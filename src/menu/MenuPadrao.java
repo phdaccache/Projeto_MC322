@@ -19,7 +19,7 @@ public enum MenuPadrao {
         SubmenuPadrao.RESERVAS_BIBLIOTECA,
         SubmenuPadrao.VOLTAR
     }),
-    CLIENTE_("Area Cliente", new SubmenuPadrao[] {
+    CLIENTE("Area Cliente", new SubmenuPadrao[] {
         SubmenuPadrao.MINHA_CONTA_CLIENTE,
         SubmenuPadrao.ITENS_CLIENTE,
         SubmenuPadrao.EMPRESTIMOS_CLIENTE,

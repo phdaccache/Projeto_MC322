@@ -13,8 +13,10 @@ public class Menu {
         this.scanner = scanner;
     }
 
-    // Imprime Menu no terminal
-    public void showMenu() {
+    /******************************* MENU PADRAO *******************************/
+
+    // Imprime Menu Padrao no terminal
+    public void showMenuPadrao() {
         MenuPadrao menu[] = MenuPadrao.values();
         String title = getTituloFormatado("Menu");
 
@@ -32,8 +34,8 @@ public class Menu {
         System.out.println("|-------------------------------------------|");
     }
 
-    // Le a opcao escolhida no menu com o scanner e a retorna
-    public MenuPadrao readOptionMenu() {
+    // Le a opcao escolhida no menu padrao com o scanner e a retorna
+    public MenuPadrao readOptionMenuPadrao() {
         int option;
         MenuPadrao menu[] = MenuPadrao.values();
 
@@ -50,66 +52,65 @@ public class Menu {
         }
     }
 
-    // Executa a opcao do menu passada
-    public void runMenuOption(MenuPadrao option) {
+    // Executa a opcao do menu padrao passada
+    public void runMenuPadraoOption(MenuPadrao option) {
         Biblioteca biblioteca;
         Cliente cliente;
 
         switch (option) {
             case ADMIN:
-                runSubmenu(option, null, null);
+                runSubmenuPadrao(option, null, null);
                 break;
             case BIBLIOTECA:
                 System.out.println("Login da Biblioteca:");
                 biblioteca = loginbiblioteca();
                 if (biblioteca == null) {return;}
                 System.out.println("Login realizado com sucesso!");
-                System.out.printf("Bem vindo(a) %s!\n", biblioteca.getNome());
-                runSubmenu(option, biblioteca, null);
+                System.out.printf("Bem vindo(a) %s!\n", "Nome Biblioteca");
+                runSubmenuPadrao(option, biblioteca, null);
                 break;
             case CLIENTE:
                 System.out.println("Login do Cliente:");
                 cliente = loginCliente();
                 if (cliente == null) {return;}
                 System.out.println("Login realizado com sucesso!");
-                System.out.printf("Bem vindo(a) %s!\n", cliente.getNome());
-                runSubmenu(option, null, cliente);
+                System.out.printf("Bem vindo(a) %s!\n", "Nome Cliente");
+                runSubmenuPadrao(option, null, cliente);
                 break;
             case SAIR:
                 System.out.println("Programa encerrado.");
         }
     }
 
-    // Executa submenu (imprime, recebe a opcao e executa a opcao) de acordo com a opcao passada
-    private void runSubmenu(MenuPadrao option, biblioteca biblioteca, Cliente cliente) {
-        SubmenuBiblioteca subOption;
+
+    /******************************* SUBMENU PADRAO *******************************/
+
+    // Executa submenu padrao (imprime, recebe a opcao e executa a opcao) de acordo com a opcao passada
+    private void runSubmenuPadrao(MenuPadrao option, Biblioteca biblioteca, Cliente cliente) {
+        SubmenuPadrao subOption;
         do {
-            showSubmenu(option);
-            subOption = readOptionSubmenu(option);
+            showSubmenuPadrao(option);
+            subOption = readOptionSubmenuPadrao(option);
             if (biblioteca != null) {
-                runSubmenuOption(subOption, biblioteca, null);
+                runSubmenuPadraoOption(subOption, biblioteca, null);
             } else if (cliente != null) {
-                runSubmenuOption(subOption, null, cliente);
+                runSubmenuPadraoOption(subOption, null, cliente);
             } else {
-                runSubmenuOption(subOption, null, null);
+                runSubmenuPadraoOption(subOption, null, null);
             }
-        } while (subOption != SubmenuBiblioteca.VOLTAR);
+        } while (subOption != SubmenuPadrao.VOLTAR);
     }
 
-    // Imprime o Submenu de "option" no terminal.
-    private void showSubmenu(MenuPadrao option) {
-        SubmenuBiblioteca submenu[] = option.getSubOptions();
+    // Imprime o submenu padrao de "option" no terminal.
+    private void showSubmenuPadrao(MenuPadrao option) {
+        SubmenuPadrao submenu[] = option.getSubOptions();
         String title = getTituloFormatado(option.getName());
 
         System.out.println(title);
         System.out.println("|-------------------------------------------|");
         for (int i = 0; i < submenu.length; i++) {
-            int numSuboption;
-            if (i == submenu.length - 1) { // Se a opcao for a ultima (i.e. "VOLTAR"), recebe 0
-                numSuboption = 0;
-            } else {
-                numSuboption = i + 1;
-            }
+            // Se a opcao for a ultima (i.e. "SAIR"), recebe 0
+            int numSuboption = i == submenu.length - 1 ? 0 : i + 1;
             if (numSuboption < 10) {
                 System.out.printf("| Opcao %d - %-31s |\n", numSuboption, submenu[i].getName());
             } else {
@@ -119,147 +120,103 @@ public class Menu {
         System.out.println("|-------------------------------------------|");
     }
     
-    // Le a opcao escolhida no submenu com o scanner e a retorna
-    private SubmenuBiblioteca readOptionSubmenu(MenuPadrao option) {
+    // Le a opcao escolhida no submenu padrao com o scanner e a retorna
+    private SubmenuPadrao readOptionSubmenuPadrao(MenuPadrao option) {
         int subOption;
-        SubmenuBiblioteca submenu[] = option.getSubOptions();
+        SubmenuPadrao submenu[] = option.getSubOptions();
 
-        // Enquanto a opcao nao for valida, fica pedindo a opcao novamente
-        while (true) {
-            System.out.print("Digite uma opcao: ");
-            subOption = scanner.nextInt();
-            scanner.nextLine();
-            if (subOption < 0 || subOption > submenu.length - 1) {
-                System.out.println("Opcao Invalida.");
-            } else if (subOption == 0) {
-                return submenu[submenu.length - 1]; // opcao 0 = "VOLTAR", i.e. ultima opcao do submenu
-            } else {
-                return submenu[subOption - 1];
-            }
+        System.out.print("Digite uma opcao: ");
+        subOption = scanner.nextInt();
+        scanner.nextLine();
+        if (subOption < 0 || subOption > submenu.length - 1) {
+            System.out.println("Opcao Invalida.");
+            return null;
+        } else if (subOption == 0) {
+            return submenu[submenu.length - 1]; // opcao 0 = "VOLTAR", i.e. ultima opcao do submenu
+        } else {
+            return submenu[subOption - 1];
         }
     }
 
-    // Executa a opcao do submenu passada
-    private void runSubmenuOption(SubmenuBiblioteca subOption, biblioteca biblioteca, Cliente cliente) {
-        switch(subOption) {
+    // Executa a opcao do submenu padrao passada
+    private void runSubmenuPadraoOption(SubmenuPadrao subOption, Biblioteca biblioteca, Cliente cliente) {
+        switch (subOption) {
             // Admin
-            case LISTAR_bibliotecaS:
-                Admin.listarbibliotecas();
+            case LISTAR_BIBLIOTECAS:
+                System.out.println("Listar Bibliotecas.");
                 break;
-            case CADASTRAR_biblioteca:
-                Admin.cadastrarbiblioteca(scanner);
+            case CADASTRAR_BIBLIOTECA:
+                System.out.println("Cadastrar Biblioteca.");
                 break;
-            case EXCLUIR_biblioteca:
-                Admin.excluirbiblioteca(scanner);
+            case EXCLUIR_BIBLIOTECA:
+                System.out.println("Excluir Biblioteca.");
                 break;
-
-            // biblioteca
-            case VISUALIZAR_DADOS_biblioteca:
-                biblioteca.visualizarDados();
-                break;
-            case LISTAR_CLIENTES:
-                biblioteca.listarClientes();
-                break;
-            case CADASTRAR_CLIENTE:
-                biblioteca.cadastrarCliente(scanner);
-                break;
-            case EXCLUIR_CLIENTE:
-                biblioteca.excluirCliente(scanner);
-                break;
-            case LISTAR_SEGUROS_biblioteca:
-                biblioteca.listarSeguros();
-                break;
-            case LISTAR_SEGUROS_biblioteca_CLIENTE:
-                biblioteca.listarSegurosPorCliente(scanner);
-                break;
-            case GERAR_SEGURO:
-                biblioteca.gerarSeguro(scanner);
-                break;
-            case CANCELAR_SEGURO:
-                biblioteca.cancelarSeguro(scanner);
-                break;
-            case LISTAR_SINISTROS_biblioteca:
-                biblioteca.listarSinistros();
-                break;
-            case LISTAR_SINISTROS_biblioteca_CLIENTE:
-                biblioteca.listarSinistrosPorCliente(scanner);
-                break;
-            case GERAR_SINISTRO:
-                biblioteca.gerarSinistro(scanner);
-                break;
-            case EXCLUIR_SINISTRO:
-                biblioteca.excluirSinistro(scanner);
-                break;
-            case CALCULAR_RECEITA_biblioteca:
-                biblioteca.calcularReceita();
+            case AVANCAR_TEMPO:
+                System.out.println("Avancar Tempo.");
                 break;
 
-            // Cliente PF
-            case VISUALIZAR_DADOS_CLIENTE_PF:
-                cliente.visualizarDados();
-                break;
-            case LISTAR_SEGUROS_CLIENTE_PF:
-                cliente.listarSeguros();
-                break;
-            case VISUALIZAR_SEGURO_CLIENTE_PF:
-                cliente.visualizarSeguro(scanner);
-                break;
-            case LISTAR_CONDUTORES_PF:
-                cliente.listarCondutores();
-                break;
-            case CADASTRAR_CONDUTOR_PF:
-                cliente.cadastrarCondutor(scanner);
-                break;
-            case EXCLUIR_CONDUTOR_PF:
-                cliente.excluirCondutor(scanner);
-                break;
-            case LISTAR_VEICULOS:
-                ((ClientePF)cliente).listarVeiculos();
-                break;
-            case CADASTRAR_VEICULO:
-                ((ClientePF)cliente).cadastrarVeiculo(scanner);
-                break;
-            case EXCLUIR_VEICULO:
-                ((ClientePF)cliente).excluirVeiculo(scanner);
+            // Biblioteca
+            case MINHA_CONTA_BIBLIOTECA:
+            case CLIENTES:
+            case ITENS_BIBLIOTECA:
+            case EMPRESTIMOS_BIBLIOTECA:
+            case RESERVAS_BIBLIOTECA:
+                runSubmenuBiblioteca(subOption, biblioteca);
                 break;
 
-            // Cliente PJ
-            case VISUALIZAR_DADOS_CLIENTE_PJ:
-                cliente.visualizarDados();
-                break;
-            case LISTAR_SEGUROS_CLIENTE_PJ:
-                cliente.listarSeguros();
-                break;
-            case VISUALIZAR_SEGURO_CLIENTE_PJ:
-                cliente.visualizarSeguro(scanner);
-                break;
-            case LISTAR_CONDUTORES_PJ:
-                cliente.listarCondutores();
-                break;
-            case CADASTRAR_CONDUTOR_PJ:
-                cliente.cadastrarCondutor(scanner);
-                break;
-            case EXCLUIR_CONDUTOR_PJ:
-                cliente.excluirCondutor(scanner);
-                break;
-            case LISTAR_FROTAS:
-                ((ClientePJ)cliente).listarFrotas();
-                break;
-            case VISUALIZAR_FROTA:
-                ((ClientePJ)cliente).visualizarFrota(scanner);
-                break;
-            case CADASTRAR_FROTA:
-                ((ClientePJ)cliente).cadastrarFrota(scanner);
-                break;
-            case ATUALIZAR_FROTA:
-                ((ClientePJ)cliente).atualizarFrota(scanner);
+            // Cliente
+            case MINHA_CONTA_CLIENTE:
+            case ITENS_CLIENTE:
+            case EMPRESTIMOS_CLIENTE:
+            case RESERVAS_CLIENTE:
+                runSubmenuCliente(subOption, cliente);
                 break;
 
             // Comum
             case VOLTAR:
-            	break;
+                break;
         }
     }
+
+
+    /******************************* MENU BIBLIOTECA *******************************/
+
+    // Executa submenu da biblioteca (imprime, recebe a opcao e executa a opcao) de acordo com a opcao passada
+    private void runSubmenuBiblioteca(SubmenuPadrao option, Biblioteca biblioteca) {
+        SubmenuBiblioteca subOption;
+        do {
+            showSubmenuBiblioteca(option);
+            subOption = readOptionSubmenuBiblioteca(option);
+            runSubmenuBibliotecaOption(subOption, biblioteca);
+
+        } while (subOption != SubmenuBiblioteca.VOLTAR);
+    }
+
+    // Imprime o menu da biblioteca no terminal
+    private void showSubmenuBiblioteca(SubmenuPadrao option) {
+        return;
+    }
+
+    // Le a opcao escolhida no menu biblioteca com o scanner e a retorna
+    private SubmenuBiblioteca readOptionSubmenuBiblioteca(SubmenuPadrao option) {
+        return null;
+    }
+
+    // Executa a opcao do menu biblioteca passada
+    private void runSubmenuBibliotecaOption(SubmenuBiblioteca subOption, Biblioteca biblioteca) {
+        return;
+    }
+
+
+    /******************************* MENU CLIENTE *******************************/
+
+    // Executa submenu do cliente (imprime, recebe a opcao e executa a opcao) de acordo com a opcao passada
+    private void runSubmenuCliente(SubmenuPadrao option, Cliente cliente) {
+        return;
+    }
+
+
+    /******************************* METODOS AUXILIARES *******************************/
 
     // Retorna o titulo do menu (ou submenu) no formato '#################### Menu ###################'
     private String getTituloFormatado(String titulo) {
