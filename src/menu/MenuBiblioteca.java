@@ -4,7 +4,8 @@ public enum MenuBiblioteca {
     MINHA_CONTA("Minha Conta", new SubmenuBiblioteca[] {
         SubmenuBiblioteca.VISUALIZAR_DADOS,
         SubmenuBiblioteca.EDITAR_DADOS,
-        SubmenuBiblioteca.EXCLUIR_CONTA
+        SubmenuBiblioteca.EXCLUIR_CONTA,
+        SubmenuBiblioteca.VOLTAR
     }),
     CLIENTES("Clientes", new SubmenuBiblioteca[] {
         SubmenuBiblioteca.LISTAR_CLIENTES,
@@ -14,7 +15,8 @@ public enum MenuBiblioteca {
         SubmenuBiblioteca.EXCLUIR_CLIENTE,
         SubmenuBiblioteca.LISTAR_ASSINATURAS,
         SubmenuBiblioteca.GERAR_ASSINATURA,
-        SubmenuBiblioteca.EXCLUIR_ASSINATURA
+        SubmenuBiblioteca.CANCELAR_ASSINATURA,
+        SubmenuBiblioteca.VOLTAR
     }),
     ITENS("Itens", new SubmenuBiblioteca[] {
         SubmenuBiblioteca.PESQUISAR_ITEM,
@@ -24,20 +26,23 @@ public enum MenuBiblioteca {
         SubmenuBiblioteca.LISTAR_ARTIGOS,
         SubmenuBiblioteca.LISTAR_REVISTAS,
         SubmenuBiblioteca.CADASTRAR_ITEM,
-        SubmenuBiblioteca.EXCLUIR_ITEM
+        SubmenuBiblioteca.EXCLUIR_ITEM,
+        SubmenuBiblioteca.VOLTAR
     }),
     EMPRESTIMOS("Emprestimos", new SubmenuBiblioteca[] {
         SubmenuBiblioteca.LISTAR_EMPRESTIMOS,
         SubmenuBiblioteca.LISTAR_EMPRESTIMOS_ATIVOS,
         SubmenuBiblioteca.LISTAR_EMPRESTIMOS_ATRASADOS,
-        SubmenuBiblioteca.LISTAR_EMPRESTIMOS_CLIENTE
+        SubmenuBiblioteca.LISTAR_EMPRESTIMOS_CLIENTE,
+        SubmenuBiblioteca.VOLTAR
     }),
     RESERVAS("Reservas", new SubmenuBiblioteca[] {
         SubmenuBiblioteca.LISTAR_RESERVAS,
         SubmenuBiblioteca.LISTAR_RESERVAS_ATIVAS,
-        SubmenuBiblioteca.LISTAR_RESERVAS_CLIENTE
+        SubmenuBiblioteca.LISTAR_RESERVAS_CLIENTE,
+        SubmenuBiblioteca.VOLTAR
     }),
-    SAIR("Sair");
+    VOLTAR("Voltar");
 
     // Atributos
     private final String name;

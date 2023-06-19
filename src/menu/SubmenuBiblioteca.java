@@ -16,7 +16,7 @@ public enum SubmenuBiblioteca {
     EXCLUIR_CLIENTE("Excluir Cliente"),
     LISTAR_ASSINATURAS("Listar Assinaturas"),
     GERAR_ASSINATURA("Gerar Assinatura"),
-    EXCLUIR_ASSINATURA("Excluir Assinatura"),
+    CANCELAR_ASSINATURA("Cancelar Assinatura"),
     // Itens
     PESQUISAR_ITEM("Pesquisar Item"),
     LISTAR_ITENS("Listar Todos os Itens"),
