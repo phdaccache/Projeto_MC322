@@ -1,6 +1,6 @@
-package menu;
+package menu.enuns;
 
-public enum SubmenuCliente {
+public enum EnumSubmenuCliente {
     // Minha Conta
     VISUALIZAR_DADOS("Visualizar Dados"),
     EDITAR_DADOS("Editar Dados"),
@@ -11,7 +11,7 @@ public enum SubmenuCliente {
     // Emprestimos
     MEUS_EMPRESTIMOS("Meus Emprestimos"),
     EMPRESTIMOS_ATRASADOS("Emprestimos Atrasados"),
-    GERAR_EMPRESTIMO("Gerar Emprestimo"),
+    SOLICITAR_EMPRESTIMO("Solicitar Emprestimo"),
     DEVOLVER_EMPRESTIMO("Devolver Emprestimo"),
     RENOVAR_EMPRESTIMO("Renovar Emprestimo"),
     // Reservas
@@ -25,7 +25,7 @@ public enum SubmenuCliente {
 	private final String name;
 	
     // Construtor
-	SubmenuCliente(String name){
+	EnumSubmenuCliente(String name){
 		this.name = name;
 	}
 	

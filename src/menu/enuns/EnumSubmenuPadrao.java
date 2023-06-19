@@ -1,6 +1,6 @@
-package menu;
+ package menu.enuns;
 
-public enum SubmenuPadrao {
+public enum EnumSubmenuPadrao {
     // Admin
     LISTAR_BIBLIOTECAS("Listar Bibliotecas"),
     CADASTRAR_BIBLIOTECA("Cadastrar Biblioteca"),
@@ -24,7 +24,7 @@ public enum SubmenuPadrao {
 	private final String name;
 	
     // Construtor
-	SubmenuPadrao(String name){
+	EnumSubmenuPadrao(String name){
 		this.name = name;
 	}
 	

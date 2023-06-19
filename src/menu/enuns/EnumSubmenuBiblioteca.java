@@ -1,9 +1,9 @@
-package menu;
+package menu.enuns;
 
 /* enum para os Submenus
  * Cada constante e uma opcao de todos os submenus
  */
-public enum SubmenuBiblioteca {
+public enum EnumSubmenuBiblioteca {
     // Minha Conta
     VISUALIZAR_DADOS("Visualizar Dados"),
     EDITAR_DADOS("Editar Dados"),
@@ -42,7 +42,7 @@ public enum SubmenuBiblioteca {
 	private final String name;
 	
     // Construtor
-	SubmenuBiblioteca(String name){
+	EnumSubmenuBiblioteca(String name){
 		this.name = name;
 	}
 	
