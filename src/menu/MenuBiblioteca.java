@@ -6,7 +6,7 @@ import menu.enuns.EnumMenuBiblioteca;
 import menu.enuns.EnumSubmenuBiblioteca;
 import pacote.Biblioteca;
 
-public class MenuBiblioteca extends Menu {
+public class        MenuBiblioteca extends Menu {
     // Construtor
     public MenuBiblioteca(Scanner scanner) {
         super(scanner);
