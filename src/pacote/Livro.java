@@ -1,6 +1,6 @@
 package pacote;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 public class Livro extends Item{
 	private String editora;

@@ -1,6 +1,6 @@
 package pacote;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 public class Revista extends Item{
 	//private ArquivoRevista arquivoRevista;

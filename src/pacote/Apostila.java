@@ -1,6 +1,6 @@
 package pacote;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 public class Apostila extends Item{
 	//private ArquivoApostila arquivoApostila;

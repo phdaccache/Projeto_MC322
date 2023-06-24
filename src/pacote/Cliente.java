@@ -1,13 +1,13 @@
 package pacote;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Date;
 
 public class Cliente {
+	private final String CPF;
 	private String nome;
 	private String telefone;
 	private String email;
-	private final String CPF;
 	private Date dataNasc;
 	//private ArrayList<Emprestimo> listaEmprestimos;
 	//private ArrayList<Reserva> listaReservasItens;
@@ -23,9 +23,10 @@ public class Cliente {
 		//this.listaEmprestimos = listaEmprestimos;
 		//this.listaReservasItens = listaReservasItens;
 	}
+
 	//Getters e setters
 	public String getCpf() {
-		return nome;
+		return CPF;
 	}
 	public String getNome() {
 		return nome;
