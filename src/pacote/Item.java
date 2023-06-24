@@ -4,15 +4,17 @@ import java.util.ArrayList;
 
 public class Item {
 	private final int code; //aleatorio
+	private final int QtdDePaginas;
 	private String titulo;
 	private String autores;
 	private ArrayList<Reserva> listaReservas;
 	private int ano;
 	
 	//Construtor
-	public Item(int code, String titulo, String autores, ArrayList<Reserva> listaReservas, 
+	public Item(int code, int QtdDePaginas, String titulo, String autores, ArrayList<Reserva> listaReservas,
 			int ano) {
 		this.code = code;
+		this.QtdDePaginas = QtdDePaginas;
 		this.titulo = titulo;
 		this.autores = autores;
 		this.listaReservas = listaReservas;
@@ -45,5 +47,23 @@ public class Item {
 	}
 	public void setAno(int ano) {
 		this.ano = ano;
+	}
+	public int getQtdDePaginas() {
+		return QtdDePaginas;
+	}
+	public void addReserva(Reserva reserva) {
+		this.listaReservas.add(reserva);
+	}
+	public void removeReserva(Reserva reserva) {
+		this.listaReservas.remove(reserva);
+	}
+
+	//Metodos
+
+	//toString
+	@Override
+	public String toString() {
+		return "Item [code=" + code + ", QtdDePaginas=" + QtdDePaginas + ", titulo=" + titulo + ", autores=" + autores
+				+ ", listaReservas=" + listaReservas + ", ano=" + ano + "]";
 	}
 }

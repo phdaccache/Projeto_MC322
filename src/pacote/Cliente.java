@@ -8,17 +8,19 @@ public class Cliente {
 	private String nome;
 	private String telefone;
 	private String email;
+	private final String ID;
 	private Date dataNasc;
+	private String status; // "ativo", "inativo", "suspenso", "bloqueado" etc
 	private ArrayList<Emprestimo> listaEmprestimos;
 	private ArrayList<Reserva> listaReservasItens;
 	
 	//Construtor
-	public Cliente(String nome, String telefone, String email, String CPF, Date dataNasc, 
-			ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
-		this.nome = nome;
-		this.email = email;
-		this.telefone = telefone;
+	public Cliente(String CPF, String nome, String telefone, String email, String ID, Date dataNasc, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
 		this.CPF = CPF;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.email = email;
+		this.ID = ID;
 		this.dataNasc = dataNasc;
 		this.listaEmprestimos = listaEmprestimos;
 		this.listaReservasItens = listaReservasItens;
@@ -64,4 +66,15 @@ public class Cliente {
 	public void setEmprestimo(ArrayList<Emprestimo> listaEmprestimos) {
 		this.listaEmprestimos = listaEmprestimos;
 	}
+
+	//Metodos
+
+	//toString
+	@Override
+	public String toString() {
+		return "Cliente [CPF=" + CPF + ", nome=" + nome + ", telefone=" + telefone + ", email=" + email + ", ID=" + ID
+				+ ", dataNasc=" + dataNasc + ", status=" + status + ", listaEmprestimos=" + listaEmprestimos
+				+ ", listaReservasItens=" + listaReservasItens + "]";
+	}
+
 }

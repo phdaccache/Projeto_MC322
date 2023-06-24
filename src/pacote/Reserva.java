@@ -6,6 +6,7 @@ public class Reserva {
 	private Item item;
 	private Date data;
 	private Cliente cliente;
+	private String status; //Em dia, atrasado, cancelado, etc.
 	private final String code; //aleatorio
 	private String posicao;
 	
@@ -45,5 +46,15 @@ public class Reserva {
 	}
 	public void setPosicao(String posicao) {
 		this.posicao = posicao;
+	}
+
+	//Metodos
+
+
+	//toString
+	@Override
+	public String toString() {
+		return "Reserva [item=" + item + ", data=" + data + ", cliente=" + cliente + ", status=" + status + ", code="
+				+ code + ", posicao=" + posicao + "]";
 	}
 }

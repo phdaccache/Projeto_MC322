@@ -46,5 +46,14 @@ public class Emprestimo {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+	//Metodos
+
+	//toString
+	@Override
+	public String toString() {
+		return "Emprestimo [item=" + item + ", data_ini=" + data_ini + ", data_lim=" + data_lim + ", cliente=" + cliente
+				+ ", code=" + code + "]";
+	}
 	
 }

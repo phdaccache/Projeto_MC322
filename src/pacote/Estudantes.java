@@ -9,10 +9,10 @@ public class Estudantes extends Cliente{
 	private int ano_grad; //ano limite de graduacao
 	
 	//Construtor
-	public Estudantes(String nome, String telefone, String email, String CPF, Date dataNasc, 
-			ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, 
-			String RA, String curso, int ano_grad) {
-		super(nome, telefone, email, CPF, dataNasc, listaEmprestimos, listaReservasItens);
+
+
+	public Estudantes(String CPF, String nome, String telefone, String email, String ID, Date dataNasc, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String RA, String curso, int ano_grad) {
+		super(CPF, nome, telefone, email, ID, dataNasc, listaEmprestimos, listaReservasItens);
 		this.RA = RA;
 		this.curso = curso;
 		this.ano_grad = ano_grad;
@@ -33,6 +33,18 @@ public class Estudantes extends Cliente{
 	}
 	public void setAnoGrad(int ano_grad) {
 		this.ano_grad = ano_grad;
+	}
+
+	//Metodos
+
+	//Metodo para verificar se o aluno esta apto a fazer emprestimos
+
+	//Metodo para verificar se o aluno esta apto a fazer reservas
+
+	//toString
+	@Override
+	public String toString() {
+		return "Estudantes [RA=" + RA + ", curso=" + curso + ", ano_grad=" + ano_grad + "]";
 	}
 	
 }
