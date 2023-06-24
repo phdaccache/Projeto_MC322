@@ -1,21 +1,21 @@
 package pacote;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 
 public class Item {
-	private final int code;
+	private final int code; //aleatorio
 	private String titulo;
 	private String autores;
-	//private ArrayList<Reserva> listaReservas;
+	private ArrayList<Reserva> listaReservas;
 	private int ano;
 	
 	//Construtor
-	public Item(int code, String titulo, String autores/*, ArrayList<Reserva> listaReservas*/, 
+	public Item(int code, String titulo, String autores, ArrayList<Reserva> listaReservas, 
 			int ano) {
 		this.code = code;
 		this.titulo = titulo;
 		this.autores = autores;
-		//this.listaReservas = listaReservas;
+		this.listaReservas = listaReservas;
 		this.ano = ano;
 	}
 	//Getters e setters
@@ -34,12 +34,12 @@ public class Item {
 	public void setAutores(String autores) {
 		this.autores = autores;
 	}
-	/*public ArrayList<Reserva> getListaReservas(){
+	public ArrayList<Reserva> getListaReservas(){
 		return listaReservas;
 	}
 	public void setReserva(ArrayList<Reserva> listaReservas) {
 		this.listaReservas = listaReservas;
-	}*/
+	}
 	public int getAno() {
 		return ano;
 	}

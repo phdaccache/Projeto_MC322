@@ -1,6 +1,6 @@
 package pacote;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Cliente {
@@ -9,19 +9,19 @@ public class Cliente {
 	private String telefone;
 	private String email;
 	private Date dataNasc;
-	//private ArrayList<Emprestimo> listaEmprestimos;
-	//private ArrayList<Reserva> listaReservasItens;
+	private ArrayList<Emprestimo> listaEmprestimos;
+	private ArrayList<Reserva> listaReservasItens;
 	
 	//Construtor
-	public Cliente(String nome, String telefone, String email, String CPF, Date dataNasc 
-			/*, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens*/) {
+	public Cliente(String nome, String telefone, String email, String CPF, Date dataNasc, 
+			ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.CPF = CPF;
 		this.dataNasc = dataNasc;
-		//this.listaEmprestimos = listaEmprestimos;
-		//this.listaReservasItens = listaReservasItens;
+		this.listaEmprestimos = listaEmprestimos;
+		this.listaReservasItens = listaReservasItens;
 	}
 
 	//Getters e setters
@@ -52,7 +52,7 @@ public class Cliente {
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
-	/*public ArrayList<Reserva> getListaReservasItens(){
+	public ArrayList<Reserva> getListaReservasItens(){
 		return listaReservasItens;
 	}
 	public void setReservaItens(ArrayList<Reserva> listaReservasItens) {
@@ -63,5 +63,5 @@ public class Cliente {
 	}
 	public void setEmprestimo(ArrayList<Emprestimo> listaEmprestimos) {
 		this.listaEmprestimos = listaEmprestimos;
-	}*/
+	}
 }

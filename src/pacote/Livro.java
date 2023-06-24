@@ -1,15 +1,15 @@
 package pacote;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class Livro extends Item{
 	private String editora;
 	//private ArquivoLivro arquivoLivro;
 	
 	//Construtor
-	public Livro(int code, String titulo, String autores/*, ArrayList<Reserva> listaReservas*/,
+	public Livro(int code, String titulo, String autores, ArrayList<Reserva> listaReservas,
 			int ano, String editora/*, ArquivoLivro arquivoLivro*/) {
-		super(code, titulo, autores,/* listaReservas,*/ ano);
+		super(code, titulo, autores, listaReservas, ano);
 		this.editora = editora;
 		//this.arquivoLivro = arquivoLivro;
 	}
