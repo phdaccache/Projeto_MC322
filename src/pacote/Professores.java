@@ -13,8 +13,8 @@ public class Professores extends Cliente{
 	//Construtor
 
 
-	public Professores(String CPF, String nome, String telefone, String email, String ID, Date dataNasc, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-		super(CPF, nome, telefone, email, ID, dataNasc, listaEmprestimos, listaReservasItens);
+	public Professores(String CPF, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+		super(CPF, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens);
 		this.instituicao = instituicao;
 		this.educacao = educacao;
 		this.area = area;
@@ -56,9 +56,7 @@ public class Professores extends Cliente{
 
 	//Metodos
 
-	//Metodo para verificar se o professor esta apto a fazer emprestimos
 
-	//Metodo para verificar se o professor esta apto a fazer reservas
 
 	//toString
 	@Override

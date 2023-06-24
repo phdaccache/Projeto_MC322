@@ -12,8 +12,8 @@ public class Revista extends Item{
 	//Construtor
 
 
-	public Revista(int code, int QtdDePaginas, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int edicao, String instituicao, ArrayList<String> assuntos, int ISSN) {
-		super(code, QtdDePaginas, titulo, autores, listaReservas, ano);
+	public Revista(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int edicao, String instituicao, ArrayList<String> assuntos, int ISSN) {
+		super(code, qtdDePaginas, status, titulo, autores, listaReservas, ano);
 		this.edicao = edicao;
 		this.instituicao = instituicao;
 		this.assuntos = assuntos;

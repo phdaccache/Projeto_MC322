@@ -12,8 +12,8 @@ public class Livro extends Item{
 	//Construtor
 
 
-	public Livro(int code, int QtdDePaginas, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String editora, int ISBN, String edicao, String tema) {
-		super(code, QtdDePaginas, titulo, autores, listaReservas, ano);
+	public Livro(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String editora, int ISBN, String edicao, String tema) {
+		super(code, qtdDePaginas, status, titulo, autores, listaReservas, ano);
 		this.editora = editora;
 		this.ISBN = ISBN;
 		this.edicao = edicao;

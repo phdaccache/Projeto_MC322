@@ -23,13 +23,45 @@ public class Admin {
 
     //Metodos
     public Date Avancatempo(int dias) {
+        //AtualizarClientes();
+        //AtualizarEmprestimos();
+        //AtualizarReservas();
+        //AtualizarBibliotecas();
+        //AtualizarItens();
         return null;
     }
     public void CadastraBiblioteca(Biblioteca biblioteca) {
+        for(Biblioteca b : bibliotecas){
+            if(b.getNome().equals(biblioteca.getNome())){
+                System.out.println("Biblioteca já cadastrada");
+                return;
+            }
+            else{
+                bibliotecas.add(biblioteca);
+                System.out.println("Biblioteca cadastrada com sucesso");
+                return;
+            }
+        }
     }
     public void RemoveBiblioteca(Biblioteca biblioteca) {
+        for(Biblioteca b : bibliotecas){
+            if(b.getNome().equals(biblioteca.getNome())){
+                bibliotecas.remove(biblioteca);
+                System.out.println("Biblioteca removida com sucesso");
+                return;
+            }
+            else{
+                System.out.println("Biblioteca não encontrada");
+                return;
+            }
+        }
     }
     public void listarBibliotecas() {
+        for(Biblioteca b : bibliotecas){
+            System.out.println("**********");
+            System.out.println(b.toString());
+            System.out.println("**********");
+        }
     }
 
     

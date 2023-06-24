@@ -9,13 +9,13 @@ public class Apostila extends Item{
 	private String instituicao;
 	
 	//Construtor
-	public Apostila(int code, int QtdDePaginas, String disciplina, String instituicao, String titulo, String autores, ArrayList<Reserva> listaReservas,
-			int ano/*, ArquivoApostila arquivoApostila*/) {
-		super(code, QtdDePaginas, titulo, autores, listaReservas, ano);
+
+	public Apostila(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String disciplina, String instituicao) {
+		super(code, qtdDePaginas, status, titulo, autores, listaReservas, ano);
 		this.disciplina = disciplina;
 		this.instituicao = instituicao;
-		//this.arquivoApostila = arquivoApostila;
 	}
+
 	//Getters e setters
 	public String getDisciplina() {
 		return disciplina;

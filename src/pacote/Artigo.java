@@ -11,8 +11,8 @@ public class Artigo extends Item{
 	
 	//Construtor
 
-	public Artigo(int code, int QtdDePaginas, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int DOI, String abstractArtigo, String keywords) {
-		super(code, QtdDePaginas, titulo, autores, listaReservas, ano);
+	public Artigo(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int DOI, String abstractArtigo, String keywords) {
+		super(code, qtdDePaginas, status, titulo, autores, listaReservas, ano);
 		this.DOI = DOI;
 		this.abstractArtigo = abstractArtigo;
 		this.keywords = keywords;
