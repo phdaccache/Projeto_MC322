@@ -235,6 +235,32 @@ public class Biblioteca {
         }
         return revistas;
     }
+    public ArrayList<Estudantes> getEstudantes(){
+        ArrayList<Estudantes> estudantes = new ArrayList<>();
+        for(Cliente cliente : clientes){
+            if(cliente instanceof Estudantes){
+                estudantes.add((Estudantes) cliente);
+            }
+        }
+        if (estudantes.isEmpty()){
+            System.out.println("Não há estudantes cadastrados!");
+            return null;
+        }
+        return estudantes;
+    }
+    public ArrayList<Professores> getProfessores(){
+        ArrayList<Professores> professores = new ArrayList<>();
+        for(Cliente cliente : clientes){
+            if(cliente instanceof Professores){
+                professores.add((Professores) cliente);
+            }
+        }
+        if (professores.isEmpty()){
+            System.out.println("Não há professores cadastrados!");
+            return null;
+        }
+        return professores;
+    }
 
     public void listarItens(){
         if(itens.isEmpty()){
@@ -252,6 +278,43 @@ public class Biblioteca {
         for (Revista revista : getRevistas()){
             System.out.println("***** Revistas *****");
             System.out.println(revista.toString());
+        }
+        return;
+    }
+    public void listarClientes(){
+        if(clientes.isEmpty()){
+            System.out.println("Não há clientes cadastrados!");
+            return;
+        }
+        for(Estudantes estudantes : getEstudantes()){
+            System.out.println("***** Estudantes *****");
+            System.out.println(estudantes.toString());
+        }
+        for(Professores professores : getProfessores()){
+            System.out.println("***** Professores *****");
+            System.out.println(professores.toString());
+        }
+        return;
+    }
+    public void listarReservas(){
+        if(reservas.isEmpty()){
+            System.out.println("Não há reservas cadastradas!");
+            return;
+        }
+        for(Reserva reserva : reservas){
+            System.out.println("***** Reservas *****");
+            System.out.println(reserva.toString());
+        }
+        return;
+    }
+    public void listarEmprestimos(){
+        if(emprestimos.isEmpty()){
+            System.out.println("Não há emprestimos cadastrados!");
+            return;
+        }
+        for(Emprestimo emprestimo : emprestimos){
+            System.out.println("***** Emprestimos *****");
+            System.out.println(emprestimo.toString());
         }
         return;
     }
