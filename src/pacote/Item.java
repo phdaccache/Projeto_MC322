@@ -1,9 +1,10 @@
 package pacote;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 
 public class Item {
-	private final int code; //aleatorio
+	private final int code;
 	private final int QtdDePaginas;
 	private String status; //disponivel, emprestado, reservado, etc.
 	private String titulo;
@@ -73,14 +74,12 @@ public class Item {
 	//toString
 	@Override
 	public String toString() {
-		return "Item{" +
-				"code=" + code +
-				", QtdDePaginas=" + QtdDePaginas +
-				", status='" + status + '\'' +
-				", titulo='" + titulo + '\'' +
-				", autores='" + autores + '\'' +
-				", listaReservas=" + listaReservas +
-				", ano=" + ano +
-				'}';
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add("Nome: " + getTitulo());
+		joiner.add("Quantidade de Páginas: " + getQtdDePaginas());
+		joiner.add("Status: " + getStatus());
+		joiner.add("Autores: " + getAutores());
+		joiner.add("Ano: " + getAno());
+		return joiner.toString();
 	}
 }

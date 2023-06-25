@@ -2,6 +2,7 @@ package pacote;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class Apostila extends Item{
 	//private ArquivoApostila arquivoApostila;
@@ -35,8 +36,11 @@ public class Apostila extends Item{
 	//toString
 	@Override
 	public String toString() {
-		return "Apostila [disciplina=" + disciplina + ", instituicao=" + instituicao + ", toString()="
-				+ super.toString() + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add(super.toString());
+		joiner.add("Disciplina: " + this.disciplina);
+		joiner.add("Instituicao: " + this.instituicao);
+		return joiner.toString();
 	}
 
 }

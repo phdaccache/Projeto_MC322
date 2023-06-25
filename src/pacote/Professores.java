@@ -2,6 +2,7 @@ package pacote;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.StringJoiner;
 
 public class Professores extends Cliente{
 	private String instituicao;
@@ -61,7 +62,13 @@ public class Professores extends Cliente{
 	//toString
 	@Override
 	public String toString() {
-		return "Professores [instituicao=" + instituicao + ", educacao=" + educacao + ", area=" + area + ", aulas="
-				+ aulas + ", ano_ing=" + ano_ing + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add(super.toString());
+		joiner.add("Instituicao: " + this.instituicao);
+		joiner.add("Educacao: " + this.educacao);
+		joiner.add("Area: " + this.area);
+		joiner.add("Aulas: " + this.aulas);
+		joiner.add("Ano de ingresso: " + this.ano_ing);
+		return joiner.toString();
 	}
 }

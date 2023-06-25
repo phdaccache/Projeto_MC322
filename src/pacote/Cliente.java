@@ -1,7 +1,9 @@
 package pacote;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.StringJoiner;
 
 public class Cliente {
 	private final String CPF;
@@ -177,9 +179,16 @@ public class Cliente {
 	//toString
 	@Override
 	public String toString() {
-		return "Cliente [CPF=" + CPF + ", nome=" + nome + ", telefone=" + telefone + ", email=" + email + ", ID=" + ID
-				+ ", dataNasc=" + dataNasc + ", status=" + status + ", listaEmprestimos=" + listaEmprestimos
-				+ ", listaReservasItens=" + listaReservasItens + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		/*DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataNascimento = getDataNasc().format(data);   */ //Dá errado por algum motivo
+		joiner.add("CPF: " + CPF);
+		joiner.add("Nome: " + nome);
+		joiner.add("Email: " + email);
+		joiner.add("Telefone: " + telefone);
+		joiner.add("Data de nascimento: " + dataNasc);
+		joiner.add("Status: " + status);
+		return joiner.toString();
 	}
 
 }

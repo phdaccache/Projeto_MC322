@@ -1,12 +1,13 @@
 package pacote;
 
 import java.util.Date;
+import java.util.StringJoiner;
 
 public class Reserva {
 	private Item item;
-	private Date data;
+	private Date data; // Data em que o cliente vai poder tirar o item
 	private Cliente cliente;
-	private String status; //Em dia, atrasado, cancelado, etc.
+	private String status; //Em dia ou atrasado. No sentido de foi devolvido o livro reservado ou não
 	private final String code; //aleatorio
 	private String posicao;
 	
@@ -48,13 +49,26 @@ public class Reserva {
 		this.posicao = posicao;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	//Metodos
 
 
 	//toString
 	@Override
 	public String toString() {
-		return "Reserva [item=" + item + ", data=" + data + ", cliente=" + cliente + ", status=" + status + ", code="
-				+ code + ", posicao=" + posicao + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add("Item: %s (Code: %s)" + getItem().getTitulo() + getItem().getCode());
+		joiner.add("Data de reserva:" + getData());
+		joiner.add("Cliente: %s (CPF: %s)" + getCliente().getNome() + getCliente().getCpf());
+		joiner.add("Posicao na fila de espera: " + getPosicao());
+		joiner.add("Status: " + getStatus());
+		return joiner.toString();
+
 	}
 }

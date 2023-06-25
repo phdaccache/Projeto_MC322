@@ -1,6 +1,7 @@
 package pacote;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class Artigo extends Item{
 	//private ArquivoArtigo arquivoArtigo;
@@ -43,8 +44,12 @@ public class Artigo extends Item{
 	//toString
 	@Override
 	public String toString() {
-		return "Artigo [DOI=" + DOI + ", abstractArtigo=" + abstractArtigo + ", keywords=" + keywords + ", toString()="
-				+ super.toString() + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add(super.toString());
+		joiner.add("DOI: " + this.getDOI());
+		joiner.add("Resumo: " + this.getAbstractArtigo());
+		joiner.add("Palavras-chave: " + this.getKeywords());
+		return joiner.toString();
 	}
 }
 

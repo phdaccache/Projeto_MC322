@@ -1,6 +1,7 @@
 package pacote;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class Livro extends Item{
 	private String editora;
@@ -51,8 +52,13 @@ public class Livro extends Item{
 	//toString
 	@Override
 	public String toString() {
-		return "Livro [editora=" + editora + ", ISBN=" + ISBN + ", edicao=" + edicao + ", tema=" + tema
-				+ ", toString()=" + super.toString() + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add(super.toString());
+		joiner.add("Editora: " + getEditora());
+		joiner.add("ISBN: " + getISBN());
+		joiner.add("Edição: " + getEdicao());
+		joiner.add("Tema: " + getTema());
+		return joiner.toString();
 	}
 }
 

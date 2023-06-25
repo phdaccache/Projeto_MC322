@@ -1,6 +1,7 @@
 package pacote;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class Revista extends Item{
 	//private ArquivoRevista arquivoRevista;
@@ -49,8 +50,13 @@ public class Revista extends Item{
 	//toString
 	@Override
 	public String toString() {
-		return "Revista [edicao=" + edicao + ", instituicao=" + instituicao + ", assuntos=" + assuntos + ", ISSN=" + ISSN
-				+ ", toString()=" + super.toString() + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add(super.toString());
+		joiner.add("Edicao: " + edicao);
+		joiner.add("Instituicao: " + instituicao);
+		joiner.add("Assuntos: " + assuntos);
+		joiner.add("ISSN: " + ISSN);
+		return joiner.toString();
 	}
 
 }

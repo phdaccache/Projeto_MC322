@@ -1,6 +1,7 @@
 package pacote;
 
 import java.util.Date;
+import java.util.StringJoiner;
 
 public class Emprestimo {
 	private Item item;
@@ -52,8 +53,13 @@ public class Emprestimo {
 	//toString
 	@Override
 	public String toString() {
-		return "Emprestimo [item=" + item + ", data_ini=" + data_ini + ", data_lim=" + data_lim + ", cliente=" + cliente
-				+ ", code=" + code + "]";
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add("Item: %s (Code: %s)" + getItem().getTitulo() + getItem().getCode());
+		joiner.add("Data de inicio de emprestimo:" + getDataIni());
+		joiner.add("Data limite de devolucao:" + getDataLim());
+		joiner.add("Cliente: %s (CPF: %s)" + getCliente().getNome() + getCliente().getCpf());
+		joiner.add("Code: %s" + getCode());
+		return joiner.toString();
 	}
 	
 }
