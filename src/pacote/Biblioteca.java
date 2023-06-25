@@ -108,6 +108,95 @@ public class Biblioteca {
         Reserva reserva = new Reserva(item, data, cliente, code, posicao);
         this.reservas.add(reserva);
     }
+    public void removerCliente(String CPF) {
+        System.out.println("***** Removendo cliente *****");
+        for (Cliente cliente : this.clientes) {
+            if (cliente.getCpf().equals(CPF)) {
+                this.clientes.remove(cliente);
+                System.out.println("Cliente removido com sucesso!");
+                removerEmprestimoPorCliente(CPF);
+                removerReservasPorCliente(CPF);
+                return;
+            }
+        }
+        System.out.println("Cliente não encontrado!");
+    }
+    public void removerItem(String Titulo) {
+        System.out.println("***** Removendo item *****");
+        for (Item item : this.itens) {
+            if (item.getTitulo().equals(Titulo)) {
+                this.itens.remove(item);
+                System.out.println("Item removido com sucesso!");
+                removerEmprestimoPorItem(Titulo);
+                removerReservasPorItem(Titulo);
+                return;
+            }
+        }
+        System.out.println("Item não encontrado!");
+    }
+    public void removerEmprestimoPorCliente(String CPF) {
+        int i = 0;
+        for (Emprestimo emprestimo : this.emprestimos) {
+            i++;
+            if (emprestimo.getCliente().getCpf().equals(CPF)) {
+                this.emprestimos.remove(emprestimo);
+                if(i == emprestimos.size()){
+                    System.out.println("Emprestimos removidos com sucesso!");
+                    return;
+                }
+            }
+        }
+        System.out.println("Emprestimos não encontrados!");
+        return;
+    }
+    public void removerEmprestimoPorItem(String Titulo) {
+        int i = 0;
+        for (Emprestimo emprestimo : this.emprestimos) {
+            i++;
+            if (emprestimo.getItem().getTitulo().equals(Titulo)) {
+                this.emprestimos.remove(emprestimo);
+                if(i == emprestimos.size()){
+                    System.out.println("Emprestimos removidos com sucesso!");
+                    return;
+                }
+            }
+        }
+        System.out.println("Emprestimos não encontrados!");
+        return;
+    }
+    public void removerReservasPorCliente(String CPF) {
+        int i = 0;
+        for (Reserva reserva : this.reservas) {
+            i++;
+            if (reserva.getCliente().getCpf().equals(CPF)) {
+                this.reservas.remove(reserva);
+                if(i == reservas.size()){
+                    System.out.println("Reservas removidas com sucesso!");
+                    return;
+                }
+            }
+        }
+        System.out.println("Reservas não encontradas!");
+        return;
+    }
+    public void removerReservasPorItem(String Titulo) {
+        int i = 0;
+        for (Reserva reserva : this.reservas) {
+            i++;
+            if (reserva.getItem().getTitulo().equals(Titulo)) {
+                this.reservas.remove(reserva);
+                if(i == reservas.size()){
+                    System.out.println("Reservas removidas com sucesso!");
+                    return;
+                }
+            }
+        }
+        System.out.println("Reservas não encontradas!");
+        return;
+    }
+
+    //Metodos para atualizar emprestimos e reservas.
+
 
     //toString
     @Override
