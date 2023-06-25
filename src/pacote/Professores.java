@@ -14,8 +14,8 @@ public class Professores extends Cliente{
 	//Construtor
 
 
-	public Professores(String CPF, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-		super(CPF, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens);
+	public Professores(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+		super(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens);
 		this.instituicao = instituicao;
 		this.educacao = educacao;
 		this.area = area;

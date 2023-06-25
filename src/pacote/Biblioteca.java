@@ -80,12 +80,12 @@ public class Biblioteca {
     }
 
     //Métodos
-    public void cadastrarEstudantes(String CPF, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String Matricula, String curso, int ano_grad){
-        Estudantes estudante = new Estudantes(CPF, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens, Matricula, curso, ano_grad);
+    public void cadastrarEstudantes(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
+        Estudantes estudante = new Estudantes(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens, matricula, curso, ano_grad);
         this.clientes.add(estudante);
     }
-    public void cadastrarProfessores(String CPF, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-        Professores professor = new Professores(CPF, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens, instituicao, educacao, area, aulas, ano_ing);
+    public void cadastrarProfessores(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+        Professores professor = new Professores(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens, instituicao, educacao, area, aulas, ano_ing);
         this.clientes.add(professor);
     }
     public void cadastrarLivro(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String editora, int ISBN, String edicao, String tema){
@@ -195,7 +195,7 @@ public class Biblioteca {
         return;
     }
 
-    //Metodos para atualizar emprestimos e reservas.
+    //Metodos para atualizar emprestimos e reservas depois de um certo tempo.
 
 
     //toString

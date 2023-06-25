@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 
 public class Cliente {
 	private final String CPF;
+	private int multa; //Valor de multa acumulada. O cliente sempre começa com 0.
 	private String nome;
 	private String telefone;
 	private String email;
@@ -20,8 +21,9 @@ public class Cliente {
 	//Construtor
 
 
-	public Cliente(String CPF, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
+	public Cliente(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
 		this.CPF = CPF;
+		this.multa = multa;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
@@ -85,8 +87,21 @@ public class Cliente {
 	public String getSenha() {
 		return senha;
 	}
-
-
+	public String getCPF() {
+		return CPF;
+	}
+	public int getMulta() {
+		return multa;
+	}
+	public void setMulta(int multa) {
+		this.multa = multa;
+	}
+	public void setListaEmprestimos(ArrayList<Emprestimo> listaEmprestimos) {
+		this.listaEmprestimos = listaEmprestimos;
+	}
+	public void setListaReservasItens(ArrayList<Reserva> listaReservasItens) {
+		this.listaReservasItens = listaReservasItens;
+	}
 	//Metodos
 
 	//Metodo para verificar se o cliente esta apto a fazer emprestimos
@@ -175,6 +190,8 @@ public class Cliente {
 	}
 
 	//Metodo para tentar fazer uma reserva
+
+	//Fazer metodo para atualizar a situação
 
 	//toString
 	@Override

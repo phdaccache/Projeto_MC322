@@ -11,9 +11,10 @@ public class Estudantes extends Cliente{
 	
 	//Construtor
 
-	public Estudantes(String CPF, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String Matricula, String curso, int ano_grad) {
-		super(CPF, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens);
-		this.Matricula = Matricula;
+
+	public Estudantes(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
+		super(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens);
+		this.Matricula = matricula;
 		this.curso = curso;
 		this.ano_grad = ano_grad;
 	}
