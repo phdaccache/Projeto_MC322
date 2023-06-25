@@ -329,6 +329,7 @@ public class Biblioteca {
         }
         return;
     }
+
     public void listarReservas(){
         if(reservas.isEmpty()){
             System.out.println("Não há reservas cadastradas!");
@@ -340,6 +341,7 @@ public class Biblioteca {
         }
         return;
     }
+    //public void listarReservasPorCliente(){}
     public void listarEmprestimos(){
         if(emprestimos.isEmpty()){
             System.out.println("Não há emprestimos cadastrados!");
@@ -350,6 +352,18 @@ public class Biblioteca {
             System.out.println(emprestimo.toString());
         }
         return;
+    }
+
+    public Item pesquisarItem(String titulo){
+        for(Item item : itens){
+            if(item.getTitulo().equals(titulo)){
+                System.out.println("Item encontrado!");
+                //item.toString(); Talvez?
+                return item;
+            }
+        }
+        System.out.println("Item não encontrado!");
+        return null;
     }
 
     //Metodos para atualizar emprestimos e reservas depois de um certo tempo.
