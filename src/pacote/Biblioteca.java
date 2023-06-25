@@ -281,6 +281,39 @@ public class Biblioteca {
         }
         return;
     }
+    public void listarLivros(){
+        if(getlivros() == null){
+            System.out.println("Não há livros cadastrados!");
+            return;
+        }
+        for(Livro livro : getlivros()){
+            System.out.println("***** Livros *****");
+            System.out.println(livro.toString());
+        }
+        return;
+    }
+    public void listarRevistas(){
+        if(getRevistas() == null){
+            System.out.println("Não há revistas cadastradas!");
+            return;
+        }
+        for(Revista revista : getRevistas()){
+            System.out.println("***** Revistas *****");
+            System.out.println(revista.toString());
+        }
+        return;
+    }
+    public void listarArtigos(){
+        if(getArtigos() == null){
+            System.out.println("Não há artigos cadastrados!");
+            return;
+        }
+        for(Artigo artigo : getArtigos()){
+            System.out.println("***** Artigos *****");
+            System.out.println(artigo.toString());
+        }
+        return;
+    }
     public void listarClientes(){
         if(clientes.isEmpty()){
             System.out.println("Não há clientes cadastrados!");
