@@ -195,6 +195,67 @@ public class Biblioteca {
         return;
     }
 
+    //Retorna uma lista de itens especificos
+    public ArrayList<Livro> getlivros(){
+        ArrayList<Livro> livros = new ArrayList<>();
+        for(Item item : itens){
+            if(item instanceof Livro){
+                livros.add((Livro) item);
+            }
+        }
+        if(livros.isEmpty()){
+            System.out.println("Não há livros cadastrados!");
+            return null;
+        }
+        return livros;
+    }
+    public ArrayList<Artigo> getArtigos(){
+        ArrayList<Artigo> artigos = new ArrayList<>();
+        for(Item item : itens){
+            if(item instanceof Artigo){
+                artigos.add((Artigo) item);
+            }
+        }
+        if (artigos.isEmpty()){
+            System.out.println("Não há artigos cadastrados!");
+            return null;
+        }
+        return artigos;
+    }
+    public ArrayList<Revista> getRevistas(){
+        ArrayList<Revista> revistas = new ArrayList<>();
+        for(Item item : itens){
+            if(item instanceof Revista){
+                revistas.add((Revista) item);
+            }
+        }
+        if (revistas.isEmpty()){
+            System.out.println("Não há revistas cadastradas!");
+            return null;
+        }
+        return revistas;
+    }
+
+    public void listarItens(){
+        if(itens.isEmpty()){
+            System.out.println("Não há itens cadastrados!");
+            return;
+        }
+        for(Livro livro : getlivros()){
+            System.out.println("***** Livros *****");
+            System.out.println(livro.toString());
+        }
+        for(Artigo artigo : getArtigos()){
+            System.out.println("***** Artigos *****");
+            System.out.println(artigo.toString());
+        }
+        for (Revista revista : getRevistas()){
+            System.out.println("***** Revistas *****");
+            System.out.println(revista.toString());
+        }
+        return;
+    }
+
     //Metodos para atualizar emprestimos e reservas depois de um certo tempo.
 
 
