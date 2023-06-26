@@ -195,7 +195,7 @@ public class FrameLoginBiblioteca extends JFrame {
 			public void focusGained(FocusEvent e) {
 				txtPassword.setForeground(MyColors.TEXT);
 				if (txtPassword.getText().equals("Senha")) {
-					txtPassword.setEchoChar('●');
+					txtPassword.setEchoChar('*');
 					txtPassword.setText("");
 				}
 			}
