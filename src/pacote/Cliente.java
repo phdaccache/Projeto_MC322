@@ -237,66 +237,56 @@ public class Cliente {
     	}
 	}
 
-	//PROTÓTIPO - Metodo que tenta fazer um emprestimo, em seguida aplica o metodo de reserva caso o cliente queira.
-	public boolean TentaEmprestimo(String TituloItem, ArrayList<Item> listaItens, ArrayList<Emprestimo> listaEmprestimos) {
+	public String TentaEmprestimo(String TituloItem, ArrayList<Item> listaItens, ArrayList<Emprestimo> listaEmprestimos) {
 		if (aptoEmprestimo() == true) {
 			if (verificaStatusItem(TituloItem, listaItens, listaEmprestimos) == "disponivel") {
-				System.out.println("Emprestimo realizado com sucesso");
-				return true;
+				return fazerEmprestimo(TituloItem);
 			}
 			else if(verificaStatusItem(TituloItem, listaItens, listaEmprestimos) == "emprestado"){
 				Emprestimo emprestimo = achaEmprestimo(TituloItem, listaEmprestimos);
-				System.out.println("Item emprestado. \nEstará disponivel no máximo em " + emprestimo.getDataLim() + ".\n");
-				System.out.println("Para caso queira fazer uma reserva, vá para a area de reservas.");
-				//Método para tentar reserva, caso o cliente queira.
-				return false;
+				return "Item emprestado. \nEstará disponivel no máximo em " + emprestimo.getDataLim() + ".\n" + "Para caso queira fazer uma reserva, vá para a area de reservas.";
 			}
 			else if(verificaStatusItem(TituloItem, listaItens, listaEmprestimos) == "reservado"){
-				System.out.println("Item está reservado. Para caso queira fazer uma reserva, vá para a área de reservas");
-				//Método para tentar reserva, caso o cliente queira.
-				return false;
+				return "Item está reservado. Para caso queira fazer uma reserva, vá para a área de reservas";
 			}
 			else {
-				System.out.println("Emprestimo nao realizado");
-				return false;
+				return "Emprestimo nao realizado";
 			}
 		}
 		else {
-			System.out.println("Cliente nao apto a fazer emprestimos");
-			return false;
+			return "Cliente nao apto a fazer emprestimos";
 		}
 	}
-	public void fazerEmprestimo(String titulo){
-		if(TentaEmprestimo(titulo, biblioteca.getItens(), listaEmprestimos) == true){
-			 biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.getData(), Admin.getData().plusDays(verificaQtdDeDias(this)), this);
-			 biblioteca.getItem(titulo).setStatus("emprestado");
-			System.out.println("Emprestimo realizado com sucesso");
-		}
-		else{
-			System.out.println("Emprestimo nao realizado");
-		}
+	public String fazerEmprestimo(String titulo){
+		biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.getData(), Admin.getData().plusDays(verificaQtdDeDias(this)), this);
+		biblioteca.getItem(titulo).setStatus("emprestado");
+		return "Emprestimo realizado com sucesso";
 	}
-	public void listarEmprestimos(){
+	public String listarEmprestimos(){
+		String retorno;
 		if(listaEmprestimos.isEmpty() || listaEmprestimos == null){
-			System.out.println("Nao ha emprestimos");
+			return "Nao ha emprestimos";
 		}
 		else{
+			retorno = "****** Emprestimos ******\n";
 			for(Emprestimo emprestimo : listaEmprestimos){
-				System.out.println("****** Emprestimos ******");
-				emprestimo.toString();
+				retorno += emprestimo.toString();
 			}
 		}
+		return retorno;
 	}
-	public void listarReservas(){
+	public String listarReservas(){
+		String retorno = "";
 		if(listaReservasItens.isEmpty() || listaReservasItens == null){
-			System.out.println("Nao ha reservas");
+			return "Nao ha reservas";
 		}
 		else{
+			retorno = "****** Reservas ******\n";
 			for(Reserva reserva : listaReservasItens){
-				System.out.println("****** Reservas ******");
-				reserva.toString();
+				retorno += reserva.toString();
 			}
 		}
+		return retorno;
 	}
 	public void pesquisarItem(String titulo){
 		getBiblioteca().pesquisarItem(titulo);
@@ -305,7 +295,7 @@ public class Cliente {
 		getBiblioteca().UltimasAquisicoes();
 	}
 
-	public ArrayList<Emprestimo> DevolverEmprestimo(String Titulo){
+	public String DevolverEmprestimo(String Titulo){
 		try {
 	        if (listaEmprestimos == null) {
 	            throw new IllegalArgumentException("Lista vazia!");
@@ -313,38 +303,36 @@ public class Cliente {
         for(Emprestimo emprestimo : listaEmprestimos){
 			if(emprestimo.getItem().getTitulo().equals(Titulo)){
 				listaEmprestimos.remove(emprestimo);
-				System.out.println("Emprestimo removido com sucesso");
-				return listaEmprestimos;
+				return "Emprestimo removido com sucesso";
 			}
 		}
-		System.out.println("Emprestimo nao encontrado");
-		return listaEmprestimos;
+		return "Emprestimo nao encontrado";
     	} catch (IllegalArgumentException e) {
 	        System.out.println("Erro: " + e.getMessage());
             return null;
     	}
 	}
 	//Permite fazer uma renovação apenas quando não há reservas para o item.
-	public void renovarEmprestimo(String titulo){
+	public String renovarEmprestimo(String titulo){
 		try {
 	        if (listaEmprestimos == null) {
 	            throw new IllegalArgumentException("Lista vazia!");
 	        }
         if(getItem(titulo).getStatus().equals("reservado")){
-			System.out.println("Há reservas. O cliente não pode renovar o emprestimo.");
+			return "Há reservas. O cliente não pode renovar o emprestimo.";
 		}
 		else{
 			for(Emprestimo emprestimo : listaEmprestimos){
 				if(emprestimo.getItem().getTitulo().equals(titulo)){
 					emprestimo.setDataLim(emprestimo.getDataLim().plusDays(verificaQtdDeDias(this)));
-					System.out.println("Emprestimo renovado com sucesso");
+					return "Emprestimo renovado com sucesso";
 				}
 			}
 		}
     	} catch (IllegalArgumentException e) {
-	        System.out.println("Erro: " + e.getMessage());
-            return;
+	        return "Erro: " + e.getMessage();
     	}
+		return "Emprestimo nao encontrado";
 	}
 
 	//public void listarEmprestimosAtrasados(){}
