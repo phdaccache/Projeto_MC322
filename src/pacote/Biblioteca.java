@@ -161,7 +161,7 @@ public class Biblioteca {
     	} catch (IllegalArgumentException e) {
         	this.itens = new ArrayList<>();
  	        this.itens.add(livro);
-            return "Livro cadastrado com sucesso";
+            return "Livro cadastrado com sucesso.";
  	    }
     }
     public String cadastrarArtigo(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int DOI, String abstractArtigo, String keywords){
