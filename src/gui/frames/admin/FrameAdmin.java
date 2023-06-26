@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import gui.frames.*;
-import gui.frames.cliente.FrameCliente;
 import gui.frames.style.*;
 
 public class FrameAdmin extends JFrame {

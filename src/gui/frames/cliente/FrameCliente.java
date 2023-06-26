@@ -6,7 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import gui.frames.*;
 import gui.frames.cliente.emprestimos.FrameEmprestimos;
 import gui.frames.cliente.itens.FrameItens;
 import gui.frames.cliente.minhaConta.FrameMinhaConta;
