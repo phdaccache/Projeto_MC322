@@ -12,7 +12,6 @@ public class PanelListarTodosOsClientes extends JPanel {
 	private JLabel iconX;
 	
 	public PanelListarTodosOsClientes() {
-		System.out.println("Teste");
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
