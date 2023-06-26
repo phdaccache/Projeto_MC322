@@ -14,7 +14,7 @@ public class MenuBiblioteca extends Menu {
 
     // Executa menu da biblioteca (imprime, recebe a opcao e executa a opcao) de acordo com a opcao passada
     public void runMenu(Biblioteca biblioteca) {
-        EnumMenuBiblioteca option;
+    	EnumMenuBiblioteca option;
         do {
             showMenu();
             option = readOptionMenu();

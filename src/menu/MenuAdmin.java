@@ -1,8 +1,19 @@
 package menu;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Date;
+
 
 import menu.enuns.EnumMenuAdmin;
+//teste
+import pacote.Admin; 
+import pacote.Biblioteca;
+import pacote.Cliente;
+import pacote.Emprestimo;
+import pacote.Item;
+import pacote.Reserva;
 
 public class MenuAdmin extends Menu {
     // Construtor
@@ -65,15 +76,36 @@ public class MenuAdmin extends Menu {
         switch (option) {
             case LISTAR_BIBLIOTECAS:
                 System.out.println("Listar Bibliotecas.");
+                /*teste
+                Date dataAtual = new Date();
+                Admin admin = new Admin(null, dataAtual);
+                admin.listarBibliotecas();*/
                 break;
             case CADASTRAR_BIBLIOTECA:
                 System.out.println("Cadastrar Biblioteca.");
+                //teste
+                Date dataAtual = new Date();
+                Admin admin = new Admin(null, dataAtual);
+                Biblioteca biblioteca = new Biblioteca(getScanner().next(), getScanner().next(), getScanner().next(), 
+                		getScanner().next(),null, null, null, null);
+                admin.CadastraBiblioteca(biblioteca);
                 break;
             case EXCLUIR_BIBLIOTECA:
                 System.out.println("Excluir Biblioteca.");
+                /*teste
+                Date dataAtual = new Date();
+                Admin admin = new Admin(null, dataAtual);
+                Biblioteca biblioteca = new Biblioteca(getScanner().next(), getScanner().next(), getScanner().next(), 
+                		getScanner().next(),null, null, null, null);
+                admin.RemoveBiblioteca(biblioteca);*/
                 break;
             case AVANCAR_TEMPO:
                 System.out.println("Avancar Tempo.");
+                /*teste
+                Date dataAtual = new Date();
+                Admin admin = new Admin(null, dataAtual);
+                admin.Avancatempo(-2);
+                admin.Avancatempo(2);*/
                 break;
             case VOLTAR:
                 break;

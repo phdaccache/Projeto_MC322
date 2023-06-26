@@ -20,30 +20,60 @@ public class Admin {
     public void setBibliotecas(ArrayList<Biblioteca> bibliotecas) {
         this.bibliotecas = bibliotecas;
     }
+    public Date getData() {
+    	return data;
+    }
+    public void setData(Date data) {
+        this.data = data;
+    }
 
     //Metodos
     public Date Avancatempo(int dias) {
-        //AtualizarClientes();
-        //AtualizarEmprestimos();
-        //AtualizarReservas();
-        //AtualizarBibliotecas();
-        //AtualizarItens();
+	    try {
+	        if (dias <= 0) {
+	            throw new IllegalArgumentException("O número de dias deve ser positivo");
+	        }
+	        System.out.println("teste");
+	        // Resto do código para avançar o tempo
+	        //AtualizarClientes();
+	        //AtualizarEmprestimos();
+	        //AtualizarReservas();
+	        //AtualizarBibliotecas();
+	        //AtualizarItens();     
+	    } catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+	    }
+
         return null;
     }
     public void CadastraBiblioteca(Biblioteca biblioteca) {
-        for(Biblioteca b : bibliotecas){
+    	try {
+	        if (this.bibliotecas == null) {
+	            throw new IllegalArgumentException();
+	        }
+    	for(Biblioteca b : this.bibliotecas){
             if(b.getNome().equals(biblioteca.getNome())){
                 System.out.println("Biblioteca já cadastrada");
                 return;
             }
             else{
-                bibliotecas.add(biblioteca);
+            	this.bibliotecas.add(biblioteca);
                 System.out.println("Biblioteca cadastrada com sucesso");
                 return;
             }
         }
+    	} catch (IllegalArgumentException e) {
+        	this.bibliotecas = new ArrayList<>();
+ 	        this.bibliotecas.add(biblioteca);
+            System.out.println("Biblioteca cadastrada com sucesso");
+            return;
+ 	    }
     }
     public void RemoveBiblioteca(Biblioteca biblioteca) {
+    	try {
+	        if (this.bibliotecas == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for(Biblioteca b : bibliotecas){
             if(b.getNome().equals(biblioteca.getNome())){
                 bibliotecas.remove(biblioteca);
@@ -54,14 +84,26 @@ public class Admin {
                 System.out.println("Biblioteca não encontrada");
                 return;
             }
-        }
+        } 
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
     public void listarBibliotecas() {
+    	try {
+	        if (this.bibliotecas == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for(Biblioteca b : bibliotecas){
             System.out.println("**********");
             System.out.println(b.toString());
             System.out.println("**********");
         }
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
 
 
