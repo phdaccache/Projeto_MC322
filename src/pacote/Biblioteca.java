@@ -101,8 +101,8 @@ public class Biblioteca {
         Revista revista = new Revista(code, qtdDePaginas, status, titulo, autores, listaReservas, ano, edicao, instituicao, assuntos, ISSN);
         this.itens.add(revista);
     }
-    public void cadastrarEmprestimo(Item item, Date data_ini, Date data_lim, Cliente cliente, String code) {
-        Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente, code);
+    public void cadastrarEmprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente) {
+        Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente);
         this.emprestimos.add(emprestimo);
     }
     public void cadastrarReserva(Item item, LocalDate data, Cliente cliente, int posicao) {
@@ -197,6 +197,15 @@ public class Biblioteca {
     }
 
     //Retorna uma lista de itens especificos
+    public Item getItem(String titulo){
+        for(Item item : itens){
+            if(item.getTitulo().equals(titulo)){
+                return item;
+            }
+        }
+        System.out.println("Item não encontrado!");
+        return null;
+    }
     public ArrayList<Livro> getlivros(){
         ArrayList<Livro> livros = new ArrayList<>();
         for(Item item : itens){

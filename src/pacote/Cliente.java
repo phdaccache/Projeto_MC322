@@ -14,7 +14,6 @@ public class Cliente {
 	private String telefone;
 	private String email;
 	private LocalDate dataNasc;
-	private final String ID;
 	private final String senha;
 	private String assinatura; // "basica", "Prata", "Dourado" etc
 	private String status; // "ativo", "inativo", "suspenso", "bloqueado" etc
@@ -24,7 +23,7 @@ public class Cliente {
 	//Construtor
 
 
-	public Cliente(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
+	public Cliente(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
 		this.biblioteca = biblioteca;
 		this.CPF = CPF;
 		this.multa = multa;
@@ -32,7 +31,6 @@ public class Cliente {
 		this.telefone = telefone;
 		this.email = email;
 		this.dataNasc = dataNasc;
-		this.ID = ID;
 		this.senha = senha;
 		this.assinatura = assinatura;
 		this.status = status;
@@ -85,9 +83,6 @@ public class Cliente {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public String getID() {
-		return ID;
 	}
 	public String getSenha() {
 		return senha;
@@ -215,7 +210,16 @@ public class Cliente {
 			return false;
 		}
 	}
-
+	public void fazerEmprestimo(String titulo){
+		if(TentaEmprestimo(titulo, biblioteca.getItens(), listaEmprestimos) == true){
+			 biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.getData(), Admin.getData().plusDays(verificaQtdDeDias(this)), this);
+			 biblioteca.getItem(titulo).setStatus("emprestado");
+			System.out.println("Emprestimo realizado com sucesso");
+		}
+		else{
+			System.out.println("Emprestimo nao realizado");
+		}
+	}
 	public void listarEmprestimos(){
 		if(listaEmprestimos.isEmpty()){
 			System.out.println("Nao ha emprestimos");
@@ -244,17 +248,7 @@ public class Cliente {
 	public void UltimasAquisicoes(){
 		getBiblioteca().UltimasAquisicoes();
 	}
-	public ArrayList<Reserva> removerReserva(String Titulo){
-		for(Reserva reserva : listaReservasItens){
-			if(reserva.getItem().getTitulo().equals(Titulo)){
-				listaReservasItens.remove(reserva);
-				System.out.println("Reserva removida com sucesso");
-				return listaReservasItens;
-			}
-		}
-		System.out.println("Reserva nao encontrada");
-		return listaReservasItens;
-	}
+
 	public ArrayList<Emprestimo> DevolverEmprestimo(String Titulo){
 		for(Emprestimo emprestimo : listaEmprestimos){
 			if(emprestimo.getItem().getTitulo().equals(Titulo)){
@@ -266,10 +260,24 @@ public class Cliente {
 		System.out.println("Emprestimo nao encontrado");
 		return listaEmprestimos;
 	}
+	//Permite fazer uma renovação apenas quando não há reservas para o item.
+	public void renovarEmprestimo(String titulo){
+		if(getItem(titulo).getStatus().equals("reservado")){
+			System.out.println("Há reservas. O cliente não pode renovar o emprestimo.");
+		}
+		else{
+			for(Emprestimo emprestimo : listaEmprestimos){
+				if(emprestimo.getItem().getTitulo().equals(titulo)){
+					emprestimo.setDataLim(emprestimo.getDataLim().plusDays(verificaQtdDeDias(this)));
+					System.out.println("Emprestimo renovado com sucesso");
+				}
+			}
+		}
+	}
 
 	//public void listarEmprestimosAtrasados(){}
 
-	public Boolean TentaReservar(String titulo){
+	public Boolean TentaReservar(String titulo) {
 		for(Emprestimo emprestimo : getBiblioteca().getEmprestimos()){
 			if(emprestimo.getItem().getTitulo().equals(titulo)){
 				return true;
@@ -300,6 +308,7 @@ public class Cliente {
 	}
 	public void Reservar(String titulo){
 		biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
+		biblioteca.getItem(titulo).setStatus("reservado");
 	}
 
 	//Fazer metodo para atualizar a situação

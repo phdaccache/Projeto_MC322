@@ -35,6 +35,7 @@ public class Admin {
 	        }
 	        System.out.println("teste");
 	        // Resto do código para avançar o tempo
+            setData(getData().plusDays(dias));
 	        //AtualizarClientes();
 	        //AtualizarEmprestimos();
 	        //AtualizarReservas();
@@ -104,6 +105,9 @@ public class Admin {
 	        System.out.println("Erro: " + e.getMessage());
             return;
  	    }
+    }
+    public void AtualizarClientes(){
+
     }
 
 
