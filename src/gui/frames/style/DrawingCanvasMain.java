@@ -20,10 +20,10 @@ public class DrawingCanvasMain extends JPanel {
 	    g2D.setFont(font);
 	    GradientPaint gp = new GradientPaint(
 	                            90, 70,
-	                            MyColor.PRIMARY,
+	                            MyColors.PRIMARY,
 	                            fontMetrics.stringWidth("Bibliotecas"),
 	                            fontMetrics.getHeight(),
-	                            MyColor.ACCENT);             
+	                            MyColors.ACCENT);             
 	    g2D.setPaint(gp);
 	    g2D.drawString("Bibliotecas",68,235);
 	}

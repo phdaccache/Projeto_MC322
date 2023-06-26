@@ -32,8 +32,8 @@ public class FrameItens extends JFrame {
 		setBounds(100, 100, 600, 400);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(MyColor.ACCENT);
-		contentPane.setBorder(new LineBorder(MyColor.ACCENT, 2));
+		contentPane.setBackground(MyColors.ACCENT);
+		contentPane.setBorder(new LineBorder(MyColors.ACCENT, 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -55,8 +55,8 @@ public class FrameItens extends JFrame {
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
-		iconArrow.setBackground(MyColor.PRIMARY);
-		iconArrow.setForeground(MyColor.BACKGROUND);
+		iconArrow.setBackground(MyColors.PRIMARY);
+		iconArrow.setForeground(MyColors.BACKGROUND);
 		iconArrow.setHorizontalTextPosition(SwingConstants.CENTER);
 		iconArrow.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 14));
 		iconArrow.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,27 +73,27 @@ public class FrameItens extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				iconArrow.setBackground(MyColor.PLACEHOLDER);
+				iconArrow.setBackground(MyColors.PLACEHOLDER);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				iconArrow.setBackground(MyColor.PRIMARY);
+				iconArrow.setBackground(MyColors.PRIMARY);
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				iconArrow.setBackground(MyColor.SECONDARY_PLACEHOLDER);
+				iconArrow.setBackground(MyColors.SECONDARY_PLACEHOLDER);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				iconArrow.setBackground(MyColor.PLACEHOLDER);
+				iconArrow.setBackground(MyColors.PLACEHOLDER);
 			}
 		});
 		contentPane.add(iconArrow);
 		
 		iconX = new JLabel("X");
 		iconX.setOpaque(true);
-		iconX.setBackground(MyColor.SECONDARY_BACKGROUND);
-		iconX.setForeground(MyColor.PRIMARY);
+		iconX.setBackground(MyColors.SECONDARY_BACKGROUND);
+		iconX.setForeground(MyColors.PRIMARY);
 		iconX.setHorizontalTextPosition(SwingConstants.CENTER);
 		iconX.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 14));
 		iconX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -108,43 +108,43 @@ public class FrameItens extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				iconX.setBackground(MyColor.CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				iconX.setBackground(MyColor.SECONDARY_BACKGROUND);
-				iconX.setForeground(MyColor.PRIMARY);
+				iconX.setBackground(MyColors.SECONDARY_BACKGROUND);
+				iconX.setForeground(MyColors.PRIMARY);
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				iconX.setBackground(MyColor.SECONDARY_CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.SECONDARY_CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				iconX.setBackground(MyColor.CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 		});
 		contentPane.add(iconX);
 	
 		pnlTitle = new JPanel();
 		pnlTitle.setBounds(2, 45, 248, 60);
-		pnlTitle.setBackground(MyColor.ACCENT);
+		pnlTitle.setBackground(MyColors.ACCENT);
 		contentPane.add(pnlTitle);
 		pnlTitle.setLayout(null);
 		
 		lblTitle = new JLabel("ITENS");
 		lblTitle.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblTitle.setForeground(MyColor.BACKGROUND);
+		lblTitle.setForeground(MyColors.BACKGROUND);
 		lblTitle.setFont(new Font("Dialog", Font.BOLD, 25));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(0, 0, 248, 60);
 		pnlTitle.add(lblTitle);
 		
 		JPanel pnlMenu = new JPanel();
-		pnlMenu.setBackground(MyColor.PRIMARY);
+		pnlMenu.setBackground(MyColors.PRIMARY);
 		pnlMenu.setBounds(2, 2, 248, 396);
 		contentPane.add(pnlMenu);
 		pnlMenu.setLayout(null);
@@ -157,14 +157,14 @@ public class FrameItens extends JFrame {
 			}
 		});
 		pnlPesquisarItem.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(24, 17, 29)));
-		pnlPesquisarItem.setBackground(MyColor.PRIMARY);
+		pnlPesquisarItem.setBackground(MyColors.PRIMARY);
 		pnlPesquisarItem.setBounds(20, 125, 210, 32);
 		pnlMenu.add(pnlPesquisarItem);
 		pnlPesquisarItem.setLayout(null);
 		
 		JLabel lblPesquisarItem = new JLabel("PESQUISAR ITEM");
 		lblPesquisarItem.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblPesquisarItem.setForeground(MyColor.BACKGROUND);
+		lblPesquisarItem.setForeground(MyColors.BACKGROUND);
 		lblPesquisarItem.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblPesquisarItem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPesquisarItem.setBounds(6, 6, 207, 20);
@@ -177,8 +177,8 @@ public class FrameItens extends JFrame {
 				menuClicked(panelListarTodosOsItens);
 			}
 		});
-		pnlListarTodosOsItens.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
-		pnlListarTodosOsItens.setBackground(MyColor.PRIMARY);
+		pnlListarTodosOsItens.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
+		pnlListarTodosOsItens.setBackground(MyColors.PRIMARY);
 		pnlListarTodosOsItens.setBounds(20, 157, 210, 32);
 		pnlMenu.add(pnlListarTodosOsItens);
 		pnlListarTodosOsItens.setLayout(null);
@@ -199,8 +199,8 @@ public class FrameItens extends JFrame {
 				menuClicked(panelListarLivros);
 			}
 		});
-		pnlListarLivros.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
-		pnlListarLivros.setBackground(MyColor.PRIMARY);
+		pnlListarLivros.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
+		pnlListarLivros.setBackground(MyColors.PRIMARY);
 		pnlListarLivros.setLayout(null);
 		pnlListarLivros.setBounds(20, 189, 210, 32);
 		pnlMenu.add(pnlListarLivros);
@@ -222,7 +222,7 @@ public class FrameItens extends JFrame {
 			}
 		});
 		pnlListarApostilas.setLayout(null);
-		pnlListarApostilas.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
+		pnlListarApostilas.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
 		pnlListarApostilas.setBackground(new Color(121, 98, 68));
 		pnlListarApostilas.setBounds(20, 221, 210, 32);
 		pnlMenu.add(pnlListarApostilas);
@@ -244,7 +244,7 @@ public class FrameItens extends JFrame {
 			}
 		});
 		pnlListarArtigos.setLayout(null);
-		pnlListarArtigos.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
+		pnlListarArtigos.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
 		pnlListarArtigos.setBackground(new Color(121, 98, 68));
 		pnlListarArtigos.setBounds(20, 253, 210, 32);
 		pnlMenu.add(pnlListarArtigos);
@@ -266,7 +266,7 @@ public class FrameItens extends JFrame {
 			}
 		});
 		pnlListarRevistas.setLayout(null);
-		pnlListarRevistas.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
+		pnlListarRevistas.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
 		pnlListarRevistas.setBackground(new Color(121, 98, 68));
 		pnlListarRevistas.setBounds(20, 285, 210, 32);
 		pnlMenu.add(pnlListarRevistas);
@@ -288,7 +288,7 @@ public class FrameItens extends JFrame {
 			}
 		});
 		pnlCadastrarItem.setLayout(null);
-		pnlCadastrarItem.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
+		pnlCadastrarItem.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
 		pnlCadastrarItem.setBackground(new Color(121, 98, 68));
 		pnlCadastrarItem.setBounds(20, 317, 210, 32);
 		pnlMenu.add(pnlCadastrarItem);
@@ -364,19 +364,19 @@ public class FrameItens extends JFrame {
 		
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			panel.setBackground(MyColor.ACCENT);
+			panel.setBackground(MyColors.ACCENT);
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			panel.setBackground(MyColor.PRIMARY);
+			panel.setBackground(MyColors.PRIMARY);
 		}
 		@Override
 		public void mousePressed(MouseEvent e) {
-			panel.setBackground(MyColor.SECONDARY_ACCENT);
+			panel.setBackground(MyColors.SECONDARY_ACCENT);
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			panel.setBackground(MyColor.ACCENT);
+			panel.setBackground(MyColors.ACCENT);
 		}
 	}
 }

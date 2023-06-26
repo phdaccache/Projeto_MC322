@@ -1,7 +1,7 @@
 package gui.frames.style;
 import java.awt.Color;
 
-public class MyColor {
+public class MyColors {
 	public static Color TEXT = new Color(24, 17, 29);
 	public static Color BACKGROUND = new Color(250, 249, 251);
 	public static Color SECONDARY_BACKGROUND = new Color(238, 237, 239);

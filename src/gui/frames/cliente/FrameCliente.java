@@ -35,8 +35,8 @@ public class FrameCliente extends JFrame {
 		setBounds(100, 100, 600, 400);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(MyColor.SECONDARY_BACKGROUND);
-		contentPane.setBorder(new LineBorder(MyColor.ACCENT, 2));
+		contentPane.setBackground(MyColors.SECONDARY_BACKGROUND);
+		contentPane.setBorder(new LineBorder(MyColors.ACCENT, 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -49,8 +49,8 @@ public class FrameCliente extends JFrame {
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
-		iconArrow.setBackground(MyColor.SECONDARY_BACKGROUND);
-		iconArrow.setForeground(MyColor.PRIMARY);
+		iconArrow.setBackground(MyColors.SECONDARY_BACKGROUND);
+		iconArrow.setForeground(MyColors.PRIMARY);
 		iconArrow.setHorizontalTextPosition(SwingConstants.CENTER);
 		iconArrow.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 14));
 		iconArrow.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,31 +70,31 @@ public class FrameCliente extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				iconArrow.setBackground(MyColor.PLACEHOLDER);
-				iconArrow.setForeground(MyColor.BACKGROUND);
+				iconArrow.setBackground(MyColors.PLACEHOLDER);
+				iconArrow.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				iconArrow.setBackground(MyColor.SECONDARY_BACKGROUND);
-				iconArrow.setForeground(MyColor.PRIMARY);
+				iconArrow.setBackground(MyColors.SECONDARY_BACKGROUND);
+				iconArrow.setForeground(MyColors.PRIMARY);
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				iconArrow.setBackground(MyColor.SECONDARY_PLACEHOLDER);
-				iconArrow.setForeground(MyColor.BACKGROUND);
+				iconArrow.setBackground(MyColors.SECONDARY_PLACEHOLDER);
+				iconArrow.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				iconArrow.setBackground(MyColor.PLACEHOLDER);
-				iconArrow.setForeground(MyColor.BACKGROUND);
+				iconArrow.setBackground(MyColors.PLACEHOLDER);
+				iconArrow.setForeground(MyColors.BACKGROUND);
 			}
 		});
 		contentPane.add(iconArrow);
 		
 		iconX = new JLabel("X");
 		iconX.setOpaque(true);
-		iconX.setBackground(MyColor.SECONDARY_BACKGROUND);
-		iconX.setForeground(MyColor.PRIMARY);
+		iconX.setBackground(MyColors.SECONDARY_BACKGROUND);
+		iconX.setForeground(MyColors.PRIMARY);
 		iconX.setHorizontalTextPosition(SwingConstants.CENTER);
 		iconX.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 14));
 		iconX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -109,23 +109,23 @@ public class FrameCliente extends JFrame {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				iconX.setBackground(MyColor.CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				iconX.setBackground(MyColor.SECONDARY_BACKGROUND);
-				iconX.setForeground(MyColor.PRIMARY);
+				iconX.setBackground(MyColors.SECONDARY_BACKGROUND);
+				iconX.setForeground(MyColors.PRIMARY);
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				iconX.setBackground(MyColor.SECONDARY_CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.SECONDARY_CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				iconX.setBackground(MyColor.CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 		});
 		add(iconX);
@@ -135,20 +135,20 @@ public class FrameCliente extends JFrame {
 		
 		pnlTitle = new JPanel();
 		pnlTitle.setBounds(175, 45, 250, 60);
-		pnlTitle.setBackground(MyColor.SECONDARY_BACKGROUND);
+		pnlTitle.setBackground(MyColors.SECONDARY_BACKGROUND);
 		contentPane.add(pnlTitle);
 		pnlTitle.setLayout(null);
 		
 		lblTitle = new JLabel("Área do");
 		lblTitle.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblTitle.setForeground(MyColor.PRIMARY);
+		lblTitle.setForeground(MyColors.PRIMARY);
 		lblTitle.setFont(new Font("Dialog", Font.BOLD, 40));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(0, 0, 250, 60);
 		pnlTitle.add(lblTitle);
 		
 		pnlMenu = new JPanel();
-		pnlMenu.setBackground(MyColor.PRIMARY);
+		pnlMenu.setBackground(MyColors.PRIMARY);
 		pnlMenu.setBounds(2, 184, 596, 214);
 		contentPane.add(pnlMenu);
 		pnlMenu.setLayout(null);
@@ -161,14 +161,14 @@ public class FrameCliente extends JFrame {
 				menuClicked(frameMinhaConta);
 			}
 		});
-		pnlMinhaConta.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
-		pnlMinhaConta.setBackground(MyColor.PRIMARY);
+		pnlMinhaConta.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
+		pnlMinhaConta.setBackground(MyColors.PRIMARY);
 		pnlMinhaConta.setBounds(193, 27, 210, 40);
 		pnlMenu.add(pnlMinhaConta);
 		pnlMinhaConta.setLayout(null);
 		
 		lblMinhaConta = new JLabel("MINHA CONTA");
-		lblMinhaConta.setForeground(MyColor.BACKGROUND);
+		lblMinhaConta.setForeground(MyColors.BACKGROUND);
 		lblMinhaConta.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblMinhaConta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMinhaConta.setBounds(30, 10, 150, 20);
@@ -183,7 +183,7 @@ public class FrameCliente extends JFrame {
 			}
 		});
 		pnlItens.setLayout(null);
-		pnlItens.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
+		pnlItens.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
 		pnlItens.setBackground(new Color(121, 98, 68));
 		pnlItens.setBounds(193, 67, 210, 40);
 		pnlMenu.add(pnlItens);
@@ -204,7 +204,7 @@ public class FrameCliente extends JFrame {
 			}
 		});
 		pnlEmprestimos.setLayout(null);
-		pnlEmprestimos.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColor.TEXT));
+		pnlEmprestimos.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
 		pnlEmprestimos.setBackground(new Color(121, 98, 68));
 		pnlEmprestimos.setBounds(193, 107, 210, 40);
 		pnlMenu.add(pnlEmprestimos);
@@ -261,19 +261,19 @@ public class FrameCliente extends JFrame {
 		
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			panel.setBackground(MyColor.ACCENT);
+			panel.setBackground(MyColors.ACCENT);
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			panel.setBackground(MyColor.PRIMARY);
+			panel.setBackground(MyColors.PRIMARY);
 		}
 		@Override
 		public void mousePressed(MouseEvent e) {
-			panel.setBackground(MyColor.SECONDARY_ACCENT);
+			panel.setBackground(MyColors.SECONDARY_ACCENT);
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			panel.setBackground(MyColor.ACCENT);
+			panel.setBackground(MyColors.ACCENT);
 		}
 	}
 }

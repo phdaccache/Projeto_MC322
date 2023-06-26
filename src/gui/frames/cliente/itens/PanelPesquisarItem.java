@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import gui.frames.style.MyColor;
+import gui.frames.style.MyColors;
 
 public class PanelPesquisarItem extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -24,8 +24,8 @@ public class PanelPesquisarItem extends JPanel {
 		
 		iconX = new JLabel("X");
 		iconX.setOpaque(true);
-		iconX.setBackground(MyColor.SECONDARY_BACKGROUND);
-		iconX.setForeground(MyColor.PRIMARY);
+		iconX.setBackground(MyColors.SECONDARY_BACKGROUND);
+		iconX.setForeground(MyColors.PRIMARY);
 		iconX.setHorizontalTextPosition(SwingConstants.CENTER);
 		iconX.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 14));
 		iconX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -40,23 +40,23 @@ public class PanelPesquisarItem extends JPanel {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				iconX.setBackground(MyColor.CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				iconX.setBackground(MyColor.SECONDARY_BACKGROUND);
-				iconX.setForeground(MyColor.PRIMARY);
+				iconX.setBackground(MyColors.SECONDARY_BACKGROUND);
+				iconX.setForeground(MyColors.PRIMARY);
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				iconX.setBackground(MyColor.SECONDARY_CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.SECONDARY_CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				iconX.setBackground(MyColor.CLOSE);
-				iconX.setForeground(MyColor.BACKGROUND);
+				iconX.setBackground(MyColors.CLOSE);
+				iconX.setForeground(MyColors.BACKGROUND);
 			}
 		});
 		add(iconX);
