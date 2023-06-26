@@ -1,7 +1,7 @@
 package pacote;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.StringJoiner;
 
 public class Estudantes extends Cliente{
@@ -12,9 +12,9 @@ public class Estudantes extends Cliente{
 	//Construtor
 
 
-	public Estudantes(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
-		super(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens);
-		this.Matricula = matricula;
+	public Estudantes(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
+		super(biblioteca, CPF, multa, nome, telefone, email, dataNasc, ID, senha, assinatura, status, listaEmprestimos, listaReservasItens);
+		Matricula = matricula;
 		this.curso = curso;
 		this.ano_grad = ano_grad;
 	}

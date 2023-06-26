@@ -1,7 +1,7 @@
 package pacote;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.StringJoiner;
 
 public class Professores extends Cliente{
@@ -14,8 +14,8 @@ public class Professores extends Cliente{
 	//Construtor
 
 
-	public Professores(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-		super(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens);
+	public Professores(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+		super(biblioteca, CPF, multa, nome, telefone, email, dataNasc, ID, senha, assinatura, status, listaEmprestimos, listaReservasItens);
 		this.instituicao = instituicao;
 		this.educacao = educacao;
 		this.area = area;

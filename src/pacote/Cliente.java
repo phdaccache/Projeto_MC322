@@ -1,19 +1,22 @@
 package pacote;
 
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.StringJoiner;
 
 public class Cliente {
+	private Biblioteca biblioteca;
 	private final String CPF;
 	private int multa; //Valor de multa acumulada. O cliente sempre começa com 0.
 	private String nome;
 	private String telefone;
 	private String email;
-	private Date dataNasc;
+	private LocalDate dataNasc;
 	private final String ID;
 	private final String senha;
+	private String assinatura; // "basica", "Prata", "Dourado" etc
 	private String status; // "ativo", "inativo", "suspenso", "bloqueado" etc
 	private ArrayList<Emprestimo> listaEmprestimos;
 	private ArrayList<Reserva> listaReservasItens;
@@ -21,7 +24,8 @@ public class Cliente {
 	//Construtor
 
 
-	public Cliente(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
+	public Cliente(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
+		this.biblioteca = biblioteca;
 		this.CPF = CPF;
 		this.multa = multa;
 		this.nome = nome;
@@ -30,6 +34,7 @@ public class Cliente {
 		this.dataNasc = dataNasc;
 		this.ID = ID;
 		this.senha = senha;
+		this.assinatura = assinatura;
 		this.status = status;
 		this.listaEmprestimos = listaEmprestimos;
 		this.listaReservasItens = listaReservasItens;
@@ -57,10 +62,10 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Date getDataNasc() {
+	public LocalDate getDataNasc() {
 		return dataNasc;
 	}
-	public void setDataNasc(Date dataNasc) {
+	public void setDataNasc(LocalDate dataNasc) {
 		this.dataNasc = dataNasc;
 	}
 	public ArrayList<Reserva> getListaReservasItens(){
@@ -102,7 +107,27 @@ public class Cliente {
 	public void setListaReservasItens(ArrayList<Reserva> listaReservasItens) {
 		this.listaReservasItens = listaReservasItens;
 	}
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
+	}
+	public String getAssinatura() {
+		return assinatura;
+	}
+	public void setAssinatura(String assinatura) {
+		this.assinatura = assinatura;
+	}
 	//Metodos
+	public Item getItem(String Titulo){
+		for(Item item : biblioteca.getItens()) {
+			if(item.getTitulo().equals(Titulo)) {
+				return item;
+			}
+		}
+		return null;
+	}
 
 	//Metodo para verificar se o cliente esta apto a fazer emprestimos
 	public boolean aptoEmprestimo() {
@@ -160,6 +185,7 @@ public class Cliente {
 		}
 		return "Item nao encontrado";
 	}
+
 	//PROTÓTIPO - Metodo que tenta fazer um emprestimo, em seguida aplica o metodo de reserva caso o cliente queira.
 	public boolean TentaEmprestimo(String TituloItem, ArrayList<Item> listaItens, ArrayList<Emprestimo> listaEmprestimos) {
 		if (aptoEmprestimo() == true) {
@@ -169,12 +195,13 @@ public class Cliente {
 			}
 			else if(verificaStatusItem(TituloItem, listaItens, listaEmprestimos) == "emprestado"){
 				Emprestimo emprestimo = achaEmprestimo(TituloItem, listaEmprestimos);
-				System.out.println("Item emprestado. \nEstará disponivel no máximo em " + emprestimo.getDataLim() + ".");
+				System.out.println("Item emprestado. \nEstará disponivel no máximo em " + emprestimo.getDataLim() + ".\n");
+				System.out.println("Para caso queira fazer uma reserva, vá para a area de reservas.");
 				//Método para tentar reserva, caso o cliente queira.
 				return false;
 			}
 			else if(verificaStatusItem(TituloItem, listaItens, listaEmprestimos) == "reservado"){
-				System.out.println("Item reservado.");
+				System.out.println("Item está reservado. Para caso queira fazer uma reserva, vá para a área de reservas");
 				//Método para tentar reserva, caso o cliente queira.
 				return false;
 			}
@@ -189,7 +216,91 @@ public class Cliente {
 		}
 	}
 
-	//Metodo para tentar fazer uma reserva
+	public void listarEmprestimos(){
+		if(listaEmprestimos.isEmpty()){
+			System.out.println("Nao ha emprestimos");
+		}
+		else{
+			for(Emprestimo emprestimo : listaEmprestimos){
+				System.out.println("****** Emprestimos ******");
+				emprestimo.toString();
+			}
+		}
+	}
+	public void listarReservas(){
+		if(listaReservasItens.isEmpty()){
+			System.out.println("Nao ha reservas");
+		}
+		else{
+			for(Reserva reserva : listaReservasItens){
+				System.out.println("****** Reservas ******");
+				reserva.toString();
+			}
+		}
+	}
+	public void pesquisarItem(String titulo){
+		getBiblioteca().pesquisarItem(titulo);
+	}
+	public void UltimasAquisicoes(){
+		getBiblioteca().UltimasAquisicoes();
+	}
+	public ArrayList<Reserva> removerReserva(String Titulo){
+		for(Reserva reserva : listaReservasItens){
+			if(reserva.getItem().getTitulo().equals(Titulo)){
+				listaReservasItens.remove(reserva);
+				System.out.println("Reserva removida com sucesso");
+				return listaReservasItens;
+			}
+		}
+		System.out.println("Reserva nao encontrada");
+		return listaReservasItens;
+	}
+	public ArrayList<Emprestimo> DevolverEmprestimo(String Titulo){
+		for(Emprestimo emprestimo : listaEmprestimos){
+			if(emprestimo.getItem().getTitulo().equals(Titulo)){
+				listaEmprestimos.remove(emprestimo);
+				System.out.println("Emprestimo removido com sucesso");
+				return listaEmprestimos;
+			}
+		}
+		System.out.println("Emprestimo nao encontrado");
+		return listaEmprestimos;
+	}
+
+	//public void listarEmprestimosAtrasados(){}
+
+	public Boolean TentaReservar(String titulo){
+		for(Emprestimo emprestimo : getBiblioteca().getEmprestimos()){
+			if(emprestimo.getItem().getTitulo().equals(titulo)){
+				return true;
+			}
+		}
+		return false;
+	}
+	// Metodo para verificar a quantidade de dias que um cliente pode ficar.
+	public int verificaQtdDeDias(Cliente cliente){
+		if(cliente.getAssinatura().equals("Básico")){
+			return 5;
+		}
+		else if(cliente.getAssinatura().equals("Prata")){
+			return 7;
+		}
+		else if(cliente.getAssinatura().equals("Dourado")){
+			return 10;
+		}
+		else{
+			System.out.println("Assinatura invalida");
+			return 0;
+		}
+	}
+	//Método para calcular a data esperada para o item estar disponivel.
+	public LocalDate CalculaData(String titulo){
+		LocalDate data = getItem(titulo).getListaReservas().get(0).getData().plusDays(verificaQtdDeDias(this));
+		return data;
+	}
+	public void Reservar(String titulo){
+		biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
+	}
 
 	//Fazer metodo para atualizar a situação
 
@@ -197,14 +308,16 @@ public class Cliente {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
-		/*DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String dataNascimento = getDataNasc().format(data);   */ //Dá errado por algum motivo
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //Formato da data (dia/mes/ano
+		String dataNascimento = formato.format(getDataNasc());
 		joiner.add("CPF: " + CPF);
 		joiner.add("Nome: " + nome);
 		joiner.add("Email: " + email);
 		joiner.add("Telefone: " + telefone);
-		joiner.add("Data de nascimento: " + dataNasc);
+		joiner.add("Data de nascimento: " + dataNascimento);
 		joiner.add("Status: " + status);
+		joiner.add("Biblioteca: " + biblioteca.getNome());
+
 		return joiner.toString();
 	}
 

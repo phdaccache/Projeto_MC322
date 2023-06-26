@@ -1,5 +1,6 @@
 package pacote;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,12 +81,12 @@ public class Biblioteca {
     }
 
     //Métodos
-    public void cadastrarEstudantes(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
-        Estudantes estudante = new Estudantes(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens, matricula, curso, ano_grad);
+    public void cadastrarEstudantes(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
+        Estudantes estudante = new Estudantes(biblioteca, CPF, multa, nome, telefone, email, dataNasc, ID, senha, assinatura, status, listaEmprestimos, listaReservasItens, matricula, curso, ano_grad);
         this.clientes.add(estudante);
     }
-    public void cadastrarProfessores(String CPF, int multa, String nome, String telefone, String email, Date dataNasc, String ID, String senha, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-        Professores professor = new Professores(CPF, multa, nome, telefone, email, dataNasc, ID, senha, status, listaEmprestimos, listaReservasItens, instituicao, educacao, area, aulas, ano_ing);
+    public void cadastrarProfessores(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+        Professores professor = new Professores(biblioteca, CPF, multa, nome, telefone, email, dataNasc, ID, senha, assinatura, status, listaEmprestimos, listaReservasItens, instituicao, educacao, area, aulas, ano_ing);
         this.clientes.add(professor);
     }
     public void cadastrarLivro(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String editora, int ISBN, String edicao, String tema){
@@ -104,8 +105,8 @@ public class Biblioteca {
         Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente, code);
         this.emprestimos.add(emprestimo);
     }
-    public void cadastrarReserva(Item item, Date data, Cliente cliente, String code, String posicao) {
-        Reserva reserva = new Reserva(item, data, cliente, code, posicao);
+    public void cadastrarReserva(Item item, LocalDate data, Cliente cliente, int posicao) {
+        Reserva reserva = new Reserva(item, data, cliente, posicao);
         this.reservas.add(reserva);
     }
     public void removerCliente(String CPF) {
@@ -329,7 +330,6 @@ public class Biblioteca {
         }
         return;
     }
-
     public void listarReservas(){
         if(reservas.isEmpty()){
             System.out.println("Não há reservas cadastradas!");
@@ -341,7 +341,35 @@ public class Biblioteca {
         }
         return;
     }
-    //public void listarReservasPorCliente(){}
+
+    public void listarReservasPorCliente(String CPF){
+        for(Cliente cliente : clientes){
+            if(cliente.getCPF().equals(CPF)){
+                for(Reserva reserva : reservas){
+                    if(reserva.getCliente().getCPF().equals(CPF)){
+                        System.out.println("***** Reservas *****");
+                        System.out.println(reserva.toString());
+                    }
+                }
+                return;
+            }
+        }
+    }
+    public void listarEmprestimosPorCliente(String CPF){
+        for(Cliente cliente : clientes){
+            if(cliente.getCPF().equals(CPF)){
+                for(Emprestimo emprestimo : emprestimos){
+                    if(emprestimo.getCliente().getCPF().equals(CPF)){
+                        System.out.println("***** Emprestimos *****");
+                        System.out.println(emprestimo.toString());
+                    }
+                }
+                return;
+            }
+        }
+    }
+
+    //public void listarEmprestimosAtrasados(){}
     public void listarEmprestimos(){
         if(emprestimos.isEmpty()){
             System.out.println("Não há emprestimos cadastrados!");
@@ -364,6 +392,18 @@ public class Biblioteca {
         }
         System.out.println("Item não encontrado!");
         return null;
+    }
+    public void UltimasAquisicoes(){
+        if(itens.isEmpty()){
+            System.out.println("Não há itens cadastrados!");
+            return;
+        }
+        System.out.println("***** Ultimas Aquisições *****");
+        //Faz a listagens dos ultimos 3 itens adicionados
+        for(int i = 0; i < 2; i++){
+            itens.get(i).toString();
+        }
+        return;
     }
 
     //Metodos para atualizar emprestimos e reservas depois de um certo tempo.

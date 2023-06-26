@@ -1,14 +1,14 @@
 package pacote;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Admin {
     private ArrayList<Biblioteca> bibliotecas;
-    private Date data;
+    private static LocalDate data; // Data atual do sistema
 
     //Construtor
-    public Admin(ArrayList<Biblioteca> bibliotecas, Date data) {
+    public Admin(ArrayList<Biblioteca> bibliotecas, LocalDate data) {
         this.bibliotecas = bibliotecas;
         this.data = data;
     }
@@ -20,15 +20,15 @@ public class Admin {
     public void setBibliotecas(ArrayList<Biblioteca> bibliotecas) {
         this.bibliotecas = bibliotecas;
     }
-    public Date getData() {
+    public static LocalDate getData() {
     	return data;
     }
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
     //Metodos
-    public Date Avancatempo(int dias) {
+    public LocalDate Avancatempo(int dias) {
 	    try {
 	        if (dias <= 0) {
 	            throw new IllegalArgumentException("O número de dias deve ser positivo");
