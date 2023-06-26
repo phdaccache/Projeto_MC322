@@ -8,12 +8,12 @@ import java.util.Date;
 
 import menu.enuns.EnumMenuAdmin;
 //teste
-import pacote.Admin; 
+/*import pacote.Admin; 
 import pacote.Biblioteca;
 import pacote.Cliente;
 import pacote.Emprestimo;
 import pacote.Item;
-import pacote.Reserva;
+import pacote.Reserva;*/
 
 public class MenuAdmin extends Menu {
     // Construtor
@@ -83,12 +83,12 @@ public class MenuAdmin extends Menu {
                 break;
             case CADASTRAR_BIBLIOTECA:
                 System.out.println("Cadastrar Biblioteca.");
-                //teste
+                /*teste
                 Date dataAtual = new Date();
                 Admin admin = new Admin(null, dataAtual);
                 Biblioteca biblioteca = new Biblioteca(getScanner().next(), getScanner().next(), getScanner().next(), 
                 		getScanner().next(),null, null, null, null);
-                admin.CadastraBiblioteca(biblioteca);
+                admin.CadastraBiblioteca(biblioteca);*/
                 break;
             case EXCLUIR_BIBLIOTECA:
                 System.out.println("Excluir Biblioteca.");
