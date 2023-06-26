@@ -21,8 +21,6 @@ public class Cliente {
 	private ArrayList<Reserva> listaReservasItens;
 	
 	//Construtor
-
-
 	public Cliente(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
 		this.biblioteca = biblioteca;
 		this.CPF = CPF;
