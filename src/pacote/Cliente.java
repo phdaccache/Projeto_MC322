@@ -15,7 +15,7 @@ public class Cliente {
 	private String telefone;
 	private String email;
 	private LocalDate dataNasc;
-	private final String senha;
+	private String senha;
 	private String assinatura; // "basica", "Prata", "Dourado" etc
 	private String status; // "ativo", "inativo", "suspenso", "bloqueado" etc
 	private ArrayList<Emprestimo> listaEmprestimos;
@@ -48,18 +48,39 @@ public class Cliente {
 	            this.nome = entrada.next();
 	        }
         }
-        while(true) {
-	        try {
-	            if (!Validacao.validarCpf(this.CPF)) {
-	                throw new IllegalArgumentException("CPF inválido");
-	            }
-	            break;
-	        } catch (IllegalArgumentException e) {
-	            System.out.println("Erro: " + e.getMessage());
-	            System.out.println("Insira outro CPF: ");
-	            this.CPF = entrada.next();
+		 while(true) {
+		        try {
+		            if (!Validacao.validarCpf(this.CPF)) {
+		                throw new IllegalArgumentException("CPF inválido");
+		            }
+		            ArrayList<Cliente> c = biblioteca.getClientes();
+		        	 for (Cliente cliente : c) {
+		                 if (cliente.getCpf().equals(this.CPF)){
+		                	 throw new IllegalArgumentException("CPF já cadastrado");
+		                 }
+		            }
+		            break;
+		        } catch (IllegalArgumentException e) {
+		            System.out.println("Erro: " + e.getMessage());
+		            System.out.println("Insira outro CPF: ");
+		            this.CPF = entrada.next();
+		        }
 	        }
-        }
+	        while(true) {
+		        try {
+		        	ArrayList<Cliente> c = biblioteca.getClientes();
+		        	 for (Cliente cliente : c) {
+		                 if (cliente.getCpf().equals(this.senha)){
+		                	 throw new IllegalArgumentException("Senha já utilizada");
+		                 }
+		            }
+		        	 break;
+		        } catch (IllegalArgumentException e) {
+		            System.out.println("Erro: " + e.getMessage());
+		            System.out.println("Escolha outra senha: ");
+		            this.senha = entrada.next();
+		        }
+	        }
 	}
 
 	//Getters e setters
@@ -71,10 +92,16 @@ public class Cliente {
             if (!Validacao.validarCpf(this.CPF)) {
                 throw new IllegalArgumentException("CPF inválido");
             }
+            ArrayList<Cliente> c = biblioteca.getClientes();
+	       	for (Cliente cliente : c) {
+				 if (cliente.getCpf().equals(this.CPF)){
+					 throw new IllegalArgumentException("CPF já cadastrado");
+				 }
+	        }
             this.CPF = CPF;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
+	     } catch (IllegalArgumentException e) {
+	         System.out.println("Erro: " + e.getMessage());
+	     }
 	}
 	public String getNome() {
 		return nome;
@@ -127,6 +154,19 @@ public class Cliente {
 	}
 	public String getSenha() {
 		return senha;
+	}
+	public void setSenha(String senha) {
+		try {
+        	ArrayList<Cliente> c = biblioteca.getClientes();
+        	 for (Cliente cliente : c) {
+                 if (cliente.getCpf().equals(this.senha)){
+                	 throw new IllegalArgumentException("Senha já utilizada");
+                 }
+            }
+        	 this.senha = senha;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 	}
 	public int getMulta() {
 		return multa;

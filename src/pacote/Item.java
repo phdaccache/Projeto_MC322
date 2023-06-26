@@ -1,5 +1,6 @@
 package pacote;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.StringJoiner;
 
 
@@ -15,7 +16,8 @@ public class Item {
 	//Construtor
 
 	public Item(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano) {
-		this.code = code;
+		Random random = new Random();
+		this.code = random.nextInt();
 		this.QtdDePaginas = qtdDePaginas;
 		this.status = status;
 		this.titulo = titulo;

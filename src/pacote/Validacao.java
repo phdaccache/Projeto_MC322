@@ -139,4 +139,23 @@ public class Validacao {
 		//System.out.println("CPF válido\n");
 		return true;
 	}
+	//validar entradas
+		/*
+		try {
+			System.out.println("Entrada: ");
+			int entrada = scanner.nextInt();
+		} catch(InputMismatchException inputMismatchException){
+			System.err.println("Exceção: "+ inputMismatchException);
+			scanner.nextLine();
+			System.out.println("É necessário entrar com um número inteiro. Por favor, tente novamente.");
+			
+		}
+		*/
+		
+		//validar arquivo
+		/*try {
+			
+		} catch(java.io.FileNotFoundException e){
+			System.out.println("Não foi possível abrir o arquivo.");	
+		}*/
 }
