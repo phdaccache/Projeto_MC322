@@ -32,7 +32,7 @@ public class Biblioteca {
         this.reservas = reservas;
     	while(true) {
 	    	try {
-	            if (!Validacao.validarNome(nome)) {
+	            if (!Validacao.validarNome(this.nome)) {
 	                throw new IllegalArgumentException("Nome inválido");
 	            }
 	            break;
@@ -44,7 +44,7 @@ public class Biblioteca {
         }
         while(true) {
 	        try {
-	            if (!Validacao.validarCnpj(CNPJ)) {
+	            if (!Validacao.validarCnpj(this.CNPJ)) {
 	                throw new IllegalArgumentException("CNPJ inválido");
 	            }
 	            break;
@@ -62,13 +62,27 @@ public class Biblioteca {
         return nome;
     }
     public void setNome(String nome) {
-        this.nome = nome;
+    	try {
+            if (!Validacao.validarNome(nome)) {
+                throw new IllegalArgumentException("Nome inválido");
+            }
+            this.nome = nome;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
     }
     public String getCNPJ() {
         return CNPJ;
     }
     public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
+    	try {
+            if (!Validacao.validarCnpj(this.CNPJ)) {
+                throw new IllegalArgumentException("CNPJ inválido");
+            }
+            this.CNPJ = CNPJ;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
     }
     public String getEndereco() {
         return endereco;
@@ -453,6 +467,10 @@ public class Biblioteca {
         joiner.add("CNPJ: " + this.CNPJ);
         joiner.add("Endereço: " + this.endereco);
         joiner.add("Telefone: " + this.telefone);
+        joiner.add("Lista de itens: " + this.itens);
+        joiner.add("Lista de clientes: " + this.clientes);
+        joiner.add("Lista de emprestimos: " + this.emprestimos);
+        joiner.add("Lista de reservar: " + this.reservas);
 
         return joiner.toString();
     }
