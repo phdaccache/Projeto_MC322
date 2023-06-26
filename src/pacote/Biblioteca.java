@@ -157,7 +157,7 @@ public class Biblioteca {
 	            throw new IllegalArgumentException();
 	        }
 	    this.itens.add(livro);
-	    return "Livro cadastrado com sucesso";
+	    return "Livro cadastrado com sucesso.";
     	} catch (IllegalArgumentException e) {
         	this.itens = new ArrayList<>();
  	        this.itens.add(livro);
