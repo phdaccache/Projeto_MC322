@@ -33,7 +33,6 @@ public class Admin {
 	        if (dias <= 0) {
 	            throw new IllegalArgumentException("O número de dias deve ser positivo");
 	        }
-	        System.out.println("teste");
 	        // Resto do código para avançar o tempo
             setData(getData().plusDays(dias));
 	        //AtualizarClientes();

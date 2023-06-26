@@ -132,6 +132,9 @@ public class MenuBiblioteca extends Menu {
             // Minha Conta
             case VISUALIZAR_DADOS:
                 System.out.println("Visualizar Dados.");
+                //teste
+                //biblioteca;
+                
                 break;
             case EDITAR_DADOS:
                 System.out.println("Editar Dados.");

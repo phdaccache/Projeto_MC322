@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.StringJoiner;
 import java.util.jar.JarEntry;
+
 
 public class Biblioteca {
     private String nome;
@@ -19,7 +21,8 @@ public class Biblioteca {
 
     //Construtor
     public Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas) {
-        this.nome = nome;
+    	Scanner entrada = new Scanner(System.in);
+    	this.nome = nome;
         this.CNPJ = CNPJ;
         this.endereco = endereco;
         this.telefone = telefone;
@@ -27,6 +30,30 @@ public class Biblioteca {
         this.clientes = clientes;
         this.emprestimos = emprestimos;
         this.reservas = reservas;
+    	while(true) {
+	    	try {
+	            if (!Validacao.validarNome(nome)) {
+	                throw new IllegalArgumentException("Nome inválido");
+	            }
+	            break;
+	        } catch (IllegalArgumentException e) {
+	            System.out.println("Erro: " + e.getMessage());
+	            System.out.println("Insira outro nome: ");
+	            this.nome = entrada.next();
+	        }
+        }
+        while(true) {
+	        try {
+	            if (!Validacao.validarCnpj(CNPJ)) {
+	                throw new IllegalArgumentException("CNPJ inválido");
+	            }
+	            break;
+	        } catch (IllegalArgumentException e) {
+	            System.out.println("Erro: " + e.getMessage());
+	            System.out.println("Insira outro CNPJ: ");
+	            this.CNPJ = entrada.next();
+	        }
+        }
     }
 
     //Getters e setters

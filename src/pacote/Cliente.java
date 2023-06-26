@@ -9,6 +9,7 @@ import java.util.StringJoiner;
 public class Cliente {
 	private Biblioteca biblioteca;
 	private final String CPF;
+	private final String ID;
 	private int multa; //Valor de multa acumulada. O cliente sempre começa com 0.
 	private String nome;
 	private String telefone;
@@ -21,9 +22,10 @@ public class Cliente {
 	private ArrayList<Reserva> listaReservasItens;
 	
 	//Construtor
-	public Cliente(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
+	public Cliente(Biblioteca biblioteca, String CPF, String ID, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
 		this.biblioteca = biblioteca;
 		this.CPF = CPF;
+		this.ID = ID;
 		this.multa = multa;
 		this.nome = nome;
 		this.telefone = telefone;
@@ -39,6 +41,9 @@ public class Cliente {
 	//Getters e setters
 	public String getCpf() {
 		return CPF;
+	}
+	public String getID() {
+		return ID;
 	}
 	public String getNome() {
 		return nome;
@@ -318,6 +323,7 @@ public class Cliente {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //Formato da data (dia/mes/ano
 		String dataNascimento = formato.format(getDataNasc());
 		joiner.add("CPF: " + CPF);
+		joiner.add("ID: " + ID);
 		joiner.add("Nome: " + nome);
 		joiner.add("Email: " + email);
 		joiner.add("Telefone: " + telefone);

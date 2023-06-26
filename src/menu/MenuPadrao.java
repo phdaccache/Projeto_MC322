@@ -83,7 +83,7 @@ public class MenuPadrao extends Menu{
                 biblioteca = loginbiblioteca();
                 if (biblioteca == null) {return;}
                 System.out.println("Login realizado com sucesso!");
-                System.out.printf("Bem vindo(a) %s!\n", "Nome Biblioteca");
+                System.out.printf("Bem vindo(a) %s!\n", biblioteca.getNome());
                 menuBiblioteca.runMenu(biblioteca);
                 break;
             case CLIENTE:
@@ -105,7 +105,10 @@ public class MenuPadrao extends Menu{
 
     // Login da Biblioteca
     private Biblioteca loginbiblioteca() {
-        return null;
+    	//teste
+    	Biblioteca biblioteca = new Biblioteca(getScanner().next(), getScanner().next(), getScanner().next(), 
+        		getScanner().next(),null, null, null, null);
+        return biblioteca;
     }
 
     // Login do Cliente
