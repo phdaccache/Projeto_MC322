@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.StringJoiner;
 
 public class Revista extends Item{
-	//private ArquivoRevista arquivoRevista;
 	private int edicao;
 	private String instituicao;
 	private ArrayList<String> assuntos;
@@ -52,10 +51,26 @@ public class Revista extends Item{
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
 		joiner.add(super.toString());
-		joiner.add("Edicao: " + edicao);
-		joiner.add("Instituicao: " + instituicao);
-		joiner.add("Assuntos: " + assuntos);
-		joiner.add("ISSN: " + ISSN);
+		if (edicao != -1) {
+		    joiner.add("Edição: " + this.edicao);
+		} else {
+			joiner.add("Edição: Não especificada");
+		}
+		if (instituicao != null) {
+		    joiner.add("Intituição: " + this.instituicao);
+		} else {
+			joiner.add("Intituição: Não especificada");
+		}
+		if (assuntos != null) {
+		    joiner.add("Assuntos: " + this.assuntos);
+		} else {
+			joiner.add("Assuntos: Não especificados");
+		}
+		if (ISSN != -1) {
+		    joiner.add("ISSN: " + this.ISSN);
+		} else {
+			joiner.add("ISSN: Não especificado");
+		}
 		return joiner.toString();
 	}
 

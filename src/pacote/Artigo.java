@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.StringJoiner;
 
 public class Artigo extends Item{
-	//private ArquivoArtigo arquivoArtigo;
 	private int DOI; //Digital Object Identifier, identificador único para cada artigo;
 	private String abstractArtigo; //Resumo do artigo;
 	private String keywords; //Palavras-chave do artigo;
@@ -46,9 +45,22 @@ public class Artigo extends Item{
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
 		joiner.add(super.toString());
-		joiner.add("DOI: " + this.getDOI());
-		joiner.add("Resumo: " + this.getAbstractArtigo());
-		joiner.add("Palavras-chave: " + this.getKeywords());
+		if (DOI != -1) {
+	        joiner.add("DOI: " + this.DOI);
+	    } else {
+	        joiner.add("DOI: Não especificado");
+	    }
+	    
+	    if (abstractArtigo != null) {
+	        joiner.add("Resumo: " + this.abstractArtigo);
+	    } else {
+	        joiner.add("Instituição: Não especificada");
+	    }
+	    if (keywords != null) {
+	        joiner.add("Palavras-chave: " + this.keywords);
+	    } else {
+	        joiner.add("Palavras-chave: Não especificadas");
+	    }
 		return joiner.toString();
 	}
 }

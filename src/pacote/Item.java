@@ -16,7 +16,7 @@ public class Item {
 
 	public Item(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano) {
 		this.code = code;
-		QtdDePaginas = qtdDePaginas;
+		this.QtdDePaginas = qtdDePaginas;
 		this.status = status;
 		this.titulo = titulo;
 		this.autores = autores;
@@ -75,11 +75,31 @@ public class Item {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
-		joiner.add("Nome: " + getTitulo());
-		joiner.add("Quantidade de Páginas: " + getQtdDePaginas());
-		joiner.add("Status: " + getStatus());
-		joiner.add("Autores: " + getAutores());
-		joiner.add("Ano: " + getAno());
+		if (titulo != null) {
+		    joiner.add("Título: " + this.titulo);
+		} else {
+			joiner.add("Título: Não especificado");
+		}
+		if (QtdDePaginas != -1) {
+		    joiner.add("Quantidade de Páginas: " + this.QtdDePaginas);
+		} else {
+			joiner.add("Quantidade de Páginas: Não especificado");
+		}
+		if (status != null) {
+		    joiner.add("Status: " + this.status);
+		} else {
+			joiner.add("Status: Não especificado");
+		}
+		if (autores != null) {
+		    joiner.add("Autores: " + this.autores);
+		} else {
+			joiner.add("Autores: Não especificados");
+		}
+		if (ano != -1) {
+		    joiner.add("Ano: " + this.ano);
+		} else {
+			joiner.add("Ano: Não especificado");
+		}
 		return joiner.toString();
 	}
 }

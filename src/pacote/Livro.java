@@ -8,7 +8,6 @@ public class Livro extends Item{
 	private int ISBN; //International Standard Book Number, código de identificação único para livros
 	private String edicao;
 	private String tema; //Educação, suspense, romance, etc
-	//private ArquivoLivro arquivoLivro;
 	
 	//Construtor
 
@@ -54,10 +53,26 @@ public class Livro extends Item{
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
 		joiner.add(super.toString());
-		joiner.add("Editora: " + getEditora());
-		joiner.add("ISBN: " + getISBN());
-		joiner.add("Edição: " + getEdicao());
-		joiner.add("Tema: " + getTema());
+		 if (editora != null) {
+		     joiner.add("Editora: " + this.editora);
+		 } else {
+			 joiner.add("Editora: Não especificada");
+		 }
+		 if (ISBN != -1) {
+		     joiner.add("ISBN: " + this.ISBN);
+		 } else {
+			 joiner.add("ISBN: Não especificado");
+		 }
+		 if (edicao != null) {
+		     joiner.add("Edição: " + this.edicao);
+		 } else {
+			 joiner.add("Edição: Não especificada");
+		 }
+		 if (tema != null) {
+		     joiner.add("Tema: " + this.tema);
+		 } else {
+			 joiner.add("Tema: Não especificado");
+		 }
 		return joiner.toString();
 	}
 }

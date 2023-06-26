@@ -90,20 +90,23 @@ public class Admin {
             return;
  	    }
     }
-    public void listarBibliotecas() {
+    public ArrayList<String> listarBibliotecas() {
     	try {
 	        if (this.bibliotecas == null) {
 	            throw new IllegalArgumentException("Lista vazia!");
 	        }
-        for(Biblioteca b : bibliotecas){
-            System.out.println("**********");
-            System.out.println(b.toString());
-            System.out.println("**********");
+        for(Biblioteca b : this.bibliotecas){
+            //System.out.println("**********");
+        	ArrayList<String> listaExemplo = new ArrayList<>();
+        	listaExemplo.add(b.toString());
+            return listaExemplo;
+            //System.out.println("**********");
         }
     	} catch (IllegalArgumentException e) {
 	        System.out.println("Erro: " + e.getMessage());
-            return;
+            return null;
  	    }
+		return null;
     }
     public void AtualizarClientes(){
 

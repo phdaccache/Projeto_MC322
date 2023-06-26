@@ -3,13 +3,13 @@ package pacote;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.StringJoiner;
 
 public class Cliente {
 	private Biblioteca biblioteca;
-	private final String CPF;
-	private final String ID;
+	private String CPF;
 	private int multa; //Valor de multa acumulada. O cliente sempre começa com 0.
 	private String nome;
 	private String telefone;
@@ -22,10 +22,10 @@ public class Cliente {
 	private ArrayList<Reserva> listaReservasItens;
 	
 	//Construtor
-	public Cliente(Biblioteca biblioteca, String CPF, String ID, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
+	public Cliente(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens) {
+		Scanner entrada = new Scanner(System.in);
 		this.biblioteca = biblioteca;
 		this.CPF = CPF;
-		this.ID = ID;
 		this.multa = multa;
 		this.nome = nome;
 		this.telefone = telefone;
@@ -36,20 +36,58 @@ public class Cliente {
 		this.status = status;
 		this.listaEmprestimos = listaEmprestimos;
 		this.listaReservasItens = listaReservasItens;
+		while(true) {
+	    	try {
+	            if (!Validacao.validarNome(this.nome)) {
+	                throw new IllegalArgumentException("Nome inválido");
+	            }
+	            break;
+	        } catch (IllegalArgumentException e) {
+	            System.out.println("Erro: " + e.getMessage());
+	            System.out.println("Insira outro nome: ");
+	            this.nome = entrada.next();
+	        }
+        }
+        while(true) {
+	        try {
+	            if (!Validacao.validarCpf(this.CPF)) {
+	                throw new IllegalArgumentException("CPF inválido");
+	            }
+	            break;
+	        } catch (IllegalArgumentException e) {
+	            System.out.println("Erro: " + e.getMessage());
+	            System.out.println("Insira outro CPF: ");
+	            this.CPF = entrada.next();
+	        }
+        }
 	}
 
 	//Getters e setters
 	public String getCpf() {
 		return CPF;
 	}
-	public String getID() {
-		return ID;
+	public void setCpf(String CPF) {
+		try {
+            if (!Validacao.validarCpf(this.CPF)) {
+                throw new IllegalArgumentException("CPF inválido");
+            }
+            this.CPF = CPF;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 	}
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.nome = nome;
+		try {
+            if (!Validacao.validarNome(nome)) {
+                throw new IllegalArgumentException("Nome inválido");
+            }
+            this.nome = nome;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 	}
 	public String getEmail() {
 		return email;
@@ -90,20 +128,11 @@ public class Cliente {
 	public String getSenha() {
 		return senha;
 	}
-	public String getCPF() {
-		return CPF;
-	}
 	public int getMulta() {
 		return multa;
 	}
 	public void setMulta(int multa) {
 		this.multa = multa;
-	}
-	public void setListaEmprestimos(ArrayList<Emprestimo> listaEmprestimos) {
-		this.listaEmprestimos = listaEmprestimos;
-	}
-	public void setListaReservasItens(ArrayList<Reserva> listaReservasItens) {
-		this.listaReservasItens = listaReservasItens;
 	}
 	public Biblioteca getBiblioteca() {
 		return biblioteca;
@@ -119,12 +148,20 @@ public class Cliente {
 	}
 	//Metodos
 	public Item getItem(String Titulo){
-		for(Item item : biblioteca.getItens()) {
+		try {
+	        if (this.biblioteca == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+        for(Item item : biblioteca.getItens()) {
 			if(item.getTitulo().equals(Titulo)) {
 				return item;
 			}
 		}
 		return null;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+    	}
 	}
 
 	//Metodo para verificar se o cliente esta apto a fazer emprestimos
@@ -146,24 +183,36 @@ public class Cliente {
 			return false;
 		}
 		else {
-			System.out.println("Status invalido");
+			System.out.println("Status inválido");
 			return false;
 		}
 	}
 
 	//Metodo para achar emprestimo na lista de emprestimos da biblioteca
 	public Emprestimo achaEmprestimo(String titulo, ArrayList<Emprestimo> listaEmprestimos) {
-		for (Emprestimo emprestimo : listaEmprestimos) {
+		try {
+	        if (listaEmprestimos == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+        for (Emprestimo emprestimo : listaEmprestimos) {
 			if (emprestimo.getItem().getTitulo().equals(titulo)) {
 				return emprestimo;
 			}
 		}
 		return null;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+    	}
 	}
 
 	// PROTÓTIPO - Metodo para verificar se o item está disponível, emprestado, ou reservado.
 	public String verificaStatusItem(String TituloItem, ArrayList<Item> listaItens, ArrayList<Emprestimo> listaEmprestimos) {
-		for (Item item : listaItens) {
+		try {
+	        if (listaItens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+        for (Item item : listaItens) {
 			if (item.getTitulo().equals(TituloItem)) {
 				if (item.getStatus().equals("disponivel")) {
 					System.out.println("Item disponivel");
@@ -182,6 +231,10 @@ public class Cliente {
 			}
 		}
 		return "Item nao encontrado";
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+    	}
 	}
 
 	//PROTÓTIPO - Metodo que tenta fazer um emprestimo, em seguida aplica o metodo de reserva caso o cliente queira.
@@ -224,7 +277,7 @@ public class Cliente {
 		}
 	}
 	public void listarEmprestimos(){
-		if(listaEmprestimos.isEmpty()){
+		if(listaEmprestimos.isEmpty() || listaEmprestimos == null){
 			System.out.println("Nao ha emprestimos");
 		}
 		else{
@@ -235,7 +288,7 @@ public class Cliente {
 		}
 	}
 	public void listarReservas(){
-		if(listaReservasItens.isEmpty()){
+		if(listaReservasItens.isEmpty() || listaReservasItens == null){
 			System.out.println("Nao ha reservas");
 		}
 		else{
@@ -253,7 +306,11 @@ public class Cliente {
 	}
 
 	public ArrayList<Emprestimo> DevolverEmprestimo(String Titulo){
-		for(Emprestimo emprestimo : listaEmprestimos){
+		try {
+	        if (listaEmprestimos == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+        for(Emprestimo emprestimo : listaEmprestimos){
 			if(emprestimo.getItem().getTitulo().equals(Titulo)){
 				listaEmprestimos.remove(emprestimo);
 				System.out.println("Emprestimo removido com sucesso");
@@ -262,10 +319,18 @@ public class Cliente {
 		}
 		System.out.println("Emprestimo nao encontrado");
 		return listaEmprestimos;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+    	}
 	}
 	//Permite fazer uma renovação apenas quando não há reservas para o item.
 	public void renovarEmprestimo(String titulo){
-		if(getItem(titulo).getStatus().equals("reservado")){
+		try {
+	        if (listaEmprestimos == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+        if(getItem(titulo).getStatus().equals("reservado")){
 			System.out.println("Há reservas. O cliente não pode renovar o emprestimo.");
 		}
 		else{
@@ -276,17 +341,29 @@ public class Cliente {
 				}
 			}
 		}
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+    	}
 	}
 
 	//public void listarEmprestimosAtrasados(){}
 
 	public Boolean TentaReservar(String titulo) {
-		for(Emprestimo emprestimo : getBiblioteca().getEmprestimos()){
+		try {
+	        if (listaEmprestimos == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+        for(Emprestimo emprestimo : getBiblioteca().getEmprestimos()){
 			if(emprestimo.getItem().getTitulo().equals(titulo)){
 				return true;
 			}
 		}
 		return false;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return false;
+    	}
 	}
 	// Metodo para verificar a quantidade de dias que um cliente pode ficar.
 	public int verificaQtdDeDias(Cliente cliente){
@@ -323,7 +400,6 @@ public class Cliente {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //Formato da data (dia/mes/ano
 		String dataNascimento = formato.format(getDataNasc());
 		joiner.add("CPF: " + CPF);
-		joiner.add("ID: " + ID);
 		joiner.add("Nome: " + nome);
 		joiner.add("Email: " + email);
 		joiner.add("Telefone: " + telefone);

@@ -1,11 +1,9 @@
 package pacote;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
 public class Apostila extends Item{
-	//private ArquivoApostila arquivoApostila;
 	private String disciplina;
 	private String instituicao;
 	
@@ -38,8 +36,17 @@ public class Apostila extends Item{
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
 		joiner.add(super.toString());
-		joiner.add("Disciplina: " + this.disciplina);
-		joiner.add("Instituicao: " + this.instituicao);
+		if (disciplina != null) {
+	        joiner.add("Disciplina: " + this.disciplina);
+	    } else {
+	        joiner.add("Disciplina: Não especificada");
+	    }
+	    
+	    if (instituicao != null) {
+	        joiner.add("Instituição: " + this.instituicao);
+	    } else {
+	        joiner.add("Instituição: Não especificada");
+	    }
 		return joiner.toString();
 	}
 

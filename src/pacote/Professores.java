@@ -14,8 +14,8 @@ public class Professores extends Cliente{
 	//Construtor
 
 
-	public Professores(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-		super(biblioteca, CPF, ID, multa, nome, telefone, email, dataNasc, senha, assinatura, status, listaEmprestimos, listaReservasItens);
+	public Professores(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+		super(biblioteca, CPF, multa, nome, telefone, email, dataNasc, senha, assinatura, status, listaEmprestimos, listaReservasItens);
 		this.instituicao = instituicao;
 		this.educacao = educacao;
 		this.area = area;
@@ -64,11 +64,31 @@ public class Professores extends Cliente{
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
 		joiner.add(super.toString());
-		joiner.add("Instituicao: " + this.instituicao);
-		joiner.add("Educacao: " + this.educacao);
-		joiner.add("Area: " + this.area);
-		joiner.add("Aulas: " + this.aulas);
-		joiner.add("Ano de ingresso: " + this.ano_ing);
+		if (instituicao != null) {
+		    joiner.add("Instituição: " + this.instituicao);
+		} else {
+			joiner.add("Instituição: Não especificada");
+		}
+		if (educacao != null) {
+		    joiner.add("Educação: " + this.educacao);
+		} else {
+			joiner.add("Educação: Não especificada");
+		}
+		if (area != null) {
+		    joiner.add("Área: " + this.area);
+		} else {
+			joiner.add("Área: Não especificada");
+		}
+		if (aulas != null) {
+		    joiner.add("Aulas: " + this.aulas);
+		} else {
+			joiner.add("Aulas: Não especificadas");
+		}
+		if (ano_ing != -1) {
+		    joiner.add("Ano de ingresso: " + this.ano_ing);
+		} else {
+			joiner.add("Ano de ingresso: Não especificado");
+		};
 		return joiner.toString();
 	}
 }

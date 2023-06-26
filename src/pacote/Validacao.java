@@ -82,4 +82,61 @@ public class Validacao {
 		//System.out.println("CNPJ válido\n");
 		return true;
 	}
+	public static boolean validarCpf(String cpf) {
+		if(cpf == null) {
+			System.out.println("CPF vazio");
+			return false;
+		}
+		cpf = cpf.replaceAll("[^0-9]+", "");//remover caract nao num
+		int n = cpf.length();
+		if(n != 11) { //verifica se tem 11 digitos
+			System.out.println("CPF precisa ter 11 dígitos");
+			return false;
+		}
+		//verifica digitos iguais
+		int i = 0;
+		while (i < n) {
+			if(cpf.charAt(i) != cpf.charAt(n-1))
+				break;
+			i++;
+		}
+		if (i == n) {
+			System.out.println("CPF não pode ter todos os dígitos iguais");
+			return false;
+		}
+		//calcular digito verificador
+		int sm = 0;
+		int peso = 10;
+		int r, num;
+		int digito1, digito2;
+		//calculo do digito1
+		for (int j = 0; j < 9; j++) {
+			num = (int)(cpf.charAt(j)-48);
+			sm = sm +(num*peso);
+			peso = peso - 1;
+		}
+		r = 11 - (sm % 11);
+		if((r == 10)||(r == 11))
+			digito1 = '0';
+		else digito1 = (char)(r+48);
+		//calculo do digito2
+		sm = 0;
+		peso = 11;
+		for (int w = 0; w < 10; w++) {
+			num = (int)(cpf.charAt(w)-48);
+			sm = sm +(num*peso);
+			peso = peso - 1;
+		}
+		r = 11 - (sm % 11);
+		if((r == 10)||(r == 11))
+			digito2 = '0';
+		else digito2 = (char)(r+48);
+		//verificar os digitos calculados com os dados
+		if((digito1 != cpf.charAt(9)||(digito2 != cpf.charAt(10)))) {
+			System.out.println("CPF não possui os últimos dígitos corretos");
+			return false;
+		}
+		//System.out.println("CPF válido\n");
+		return true;
+	}
 }

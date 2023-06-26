@@ -122,36 +122,124 @@ public class Biblioteca {
     }
 
     //Métodos
-    public void cadastrarEstudantes(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
-        Estudantes estudante = new Estudantes(biblioteca, CPF, multa, nome, telefone, email, dataNasc, ID, senha, assinatura, status, listaEmprestimos, listaReservasItens, matricula, curso, ano_grad);
-        this.clientes.add(estudante);
+    public void cadastrarEstudantes(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
+        Estudantes estudante = new Estudantes(biblioteca, CPF, multa, nome, telefone, email, dataNasc, senha, assinatura, status, listaEmprestimos, listaReservasItens, matricula, curso, ano_grad);
+        try {
+	        if (this.clientes == null) {
+	            throw new IllegalArgumentException();
+	        }
+	    this.clientes.add(estudante);
+	    System.out.println("Estudante cadastrado com sucesso");
+	    return;
+    	} catch (IllegalArgumentException e) {
+        	this.clientes = new ArrayList<>();
+ 	        this.clientes.add(estudante);
+            System.out.println("Estudante cadastrado com sucesso");
+            return;
+ 	    }
     }
-    public void cadastrarProfessores(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String ID, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-        Professores professor = new Professores(biblioteca, CPF, multa, nome, telefone, email, dataNasc, ID, senha, assinatura, status, listaEmprestimos, listaReservasItens, instituicao, educacao, area, aulas, ano_ing);
-        this.clientes.add(professor);
+    public void cadastrarProfessores(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+        Professores professor = new Professores(biblioteca, CPF, multa, nome, telefone, email, dataNasc, senha, assinatura, status, listaEmprestimos, listaReservasItens, instituicao, educacao, area, aulas, ano_ing);
+        try {
+	        if (this.clientes == null) {
+	            throw new IllegalArgumentException();
+	        }
+	    this.clientes.add(professor);
+	    System.out.println("Professor cadastrado com sucesso");
+	    return;
+    	} catch (IllegalArgumentException e) {
+        	this.clientes = new ArrayList<>();
+ 	        this.clientes.add(professor);
+            System.out.println("Professor cadastrado com sucesso");
+            return;
+ 	    }
     }
     public void cadastrarLivro(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String editora, int ISBN, String edicao, String tema){
         Livro livro = new Livro(code, qtdDePaginas, status, titulo, autores, listaReservas, ano, editora, ISBN, edicao, tema);
-        this.itens.add(livro);
+        try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException();
+	        }
+	    this.itens.add(livro);
+	    System.out.println("Livro cadastrado com sucesso");
+	    return;
+    	} catch (IllegalArgumentException e) {
+        	this.itens = new ArrayList<>();
+ 	        this.itens.add(livro);
+            System.out.println("Livro cadastrado com sucesso");
+            return;
+ 	    }
     }
     public void cadastrarArtigo(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int DOI, String abstractArtigo, String keywords){
         Artigo artigo = new Artigo(code, qtdDePaginas, status, titulo, autores, listaReservas, ano, DOI, abstractArtigo, keywords);
-        this.itens.add(artigo);
+        try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException();
+	        }
+	    this.itens.add(artigo);
+	    System.out.println("Artigo cadastrado com sucesso");
+	    return;
+    	} catch (IllegalArgumentException e) {
+        	this.itens = new ArrayList<>();
+ 	        this.itens.add(artigo);
+            System.out.println("Artigo cadastrado com sucesso");
+            return;
+ 	    }
     }
     public void cadastrarRevista(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int edicao, String instituicao, ArrayList<String> assuntos, int ISSN) {
         Revista revista = new Revista(code, qtdDePaginas, status, titulo, autores, listaReservas, ano, edicao, instituicao, assuntos, ISSN);
-        this.itens.add(revista);
+        try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException();
+	        }
+	    this.itens.add(revista);
+	    System.out.println("Revista cadastrado com sucesso");
+	    return;
+    	} catch (IllegalArgumentException e) {
+        	this.itens = new ArrayList<>();
+ 	        this.itens.add(revista);
+            System.out.println("Revista cadastrado com sucesso");
+            return;
+ 	    }
     }
     public void cadastrarEmprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente) {
         Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente);
-        this.emprestimos.add(emprestimo);
+        try {
+	        if (this.emprestimos == null) {
+	            throw new IllegalArgumentException();
+	        }
+	    this.emprestimos.add(emprestimo);
+	    System.out.println("Emprestimo cadastrado com sucesso");
+	    return;
+    	} catch (IllegalArgumentException e) {
+        	this.emprestimos = new ArrayList<>();
+ 	        this.emprestimos.add(emprestimo);
+            System.out.println("Emprestimo cadastrado com sucesso");
+            return;
+ 	    }
     }
     public void cadastrarReserva(Item item, LocalDate data, Cliente cliente, int posicao) {
         Reserva reserva = new Reserva(item, data, cliente, posicao);
-        this.reservas.add(reserva);
+        try {
+	        if (this.reservas == null) {
+	            throw new IllegalArgumentException();
+	        }
+	    this.reservas.add(reserva);
+	    System.out.println("Reserva cadastrado com sucesso");
+	    return;
+    	} catch (IllegalArgumentException e) {
+        	this.reservas = new ArrayList<>();
+ 	        this.reservas.add(reserva);
+            System.out.println("Reserva cadastrado com sucesso");
+            return;
+ 	    }
     }
     public void removerCliente(String CPF) {
         System.out.println("***** Removendo cliente *****");
+        try {
+	        if (this.clientes == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for (Cliente cliente : this.clientes) {
             if (cliente.getCpf().equals(CPF)) {
                 this.clientes.remove(cliente);
@@ -162,9 +250,18 @@ public class Biblioteca {
             }
         }
         System.out.println("Cliente não encontrado!");
+        return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
     public void removerItem(String Titulo) {
         System.out.println("***** Removendo item *****");
+        try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for (Item item : this.itens) {
             if (item.getTitulo().equals(Titulo)) {
                 this.itens.remove(item);
@@ -175,11 +272,20 @@ public class Biblioteca {
             }
         }
         System.out.println("Item não encontrado!");
+        return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
     public void removerEmprestimoPorCliente(String CPF) {
-        int i = 0;
+        try {
+	        if (this.emprestimos == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for (Emprestimo emprestimo : this.emprestimos) {
-            i++;
+        	int i = 0;
+        	i++;
             if (emprestimo.getCliente().getCpf().equals(CPF)) {
                 this.emprestimos.remove(emprestimo);
                 if(i == emprestimos.size()){
@@ -190,8 +296,16 @@ public class Biblioteca {
         }
         System.out.println("Emprestimos não encontrados!");
         return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
     public void removerEmprestimoPorItem(String Titulo) {
+    	try {
+	        if (this.emprestimos == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         int i = 0;
         for (Emprestimo emprestimo : this.emprestimos) {
             i++;
@@ -205,8 +319,16 @@ public class Biblioteca {
         }
         System.out.println("Emprestimos não encontrados!");
         return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
     public void removerReservasPorCliente(String CPF) {
+    	try {
+	        if (this.reservas == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         int i = 0;
         for (Reserva reserva : this.reservas) {
             i++;
@@ -220,9 +342,17 @@ public class Biblioteca {
         }
         System.out.println("Reservas não encontradas!");
         return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
     public void removerReservasPorItem(String Titulo) {
-        int i = 0;
+    	try {
+	        if (this.reservas == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+    	int i = 0;
         for (Reserva reserva : this.reservas) {
             i++;
             if (reserva.getItem().getTitulo().equals(Titulo)) {
@@ -235,10 +365,18 @@ public class Biblioteca {
         }
         System.out.println("Reservas não encontradas!");
         return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
 
     //Retorna uma lista de itens especificos
     public Item getItem(String titulo){
+    	try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for(Item item : itens){
             if(item.getTitulo().equals(titulo)){
                 return item;
@@ -246,8 +384,16 @@ public class Biblioteca {
         }
         System.out.println("Item não encontrado!");
         return null;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+ 	    }
     }
     public ArrayList<Livro> getlivros(){
+    	try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         ArrayList<Livro> livros = new ArrayList<>();
         for(Item item : itens){
             if(item instanceof Livro){
@@ -259,8 +405,16 @@ public class Biblioteca {
             return null;
         }
         return livros;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+ 	    }
     }
     public ArrayList<Artigo> getArtigos(){
+    	try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         ArrayList<Artigo> artigos = new ArrayList<>();
         for(Item item : itens){
             if(item instanceof Artigo){
@@ -272,8 +426,16 @@ public class Biblioteca {
             return null;
         }
         return artigos;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+ 	    }
     }
     public ArrayList<Revista> getRevistas(){
+    	try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         ArrayList<Revista> revistas = new ArrayList<>();
         for(Item item : itens){
             if(item instanceof Revista){
@@ -285,8 +447,16 @@ public class Biblioteca {
             return null;
         }
         return revistas;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+ 	    }
     }
     public ArrayList<Estudantes> getEstudantes(){
+    	try {
+	        if (this.clientes == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         ArrayList<Estudantes> estudantes = new ArrayList<>();
         for(Cliente cliente : clientes){
             if(cliente instanceof Estudantes){
@@ -298,8 +468,16 @@ public class Biblioteca {
             return null;
         }
         return estudantes;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+ 	    }
     }
     public ArrayList<Professores> getProfessores(){
+    	try {
+	        if (this.clientes == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         ArrayList<Professores> professores = new ArrayList<>();
         for(Cliente cliente : clientes){
             if(cliente instanceof Professores){
@@ -311,10 +489,14 @@ public class Biblioteca {
             return null;
         }
         return professores;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+ 	    }
     }
 
     public void listarItens(){
-        if(itens.isEmpty()){
+        if(itens == null){
             System.out.println("Não há itens cadastrados!");
             return;
         }
@@ -393,10 +575,14 @@ public class Biblioteca {
     }
 
     public void listarReservasPorCliente(String CPF){
+    	try {
+	        if (this.clientes == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for(Cliente cliente : clientes){
-            if(cliente.getCPF().equals(CPF)){
+            if(cliente.getCpf().equals(CPF)){
                 for(Reserva reserva : reservas){
-                    if(reserva.getCliente().getCPF().equals(CPF)){
+                    if(reserva.getCliente().getCpf().equals(CPF)){
                         System.out.println("***** Reservas *****");
                         System.out.println(reserva.toString());
                     }
@@ -404,12 +590,20 @@ public class Biblioteca {
                 return;
             }
         }
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
     public void listarEmprestimosPorCliente(String CPF){
+    	try {
+	        if (this.clientes == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for(Cliente cliente : clientes){
-            if(cliente.getCPF().equals(CPF)){
+            if(cliente.getCpf().equals(CPF)){
                 for(Emprestimo emprestimo : emprestimos){
-                    if(emprestimo.getCliente().getCPF().equals(CPF)){
+                    if(emprestimo.getCliente().getCpf().equals(CPF)){
                         System.out.println("***** Emprestimos *****");
                         System.out.println(emprestimo.toString());
                     }
@@ -417,10 +611,18 @@ public class Biblioteca {
                 return;
             }
         }
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
 
     //public void listarEmprestimosAtrasados(){}
     public void listarEmprestimos(){
+    	try {
+	        if (this.emprestimos == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         if(emprestimos.isEmpty()){
             System.out.println("Não há emprestimos cadastrados!");
             return;
@@ -430,9 +632,17 @@ public class Biblioteca {
             System.out.println(emprestimo.toString());
         }
         return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
 
     public Item pesquisarItem(String titulo){
+    	try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         for(Item item : itens){
             if(item.getTitulo().equals(titulo)){
                 System.out.println("Item encontrado!");
@@ -442,8 +652,16 @@ public class Biblioteca {
         }
         System.out.println("Item não encontrado!");
         return null;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+ 	    }
     }
     public void UltimasAquisicoes(){
+    	try {
+	        if (this.itens == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
         if(itens.isEmpty()){
             System.out.println("Não há itens cadastrados!");
             return;
@@ -454,6 +672,10 @@ public class Biblioteca {
             itens.get(i).toString();
         }
         return;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return;
+ 	    }
     }
 
     //Metodos para atualizar emprestimos e reservas depois de um certo tempo.
