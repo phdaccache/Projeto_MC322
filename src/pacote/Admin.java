@@ -44,28 +44,19 @@ public class Admin {
 
         return null;
     }
-    public void CadastraBiblioteca(Biblioteca biblioteca) {
-    	try {
-	        if (this.bibliotecas == null) {
-	            throw new IllegalArgumentException();
-	        }
-    	for(Biblioteca b : this.bibliotecas){
-            if(b.getNome().equals(biblioteca.getNome())){
-                System.out.println("Biblioteca já cadastrada");
-                return;
+    public String Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas) {
+    	        try {
+            if (nome == null || CNPJ == null || endereco == null || telefone == null || itens == null || clientes == null || emprestimos == null || reservas == null) {
+                throw new IllegalArgumentException("Argumento nulo!");
             }
-            else{
-            	this.bibliotecas.add(biblioteca);
-                System.out.println("Biblioteca cadastrada com sucesso");
-                return;
-            }
+            // Resto do código para criar uma biblioteca
+            Biblioteca biblioteca = new Biblioteca(nome, CNPJ, endereco, telefone, itens, clientes, emprestimos, reservas);
+            this.bibliotecas.add(biblioteca);
+            System.out.println("Biblioteca criada com sucesso");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
-    	} catch (IllegalArgumentException e) {
-        	this.bibliotecas = new ArrayList<>();
- 	        this.bibliotecas.add(biblioteca);
-            System.out.println("Biblioteca cadastrada com sucesso");
-            return;
- 	    }
+        return null;
     }
     public void RemoveBiblioteca(Biblioteca biblioteca) {
     	try {
