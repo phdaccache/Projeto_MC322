@@ -140,19 +140,6 @@ public class PanelCadastrarCliente extends JPanel {
 		// Pegar a informação de dentro do input:
 		// txtInput2.getText()
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 125, 326, 230);
-		add(scrollPane);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setSelectionColor(MyColors.ACCENT);
-		textArea.setEditable(false);
-		textArea.setMargin(new Insets(10, 10, 10, 10));
-		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
-		scrollPane.setViewportView(textArea);
-
-		// String recebida do backend
-		String string = "teste\nteste";
-		textArea.setText(string);
 	}
 }
