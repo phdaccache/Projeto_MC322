@@ -419,6 +419,29 @@ public class Cliente {
 		biblioteca.getItem(titulo).setStatus("reservado");
 	}
 
+	//Metodo que deixa em aberto que pode mudar todos os dados, se recebe uma string vazia, não muda o dado.
+	public String EditarDados(String nome, String email, String telefone, LocalDate dataNasc, String senha){
+		if(nome != ""){
+			setNome(nome);
+		}
+		if(email != ""){
+			setEmail(email);
+		}
+		if(telefone != ""){
+			setTelefone(telefone);
+		}
+		if(dataNasc != null){
+			setDataNasc(dataNasc);
+		}
+		if(senha != ""){
+			setSenha(senha);
+		}
+		return "Dados alterados com sucesso";
+	}
+	public String VisualizarDados(){
+		return toString();
+	}
+
 	//Fazer metodo para atualizar a situação
 
 	//toString
