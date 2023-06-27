@@ -343,6 +343,7 @@ public class Cliente {
         for(Emprestimo emprestimo : listaEmprestimos){
 			if(emprestimo.getItem().getTitulo().equals(Titulo)){
 				listaEmprestimos.remove(emprestimo);
+				biblioteca.removerEmprestimo(Titulo);
 				return "Emprestimo removido com sucesso";
 			}
 		}

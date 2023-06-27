@@ -37,9 +37,7 @@ public class Admin {
 	        // Resto do código para avançar o tempo
             setData(getData().plusDays(dias));
             AtualizarEmprestimos(dias);
-            AtualizarReservas();
 	        //AtualizarClientes();
-
 	        //AtualizarReservas();
 	        //AtualizarBibliotecas();
 	        //AtualizarItens();     
@@ -115,33 +113,47 @@ public class Admin {
         for(Biblioteca biblioteca : this.bibliotecas){
             for(Emprestimo emprestimo : biblioteca.getEmprestimos()){
                 if(emprestimo.getDataLim().isBefore(getData())){
-                    //O livro não está atrasado
+                    //O item não está atrasado
                 }
                 else{
-                    //O livro está atrasado
-                    if(numeroAleatório() >= 5){ // Pelo número aleatório
+                    //O item está atrasado
+                    if(numeroAleatório() >= 5){ // Pelo número aleatório será definido se o cliente devolve ou não o item
                         emprestimo.setStatus(false);
-                    }//livro foi entregue a tempo
+                    }//item foi entregue a tempo
                     else{
                         if(emprestimo.getItem().getListaReservas().size() > 1){
+                            //Seta como disponivel para fazer emprestimo
                             emprestimo.getItem().setStatus("disponivel");
+                            //Faz emprestimo com o cliente na lista de reservas
                             emprestimo.getItem().getListaReservas().get(0).getCliente().fazerEmprestimo(emprestimo.getItem().getTitulo());
+                            //Seta como emprestado novamente
                             emprestimo.getItem().setStatus("reservado");
-                            emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
+                            //Remove o cliente da lista de reservas
                             emprestimo.getCliente().RemoverReserva(emprestimo.getItem().getTitulo());
+                            //Devolve o emprestimo, finalizando a operação
+                            emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
+
                         }
-                        emprestimo.getItem().setStatus("disponivel.");
-                        emprestimo.getItem().getListaReservas().get(0).getCliente().fazerEmprestimo(emprestimo.getItem().getTitulo());
-                        emprestimo.getItem().setStatus("emprestado");
-                        emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
+                        else if(emprestimo.getItem().getListaReservas().size() == 1){
+                            //Seta como disponivel para fazer emprestimo
+                            emprestimo.getItem().setStatus("disponivel.");
+                            //Faz emprestimo com o cliente na lista de reservas
+                            emprestimo.getItem().getListaReservas().get(0).getCliente().fazerEmprestimo(emprestimo.getItem().getTitulo());
+                            //Seta como emprestado novamente, dado que não há reservas
+                            emprestimo.getItem().setStatus("emprestado");
+                            //Devolve o emprestimo original.
+                            emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
+                        }
+                        else{
+                            //Apenas devolve o emprestimo
+                            emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
+                        }
                     }
                 }
             }
         }
     }
-    public void AtualizarReservas(){
 
-    }
 
     public int numeroAleatório(){
         Random random = new Random();

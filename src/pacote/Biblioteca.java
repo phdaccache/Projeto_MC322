@@ -358,6 +358,22 @@ public class Biblioteca {
             return;
         }
     }
+    public void removerEmprestimo(String titulo){
+        try {
+            if (this.emprestimos == null) {
+                throw new IllegalArgumentException("Lista vazia!");
+            }
+            for(Emprestimo emprestimo : emprestimos){
+                if(emprestimo.getItem().getTitulo().equals(titulo)){
+                    this.emprestimos.remove(emprestimo);
+                    return;
+                }
+            }
+            return;
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+    }
 
     //Retorna uma lista de itens especificos
     public Item getItem(String titulo){
