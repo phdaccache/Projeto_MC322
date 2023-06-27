@@ -36,8 +36,9 @@ public class Admin {
 	        }
 	        // Resto do código para avançar o tempo
             setData(getData().plusDays(dias));
+            AtualizarEmprestimos(dias);
 	        //AtualizarClientes();
-	        //AtualizarEmprestimos();
+
 	        //AtualizarReservas();
 	        //AtualizarBibliotecas();
 	        //AtualizarItens();     
@@ -119,11 +120,15 @@ public class Admin {
                     //O livro está atrasado
                     if(numeroAleatório() >= 5){ // Pelo número aleatório
                         emprestimo.setStatus(false);
+                    }//livro foi entregue a tempo
+                    else{
+                        emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
                     }
                 }
             }
         }
     }
+
 
     public int numeroAleatório(){
         Random random = new Random();
