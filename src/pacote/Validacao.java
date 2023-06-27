@@ -6,7 +6,7 @@ public class Validacao {
 			System.out.println("Nome vazio");
 			return false;
 		}
-		if(nome.matches("[a-zA-Z]*")) {
+		if(nome.matches("[a-zA-Z ]*")) {
 			//System.out.println("Nome válido\n");
 			return true;
 		}

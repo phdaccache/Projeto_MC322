@@ -61,21 +61,19 @@ public class Admin {
     }
     public static ArrayList<String> listarBibliotecas() {
     	try {
-	        if (bibliotecas == null) {
-	            throw new IllegalArgumentException("Lista vazia!");
-	        }
-        for(Biblioteca b : bibliotecas){
-            //System.out.println("**********");
-        	ArrayList<String> listaExemplo = new ArrayList<>();
-        	listaExemplo.add(b.toString());
-            return listaExemplo;
-            //System.out.println("**********");
-        }
+            if (bibliotecas == null || bibliotecas.isEmpty()) {
+                throw new IllegalArgumentException("Lista vazia!");
+            } else {
+                ArrayList<String> listaExemplo = new ArrayList<>();
+                for(Biblioteca b : bibliotecas){
+                    listaExemplo.add(b.toString());
+                }
+                return listaExemplo;
+            }
     	} catch (IllegalArgumentException e) {
 	        System.out.println("Erro: " + e.getMessage());
             return null;
  	    }
-		return null;
     }
     public static void AtualizarEmprestimos(int dias){
         for(Biblioteca biblioteca : bibliotecas){
