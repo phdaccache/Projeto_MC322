@@ -19,7 +19,7 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		JLabel lblNewLabel = new JLabel("CADASTRAR BIBLIOTECA");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 148, 346, 100);
+		lblNewLabel.setBounds(10, 45, 326, 60);
 		add(lblNewLabel);
 		
 		iconX = new JLabel("X");

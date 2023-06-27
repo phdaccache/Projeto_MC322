@@ -19,7 +19,7 @@ public class PanelExcluirCliente extends JPanel {
 		JLabel lblNewLabel = new JLabel("EXCLUIR CLIENTE");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(48, 148, 250, 100);
+		lblNewLabel.setBounds(10, 45, 326, 60);
 		add(lblNewLabel);
 		
 		iconX = new JLabel("X");
