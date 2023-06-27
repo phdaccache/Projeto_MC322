@@ -694,7 +694,40 @@ public class Biblioteca {
             return "Erro: " + e.getMessage();
         }
     }
-
+    public String excluirAssinatura(String CPF){
+        for(Cliente cliente : clientes){
+            if(cliente.getCpf().equals(CPF)){
+                if(cliente instanceof Estudantes){
+                    Estudantes estudante = (Estudantes) cliente;
+                    estudante.setAssinatura("Básico");
+                    return "Assinatura excluida com sucesso!";
+                }
+                if(cliente instanceof Professores){
+                    Professores professor = (Professores) cliente;
+                    professor.setAssinatura("Básico");
+                    return "Assinatura excluida com sucesso!";
+                }
+            }
+        }
+        return "Cliente não encontrado!";
+    }
+    public String gerarAssinatura(String CPF, String assinatura){
+        for(Cliente cliente : clientes){
+            if(cliente.getCpf().equals(CPF)){
+                if(cliente instanceof Estudantes){
+                    Estudantes estudante = (Estudantes) cliente;
+                    estudante.setAssinatura(assinatura);
+                    return "Assinatura gerada com sucesso!";
+                }
+                if(cliente instanceof Professores){
+                    Professores professor = (Professores) cliente;
+                    professor.setAssinatura(assinatura);
+                    return "Assinatura gerada com sucesso!";
+                }
+            }
+        }
+        return "Cliente não encontrado!";
+    }
     //Metodos para atualizar emprestimos e reservas depois de um certo tempo.
 
 
