@@ -98,7 +98,7 @@ public class PanelExcluirAssinatura extends JPanel {
 		txtInput1.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput1.getText();
+		String valor = txtInput1.getText();
 
 	}
 
