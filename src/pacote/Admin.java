@@ -37,6 +37,7 @@ public class Admin {
 	        // Resto do código para avançar o tempo
             setData(getData().plusDays(dias));
             AtualizarEmprestimos(dias);
+            AtualizarReservas();
 	        //AtualizarClientes();
 
 	        //AtualizarReservas();
@@ -122,13 +123,25 @@ public class Admin {
                         emprestimo.setStatus(false);
                     }//livro foi entregue a tempo
                     else{
+                        if(emprestimo.getItem().getListaReservas().size() > 1){
+                            emprestimo.getItem().setStatus("disponivel");
+                            emprestimo.getItem().getListaReservas().get(0).getCliente().fazerEmprestimo(emprestimo.getItem().getTitulo());
+                            emprestimo.getItem().setStatus("reservado");
+                            emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
+                            emprestimo.getCliente().RemoverReserva(emprestimo.getItem().getTitulo());
+                        }
+                        emprestimo.getItem().setStatus("disponivel");
+                        emprestimo.getItem().getListaReservas().get(0).getCliente().fazerEmprestimo(emprestimo.getItem().getTitulo());
+                        emprestimo.getItem().setStatus("emprestado");
                         emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
                     }
                 }
             }
         }
     }
+    public void AtualizarReservas(){
 
+    }
 
     public int numeroAleatório(){
         Random random = new Random();

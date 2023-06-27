@@ -342,6 +342,22 @@ public class Biblioteca {
             return;
         }
     }
+    public void removerReserva(String titulo){
+        try {
+            if (this.reservas == null) {
+                throw new IllegalArgumentException("Lista vazia!");
+            }
+            for(Reserva reserva : reservas){
+                if(reserva.getItem().getTitulo().equals(titulo)){
+                    this.reservas.remove(reserva);
+                    return;
+                }
+            }
+            return;
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+    }
 
     //Retorna uma lista de itens especificos
     public Item getItem(String titulo){

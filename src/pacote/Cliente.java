@@ -280,7 +280,8 @@ public class Cliente {
 	public String TentaEmprestimo(String TituloItem, ArrayList<Item> listaItens, ArrayList<Emprestimo> listaEmprestimos) {
 		if (aptoEmprestimo() == true) {
 			if (verificaStatusItem(TituloItem, listaItens, listaEmprestimos) == "disponivel") {
-				return fazerEmprestimo(TituloItem);
+				fazerEmprestimo(TituloItem);
+				return "Emprestimo realizado com sucesso";
 			}
 			else if(verificaStatusItem(TituloItem, listaItens, listaEmprestimos) == "emprestado"){
 				Emprestimo emprestimo = achaEmprestimo(TituloItem, listaEmprestimos);
@@ -297,10 +298,9 @@ public class Cliente {
 			return "Cliente nao apto a fazer emprestimos";
 		}
 	}
-	public String fazerEmprestimo(String titulo){
+	public void fazerEmprestimo(String titulo){
 		biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.getData(), Admin.getData().plusDays(verificaQtdDeDias(this)), this);
 		biblioteca.getItem(titulo).setStatus("emprestado");
-		return "Emprestimo realizado com sucesso";
 	}
 	public String listarEmprestimos(){
 		String retorno;
@@ -418,6 +418,15 @@ public class Cliente {
 	public void Reservar(String titulo){
 		biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
 		biblioteca.getItem(titulo).setStatus("reservado");
+	}
+	public void RemoverReserva(String titulo){
+		for(Reserva reserva : listaReservasItens){
+			if(reserva.getItem().getTitulo().equals(titulo)){
+				listaReservasItens.remove(reserva);
+				getItem(titulo).removeReserva(reserva);
+				biblioteca.removerReserva(titulo);
+			}
+		}
 	}
 
 	//Metodo que deixa em aberto que pode mudar todos os dados, se recebe uma string vazia, não muda o dado.
