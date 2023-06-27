@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.biblioteca.*;
 import gui.frames.style.*;
+import pacote.Biblioteca;
 
 public class FrameMinhaConta extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +22,7 @@ public class FrameMinhaConta extends JFrame {
 	private JPanel panelEditarDados;
 	private JPanel panelExcluirConta;
 	
-	public FrameMinhaConta() {
+	public FrameMinhaConta(Biblioteca biblioteca) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -39,9 +40,9 @@ public class FrameMinhaConta extends JFrame {
 			}
 		});
 		
-		panelVisualizarDados = new PanelVisualizarDados();
-		panelEditarDados = new PanelEditarDados();
-		panelExcluirConta = new PanelExcluirConta();
+		panelVisualizarDados = new PanelVisualizarDados(biblioteca);
+		panelEditarDados = new PanelEditarDados(biblioteca);
+		panelExcluirConta = new PanelExcluirConta(biblioteca);
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
@@ -56,7 +57,7 @@ public class FrameMinhaConta extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				FrameMinhaConta.this.dispose();
 				
-				JFrame frameBiblioteca = new FrameBiblioteca();
+				JFrame frameBiblioteca = new FrameBiblioteca(biblioteca);
 				frameBiblioteca.setVisible(true);
 				frameBiblioteca.toFront();
 				frameBiblioteca.requestFocus();

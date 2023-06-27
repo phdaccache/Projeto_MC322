@@ -299,7 +299,7 @@ public class Cliente {
 		}
 	}
 	public void fazerEmprestimo(String titulo){
-		biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.getData(), Admin.getData().plusDays(verificaQtdDeDias(this)), this);
+		biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
 		biblioteca.getItem(titulo).setStatus("emprestado");
 	}
 	public String listarEmprestimos(){

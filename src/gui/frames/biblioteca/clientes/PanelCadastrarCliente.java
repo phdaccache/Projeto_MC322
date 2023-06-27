@@ -6,13 +6,15 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
+import pacote.Biblioteca;
+
 import javax.swing.border.LineBorder;
 
 public class PanelCadastrarCliente extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelCadastrarCliente() {
+	public PanelCadastrarCliente(Biblioteca biblioteca) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);

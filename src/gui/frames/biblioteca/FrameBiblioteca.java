@@ -12,6 +12,7 @@ import gui.frames.biblioteca.itens.FrameItens;
 import gui.frames.biblioteca.minhaConta.FrameMinhaConta;
 import gui.frames.biblioteca.reservas.FrameReservas;
 import gui.frames.style.*;
+import pacote.Biblioteca;
 
 public class FrameBiblioteca extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +33,7 @@ public class FrameBiblioteca extends JFrame {
 	private JPanel pnlReservas;
 	private JLabel lblReservas;
 
-	public FrameBiblioteca() {
+	public FrameBiblioteca(Biblioteca biblioteca) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -160,7 +161,7 @@ public class FrameBiblioteca extends JFrame {
 		pnlMinhaConta.addMouseListener(new PanelButtonMouseAdapter(pnlMinhaConta) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameMinhaConta = new FrameMinhaConta();
+				JFrame frameMinhaConta = new FrameMinhaConta(biblioteca);
 				menuClicked(frameMinhaConta);
 			}
 		});
@@ -181,7 +182,7 @@ public class FrameBiblioteca extends JFrame {
 		pnlClientes.addMouseListener(new PanelButtonMouseAdapter(pnlClientes) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameClientes = new FrameClientes();
+				JFrame frameClientes = new FrameClientes(biblioteca);
 				menuClicked(frameClientes);
 			}
 		});
@@ -202,7 +203,7 @@ public class FrameBiblioteca extends JFrame {
 		pnlItens.addMouseListener(new PanelButtonMouseAdapter(pnlItens) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameItens = new FrameItens();
+				JFrame frameItens = new FrameItens(biblioteca);
 				menuClicked(frameItens);
 			}
 		});
@@ -223,7 +224,7 @@ public class FrameBiblioteca extends JFrame {
 		pnlEmprestimos.addMouseListener(new PanelButtonMouseAdapter(pnlEmprestimos) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameEmprestimos = new FrameEmprestimos();
+				JFrame frameEmprestimos = new FrameEmprestimos(biblioteca);
 				menuClicked(frameEmprestimos);
 			}
 		});
@@ -244,7 +245,7 @@ public class FrameBiblioteca extends JFrame {
 		pnlReservas.addMouseListener(new PanelButtonMouseAdapter(pnlReservas) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameReservas = new FrameReservas();
+				JFrame frameReservas = new FrameReservas(biblioteca);
 				menuClicked(frameReservas);
 			}
 		});

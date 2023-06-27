@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.biblioteca.*;
 import gui.frames.style.*;
+import pacote.Biblioteca;
 
 public class FrameClientes extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -37,7 +38,7 @@ public class FrameClientes extends JFrame {
 	private JPanel pnlExcluirAssinatura;
 	private JLabel lblExcluirAssinatura;
 	
-	public FrameClientes() {
+	public FrameClientes(Biblioteca biblioteca) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -55,14 +56,14 @@ public class FrameClientes extends JFrame {
 			}
 		});
 		
-		panelListarTodosOsClientes = new PanelListarTodosOsClientes();
-		panelListarEstudantes = new PanelListarEstudantes();
-		panelListarProfessores = new PanelListarProfessores();
-		panelCadastrarCliente = new PanelCadastrarCliente();
-		panelExcluirCliente = new PanelExcluirCliente();
-		panelListarAssinaturas = new PanelListarAssinaturas();
-		panelGerarAssinatura = new PanelGerarAssinatura();
-		panelExcluirAssinatura = new PanelExcluirAssinatura();
+		panelListarTodosOsClientes = new PanelListarTodosOsClientes(biblioteca);
+		panelListarEstudantes = new PanelListarEstudantes(biblioteca);
+		panelListarProfessores = new PanelListarProfessores(biblioteca);
+		panelCadastrarCliente = new PanelCadastrarCliente(biblioteca);
+		panelExcluirCliente = new PanelExcluirCliente(biblioteca);
+		panelListarAssinaturas = new PanelListarAssinaturas(biblioteca);
+		panelGerarAssinatura = new PanelGerarAssinatura(biblioteca);
+		panelExcluirAssinatura = new PanelExcluirAssinatura(biblioteca);
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
@@ -77,7 +78,7 @@ public class FrameClientes extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				FrameClientes.this.dispose();
 				
-				JFrame frameBiblioteca = new FrameBiblioteca();
+				JFrame frameBiblioteca = new FrameBiblioteca(biblioteca);
 				frameBiblioteca.setVisible(true);
 				frameBiblioteca.toFront();
 				frameBiblioteca.requestFocus();

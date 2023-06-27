@@ -18,9 +18,10 @@ public class Biblioteca {
     private ArrayList<Cliente> clientes;
     private ArrayList<Emprestimo> emprestimos;
     private ArrayList<Reserva> reservas;
+    private String senha;
 
     //Construtor
-    public Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas) {
+    public Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas, String senha) {
     	Scanner entrada = new Scanner(System.in);
     	this.nome = nome;
         this.CNPJ = CNPJ;
@@ -30,6 +31,7 @@ public class Biblioteca {
         this.clientes = clientes;
         this.emprestimos = emprestimos;
         this.reservas = reservas;
+        this.senha = senha;
     	while(true) {
 	    	try {
 	            if (!Validacao.validarNome(this.nome)) {
@@ -45,6 +47,7 @@ public class Biblioteca {
         while(true) {
 	        try {
 	            if (!Validacao.validarCnpj(this.CNPJ)) {
+                    System.out.println(CNPJ);
 	                throw new IllegalArgumentException("CNPJ inválido");
 	            }
 	            break;
@@ -120,6 +123,9 @@ public class Biblioteca {
     public void setReservas(ArrayList<Reserva> reservas) {
         this.reservas = reservas;
     }
+    public String getSenha() {
+		return senha;
+	}
 
     //Métodos
     public String cadastrarEstudantes(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
@@ -501,20 +507,26 @@ public class Biblioteca {
 
     public String listarItens(){
         String retorno = "";
-        if(itens == null){
+        if(itens == null || itens.isEmpty()){
             return "Não há itens cadastrados!";
         }
-        retorno = "***** Livros *****";
-        for(Livro livro : getlivros()){
-            retorno = retorno + livro.toString();
+        if (getlivros() != null) {
+            retorno = "***** Livros *****";
+            for(Livro livro : getlivros()){
+                retorno = retorno + livro.toString();
+            }
         }
-        retorno = retorno + "***** Artigos *****";
-        for(Artigo artigo : getArtigos()){
-           retorno = retorno + artigo.toString();
+        if (getArtigos() != null) {
+            retorno = retorno + "***** Artigos *****";
+            for(Artigo artigo : getArtigos()){
+                retorno = retorno + artigo.toString();
+            }
         }
-        retorno = retorno + "***** Revistas *****";
-        for (Revista revista : getRevistas()){
-            retorno = retorno + revista.toString();
+        if (getRevistas() != null) {
+            retorno = retorno + "***** Revistas *****";
+            for(Revista revista : getRevistas()){
+                retorno = retorno + revista.toString();
+            }
         }
         return retorno;
     }

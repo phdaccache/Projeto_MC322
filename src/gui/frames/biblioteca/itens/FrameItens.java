@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.biblioteca.*;
 import gui.frames.style.*;
+import pacote.Biblioteca;
 
 public class FrameItens extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +27,7 @@ public class FrameItens extends JFrame {
 	private JPanel panelCadastrarItem;
 	private JPanel panelExcluirItem;
 	
-	public FrameItens() {
+	public FrameItens(Biblioteca biblioteca) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -44,14 +45,14 @@ public class FrameItens extends JFrame {
 			}
 		});
 		
-		panelPesquisarItem = new PanelPesquisarItem();
-		panelListarTodosOsItens = new PanelListarTodosOsItens();
-		panelListarLivros = new PanelListarLivros();
-		panelListarApostilas = new PanelListarApostilas();
-		panelListarArtigos = new PanelListarArtigos();
-		panelListarRevistas = new PanelListarRevistas();
-		panelCadastrarItem = new PanelCadastrarItem();
-		panelExcluirItem = new PanelExcluirItem();
+		panelPesquisarItem = new PanelPesquisarItem(biblioteca);
+		panelListarTodosOsItens = new PanelListarTodosOsItens(biblioteca);
+		panelListarLivros = new PanelListarLivros(biblioteca);
+		panelListarApostilas = new PanelListarApostilas(biblioteca);
+		panelListarArtigos = new PanelListarArtigos(biblioteca);
+		panelListarRevistas = new PanelListarRevistas(biblioteca);
+		panelCadastrarItem = new PanelCadastrarItem(biblioteca);
+		panelExcluirItem = new PanelExcluirItem(biblioteca);
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
@@ -66,7 +67,7 @@ public class FrameItens extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				FrameItens.this.dispose();
 				
-				JFrame frameBiblioteca = new FrameBiblioteca();
+				JFrame frameBiblioteca = new FrameBiblioteca(biblioteca);
 				frameBiblioteca.setVisible(true);
 				frameBiblioteca.toFront();
 				frameBiblioteca.requestFocus();

@@ -41,7 +41,7 @@ public class FrameAdmin extends JFrame {
 		});
 		
 		panelListarBibliotecas = new PanelListarBibliotecas();
-		panelCadastrarBiblioteca = new PanelCadastrarBiblioteca();
+		panelCadastrarBiblioteca = new PanelCadastrarBiblioteca(this);
 		panelExcluirBiblioteca = new PanelExcluirBiblioteca();
 		panelAvancarTempo = new PanelAvancarTempo();
 		

@@ -7,12 +7,13 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
+import pacote.Biblioteca;
 
 public class PanelGerarAssinatura extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelGerarAssinatura() {
+	public PanelGerarAssinatura(Biblioteca biblioteca) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
