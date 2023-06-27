@@ -130,7 +130,7 @@ public class Admin {
                             emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
                             emprestimo.getCliente().RemoverReserva(emprestimo.getItem().getTitulo());
                         }
-                        emprestimo.getItem().setStatus("disponivel");
+                        emprestimo.getItem().setStatus("disponivel.");
                         emprestimo.getItem().getListaReservas().get(0).getCliente().fazerEmprestimo(emprestimo.getItem().getTitulo());
                         emprestimo.getItem().setStatus("emprestado");
                         emprestimo.getCliente().DevolverEmprestimo(emprestimo.getItem().getTitulo());
