@@ -37,10 +37,7 @@ public class Admin {
 	        // Resto do código para avançar o tempo
             setData(getData().plusDays(dias));
             AtualizarEmprestimos(dias);
-	        //AtualizarClientes();
-	        //AtualizarReservas();
-	        //AtualizarBibliotecas();
-	        //AtualizarItens();     
+
 	    } catch (IllegalArgumentException e) {
 	        System.out.println("Erro: " + e.getMessage());
 	    }
@@ -118,6 +115,8 @@ public class Admin {
                 else{
                     //O item está atrasado
                     if(numeroAleatório() >= 5){ // Pelo número aleatório será definido se o cliente devolve ou não o item
+                        emprestimo.getItem().setStatus("atrasado");
+                        emprestimo.getCliente().setMulta(dias*10); // A cada dia, recebe 10 reais de multa
                         emprestimo.setStatus(false);
                     }//item foi entregue a tempo
                     else{
