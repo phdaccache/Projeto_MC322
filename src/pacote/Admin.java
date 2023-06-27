@@ -2,6 +2,7 @@ package pacote;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Random;
 
 public class Admin {
     private ArrayList<Biblioteca> bibliotecas;
@@ -28,7 +29,7 @@ public class Admin {
     }
 
     //Metodos
-    public LocalDate Avancatempo(int dias) {
+    public String Avancatempo(int dias) {
 	    try {
 	        if (dias <= 0) {
 	            throw new IllegalArgumentException("O número de dias deve ser positivo");
@@ -108,8 +109,26 @@ public class Admin {
  	    }
 		return null;
     }
-    public void AtualizarClientes(){
+    public void AtualizarEmprestimos(int dias){
+        for(Biblioteca biblioteca : this.bibliotecas){
+            for(Emprestimo emprestimo : biblioteca.getEmprestimos()){
+                if(emprestimo.getDataLim().isBefore(getData())){
+                    //O livro não está atrasado
+                }
+                else{
+                    //O livro está atrasado
+                    if(numeroAleatório() >= 5){ // Pelo número aleatório
+                        emprestimo.setStatus(false);
+                    }
+                }
+            }
+        }
+    }
 
+    public int numeroAleatório(){
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(11); // Gera um número aleatório de 0 a 10
+        return numeroAleatorio;
     }
 
 

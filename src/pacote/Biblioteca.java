@@ -193,7 +193,7 @@ public class Biblioteca {
  	    }
     }
     public String cadastrarEmprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente) {
-        Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente);
+        Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente, true);
         try {
             if (this.emprestimos == null) {
                 throw new IllegalArgumentException();

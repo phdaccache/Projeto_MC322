@@ -6,17 +6,19 @@ import java.util.StringJoiner;
 
 public class Emprestimo {
 	private Item item;
+	private Boolean status; //true para em dia e false para atrasado
 	private LocalDate data_ini; //data do emprestimo
 	private LocalDate data_lim; //data do limite da devolucao
 	private Cliente cliente;
 	private final int code; //aleatorio
 	
 	//Construtor
-	public Emprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente) {
+	public Emprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente, Boolean status) {
 		this.item = item;
 		this.data_ini = data_ini;
 		this.data_lim = data_lim;
 		this.cliente = cliente;
+		this.status = status;
 		Random random = new Random();
 		this.code = random.nextInt();
 	}
@@ -49,7 +51,12 @@ public class Emprestimo {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
+	public Boolean getStatus() {
+		return status;
+	}
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 	//Metodos
 
 	//toString

@@ -352,6 +352,7 @@ public class Cliente {
             return null;
     	}
 	}
+
 	//Permite fazer uma renovação apenas quando não há reservas para o item.
 	public String renovarEmprestimo(String titulo){
 		try {
