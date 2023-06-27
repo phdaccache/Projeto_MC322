@@ -75,14 +75,14 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("Nome")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("Nome");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -98,7 +98,7 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		txtInput1.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput1.getText();
+		//String nome = txtInput1.getText();
 
 		///////////////////////// Input 2 /////////////////////////
 
@@ -114,14 +114,14 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Input2")) {
+				if (txtInput2.getText().equals("CNPJ")) {
 					txtInput2.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Input2");
+					txtInput2.setText("CNPJ");
 					txtInput2.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -136,8 +136,7 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		pnlInput2.add(txtInput2);
 		txtInput2.setColumns(10);
 
-		txtInput2.getText();
-
+		//String cnpj = txtInput2.getText();
 
 		///////////////////////// Input 3 /////////////////////////
 
@@ -153,30 +152,30 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput3.setForeground(MyColors.TEXT);
-				if (txtInput3.getText().equals("Input3")) {
+				if (txtInput3.getText().equals("Endereço")) {
 					txtInput3.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput3.getText().equals("")) {
-					txtInput3.setText("Input3");
-					txtInput1.setForeground(MyColors.PLACEHOLDER);
+					txtInput3.setText("Endereço");
+					txtInput3.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
 		});
-		txtInput1.setBorder(null);
-		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtInput1.setSelectionColor(MyColors.ACCENT);
-		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("Endereço");
-		txtInput1.setBackground(MyColors.BACKGROUND);
-		txtInput1.setBounds(10, 5, 100, 15);
-		pnlInput1.add(txtInput1);
-		txtInput1.setColumns(10);
+		txtInput3.setBorder(null);
+		txtInput3.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput3.setSelectionColor(MyColors.ACCENT);
+		txtInput3.setForeground(MyColors.PLACEHOLDER);
+		txtInput3.setText("Endereço");
+		txtInput3.setBackground(MyColors.BACKGROUND);
+		txtInput3.setBounds(10, 5, 100, 15);
+		pnlInput3.add(txtInput3);
+		txtInput3.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput3.getText();
+		//String endereco = txtInput3.getText();
 
 		///////////////////////// Input 4 /////////////////////////
 
@@ -192,14 +191,14 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput4.setForeground(MyColors.TEXT);
-				if (txtInput4.getText().equals("Input4")) {
+				if (txtInput4.getText().equals("Telefone")) {
 					txtInput4.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput4.getText().equals("")) {
-					txtInput4.setText("Input4");
+					txtInput4.setText("Telefone");
 					txtInput4.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -213,8 +212,8 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		txtInput4.setBounds(10, 5, 100, 15);
 		pnlInput4.add(txtInput4);
 		txtInput4.setColumns(10);
-
-		txtInput4.getText();
-		int value = Integer.parseInt(String.valueOf(txtInput4));
+		
+		//String telefone = txtInput4.getText();
+		//int value = Integer.parseInt(telefone);
 	}
 }

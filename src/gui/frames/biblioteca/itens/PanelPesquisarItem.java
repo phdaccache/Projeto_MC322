@@ -67,7 +67,7 @@ public class PanelPesquisarItem extends JPanel {
 		JPanel pnlInput1 = new JPanel();
 		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput1.setBackground(MyColors.BACKGROUND);
-		pnlInput1.setBounds(53, 125, 115, 25);
+		pnlInput1.setBounds(115, 125, 115, 25);
 		add(pnlInput1);
 		pnlInput1.setLayout(null);
 
@@ -76,14 +76,14 @@ public class PanelPesquisarItem extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("Titulo")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("Titulo");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -99,6 +99,6 @@ public class PanelPesquisarItem extends JPanel {
 		txtInput1.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput1.getText();
+		//String titulo = txtInput1.getText();
 	}
 }

@@ -61,6 +61,7 @@ public class PanelGerarAssinatura extends JPanel {
 			}
 		});
 		add(iconX);
+
 		///////////////////////// Input 1 /////////////////////////
 
 		JPanel pnlInput1 = new JPanel();
@@ -75,14 +76,14 @@ public class PanelGerarAssinatura extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("CPF")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("CPF");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -98,7 +99,7 @@ public class PanelGerarAssinatura extends JPanel {
 		txtInput1.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput1.getText();
+		//String cpf = txtInput1.getText();
 
 		///////////////////////// Input 2 /////////////////////////
 
@@ -114,14 +115,14 @@ public class PanelGerarAssinatura extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Input2")) {
+				if (txtInput2.getText().equals("Assinatura")) {
 					txtInput2.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Input2");
+					txtInput2.setText("Assinatura");
 					txtInput2.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -130,13 +131,13 @@ public class PanelGerarAssinatura extends JPanel {
 		txtInput2.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput2.setSelectionColor(MyColors.ACCENT);
 		txtInput2.setForeground(MyColors.PLACEHOLDER);
-		txtInput2.setText("Assinatura: Prata ou Dourado");
+		txtInput2.setText("Assinatura");
 		txtInput2.setBackground(MyColors.BACKGROUND);
 		txtInput2.setBounds(10, 5, 100, 15);
 		pnlInput2.add(txtInput2);
 		txtInput2.setColumns(10);
 
-		txtInput2.getText();
-
+		// Pegar a informação de dentro do input:
+		//String assinatura = txtInput2.getText();
 	}
 }

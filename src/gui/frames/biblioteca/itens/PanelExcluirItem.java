@@ -61,12 +61,13 @@ public class PanelExcluirItem extends JPanel {
 			}
 		});
 		add(iconX);
+
 		///////////////////////// Input 1 /////////////////////////
 
 		JPanel pnlInput1 = new JPanel();
 		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput1.setBackground(MyColors.BACKGROUND);
-		pnlInput1.setBounds(53, 125, 115, 25);
+		pnlInput1.setBounds(115, 125, 115, 25);
 		add(pnlInput1);
 		pnlInput1.setLayout(null);
 
@@ -75,14 +76,14 @@ public class PanelExcluirItem extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("Code")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("Code");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -98,6 +99,6 @@ public class PanelExcluirItem extends JPanel {
 		txtInput1.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput1.getText();
+		//String code = txtInput1.getText();
 	}
 }
