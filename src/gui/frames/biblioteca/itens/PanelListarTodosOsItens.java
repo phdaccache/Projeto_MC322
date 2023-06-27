@@ -19,7 +19,7 @@ public class PanelListarTodosOsItens extends JPanel {
 		JLabel lblNewLabel = new JLabel("LISTAR TODOS OS ITENS");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 148, 326, 100);
+		lblNewLabel.setBounds(10, 45, 326, 60);
 		add(lblNewLabel);
 		
 		iconX = new JLabel("X");
