@@ -114,14 +114,14 @@ public class PanelGerarAssinatura extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Input2")) {
+				if (txtInput2.getText().equals("Assinatura: Prata ou Dourado")) {
 					txtInput2.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Input2");
+					txtInput2.setText("Assinatura: Prata ou Dourado");
 					txtInput2.setForeground(MyColors.PLACEHOLDER);
 				}
 			}

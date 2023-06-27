@@ -76,14 +76,14 @@ public class PanelCadastrarCliente extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("Nome")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("Nome");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -92,14 +92,14 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput1.setSelectionColor(MyColors.ACCENT);
 		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("Input1");
+		txtInput1.setText("Nome");
 		txtInput1.setBackground(MyColors.BACKGROUND);
 		txtInput1.setBounds(10, 5, 100, 15);
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
 		
 		// Pegar a informação de dentro do input:
-		// txtInput1.getText()
+		String valor = txtInput1.getText();
 		
 		///////////////////////// Input 2 /////////////////////////
 		
@@ -115,14 +115,14 @@ public class PanelCadastrarCliente extends JPanel {
 		@Override
 		public void focusGained(FocusEvent e) {
 		txtInput2.setForeground(MyColors.TEXT);
-		if (txtInput2.getText().equals("Input2")) {
+		if (txtInput2.getText().equals("CPF")) {
 			txtInput2.setText("");
 		}
 		}
 		@Override
 		public void focusLost(FocusEvent e) {
 		if (txtInput2.getText().equals("")) {
-			txtInput2.setText("Input2");
+			txtInput2.setText("CPF");
 			txtInput2.setForeground(MyColors.PLACEHOLDER);
 		}
 		}
@@ -131,15 +131,130 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput2.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput2.setSelectionColor(MyColors.ACCENT);
 		txtInput2.setForeground(MyColors.PLACEHOLDER);
-		txtInput2.setText("Input2");
+		txtInput2.setText("CPF");
 		txtInput2.setBackground(MyColors.BACKGROUND);
 		txtInput2.setBounds(10, 5, 100, 15);
 		pnlInput2.add(txtInput2);
 		txtInput2.setColumns(10);
 		
 		// Pegar a informação de dentro do input:
-		// txtInput2.getText()
+		String valor2 = txtInput2.getText();
 
+		///////////////////////// Input 3 /////////////////////////
+
+		JPanel pnlInput3 = new JPanel();
+		pnlInput3.setBorder(new LineBorder(MyColors.TEXT));
+		pnlInput3.setBackground(MyColors.BACKGROUND);
+		pnlInput3.setBounds(53, 160, 115, 25);
+		add(pnlInput3);
+		pnlInput3.setLayout(null);
+
+		JTextField txtInput3 = new JTextField();
+		txtInput3.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtInput3.setForeground(MyColors.TEXT);
+				if (txtInput3.getText().equals("Telefone")) {
+					txtInput3.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtInput3.getText().equals("")) {
+					txtInput3.setText("Telefone");
+					txtInput3.setForeground(MyColors.PLACEHOLDER);
+				}
+			}
+		});
+		txtInput3.setBorder(null);
+		txtInput3.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput3.setSelectionColor(MyColors.ACCENT);
+		txtInput3.setForeground(MyColors.PLACEHOLDER);
+		txtInput3.setText("Telefone");
+		txtInput3.setBackground(MyColors.BACKGROUND);
+		txtInput3.setBounds(10, 5, 100, 15);
+		pnlInput3.add(txtInput3);
+		txtInput3.setColumns(10);
+
+		// Pegar a informação de dentro do input:
+		String valor3 = txtInput3.getText();
+
+		///////////////////////// Input 4 /////////////////////////
+
+		JPanel pnlInput4 = new JPanel();
+		pnlInput4.setBorder(new LineBorder(MyColors.TEXT));
+		pnlInput4.setBackground(MyColors.BACKGROUND);
+		pnlInput4.setBounds(178, 160, 115, 25);
+		add(pnlInput4);
+		pnlInput4.setLayout(null);
+
+		JTextField txtInput4 = new JTextField();
+		txtInput4.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtInput4.setForeground(MyColors.TEXT);
+				if (txtInput4.getText().equals("Email")) {
+					txtInput4.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtInput4.getText().equals("")) {
+					txtInput4.setText("Email");
+					txtInput4.setForeground(MyColors.PLACEHOLDER);
+				}
+			}
+		});
+		txtInput4.setBorder(null);
+		txtInput4.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput4.setSelectionColor(MyColors.ACCENT);
+		txtInput4.setForeground(MyColors.PLACEHOLDER);
+		txtInput4.setText("Email");
+		txtInput4.setBackground(MyColors.BACKGROUND);
+		txtInput4.setBounds(10, 5, 100, 15);
+		pnlInput4.add(txtInput4);
+		txtInput4.setColumns(10);
+
+		// Pegar a informação de dentro do input:
+		String valor4 = txtInput4.getText();
+		///////////////////////// Input 5 /////////////////////////
+
+		JPanel pnlInput5 = new JPanel();
+		pnlInput5.setBorder(new LineBorder(MyColors.TEXT));
+		pnlInput5.setBackground(MyColors.BACKGROUND);
+		pnlInput5.setBounds(53, 195, 115, 25);
+		add(pnlInput5);
+		pnlInput5.setLayout(null);
+
+		JTextField txtInput5 = new JTextField();
+		txtInput5.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtInput5.setForeground(MyColors.TEXT);
+				if (txtInput5.getText().equals("senha")) {
+					txtInput5.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtInput5.getText().equals("")) {
+					txtInput5.setText("senha");
+					txtInput5.setForeground(MyColors.PLACEHOLDER);
+				}
+			}
+		});
+		txtInput5.setBorder(null);
+		txtInput5.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput5.setSelectionColor(MyColors.ACCENT);
+		txtInput5.setForeground(MyColors.PLACEHOLDER);
+		txtInput5.setText("senha");
+		txtInput5.setBackground(MyColors.BACKGROUND);
+		txtInput5.setBounds(10, 5, 100, 15);
+		pnlInput5.add(txtInput1);
+		txtInput5.setColumns(10);
+
+		// Pegar a informação de dentro do input:
+		String valor5 = txtInput5.getText();
 
 	}
 }
