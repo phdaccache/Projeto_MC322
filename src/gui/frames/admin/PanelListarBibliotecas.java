@@ -2,10 +2,12 @@ package gui.frames.admin;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
+import pacote.Admin;
 
 public class PanelListarBibliotecas extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -72,7 +74,10 @@ public class PanelListarBibliotecas extends JPanel {
 		scrollPane.setViewportView(textArea);
 
 		// String recebida do backend
-		String string = "teste\nteste";
-		textArea.setText(string);
+		ArrayList<String> nullOption;
+		nullOption = new ArrayList<String>();
+		nullOption.add("Nenhuma biblioteca cadastrada");
+		ArrayList<String> string = Admin.listarBibliotecas() == null ? nullOption : Admin.listarBibliotecas();
+		textArea.setText(string.toString());
 	}
 }

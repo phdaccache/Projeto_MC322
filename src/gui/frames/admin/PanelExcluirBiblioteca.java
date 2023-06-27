@@ -61,12 +61,13 @@ public class PanelExcluirBiblioteca extends JPanel {
 			}
 		});
 		add(iconX);
+
 		///////////////////////// Input 1 /////////////////////////
 
 		JPanel pnlInput1 = new JPanel();
 		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput1.setBackground(MyColors.BACKGROUND);
-		pnlInput1.setBounds(53, 125, 115, 25);
+		pnlInput1.setBounds(115, 125, 115, 25);
 		add(pnlInput1);
 		pnlInput1.setLayout(null);
 
@@ -98,6 +99,6 @@ public class PanelExcluirBiblioteca extends JPanel {
 		txtInput1.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput1.getText();
+		//String cnpj = txtInput1.getText();
 	}
 }

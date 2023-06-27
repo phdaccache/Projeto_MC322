@@ -4,15 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
+import pacote.Biblioteca;
 
 public class PanelExcluirConta extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelExcluirConta() {
+	public PanelExcluirConta(Biblioteca biblioteca) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -61,43 +61,5 @@ public class PanelExcluirConta extends JPanel {
 			}
 		});
 		add(iconX);
-		///////////////////////// Input 1 /////////////////////////
-		//É para chamar a função da biblioteca
-		JPanel pnlInput1 = new JPanel();
-		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
-		pnlInput1.setBackground(MyColors.BACKGROUND);
-		pnlInput1.setBounds(53, 160, 115, 25);
-		add(pnlInput1);
-		pnlInput1.setLayout(null);
-
-		JTextField txtInput1 = new JTextField();
-		txtInput1.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
-					txtInput1.setText("");
-				}
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
-					txtInput1.setForeground(MyColors.PLACEHOLDER);
-				}
-			}
-		});
-		txtInput1.setBorder(null);
-		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtInput1.setSelectionColor(MyColors.ACCENT);
-		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("CPF");
-		txtInput1.setBackground(MyColors.BACKGROUND);
-		txtInput1.setBounds(10, 5, 100, 15);
-		pnlInput1.add(txtInput1);
-		txtInput1.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		txtInput1.getText();
 	}
 }

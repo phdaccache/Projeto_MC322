@@ -8,6 +8,8 @@ import javax.swing.border.*;
 
 import gui.frames.*;
 import gui.frames.style.*;
+import pacote.Admin;
+import pacote.Biblioteca;
 
 public class FrameLoginBiblioteca extends JFrame {
 	private Image img_user = new ImageIcon(FrameLoginBiblioteca.class.getResource("../../res/user.png")).getImage().getScaledInstance(70, 85, Image.SCALE_SMOOTH);
@@ -231,23 +233,32 @@ public class FrameLoginBiblioteca extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			if (txtUsername.getText().equals("biblioteca") && txtPassword.getText().equals("123")) {
-				lblLoginMessage.setText("");
-				FrameLoginBiblioteca.this.dispose();
-				
-				FrameBiblioteca biblioteca = new FrameBiblioteca();
-				biblioteca.setVisible(true);
-				biblioteca.toFront();
-				biblioteca.requestFocus();
+				if (Admin.bibliotecas == null || Admin.bibliotecas.isEmpty()) {
+					lblLoginMessage.setText("Não há bibliotecas cadastradas.");
+					return;
 				}
-			else if (txtUsername.getText().equals("") || txtUsername.getText().equals("CNPJ da Biblioteca") || 
-					 txtPassword.getText().equals("") || txtPassword.getText().equals("Senha")) {
-					
-				lblLoginMessage.setText("Preencha todos os campos.");
+				for (Biblioteca biblioteca : Admin.bibliotecas) {
+					System.out.println(biblioteca.getCNPJ());
+					System.out.println(biblioteca.getSenha());
+					if (txtUsername.getText().equals(biblioteca.getCNPJ()) && txtPassword.getText().equals(biblioteca.getSenha())) {
+						lblLoginMessage.setText("");
+						FrameLoginBiblioteca.this.dispose();
+						
+						FrameBiblioteca bibliotecaFrame = new FrameBiblioteca(biblioteca);
+						bibliotecaFrame.setVisible(true);
+						bibliotecaFrame.toFront();
+						bibliotecaFrame.requestFocus();
+						return;
+					}
 				}
-			else {
-				lblLoginMessage.setText("Usuário e/ou senha inválidos.");	
-				}
+				if (txtUsername.getText().equals("") || txtUsername.getText().equals("CNPJ da Biblioteca") || 
+						txtPassword.getText().equals("") || txtPassword.getText().equals("Senha")) {
+						
+					lblLoginMessage.setText("Preencha todos os campos.");
+					}
+				else {
+					lblLoginMessage.setText("Usuário e/ou senha inválidos.");	
+					}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.biblioteca.*;
 import gui.frames.style.*;
+import pacote.Biblioteca;
 
 public class FrameReservas extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +21,7 @@ public class FrameReservas extends JFrame {
 	private JPanel panelListarTodasAsReservas;
 	private JPanel panelListarReservasPorCliente;
 	
-	public FrameReservas() {
+	public FrameReservas(Biblioteca biblioteca) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -38,8 +39,8 @@ public class FrameReservas extends JFrame {
 			}
 		});
 		
-		panelListarTodasAsReservas = new PanelListarTodasAsReservas();
-		panelListarReservasPorCliente = new PanelListarReservasPorCliente();
+		panelListarTodasAsReservas = new PanelListarTodasAsReservas(biblioteca);
+		panelListarReservasPorCliente = new PanelListarReservasPorCliente(biblioteca);
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
@@ -54,7 +55,7 @@ public class FrameReservas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				FrameReservas.this.dispose();
 				
-				JFrame frameBiblioteca = new FrameBiblioteca();
+				JFrame frameBiblioteca = new FrameBiblioteca(biblioteca);
 				frameBiblioteca.setVisible(true);
 				frameBiblioteca.toFront();
 				frameBiblioteca.requestFocus();

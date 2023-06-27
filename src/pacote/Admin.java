@@ -5,37 +5,17 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public class Admin {
-    private ArrayList<Biblioteca> bibliotecas;
-    private static LocalDate data; // Data atual do sistema
-
-    //Construtor
-    public Admin(ArrayList<Biblioteca> bibliotecas, LocalDate data) {
-        this.bibliotecas = bibliotecas;
-        this.data = data;
-    }
-
-    //Getters e setters
-    public ArrayList<Biblioteca> getBibliotecas() {
-        return bibliotecas;
-    }
-    public void setBibliotecas(ArrayList<Biblioteca> bibliotecas) {
-        this.bibliotecas = bibliotecas;
-    }
-    public static LocalDate getData() {
-    	return data;
-    }
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
+    public static ArrayList<Biblioteca> bibliotecas = new ArrayList<>();
+    public static LocalDate data; // Data atual do sistema
 
     //Metodos
-    public String Avancatempo(int dias) {
+    public static String Avancatempo(int dias) {
 	    try {
 	        if (dias <= 0) {
 	            throw new IllegalArgumentException("O número de dias deve ser positivo");
 	        }
 	        // Resto do código para avançar o tempo
-            setData(getData().plusDays(dias));
+            data = data.plusDays(dias);
             AtualizarEmprestimos(dias);
 
 	    } catch (IllegalArgumentException e) {
@@ -44,23 +24,23 @@ public class Admin {
 
         return null;
     }
-    public String Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas) {
+    public static String Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas, String senha) {
     	        try {
             if (nome == null || CNPJ == null || endereco == null || telefone == null || itens == null || clientes == null || emprestimos == null || reservas == null) {
                 throw new IllegalArgumentException("Argumento nulo!");
             }
             // Resto do código para criar uma biblioteca
-            Biblioteca biblioteca = new Biblioteca(nome, CNPJ, endereco, telefone, itens, clientes, emprestimos, reservas);
-            this.bibliotecas.add(biblioteca);
+            Biblioteca biblioteca = new Biblioteca(nome, CNPJ, endereco, telefone, itens, clientes, emprestimos, reservas, senha);
+            bibliotecas.add(biblioteca);
             System.out.println("Biblioteca criada com sucesso");
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
         return null;
     }
-    public void RemoveBiblioteca(Biblioteca biblioteca) {
+    public static void RemoveBiblioteca(Biblioteca biblioteca) {
     	try {
-	        if (this.bibliotecas == null) {
+	        if (bibliotecas == null) {
 	            throw new IllegalArgumentException("Lista vazia!");
 	        }
         for(Biblioteca b : bibliotecas){
@@ -79,12 +59,12 @@ public class Admin {
             return;
  	    }
     }
-    public ArrayList<String> listarBibliotecas() {
+    public static ArrayList<String> listarBibliotecas() {
     	try {
-	        if (this.bibliotecas == null) {
+	        if (bibliotecas == null) {
 	            throw new IllegalArgumentException("Lista vazia!");
 	        }
-        for(Biblioteca b : this.bibliotecas){
+        for(Biblioteca b : bibliotecas){
             //System.out.println("**********");
         	ArrayList<String> listaExemplo = new ArrayList<>();
         	listaExemplo.add(b.toString());
@@ -97,10 +77,10 @@ public class Admin {
  	    }
 		return null;
     }
-    public void AtualizarEmprestimos(int dias){
-        for(Biblioteca biblioteca : this.bibliotecas){
+    public static void AtualizarEmprestimos(int dias){
+        for(Biblioteca biblioteca : bibliotecas){
             for(Emprestimo emprestimo : biblioteca.getEmprestimos()){
-                if(emprestimo.getDataLim().isBefore(getData())){
+                if(emprestimo.getDataLim().isBefore(data)){
                     //O item não está atrasado
                 }
                 else{
@@ -145,7 +125,7 @@ public class Admin {
     }
 
 
-    public int numeroAleatório(){
+    public static int numeroAleatório(){
         Random random = new Random();
         int numeroAleatorio = random.nextInt(11); // Gera um número aleatório de 0 a 10
         return numeroAleatorio;

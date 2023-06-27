@@ -7,12 +7,13 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
+import pacote.Biblioteca;
 
 public class PanelCadastrarItem extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelCadastrarItem () {
+	public PanelCadastrarItem (Biblioteca biblioteca) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -76,14 +77,14 @@ public class PanelCadastrarItem extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("Páginas")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("Páginas");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -92,14 +93,14 @@ public class PanelCadastrarItem extends JPanel {
 		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput1.setSelectionColor(MyColors.ACCENT);
 		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("Quantidade de páginas");
+		txtInput1.setText("Páginas");
 		txtInput1.setBackground(MyColors.BACKGROUND);
 		txtInput1.setBounds(10, 5, 100, 15);
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		txtInput1.getText();
+		//String qtdDePaginas = txtInput1.getText();
 
 		///////////////////////// Input 2 /////////////////////////
 
@@ -115,14 +116,14 @@ public class PanelCadastrarItem extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Input2")) {
+				if (txtInput2.getText().equals("Título")) {
 					txtInput2.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Input2");
+					txtInput2.setText("Título");
 					txtInput2.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -131,14 +132,14 @@ public class PanelCadastrarItem extends JPanel {
 		txtInput2.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput2.setSelectionColor(MyColors.ACCENT);
 		txtInput2.setForeground(MyColors.PLACEHOLDER);
-		txtInput2.setText("Titulo");
+		txtInput2.setText("Título");
 		txtInput2.setBackground(MyColors.BACKGROUND);
 		txtInput2.setBounds(10, 5, 100, 15);
 		pnlInput2.add(txtInput2);
 		txtInput2.setColumns(10);
 
-		txtInput2.getText();
-
+		// Pegar a informação de dentro do input:
+		//String titulo = txtInput2.getText();
 
 		///////////////////////// Input 3 /////////////////////////
 
@@ -154,30 +155,30 @@ public class PanelCadastrarItem extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput3.setForeground(MyColors.TEXT);
-				if (txtInput3.getText().equals("Input3")) {
+				if (txtInput3.getText().equals("Autores")) {
 					txtInput3.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput3.getText().equals("")) {
-					txtInput3.setText("Input3");
+					txtInput3.setText("Autores");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
 		});
-		txtInput1.setBorder(null);
-		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtInput1.setSelectionColor(MyColors.ACCENT);
-		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("Autores");
-		txtInput1.setBackground(MyColors.BACKGROUND);
-		txtInput1.setBounds(10, 5, 100, 15);
-		pnlInput1.add(txtInput1);
-		txtInput1.setColumns(10);
+		txtInput3.setBorder(null);
+		txtInput3.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput3.setSelectionColor(MyColors.ACCENT);
+		txtInput3.setForeground(MyColors.PLACEHOLDER);
+		txtInput3.setText("Autores");
+		txtInput3.setBackground(MyColors.BACKGROUND);
+		txtInput3.setBounds(10, 5, 100, 15);
+		pnlInput3.add(txtInput3);
+		txtInput3.setColumns(10);
 
 		// Pegar a informação de dentro do input:
-		 txtInput3.getText();
+		//String autores = txtInput3.getText();
 
 		///////////////////////// Input 4 /////////////////////////
 
@@ -193,14 +194,14 @@ public class PanelCadastrarItem extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput4.setForeground(MyColors.TEXT);
-				if (txtInput4.getText().equals("Input4")) {
+				if (txtInput4.getText().equals("Ano")) {
 					txtInput4.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput4.getText().equals("")) {
-					txtInput4.setText("Input4");
+					txtInput4.setText("Ano");
 					txtInput4.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -215,7 +216,7 @@ public class PanelCadastrarItem extends JPanel {
 		pnlInput4.add(txtInput4);
 		txtInput4.setColumns(10);
 
-		txtInput4.getText();
-		int value = Integer.parseInt(String.valueOf(txtInput4));
+		//String ano = txtInput4.getText();
+		//int value = Integer.parseInt(ano);
 	}
 }

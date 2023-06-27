@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.biblioteca.*;
 import gui.frames.style.*;
+import pacote.Biblioteca;
 
 public class FrameEmprestimos extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +22,7 @@ public class FrameEmprestimos extends JFrame {
 	private JPanel panelListarEmprestimosAtrasados;
 	private JPanel panelListarEmprestimosPorCliente;
 	
-	public FrameEmprestimos() {
+	public FrameEmprestimos(Biblioteca biblioteca) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -39,9 +40,9 @@ public class FrameEmprestimos extends JFrame {
 			}
 		});
 		
-		panelListarTodosOsEmprestimos = new PanelListarTodosOsEmprestimos();
-		panelListarEmprestimosAtrasados = new PanelListarEmprestimosAtrasados();
-		panelListarEmprestimosPorCliente = new PanelListarEmprestimosPorCliente();
+		panelListarTodosOsEmprestimos = new PanelListarTodosOsEmprestimos(biblioteca);
+		panelListarEmprestimosAtrasados = new PanelListarEmprestimosAtrasados(biblioteca);
+		panelListarEmprestimosPorCliente = new PanelListarEmprestimosPorCliente(biblioteca);
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
@@ -56,7 +57,7 @@ public class FrameEmprestimos extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				FrameEmprestimos.this.dispose();
 				
-				JFrame frameBiblioteca = new FrameBiblioteca();
+				JFrame frameBiblioteca = new FrameBiblioteca(biblioteca);
 				frameBiblioteca.setVisible(true);
 				frameBiblioteca.toFront();
 				frameBiblioteca.requestFocus();

@@ -6,12 +6,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
+import pacote.Biblioteca;
 
 public class PanelVisualizarDados extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelVisualizarDados() {
+	public PanelVisualizarDados(Biblioteca biblioteca) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -72,7 +73,7 @@ public class PanelVisualizarDados extends JPanel {
 		scrollPane.setViewportView(textArea);
 
 		// String recebida do backend
-		String string = "teste\nteste";
+		String string = biblioteca.toString();
 		textArea.setText(string);
 	}
 

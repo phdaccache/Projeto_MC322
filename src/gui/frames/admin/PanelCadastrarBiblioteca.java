@@ -2,17 +2,19 @@ package gui.frames.admin;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
+import pacote.Admin;
 
 public class PanelCadastrarBiblioteca extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelCadastrarBiblioteca() {
+	public PanelCadastrarBiblioteca(JFrame frameAdmin) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -75,14 +77,14 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("Nome")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("Nome");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -96,9 +98,6 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		txtInput1.setBounds(10, 5, 100, 15);
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		txtInput1.getText();
 
 		///////////////////////// Input 2 /////////////////////////
 
@@ -114,14 +113,14 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Input2")) {
+				if (txtInput2.getText().equals("CNPJ")) {
 					txtInput2.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Input2");
+					txtInput2.setText("CNPJ");
 					txtInput2.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -135,9 +134,6 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		txtInput2.setBounds(10, 5, 100, 15);
 		pnlInput2.add(txtInput2);
 		txtInput2.setColumns(10);
-
-		txtInput2.getText();
-
 
 		///////////////////////// Input 3 /////////////////////////
 
@@ -153,30 +149,27 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput3.setForeground(MyColors.TEXT);
-				if (txtInput3.getText().equals("Input3")) {
+				if (txtInput3.getText().equals("Endereço")) {
 					txtInput3.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput3.getText().equals("")) {
-					txtInput3.setText("Input3");
-					txtInput1.setForeground(MyColors.PLACEHOLDER);
+					txtInput3.setText("Endereço");
+					txtInput3.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
 		});
-		txtInput1.setBorder(null);
-		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtInput1.setSelectionColor(MyColors.ACCENT);
-		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("Endereço");
-		txtInput1.setBackground(MyColors.BACKGROUND);
-		txtInput1.setBounds(10, 5, 100, 15);
-		pnlInput1.add(txtInput1);
-		txtInput1.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		txtInput3.getText();
+		txtInput3.setBorder(null);
+		txtInput3.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput3.setSelectionColor(MyColors.ACCENT);
+		txtInput3.setForeground(MyColors.PLACEHOLDER);
+		txtInput3.setText("Endereço");
+		txtInput3.setBackground(MyColors.BACKGROUND);
+		txtInput3.setBounds(10, 5, 100, 15);
+		pnlInput3.add(txtInput3);
+		txtInput3.setColumns(10);
 
 		///////////////////////// Input 4 /////////////////////////
 
@@ -192,14 +185,14 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput4.setForeground(MyColors.TEXT);
-				if (txtInput4.getText().equals("Input4")) {
+				if (txtInput4.getText().equals("Telefone")) {
 					txtInput4.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput4.getText().equals("")) {
-					txtInput4.setText("Input4");
+					txtInput4.setText("Telefone");
 					txtInput4.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -214,7 +207,88 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		pnlInput4.add(txtInput4);
 		txtInput4.setColumns(10);
 
-		txtInput4.getText();
-		int value = Integer.parseInt(String.valueOf(txtInput4));
+		///////////////////////// Input 5 /////////////////////////
+
+		JPanel pnlInput5 = new JPanel();
+		pnlInput5.setBorder(new LineBorder(MyColors.TEXT));
+		pnlInput5.setBackground(MyColors.BACKGROUND);
+		pnlInput5.setBounds(115, 195, 115, 25);
+		add(pnlInput5);
+		pnlInput5.setLayout(null);
+
+		JTextField txtInput5 = new JTextField();
+		txtInput5.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtInput5.setForeground(MyColors.TEXT);
+				if (txtInput5.getText().equals("Senha")) {
+					txtInput5.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtInput5.getText().equals("")) {
+					txtInput5.setText("Senha");
+					txtInput5.setForeground(MyColors.PLACEHOLDER);
+				}
+			}
+		});
+		txtInput5.setBorder(null);
+		txtInput5.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput5.setSelectionColor(MyColors.ACCENT);
+		txtInput5.setForeground(MyColors.PLACEHOLDER);
+		txtInput5.setText("Senha");
+		txtInput5.setBackground(MyColors.BACKGROUND);
+		txtInput5.setBounds(10, 5, 100, 15);
+		pnlInput5.add(txtInput5);
+		txtInput5.setColumns(10);
+
+		JPanel pnlCadastroBtn = new JPanel();
+		pnlCadastroBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String nome = txtInput1.getText();
+				String cnpj = txtInput2.getText();
+				String endereco = txtInput3.getText();
+				String telefone = txtInput4.getText();
+				String senha = txtInput5.getText();
+				Admin.Biblioteca(nome, cnpj, endereco, telefone, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), senha);
+				int confirmation = JOptionPane.showConfirmDialog(null, "Biblioteca Cadastrada!", "Confirmation", JOptionPane.DEFAULT_OPTION);
+				if(confirmation == 0) {
+					frameAdmin.dispose();
+					JFrame frame = new FrameAdmin();
+					frame.setVisible(true);
+					frame.toFront();
+					frame.requestFocus();
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+		pnlCadastroBtn.setBackground(MyColors.PRIMARY);
+		pnlCadastroBtn.setBounds(48, 290, 250, 40);
+		add(pnlCadastroBtn);
+		pnlCadastroBtn.setLayout(null);
+		
+		JLabel lblCadastrar = new JLabel("CADASTRAR");
+		lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastrar.setForeground(MyColors.BACKGROUND);
+		lblCadastrar.setFont(new Font("Arial", Font.BOLD, 14));
+		lblCadastrar.setBounds(0, 5, 250, 30);
+		pnlCadastroBtn.add(lblCadastrar);
 	}
 }
