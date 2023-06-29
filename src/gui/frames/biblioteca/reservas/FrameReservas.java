@@ -8,7 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.biblioteca.*;
 import gui.frames.style.*;
-import pacote.Biblioteca;
+import sistema.Biblioteca;
 
 public class FrameReservas extends JFrame {
 	private static final long serialVersionUID = 1L;

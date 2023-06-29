@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
-import pacote.Biblioteca;
+import sistema.Biblioteca;
 
 public class PanelExcluirItem extends JPanel {
 	private static final long serialVersionUID = 1L;

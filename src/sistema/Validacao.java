@@ -1,4 +1,4 @@
-package pacote;
+package sistema;
 
 public class Validacao {
 	public static boolean validarNome(String nome) {

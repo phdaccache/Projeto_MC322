@@ -8,8 +8,8 @@ import javax.swing.border.*;
 
 import gui.frames.*;
 import gui.frames.style.*;
-import pacote.Admin;
-import pacote.Biblioteca;
+import sistema.Admin;
+import sistema.Biblioteca;
 
 public class FrameLoginBiblioteca extends JFrame {
 	private Image img_user = new ImageIcon(FrameLoginBiblioteca.class.getResource("../../res/user.png")).getImage().getScaledInstance(70, 85, Image.SCALE_SMOOTH);

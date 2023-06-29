@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 import gui.frames.*;
-import pacote.Arquivos;
+import sistema.Arquivos;
 
 public class Main {
 	private JFrame FrameMain;

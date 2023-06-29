@@ -12,7 +12,7 @@ import gui.frames.biblioteca.itens.FrameItens;
 import gui.frames.biblioteca.minhaConta.FrameMinhaConta;
 import gui.frames.biblioteca.reservas.FrameReservas;
 import gui.frames.style.*;
-import pacote.Biblioteca;
+import sistema.Biblioteca;
 
 public class FrameBiblioteca extends JFrame {
 	private static final long serialVersionUID = 1L;

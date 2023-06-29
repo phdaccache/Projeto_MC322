@@ -1,14 +1,14 @@
-package pacote;
+package sistema;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.StringJoiner;
 
 public class Item {
 	// Atributos
-	private final String[] statusPossiveis;
+	private final String[] possiveisStatus;
 	private final int code;
 	private final int qtdPaginas;
-	private String status; // disponivel, emprestado, reservado, etc.
+	private String status;
 	private String titulo;
 	private String autor;
 	private int ano;
@@ -17,7 +17,7 @@ public class Item {
 	//Construtor
 
 	public Item(int code, int qtdDePaginas, String titulo, String autor, int ano) {
-		this.statusPossiveis = new String[]{"Disponível", "Emprestado", "Reservado"};
+		this.possiveisStatus = new String[]{"Disponível", "Emprestado", "Reservado"};
 		Random random = new Random();
 		this.code = random.nextInt();
 		this.qtdPaginas = qtdDePaginas;
@@ -68,6 +68,11 @@ public class Item {
 
 
 	// Getters e setters
+	public String[] getPossiveisStatus() {
+		return this.possiveisStatus;
+	}
+
+
 	public int getCode() {
 		return this.code;
 	}

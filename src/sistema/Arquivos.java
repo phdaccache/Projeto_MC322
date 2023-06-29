@@ -1,4 +1,4 @@
-package pacote;
+package sistema;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +8,7 @@ public class Arquivos {
 
 	public Arquivos() {
 		try {
-			System.out.println("Gravação e Leitura de Arquivos\n"); 
+			System.out.println("Gravaï¿½ï¿½o e Leitura de Arquivos\n"); 
 			File livro = new File("README.md");
 			System.out.println("Arquivo gravado: " + livro.getName() + "\n");
 			System.out.println("Leitura do arquivo: " + livro.getName() + "\n");
@@ -19,7 +19,7 @@ public class Arquivos {
 		    }
 		    reader.close();
 		} catch (IOException e) {
-			      System.out.println("Arquivo não encontrado");
+			      System.out.println("Arquivo nï¿½o encontrado");
 			      e.printStackTrace();
 		}
 	}

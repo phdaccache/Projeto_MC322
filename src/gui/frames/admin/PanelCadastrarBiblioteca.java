@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
-import pacote.Admin;
+import sistema.Admin;
 
 public class PanelCadastrarBiblioteca extends JPanel {
 	private static final long serialVersionUID = 1L;
