@@ -3,77 +3,30 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.StringJoiner;
 
-
 public class Item {
+	// Atributos
+	private final String[] statusPossiveis;
 	private final int code;
-	private final int QtdDePaginas;
-	private String status; //disponivel, emprestado, reservado, etc.
+	private final int qtdPaginas;
+	private String status; // disponivel, emprestado, reservado, etc.
 	private String titulo;
-	private String autores;
-	private ArrayList<Reserva> listaReservas;
+	private String autor;
 	private int ano;
+	private ArrayList<Reserva> listaReservas;
 	
 	//Construtor
 
-	public Item(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano) {
+	public Item(int code, int qtdDePaginas, String titulo, String autor, int ano) {
+		this.statusPossiveis = new String[]{"Disponível", "Emprestado", "Reservado"};
 		Random random = new Random();
 		this.code = random.nextInt();
-		this.QtdDePaginas = qtdDePaginas;
-		this.status = status;
+		this.qtdPaginas = qtdDePaginas;
 		this.titulo = titulo;
-		this.autores = autores;
-		this.listaReservas = listaReservas;
+		this.autor = autor;
 		this.ano = ano;
+		this.listaReservas = new ArrayList<Reserva>();
 	}
 
-	//Getters e setters
-	public int getCode() {
-		return code;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	public String getAutores() {
-		return autores;
-	}
-	public void setAutores(String autores) {
-		this.autores = autores;
-	}
-	public ArrayList<Reserva> getListaReservas(){
-		return listaReservas;
-	}
-	public void setReserva(ArrayList<Reserva> listaReservas) {
-		this.listaReservas = listaReservas;
-	}
-	public int getAno() {
-		return ano;
-	}
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-	public int getQtdDePaginas() {
-		return QtdDePaginas;
-	}
-	public void addReserva(Reserva reserva) {
-		this.listaReservas.add(reserva);
-	}
-	public void removeReserva(Reserva reserva) {
-		this.listaReservas.remove(reserva);
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-
-	//Metodos
-
-	//toString
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
@@ -82,8 +35,8 @@ public class Item {
 		} else {
 			joiner.add("Título: Não especificado");
 		}
-		if (QtdDePaginas != -1) {
-		    joiner.add("Quantidade de Páginas: " + this.QtdDePaginas);
+		if (qtdPaginas != -1) {
+		    joiner.add("Quantidade de Páginas: " + this.qtdPaginas);
 		} else {
 			joiner.add("Quantidade de Páginas: Não especificado");
 		}
@@ -92,8 +45,8 @@ public class Item {
 		} else {
 			joiner.add("Status: Não especificado");
 		}
-		if (autores != null) {
-		    joiner.add("Autores: " + this.autores);
+		if (autor != null) {
+		    joiner.add("Autores: " + this.autor);
 		} else {
 			joiner.add("Autores: Não especificados");
 		}
@@ -103,5 +56,65 @@ public class Item {
 			joiner.add("Ano: Não especificado");
 		}
 		return joiner.toString();
+	}
+
+	public void addReserva(Reserva reserva) {
+		this.listaReservas.add(reserva);
+	}
+	
+	public void removeReserva(Reserva reserva) {
+		this.listaReservas.remove(reserva);
+	}
+
+
+	// Getters e setters
+	public int getCode() {
+		return this.code;
+	}
+
+
+	public int getQtdPaginas() {
+		return this.qtdPaginas;
+	}
+
+
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getAutor() {
+		return this.autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public int getAno() {
+		return this.ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+
+	public ArrayList<Reserva> getListaReservas() {
+		return this.listaReservas;
+	}
+
+	public void setListaReservas(ArrayList<Reserva> listaReservas) {
+		this.listaReservas = listaReservas;
 	}
 }

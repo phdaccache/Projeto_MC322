@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public class Admin {
-    public static ArrayList<Biblioteca> bibliotecas = new ArrayList<>();
+    // Atributos
+    public static ArrayList<Biblioteca> listaBibliotecas = new ArrayList<>();
     public static LocalDate data; // Data atual do sistema
 
-    //Metodos
     public static String Avancatempo(int dias) {
 	    try {
 	        if (dias <= 0) {
@@ -24,28 +24,30 @@ public class Admin {
 
         return null;
     }
-    public static String Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas, String senha) {
+
+    public static String CadastrarBiblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas, String senha) {
     	        try {
             if (nome == null || CNPJ == null || endereco == null || telefone == null || itens == null || clientes == null || emprestimos == null || reservas == null) {
                 throw new IllegalArgumentException("Argumento nulo!");
             }
             // Resto do código para criar uma biblioteca
-            Biblioteca biblioteca = new Biblioteca(nome, CNPJ, endereco, telefone, itens, clientes, emprestimos, reservas, senha);
-            bibliotecas.add(biblioteca);
+            Biblioteca biblioteca = new Biblioteca(nome, CNPJ, endereco, telefone, senha);
+            listaBibliotecas.add(biblioteca);
             System.out.println("Biblioteca criada com sucesso");
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
         return null;
     }
-    public static void RemoveBiblioteca(Biblioteca biblioteca) {
+
+    public static void ExcluirBiblioteca(Biblioteca biblioteca) {
     	try {
-	        if (bibliotecas == null) {
+	        if (listaBibliotecas == null) {
 	            throw new IllegalArgumentException("Lista vazia!");
 	        }
-        for(Biblioteca b : bibliotecas){
+        for(Biblioteca b : listaBibliotecas){
             if(b.getNome().equals(biblioteca.getNome())){
-                bibliotecas.remove(biblioteca);
+                listaBibliotecas.remove(biblioteca);
                 System.out.println("Biblioteca removida com sucesso");
                 return;
             }
@@ -59,13 +61,14 @@ public class Admin {
             return;
  	    }
     }
+
     public static ArrayList<String> listarBibliotecas() {
     	try {
-            if (bibliotecas == null || bibliotecas.isEmpty()) {
+            if (listaBibliotecas == null || listaBibliotecas.isEmpty()) {
                 throw new IllegalArgumentException("Lista vazia!");
             } else {
                 ArrayList<String> listaExemplo = new ArrayList<>();
-                for(Biblioteca b : bibliotecas){
+                for(Biblioteca b : listaBibliotecas){
                     listaExemplo.add(b.toString());
                 }
                 return listaExemplo;
@@ -76,9 +79,9 @@ public class Admin {
  	    }
     }
     public static void AtualizarEmprestimos(int dias){
-        for(Biblioteca biblioteca : bibliotecas){
+        for(Biblioteca biblioteca : listaBibliotecas){
             for(Emprestimo emprestimo : biblioteca.getEmprestimos()){
-                if(emprestimo.getDataLim().isBefore(data)){
+                if(emprestimo.getData_fim().isBefore(data)){
                     //O item não está atrasado
                 }
                 else{
@@ -86,7 +89,7 @@ public class Admin {
                     if(numeroAleatório() >= 5){ // Pelo número aleatório será definido se o cliente devolve ou não o item
                         emprestimo.getItem().setStatus("atrasado");
                         emprestimo.getCliente().setMulta(dias*10); // A cada dia, recebe 10 reais de multa
-                        emprestimo.setStatus(false);
+                        emprestimo.setStatus("Atrasado");
                     }//item foi entregue a tempo
                     else{
                         if(emprestimo.getItem().getListaReservas().size() > 1){

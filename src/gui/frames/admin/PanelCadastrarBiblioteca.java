@@ -252,7 +252,7 @@ public class PanelCadastrarBiblioteca extends JPanel {
 				String endereco = txtInput3.getText();
 				String telefone = txtInput4.getText();
 				String senha = txtInput5.getText();
-				Admin.Biblioteca(nome, cnpj, endereco, telefone, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), senha);
+				Admin.CadastrarBiblioteca(nome, cnpj, endereco, telefone, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), senha);
 				int confirmation = JOptionPane.showConfirmDialog(null, "Biblioteca Cadastrada!", "Confirmation", JOptionPane.DEFAULT_OPTION);
 				if(confirmation == 0) {
 					frameAdmin.dispose();

@@ -1,52 +1,23 @@
 package pacote;
 
-import java.util.ArrayList;
 import java.util.StringJoiner;
 
-public class Revista extends Item{
+public class Revista extends Item {
+	// Atributos
 	private int edicao;
 	private String instituicao;
-	private ArrayList<String> assuntos;
+	private String assuntos;
 	private final int ISSN;
 	
 	//Construtor
-
-
-	public Revista(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int edicao, String instituicao, ArrayList<String> assuntos, int ISSN) {
-		super(code, qtdDePaginas, status, titulo, autores, listaReservas, ano);
+	public Revista(int code, int qtdDePaginas, String titulo, String autor, int ano, int edicao, String instituicao, String assuntos, int ISSN) {
+		super(code, qtdDePaginas, titulo, autor, ano);
 		this.edicao = edicao;
 		this.instituicao = instituicao;
 		this.assuntos = assuntos;
 		this.ISSN = ISSN;
 	}
 
-	//Getters e setters
-	public int getEdicao() {
-		return edicao;
-	}
-	public void setEdicao(int edicao) {
-		this.edicao = edicao;
-	}
-	public String getInstituicao() {
-		return instituicao;
-	}
-	public void setInstituicao(String instituicao) {
-		this.instituicao = instituicao;
-	}
-	public ArrayList<String> getAssuntos() {
-		return assuntos;
-	}
-	public void setAssuntos(ArrayList<String> assuntos) {
-		this.assuntos = assuntos;
-	}
-	public int getISSN() {
-		return ISSN;
-	}
-
-	//Metodos
-
-
-	//toString
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
@@ -74,4 +45,32 @@ public class Revista extends Item{
 		return joiner.toString();
 	}
 
+	// Getters e Setters
+	public int getEdicao() {
+		return this.edicao;
+	}
+
+	public void setEdicao(int edicao) {
+		this.edicao = edicao;
+	}
+
+	public String getInstituicao() {
+		return this.instituicao;
+	}
+
+	public void setInstituicao(String instituicao) {
+		this.instituicao = instituicao;
+	}
+
+	public String getAssuntos() {
+		return this.assuntos;
+	}
+
+	public void setAssuntos(String assuntos) {
+		this.assuntos = assuntos;
+	}
+
+	public int getISSN() {
+		return this.ISSN;
+	}
 }
