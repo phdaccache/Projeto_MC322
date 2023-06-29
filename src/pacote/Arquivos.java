@@ -15,7 +15,7 @@ public class Arquivos {
 			FileWriter fileWriter = new FileWriter(file);
 			PrintWriter pw = new PrintWriter(fileWriter);
 			pw.println("NOME,CNPJ,ENDERECO,TELEFONE,itens.txt,clientes.txt,emprestimos.txt,reservas.txt,SENHA\n");
-			for(int i = 0; i < listaBibliotecas.size(); i++){
+			for (int i = 0; i < listaBibliotecas.size(); i++) {
 				pw.println(listaBibliotecas.get(0).getNome() + "," + listaBibliotecas.get(0).getCNPJ() + "," + listaBibliotecas.get(0).getEndereco() + "," + listaBibliotecas.get(0).getTelefone() + "," + "itens" + i + ".txt" + "," + "clientes" + i + ".txt," + "emprestimos" + i + ".txt" + "," + "reservas" + i + ".txt" + "," + listaBibliotecas.get(0).getSenha());
 			}
 			fileWriter.close();
@@ -25,8 +25,9 @@ public class Arquivos {
 			return "Arquivo nao encontrado";
 		}
 	}
+	}
 
-	public static String GravarDadosItens(ArrayList<Item> listaItens) {
+	/*public static String GravarDadosItens(ArrayList<Item> listaItens) {
 		try {
 			for(int i = 0; i < listaItens.size(); i++){
 				File file = new File("itens" + i + ".txt");
@@ -50,4 +51,4 @@ public class Arquivos {
 			return "Arquivo nao encontrado";
 		}
 	}
-}
+}*/
