@@ -23,6 +23,9 @@ public class FrameMain extends JFrame {
 	private JLabel lblTitle;
 	private JLabel lblIconBooks;
 
+	private int mouseX;
+	private int mouseY;
+	
 	public FrameMain() {		
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,6 +36,25 @@ public class FrameMain extends JFrame {
 		contentPane.setBorder(new LineBorder(MyColors.ACCENT, 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JPanel dragPanel = new JPanel();
+		dragPanel.setOpaque(false);
+		dragPanel.setBounds(2, 2, 566, 25);
+		contentPane.add(dragPanel);
+		
+		dragPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				FrameMain.this.setLocation(FrameMain.this.getX() + e.getX() - mouseX, FrameMain.this.getY()+e.getY()-mouseY);
+			}
+		});
+		dragPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseX= e.getX();
+				mouseY=e.getY();
+			}
+		});
 		
 		iconX = new JLabel("X");
 		iconX.setAlignmentX(Component.CENTER_ALIGNMENT);

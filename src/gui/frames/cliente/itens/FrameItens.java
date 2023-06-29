@@ -20,6 +20,9 @@ public class FrameItens extends JFrame {
 	private JPanel panelPesquisarItem;
 	private JPanel panelUltimasAquisicoes;
 	
+	private int mouseX;
+	private int mouseY;
+	
 	public FrameItens() {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,6 +43,25 @@ public class FrameItens extends JFrame {
 		
 		panelPesquisarItem = new PanelPesquisarItem();
 		panelUltimasAquisicoes = new PanelUltimasAquisicoes();
+		
+		JPanel dragPanel = new JPanel();
+		dragPanel.setOpaque(false);
+		dragPanel.setBounds(32, 2, 536, 25);
+		contentPane.add(dragPanel);
+		
+		dragPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				FrameItens.this.setLocation(FrameItens.this.getX() + e.getX() - mouseX, FrameItens.this.getY()+e.getY()-mouseY);
+			}
+		});
+		dragPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseX= e.getX();
+				mouseY=e.getY();
+			}
+		});
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);

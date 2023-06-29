@@ -21,6 +21,9 @@ public class FrameReservas extends JFrame {
 	private JPanel panelListarTodasAsReservas;
 	private JPanel panelListarReservasPorCliente;
 	
+	private int mouseX;
+	private int mouseY;
+	
 	public FrameReservas(Biblioteca biblioteca) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +44,25 @@ public class FrameReservas extends JFrame {
 		
 		panelListarTodasAsReservas = new PanelListarTodasAsReservas(biblioteca);
 		panelListarReservasPorCliente = new PanelListarReservasPorCliente(biblioteca);
+		
+		JPanel dragPanel = new JPanel();
+		dragPanel.setOpaque(false);
+		dragPanel.setBounds(32, 2, 536, 25);
+		contentPane.add(dragPanel);
+		
+		dragPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				FrameReservas.this.setLocation(FrameReservas.this.getX() + e.getX() - mouseX, FrameReservas.this.getY()+e.getY()-mouseY);
+			}
+		});
+		dragPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseX= e.getX();
+				mouseY=e.getY();
+			}
+		});
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);

@@ -21,6 +21,9 @@ public class FrameMinhaConta extends JFrame {
 	private JPanel panelEditarDados;
 	private JPanel panelExcluirConta;
 	
+	private int mouseX;
+	private int mouseY;
+	
 	public FrameMinhaConta() {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,6 +45,25 @@ public class FrameMinhaConta extends JFrame {
 		panelVisualizarDados = new PanelVisualizarDados();
 		panelEditarDados = new PanelEditarDados();
 		panelExcluirConta = new PanelExcluirConta();
+		
+		JPanel dragPanel = new JPanel();
+		dragPanel.setOpaque(false);
+		dragPanel.setBounds(32, 2, 536, 25);
+		contentPane.add(dragPanel);
+		
+		dragPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				FrameMinhaConta.this.setLocation(FrameMinhaConta.this.getX() + e.getX() - mouseX, FrameMinhaConta.this.getY()+e.getY()-mouseY);
+			}
+		});
+		dragPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseX= e.getX();
+				mouseY=e.getY();
+			}
+		});
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);

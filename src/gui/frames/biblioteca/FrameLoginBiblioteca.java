@@ -28,6 +28,9 @@ public class FrameLoginBiblioteca extends JFrame {
 	private JTextField lblLoginMessage;
 	private JPanel pnlTitle;
 	private JLabel lblTitle;
+	
+	private int mouseX;
+	private int mouseY;
 
 	public FrameLoginBiblioteca() {
 		setUndecorated(true);
@@ -44,6 +47,25 @@ public class FrameLoginBiblioteca extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				FrameLoginBiblioteca.this.requestFocus();
+			}
+		});
+		
+		JPanel dragPanel = new JPanel();
+		dragPanel.setOpaque(false);
+		dragPanel.setBounds(32, 2, 536, 25);
+		contentPane.add(dragPanel);
+		
+		dragPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				FrameLoginBiblioteca.this.setLocation(FrameLoginBiblioteca.this.getX() + e.getX() - mouseX, FrameLoginBiblioteca.this.getY()+e.getY()-mouseY);
+			}
+		});
+		dragPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseX= e.getX();
+				mouseY=e.getY();
 			}
 		});
 		

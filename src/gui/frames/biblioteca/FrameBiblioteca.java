@@ -32,6 +32,9 @@ public class FrameBiblioteca extends JFrame {
 	private JLabel lblEmprestimos;
 	private JPanel pnlReservas;
 	private JLabel lblReservas;
+	
+	private int mouseX;
+	private int mouseY;
 
 	public FrameBiblioteca(Biblioteca biblioteca) {
 		setUndecorated(true);
@@ -48,6 +51,25 @@ public class FrameBiblioteca extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				FrameBiblioteca.this.requestFocus();
+			}
+		});
+		
+		JPanel dragPanel = new JPanel();
+		dragPanel.setOpaque(false);
+		dragPanel.setBounds(32, 2, 536, 25);
+		contentPane.add(dragPanel);
+		
+		dragPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				FrameBiblioteca.this.setLocation(FrameBiblioteca.this.getX() + e.getX() - mouseX, FrameBiblioteca.this.getY()+e.getY()-mouseY);
+			}
+		});
+		dragPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseX= e.getX();
+				mouseY=e.getY();
 			}
 		});
 		

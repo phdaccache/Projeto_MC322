@@ -22,6 +22,9 @@ public class FrameAdmin extends JFrame {
 	private JPanel panelExcluirBiblioteca;
 	private JPanel panelAvancarTempo;
 	
+	private int mouseX;
+	private int mouseY;
+	
 	public FrameAdmin() {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +47,25 @@ public class FrameAdmin extends JFrame {
 		panelCadastrarBiblioteca = new PanelCadastrarBiblioteca(this);
 		panelExcluirBiblioteca = new PanelExcluirBiblioteca();
 		panelAvancarTempo = new PanelAvancarTempo();
+		
+		JPanel dragPanel = new JPanel();
+		dragPanel.setOpaque(false);
+		dragPanel.setBounds(32, 2, 536, 25);
+		contentPane.add(dragPanel);
+		
+		dragPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				FrameAdmin.this.setLocation(FrameAdmin.this.getX() + e.getX() - mouseX, FrameAdmin.this.getY()+e.getY()-mouseY);
+			}
+		});
+		dragPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseX= e.getX();
+				mouseY=e.getY();
+			}
+		});
 		
 		iconArrow = new JLabel("< ");
 		iconArrow.setOpaque(true);
