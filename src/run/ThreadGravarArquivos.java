@@ -1,6 +1,5 @@
 package run;
 import arquivos.ArquivoBiblioteca;
-import sistema.Admin;
 
 public class ThreadGravarArquivos extends Thread {
 
