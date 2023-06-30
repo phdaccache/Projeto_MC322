@@ -1,4 +1,5 @@
 package arquivos;
+import sistema.Admin;
 import sistema.Biblioteca;
 import sistema.Estudante;
 
@@ -39,7 +40,7 @@ public class ArquivoEstudante implements Arquivo<Estudante>{
                         String[] campos1 = linha1.split(demilitador);
                         linhas.add(campos1);
                         if(campos[1].equals(campos1[0])){
-                            //lista.add(new Estudante(campos[1], campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6]), campos[7], campos[8], campos1[1], campos1[2], campos1[3]));
+                            lista.add(new Estudante(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6]), campos[7], campos[8], campos1[1], campos1[2], Integer.parseInt(campos1[3])));
                         }
                         linha1 = br1.readLine();
                     }
