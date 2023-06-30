@@ -45,8 +45,8 @@ public class FrameAdmin extends JFrame {
 		
 		panelListarBibliotecas = new PanelListarBibliotecas();
 		panelCadastrarBiblioteca = new PanelCadastrarBiblioteca(this);
-		panelExcluirBiblioteca = new PanelExcluirBiblioteca();
-		panelAvancarTempo = new PanelAvancarTempo();
+		panelExcluirBiblioteca = new PanelExcluirBiblioteca(this);
+		panelAvancarTempo = new PanelAvancarTempo(this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);
@@ -117,7 +117,7 @@ public class FrameAdmin extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int confirmation = JOptionPane.showConfirmDialog(null, "Encerrar Programa?", "Confirmation", JOptionPane.WARNING_MESSAGE);
 				if(confirmation == 0) {
-					System.exit(0);
+					FrameAdmin.this.dispose();
 				}
 			}
 			@Override

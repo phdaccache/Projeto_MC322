@@ -255,11 +255,11 @@ public class FrameLoginBiblioteca extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (Admin.bibliotecas == null || Admin.bibliotecas.isEmpty()) {
+				if (Admin.listaBibliotecas == null || Admin.listaBibliotecas.isEmpty()) {
 					lblLoginMessage.setText("Não há bibliotecas cadastradas.");
 					return;
 				}
-				for (Biblioteca biblioteca : Admin.bibliotecas) {
+				for (Biblioteca biblioteca : Admin.listaBibliotecas) {
 					System.out.println(biblioteca.getCNPJ());
 					System.out.println(biblioteca.getSenha());
 					if (txtUsername.getText().equals(biblioteca.getCNPJ()) && txtPassword.getText().equals(biblioteca.getSenha())) {

@@ -2,7 +2,6 @@ package gui.frames.admin;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -247,19 +246,23 @@ public class PanelCadastrarBiblioteca extends JPanel {
 		pnlCadastroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String nome = txtInput1.getText();
-				String cnpj = txtInput2.getText();
-				String endereco = txtInput3.getText();
-				String telefone = txtInput4.getText();
-				String senha = txtInput5.getText();
-				Admin.Biblioteca(nome, cnpj, endereco, telefone, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), senha);
-				int confirmation = JOptionPane.showConfirmDialog(null, "Biblioteca Cadastrada!", "Confirmation", JOptionPane.DEFAULT_OPTION);
-				if(confirmation == 0) {
-					frameAdmin.dispose();
-					JFrame frame = new FrameAdmin();
-					frame.setVisible(true);
-					frame.toFront();
-					frame.requestFocus();
+				try {
+					String nome = txtInput1.getText();
+					String cnpj = txtInput2.getText();
+					String endereco = txtInput3.getText();
+					String telefone = txtInput4.getText();
+					String senha = txtInput5.getText();
+					String message = Admin.cadastrarBiblioteca(nome, cnpj, endereco, telefone, senha);
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameAdmin.dispose();
+						JFrame frame = new FrameAdmin();
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			@Override

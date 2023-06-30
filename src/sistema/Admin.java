@@ -5,88 +5,77 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public class Admin {
-    public static ArrayList<Biblioteca> bibliotecas = new ArrayList<>();
-    public static LocalDate data; // Data atual do sistema
+    // Atributos
+    public static ArrayList<Biblioteca> listaBibliotecas = new ArrayList<>();
+    public static LocalDate data = LocalDate.now(); // Data atual do sistema
 
-    //Metodos
-    public static String Avancatempo(int dias) {
-	    try {
-	        if (dias <= 0) {
-	            throw new IllegalArgumentException("O número de dias deve ser positivo");
-	        }
-	        // Resto do código para avançar o tempo
-            data = data.plusDays(dias);
-            AtualizarEmprestimos(dias);
-
-	    } catch (IllegalArgumentException e) {
-	        System.out.println("Erro: " + e.getMessage());
-	    }
-
-        return null;
-    }
-    public static String Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas, String senha) {
-    	        try {
-            if (nome == null || CNPJ == null || endereco == null || telefone == null || itens == null || clientes == null || emprestimos == null || reservas == null) {
-                throw new IllegalArgumentException("Argumento nulo!");
+    public static String listarBibliotecas() {
+        String string = "";
+        if (listaBibliotecas == null || listaBibliotecas.isEmpty()) {
+            string += "Nao há bibliotecas cadastradas.\n";
+        } else {
+            for(Biblioteca biblioteca : listaBibliotecas){
+                string += (biblioteca + "\n");
+                string += "---------------------------------------------\n";
             }
-            // Resto do código para criar uma biblioteca
-            Biblioteca biblioteca = new Biblioteca(nome, CNPJ, endereco, telefone, itens, clientes, emprestimos, reservas, senha);
-            bibliotecas.add(biblioteca);
-            System.out.println("Biblioteca criada com sucesso");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
         }
-        return null;
+
+        return string;
     }
-    public static void RemoveBiblioteca(Biblioteca biblioteca) {
-    	try {
-	        if (bibliotecas == null) {
-	            throw new IllegalArgumentException("Lista vazia!");
-	        }
-        for(Biblioteca b : bibliotecas){
-            if(b.getNome().equals(biblioteca.getNome())){
-                bibliotecas.remove(biblioteca);
-                System.out.println("Biblioteca removida com sucesso");
-                return;
+
+    public static String cadastrarBiblioteca(String nome, String cnpj, String endereco, String telefone, String senha) {
+        // Caso em que o CNPJ e invalido
+        if (!Validacao.validarDocumento(cnpj, "CNPJ")) {
+            throw new IllegalArgumentException("CNPJ invalido");
+        }
+
+        // Caso em que o CNPJ ja existe
+        for (Biblioteca biblioteca : listaBibliotecas) {
+            if (biblioteca.getCNPJ().equals(cnpj)) {
+                throw new IllegalArgumentException("Ja existe a biblioteca de CNPJ " + cnpj);
             }
-            else{
-                System.out.println("Biblioteca não encontrada");
-                return;
-            }
-        } 
-    	} catch (IllegalArgumentException e) {
-	        System.out.println("Erro: " + e.getMessage());
-            return;
- 	    }
+        }
+
+        // Cadastro da biblioteca
+        Biblioteca biblioteca = new Biblioteca(nome, cnpj, endereco, telefone, senha);
+        listaBibliotecas.add(biblioteca);
+        return "Biblioteca cadastrada!\n";
     }
-    public static ArrayList<String> listarBibliotecas() {
-    	try {
-            if (bibliotecas == null || bibliotecas.isEmpty()) {
-                throw new IllegalArgumentException("Lista vazia!");
-            } else {
-                ArrayList<String> listaExemplo = new ArrayList<>();
-                for(Biblioteca b : bibliotecas){
-                    listaExemplo.add(b.toString());
-                }
-                return listaExemplo;
+
+    public static String excluirBiblioteca(String cnpj) {
+        // Checar se a biblioteca existe antes de excluir
+        for (Biblioteca biblioteca : listaBibliotecas) {
+            if (biblioteca.getCNPJ().equals(cnpj)) {
+                listaBibliotecas.remove(biblioteca);
+                return String.format("Biblioteca '%s' de CNPJ %s removida!", biblioteca.getNome(), cnpj);
             }
-    	} catch (IllegalArgumentException e) {
-	        System.out.println("Erro: " + e.getMessage());
-            return null;
- 	    }
+        }
+
+        throw new IllegalArgumentException("Nao existe a biblioteca de CNPJ " + cnpj);
     }
-    public static void AtualizarEmprestimos(int dias){
-        for(Biblioteca biblioteca : bibliotecas){
+
+    public static String avancarTempo(int dias) {
+        if (dias <= 0) {
+            throw new IllegalArgumentException("O número de dias deve ser positivo");
+        }
+        // Avancar tempo
+        data = data.plusDays(dias);
+        atualizarEmprestimos(dias);
+        return String.format("Tempo avançado em %d dias!", dias);
+    }
+
+    public static void atualizarEmprestimos(int dias){
+        for(Biblioteca biblioteca : listaBibliotecas){
             for(Emprestimo emprestimo : biblioteca.getEmprestimos()){
-                if(emprestimo.getDataLim().isBefore(data)){
+                if(emprestimo.getData_fim().isBefore(data)){
                     //O item não está atrasado
                 }
                 else{
                     //O item está atrasado
-                    if(numeroAleatório() >= 5){ // Pelo número aleatório será definido se o cliente devolve ou não o item
+                    if(numeroAleatorio() >= 5){ // Pelo número aleatório será definido se o cliente devolve ou não o item
                         emprestimo.getItem().setStatus("atrasado");
                         emprestimo.getCliente().setMulta(dias*10); // A cada dia, recebe 10 reais de multa
-                        emprestimo.setStatus(false);
+                        emprestimo.setStatus("Atrasado");
                     }//item foi entregue a tempo
                     else{
                         if(emprestimo.getItem().getListaReservas().size() > 1){
@@ -123,12 +112,9 @@ public class Admin {
     }
 
 
-    public static int numeroAleatório(){
+    public static int numeroAleatorio(){
         Random random = new Random();
         int numeroAleatorio = random.nextInt(11); // Gera um número aleatório de 0 a 10
         return numeroAleatorio;
     }
-
-
-    
 }

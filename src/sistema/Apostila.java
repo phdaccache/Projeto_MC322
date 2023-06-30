@@ -1,37 +1,19 @@
 package sistema;
 
-import java.util.ArrayList;
 import java.util.StringJoiner;
 
-public class Apostila extends Item{
+public class Apostila extends Item {
+	// Atributos
 	private String disciplina;
 	private String instituicao;
 	
 	//Construtor
-
-	public Apostila(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String disciplina, String instituicao) {
-		super(code, qtdDePaginas, status, titulo, autores, listaReservas, ano);
+	public Apostila(int code, int qtdDePaginas, String titulo, String autor, int ano, String disciplina, String instituicao) {
+		super(code, qtdDePaginas, titulo, autor, ano);
 		this.disciplina = disciplina;
 		this.instituicao = instituicao;
 	}
 
-	//Getters e setters
-	public String getDisciplina() {
-		return disciplina;
-	}
-	public void setDisciplina(String disciplina) {
-		this.disciplina= disciplina;
-	}
-	public String getInstituicao() {
-		return instituicao;
-	}
-	public void setInstituicao(String instituicao) {
-		this.instituicao= instituicao;
-	}
-
-	//Metodos
-
-	//toString
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
@@ -50,4 +32,21 @@ public class Apostila extends Item{
 		return joiner.toString();
 	}
 
+
+	// Getters e Setters
+	public String getDisciplina() {
+		return this.disciplina;
+	}
+
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
+	}
+
+	public String getInstituicao() {
+		return this.instituicao;
+	}
+
+	public void setInstituicao(String instituicao) {
+		this.instituicao = instituicao;
+	}
 }

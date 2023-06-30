@@ -2,134 +2,36 @@ package sistema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 import java.util.StringJoiner;
-import java.util.jar.JarEntry;
 
 
 public class Biblioteca {
+    // Atributos
     private String nome;
     private String CNPJ;
     private String endereco;
     private String telefone;
+    private String senha;
     private ArrayList<Item> itens;
     private ArrayList<Cliente> clientes;
     private ArrayList<Emprestimo> emprestimos;
     private ArrayList<Reserva> reservas;
-    private String senha;
 
-    //Construtor
-    public Biblioteca(String nome, String CNPJ, String endereco, String telefone, ArrayList<Item> itens, ArrayList<Cliente> clientes, ArrayList<Emprestimo> emprestimos, ArrayList<Reserva> reservas, String senha) {
-    	Scanner entrada = new Scanner(System.in);
+    // Construtor
+    public Biblioteca(String nome, String CNPJ, String endereco, String telefone, String senha) {
     	this.nome = nome;
         this.CNPJ = CNPJ;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.itens = itens;
-        this.clientes = clientes;
-        this.emprestimos = emprestimos;
-        this.reservas = reservas;
         this.senha = senha;
-    	while(true) {
-	    	try {
-	            if (!Validacao.validarNome(this.nome)) {
-	                throw new IllegalArgumentException("Nome inválido");
-	            }
-	            break;
-	        } catch (IllegalArgumentException e) {
-	            System.out.println("Erro: " + e.getMessage());
-	            System.out.println("Insira outro nome: ");
-	            this.nome = entrada.next();
-	        }
-        }
-        while(true) {
-	        try {
-	            if (!Validacao.validarCnpj(this.CNPJ)) {
-                    System.out.println(CNPJ);
-	                throw new IllegalArgumentException("CNPJ inválido");
-	            }
-	            break;
-	        } catch (IllegalArgumentException e) {
-	            System.out.println("Erro: " + e.getMessage());
-	            System.out.println("Insira outro CNPJ: ");
-	            this.CNPJ = entrada.next();
-	        }
-        }
+        this.itens = new ArrayList<Item>();
+        this.clientes = new ArrayList<Cliente>();
+        this.emprestimos = new ArrayList<Emprestimo>();
+        this.reservas = new ArrayList<Reserva>();
     }
 
-    //Getters e setters
-
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-    	try {
-            if (!Validacao.validarNome(nome)) {
-                throw new IllegalArgumentException("Nome inválido");
-            }
-            this.nome = nome;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
-    }
-    public String getCNPJ() {
-        return CNPJ;
-    }
-    public void setCNPJ(String CNPJ) {
-    	try {
-            if (!Validacao.validarCnpj(this.CNPJ)) {
-                throw new IllegalArgumentException("CNPJ inválido");
-            }
-            this.CNPJ = CNPJ;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
-    }
-    public String getEndereco() {
-        return endereco;
-    }
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-    public String getTelefone() {
-        return telefone;
-    }
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-    public ArrayList<Item> getItens() {
-        return itens;
-    }
-    public void setItens(ArrayList<Item> itens) {
-        this.itens = itens;
-    }
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
-    }
-    public void setClientes(ArrayList<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-    public ArrayList<Emprestimo> getEmprestimos() {
-        return emprestimos;
-    }
-    public void setEmprestimos(ArrayList<Emprestimo> emprestimos) {
-        this.emprestimos = emprestimos;
-    }
-    public ArrayList<Reserva> getReservas() {
-        return reservas;
-    }
-    public void setReservas(ArrayList<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-    public String getSenha() {
-		return senha;
-	}
-
-    //Métodos
-    public String cadastrarEstudantes(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String matricula, String curso, int ano_grad) {
-        Estudantes estudante = new Estudantes(biblioteca, CPF, multa, nome, telefone, email, dataNasc, senha, assinatura, status, listaEmprestimos, listaReservasItens, matricula, curso, ano_grad);
+    public String cadastrarEstudante(String CPF, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String matricula, String curso, int ano_grad) {
+        Estudante estudante = new Estudante(this, CPF, nome, telefone, email, dataNasc, senha, assinatura, matricula, curso, ano_grad);
         try {
 	        if (this.clientes == null) {
 	            throw new IllegalArgumentException();
@@ -142,8 +44,9 @@ public class Biblioteca {
             return "Estudante cadastrado com sucesso";
  	    }
     }
+
     public String cadastrarProfessores(Biblioteca biblioteca, String CPF, int multa, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String status, ArrayList<Emprestimo> listaEmprestimos, ArrayList<Reserva> listaReservasItens, String instituicao, String educacao, String area, String aulas, int ano_ing) {
-        Professores professor = new Professores(biblioteca, CPF, multa, nome, telefone, email, dataNasc, senha, assinatura, status, listaEmprestimos, listaReservasItens, instituicao, educacao, area, aulas, ano_ing);
+        Professor professor = new Professor(biblioteca, CPF, nome, telefone, email, dataNasc, senha, assinatura, instituicao, educacao, area, aulas, ano_ing);
         try {
 	        if (this.clientes == null) {
 	            throw new IllegalArgumentException();
@@ -157,7 +60,7 @@ public class Biblioteca {
  	    }
     }
     public String cadastrarLivro(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String editora, int ISBN, String edicao, String tema){
-        Livro livro = new Livro(code, qtdDePaginas, status, titulo, autores, listaReservas, ano, editora, ISBN, edicao, tema);
+        Livro livro = new Livro(code, qtdDePaginas, titulo, autores, ano, editora, ISBN, edicao, tema);
         try {
 	        if (this.itens == null) {
 	            throw new IllegalArgumentException();
@@ -171,7 +74,7 @@ public class Biblioteca {
  	    }
     }
     public String cadastrarArtigo(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int DOI, String abstractArtigo, String keywords){
-        Artigo artigo = new Artigo(code, qtdDePaginas, status, titulo, autores, listaReservas, ano, DOI, abstractArtigo, keywords);
+        Artigo artigo = new Artigo(code, qtdDePaginas, titulo, autores, ano, DOI, abstractArtigo, keywords);
         try {
 	        if (this.itens == null) {
 	            throw new IllegalArgumentException();
@@ -184,8 +87,8 @@ public class Biblioteca {
             return "Artigo cadastrado com sucesso";
  	    }
     }
-    public String cadastrarRevista(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int edicao, String instituicao, ArrayList<String> assuntos, int ISSN) {
-        Revista revista = new Revista(code, qtdDePaginas, status, titulo, autores, listaReservas, ano, edicao, instituicao, assuntos, ISSN);
+    public String cadastrarRevista(int code, int qtdDePaginas, String status, String titulo, String autor, int ano, int edicao, String instituicao, String assuntos, int ISSN) {
+        Revista revista = new Revista(code, qtdDePaginas, titulo, autor, ano, edicao, instituicao, assuntos, ISSN);
         try {
 	        if (this.itens == null) {
 	            throw new IllegalArgumentException();
@@ -199,7 +102,7 @@ public class Biblioteca {
  	    }
     }
     public String cadastrarEmprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente) {
-        Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente, true);
+        Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente);
         try {
             if (this.emprestimos == null) {
                 throw new IllegalArgumentException();
@@ -234,7 +137,7 @@ public class Biblioteca {
                 throw new IllegalArgumentException("Lista vazia!");
             }
             for (Cliente cliente : this.clientes) {
-                if (cliente.getCpf().equals(CPF)) {
+                if (cliente.getCPF().equals(CPF)) {
                     this.clientes.remove(cliente);
                     removerEmprestimoPorCliente(CPF);
                     removerReservasPorCliente(CPF);
@@ -273,7 +176,7 @@ public class Biblioteca {
             for (Emprestimo emprestimo : this.emprestimos) {
                 int i = 0;
                 i++;
-                if (emprestimo.getCliente().getCpf().equals(CPF)) {
+                if (emprestimo.getCliente().getCPF().equals(CPF)) {
                     this.emprestimos.remove(emprestimo);
                     if(i == emprestimos.size()){
                         return "Emprestimos removidos com sucesso!";
@@ -313,7 +216,7 @@ public class Biblioteca {
             int i = 0;
             for (Reserva reserva : this.reservas) {
                 i++;
-                if (reserva.getCliente().getCpf().equals(CPF)) {
+                if (reserva.getCliente().getCPF().equals(CPF)) {
                     this.reservas.remove(reserva);
                     if(i == reservas.size()){
                         return "Reservas removidas com sucesso!";
@@ -462,15 +365,15 @@ public class Biblioteca {
             return null;
         }
     }
-    public ArrayList<Estudantes> getEstudantes(){
+    public ArrayList<Estudante> getEstudantes(){
         try {
             if (this.clientes == null) {
                 throw new IllegalArgumentException("Lista vazia!");
             }
-            ArrayList<Estudantes> estudantes = new ArrayList<>();
+            ArrayList<Estudante> estudantes = new ArrayList<>();
             for(Cliente cliente : clientes){
-                if(cliente instanceof Estudantes){
-                    estudantes.add((Estudantes) cliente);
+                if(cliente instanceof Estudante){
+                    estudantes.add((Estudante) cliente);
                 }
             }
             if (estudantes.isEmpty()){
@@ -483,15 +386,15 @@ public class Biblioteca {
             return null;
         }
     }
-    public ArrayList<Professores> getProfessores(){
+    public ArrayList<Professor> getProfessores(){
         try {
             if (this.clientes == null) {
                 throw new IllegalArgumentException("Lista vazia!");
             }
-            ArrayList<Professores> professores = new ArrayList<>();
+            ArrayList<Professor> professores = new ArrayList<>();
             for(Cliente cliente : clientes){
-                if(cliente instanceof Professores){
-                    professores.add((Professores) cliente);
+                if(cliente instanceof Professor){
+                    professores.add((Professor) cliente);
                 }
             }
             if (professores.isEmpty()){
@@ -568,11 +471,11 @@ public class Biblioteca {
             return "Não há clientes cadastrados!";
         }
         retorno = "***** Estudantes *****\n";
-        for(Estudantes estudantes : getEstudantes()){
+        for(Estudante estudantes : getEstudantes()){
             retorno = retorno + estudantes.toString();
         }
         retorno = retorno + "***** Professores *****\n";
-        for(Professores professores : getProfessores()){
+        for(Professor professores : getProfessores()){
             retorno = retorno + professores.toString();
         }
         return retorno;
@@ -583,7 +486,7 @@ public class Biblioteca {
             return "Não há estudantes cadastrados!";
         }
         retorno = "***** Estudantes *****\n";
-        for(Estudantes estudantes : getEstudantes()){
+        for(Estudante estudantes : getEstudantes()){
             retorno = retorno + estudantes.toString();
         }
         return retorno;
@@ -594,7 +497,7 @@ public class Biblioteca {
             return "Não há professores cadastrados!";
         }
         retorno = "***** Professores *****\n";
-        for(Professores professores : getProfessores()){
+        for(Professor professores : getProfessores()){
             retorno = retorno + professores.toString();
         }
         return retorno;
@@ -619,9 +522,9 @@ public class Biblioteca {
             }
             retorno = "***** Reservas *****\n";
             for(Cliente cliente : clientes){
-                if(cliente.getCpf().equals(CPF)){
+                if(cliente.getCPF().equals(CPF)){
                     for(Reserva reserva : reservas){
-                        if(reserva.getCliente().getCpf().equals(CPF)){
+                        if(reserva.getCliente().getCPF().equals(CPF)){
                             retorno = retorno + reserva.toString();
                         }
                     }
@@ -640,9 +543,9 @@ public class Biblioteca {
             }
             retorno = "***** Emprestimos *****\n";
             for(Cliente cliente : clientes){
-                if(cliente.getCpf().equals(CPF)){
+                if(cliente.getCPF().equals(CPF)){
                     for(Emprestimo emprestimo : emprestimos){
-                        if(emprestimo.getCliente().getCpf().equals(CPF)){
+                        if(emprestimo.getCliente().getCPF().equals(CPF)){
                             retorno = retorno + emprestimo.toString();
                         }
                     }
@@ -708,14 +611,14 @@ public class Biblioteca {
     }
     public String excluirAssinatura(String CPF){
         for(Cliente cliente : clientes){
-            if(cliente.getCpf().equals(CPF)){
-                if(cliente instanceof Estudantes){
-                    Estudantes estudante = (Estudantes) cliente;
+            if(cliente.getCPF().equals(CPF)){
+                if(cliente instanceof Estudante){
+                    Estudante estudante = (Estudante) cliente;
                     estudante.setAssinatura("Básico");
                     return "Assinatura excluida com sucesso!";
                 }
-                if(cliente instanceof Professores){
-                    Professores professor = (Professores) cliente;
+                if(cliente instanceof Professor){
+                    Professor professor = (Professor) cliente;
                     professor.setAssinatura("Básico");
                     return "Assinatura excluida com sucesso!";
                 }
@@ -725,14 +628,14 @@ public class Biblioteca {
     }
     public String gerarAssinatura(String CPF, String assinatura){
         for(Cliente cliente : clientes){
-            if(cliente.getCpf().equals(CPF)){
-                if(cliente instanceof Estudantes){
-                    Estudantes estudante = (Estudantes) cliente;
+            if(cliente.getCPF().equals(CPF)){
+                if(cliente instanceof Estudante){
+                    Estudante estudante = (Estudante) cliente;
                     estudante.setAssinatura(assinatura);
                     return "Assinatura gerada com sucesso!";
                 }
-                if(cliente instanceof Professores){
-                    Professores professor = (Professores) cliente;
+                if(cliente instanceof Professor){
+                    Professor professor = (Professor) cliente;
                     professor.setAssinatura(assinatura);
                     return "Assinatura gerada com sucesso!";
                 }
@@ -757,5 +660,79 @@ public class Biblioteca {
         joiner.add("Lista de reservar: " + this.reservas);
 
         return joiner.toString();
+    }
+
+
+    // Getters e Setters
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCNPJ() {
+        return this.CNPJ;
+    }
+
+    public void setCNPJ(String CNPJ) {
+        this.CNPJ = CNPJ;
+    }
+
+    public String getEndereco() {
+        return this.endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getTelefone() {
+        return this.telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getSenha() {
+        return this.senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public ArrayList<Item> getItens() {
+        return this.itens;
+    }
+
+    public void setItens(ArrayList<Item> itens) {
+        this.itens = itens;
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return this.clientes;
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public ArrayList<Emprestimo> getEmprestimos() {
+        return this.emprestimos;
+    }
+
+    public void setEmprestimos(ArrayList<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
+    }
+
+    public ArrayList<Reserva> getReservas() {
+        return this.reservas;
+    }
+
+    public void setReservas(ArrayList<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
