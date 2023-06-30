@@ -1,6 +1,7 @@
 package run;
 import javax.swing.*;
 
+import arquivos.ArquivoBiblioteca;
 import gui.frames.*;
 
 public class Main {

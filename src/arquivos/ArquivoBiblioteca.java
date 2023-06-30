@@ -2,6 +2,7 @@ package arquivos;
 
 import sistema.Biblioteca;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class ArquivoBiblioteca implements I_arquivos<Biblioteca> {
 
     @Override
     public String LerDados(ArrayList<Biblioteca> lista) {
-        return null;
+        File file = new File("Bibliotecas_arquivos\\Bibliotecas.csv"); //Mudar para ser acessada por qualquer usuário
+        if(file.exists()){
+            return "Bibliotecas carregadas com sucesso!";
+        }
+        return "Arquivo não encontrado!";
     }
 }
