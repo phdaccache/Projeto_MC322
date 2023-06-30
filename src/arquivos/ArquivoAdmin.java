@@ -4,7 +4,7 @@ import sistema.Admin;
 
 import java.util.ArrayList;
 
-public class ArquivoAdmin implements I_arquivos<Admin>{
+public class ArquivoAdmin implements Arquivo<Admin>{
     @Override
     public String GravarDados(ArrayList<Admin> lista) {
         return null;

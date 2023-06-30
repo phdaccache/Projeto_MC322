@@ -4,7 +4,7 @@ import sistema.Revista;
 
 import java.util.ArrayList;
 
-public class ArquivoRevista implements I_arquivos<Revista>{
+public class ArquivoRevista implements Arquivo<Revista>{
     @Override
     public String GravarDados(ArrayList<Revista> lista) {
         return null;

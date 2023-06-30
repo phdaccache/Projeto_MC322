@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import sistema.Biblioteca;
 
-public class Arquivos {
+public class arquivoTeste {
 
 	public static String GravarDadosBiblioteca(ArrayList<Biblioteca> listaBibliotecas) {
 		try {

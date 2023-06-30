@@ -4,7 +4,7 @@ import sistema.Emprestimo;
 
 import java.util.ArrayList;
 
-public class ArquivoEmprestimo implements I_arquivos<Emprestimo>{
+public class ArquivoEmprestimo implements Arquivo<Emprestimo>{
     @Override
     public String GravarDados(ArrayList<Emprestimo> lista) {
         return null;
