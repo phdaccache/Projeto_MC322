@@ -117,4 +117,14 @@ public class Admin {
         int numeroAleatorio = random.nextInt(11); // Gera um número aleatório de 0 a 10
         return numeroAleatorio;
     }
+
+    public static Biblioteca getBiblioteca(String cnpj) {
+        for (Biblioteca biblioteca : listaBibliotecas) {
+            if (biblioteca.getCNPJ().equals(cnpj)) {
+                return biblioteca;
+            }
+        }
+
+        return null;
+    }
 }
