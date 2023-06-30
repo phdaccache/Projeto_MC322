@@ -7,12 +7,13 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
+import sistema.Admin;
 
 public class PanelExcluirBiblioteca extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelExcluirBiblioteca() {
+	public PanelExcluirBiblioteca(JFrame frameAdmin) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -76,14 +77,14 @@ public class PanelExcluirBiblioteca extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Input1")) {
+				if (txtInput1.getText().equals("CNPJ")) {
 					txtInput1.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Input1");
+					txtInput1.setText("CNPJ");
 					txtInput1.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -98,7 +99,55 @@ public class PanelExcluirBiblioteca extends JPanel {
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String cnpj = txtInput1.getText();
+		JPanel pnlExcluirBtn = new JPanel();
+		pnlExcluirBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String cnpj = txtInput1.getText();
+					if(cnpj.equals("CNPJ")) {
+						throw new IllegalArgumentException("Preencha todos os campos");
+					}
+					String message = Admin.excluirBiblioteca(cnpj);
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameAdmin.dispose();
+						JFrame frame = new FrameAdmin();
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+		pnlExcluirBtn.setBackground(MyColors.PRIMARY);
+		pnlExcluirBtn.setBounds(48, 290, 250, 40);
+		add(pnlExcluirBtn);
+		pnlExcluirBtn.setLayout(null);
+		
+		JLabel lblExcluir = new JLabel("Excluir");
+		lblExcluir.setHorizontalAlignment(SwingConstants.CENTER);
+		lblExcluir.setForeground(MyColors.BACKGROUND);
+		lblExcluir.setFont(new Font("Arial", Font.BOLD, 14));
+		lblExcluir.setBounds(0, 5, 250, 30);
+		pnlExcluirBtn.add(lblExcluir);
 	}
 }

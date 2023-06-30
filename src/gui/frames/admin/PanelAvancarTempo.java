@@ -7,12 +7,13 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
+import sistema.Admin;
 
 public class PanelAvancarTempo extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelAvancarTempo() {
+	public PanelAvancarTempo(JFrame frameAdmin) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -98,7 +99,59 @@ public class PanelAvancarTempo extends JPanel {
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String dias = txtInput1.getText();
+		JPanel pnlAvancarBtn = new JPanel();
+		pnlAvancarBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String diasString = txtInput1.getText();
+					if(diasString.equals("Dias")) {
+						throw new IllegalArgumentException("Preencha todos os campos");
+					}
+					int dias = Integer.parseInt(diasString);
+					String message = Admin.avancarTempo(dias);
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameAdmin.dispose();
+						JFrame frame = new FrameAdmin();
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (NumberFormatException error) {
+					String message = "O campo 'Dias' deve ser preenchido com um número.";
+					JOptionPane.showMessageDialog(null, message, "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlAvancarBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlAvancarBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlAvancarBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlAvancarBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+		pnlAvancarBtn.setBackground(MyColors.PRIMARY);
+		pnlAvancarBtn.setBounds(48, 290, 250, 40);
+		add(pnlAvancarBtn);
+		pnlAvancarBtn.setLayout(null);
+		
+		JLabel lblAvancar = new JLabel("Avançar");
+		lblAvancar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAvancar.setForeground(MyColors.BACKGROUND);
+		lblAvancar.setFont(new Font("Arial", Font.BOLD, 14));
+		lblAvancar.setBounds(0, 5, 250, 30);
+		pnlAvancarBtn.add(lblAvancar);
 	}
 }

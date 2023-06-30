@@ -70,7 +70,7 @@ public class FrameMain extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int confirmation = JOptionPane.showConfirmDialog(null, "Encerrar Programa?", "Confirmation", JOptionPane.WARNING_MESSAGE);
 				if(confirmation == 0) {
-					System.exit(0);
+					FrameMain.this.dispose();
 				}
 			}
 			@Override

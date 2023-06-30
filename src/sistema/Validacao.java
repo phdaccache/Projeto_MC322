@@ -1,161 +1,177 @@
 package sistema;
 
 public class Validacao {
-	public static boolean validarNome(String nome) {
-		if(nome == null) {
-			System.out.println("Nome vazio");
-			return false;
-		}
-		if(nome.matches("[a-zA-Z ]*")) {
-			//System.out.println("Nome válido\n");
-			return true;
-		}
-		System.out.println("Nome só pode conter letras");
-		return false;
-	}
-	public static boolean validarCnpj(String cnpj) {
-		if(cnpj == null) {
-			System.out.println("CNPJ vazio");
-			return false;
-		}
-		cnpj = cnpj.replaceAll("[^0-9]+", "");//remover caract nao num
-		int n = cnpj.length();
-		if(n != 14) { //verifica se tem 14 digitos
-			System.out.println("CNPJ precisa ter 14 dígitos");
-			return false;
-		}
-		//verifica digitos iguais
-		int i = 0;
-		while (i < n) {
-			if(cnpj.charAt(i) != cnpj.charAt(n-1))
-				break;
-			i++;
-		}
-		if (i == n) {
-			System.out.println("CNPJ não pode ter todos os dígitos iguais");
-			return false;
-		}
-		//calcular digito verificador
-		int sm = 0;
-		int p1 = 5;
-		int p2 = 13;
-		int r, num;
-		int digito1, digito2;
-		//calculo do digito1
-		for (var j = 0; j < 12; j++, p1--, p2--) {
-			if(p1 >=2) {
-				num = (int)(cnpj.charAt(j)-48);
-				sm = sm +(num*p1);	
-			}
-			else {
-				num = (int)(cnpj.charAt(j)-48);
-				sm = sm +(num*p2);
-			}
-		}
-		r = sm % 11;
-		if(r < 2)
-			digito1 = '0';
-		else digito1 = (char)(48+(11-r));
-		//calculo do digito2
-		sm = 0;
-		int p3 = 6;
-		int p4 = 14;
-		for (var j = 0; j < 13; j++, p3--, p4--) {
-			if(p3 >=2) {
-				num = (int)(cnpj.charAt(j)-48);
-				sm = sm +(num*p3);	
-			}
-			else {
-				num = (int)(cnpj.charAt(j)-48);
-				sm = sm +(num*p4);
-			}
-		}
-		r = sm % 11;
-		if(r < 2)
-			digito2 = '0';
-		else digito2 = (char)(48+(11-r));
-		//verificar os digitos calculados com os dados
-		if((digito1 != cnpj.charAt(12)||(digito2 != cnpj.charAt(13)))) {
-			System.out.println("CNPJ não possui os últimos dígitos corretos");
-			return false;
-		}
-		//System.out.println("CNPJ válido\n");
-		return true;
-	}
-	public static boolean validarCpf(String cpf) {
-		if(cpf == null) {
-			System.out.println("CPF vazio");
-			return false;
-		}
-		cpf = cpf.replaceAll("[^0-9]+", "");//remover caract nao num
-		int n = cpf.length();
-		if(n != 11) { //verifica se tem 11 digitos
-			System.out.println("CPF precisa ter 11 dígitos");
-			return false;
-		}
-		//verifica digitos iguais
-		int i = 0;
-		while (i < n) {
-			if(cpf.charAt(i) != cpf.charAt(n-1))
-				break;
-			i++;
-		}
-		if (i == n) {
-			System.out.println("CPF não pode ter todos os dígitos iguais");
-			return false;
-		}
-		//calcular digito verificador
-		int sm = 0;
-		int peso = 10;
-		int r, num;
-		int digito1, digito2;
-		//calculo do digito1
-		for (int j = 0; j < 9; j++) {
-			num = (int)(cpf.charAt(j)-48);
-			sm = sm +(num*peso);
-			peso = peso - 1;
-		}
-		r = 11 - (sm % 11);
-		if((r == 10)||(r == 11))
-			digito1 = '0';
-		else digito1 = (char)(r+48);
-		//calculo do digito2
-		sm = 0;
-		peso = 11;
-		for (int w = 0; w < 10; w++) {
-			num = (int)(cpf.charAt(w)-48);
-			sm = sm +(num*peso);
-			peso = peso - 1;
-		}
-		r = 11 - (sm % 11);
-		if((r == 10)||(r == 11))
-			digito2 = '0';
-		else digito2 = (char)(r+48);
-		//verificar os digitos calculados com os dados
-		if((digito1 != cpf.charAt(9)||(digito2 != cpf.charAt(10)))) {
-			System.out.println("CPF não possui os últimos dígitos corretos");
-			return false;
-		}
-		//System.out.println("CPF válido\n");
-		return true;
-	}
-	//validar entradas
-		/*
-		try {
-			System.out.println("Entrada: ");
-			int entrada = scanner.nextInt();
-		} catch(InputMismatchException inputMismatchException){
-			System.err.println("Exceção: "+ inputMismatchException);
-			scanner.nextLine();
-			System.out.println("É necessário entrar com um número inteiro. Por favor, tente novamente.");
-			
-		}
-		*/
-		
-		//validar arquivo
-		/*try {
-			
-		} catch(java.io.FileNotFoundException e){
-			System.out.println("Não foi possível abrir o arquivo.");	
-		}*/
+	// Validar Documento
+    public static boolean validarDocumento(String documento, String tipo) {
+        if (tipo.equals("CNPJ")) {
+            return validarCNPJ(documento);
+        }
+        else if (tipo.equals("CPF")) {
+            return validarCPF(documento);
+        }
+        return false;
+    }
+
+    // Validar nome
+    public static boolean validarNome(String nome) {
+        String nomeFormatado = nome.replaceAll("[^A-Za-z ]", "");
+        if (nome.equals(nomeFormatado)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    // Validar CPF
+    private static boolean validarCPF(String cpf) {
+        String cpfNum = cpf.replaceAll("[^0-9]", ""); // Retira todos os caracteres não numericos
+        int tam = cpfNum.length();
+
+        if (tam != 11) {
+            return false;
+        }
+        if (digitosIguais(cpfNum)) {
+            return false;
+        }
+        if (!digitosVerificadoresCPF(cpfNum)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Validar CNPJ
+    private static boolean validarCNPJ(String cnpj) {
+        String cnpjNum = cnpj.replaceAll("[^0-9]", ""); // Retira todos os caracteres não numericos
+        int tam = cnpjNum.length();
+
+        if (tam != 14) {
+            return false;
+        }
+        if (digitosIguais(cnpjNum)) {
+            return false;
+        }
+        if (!digitosVerificadoresCNPJ(cnpjNum)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Verificar se os digitos sao iguais
+    private static boolean digitosIguais(String id){
+        char firstChar = id.charAt(0);
+        for (int i = 1; i < id.length(); i++) {
+            if (id.charAt(i) != firstChar) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Verificar digitos verificadores do CPF
+    private static boolean digitosVerificadoresCPF(String cpf){
+        int num, r1, r2, d1, d2;
+        int sum1 = 0, sum2 = 0;
+
+        // Primeiro digito verificador
+        // Soma com pesos
+        for (int i = 0, j = 10; i < cpf.length() - 2; i++, j--) {
+            num = (int)(cpf.charAt(i) - 48);
+            sum1 += num * j;
+        }
+
+        // Calculo do digito verificador
+        r1 = sum1 % 11;
+        if (r1 == 0 || r1 == 1) {
+            d1 = 0;
+        } else {
+            d1 = 11 - r1;
+        }
+
+        // Comparacao do digito calculado com o digito passado
+        if (d1 != (int)(cpf.charAt(9) - 48)) { // Subtraio 48 ('0' na tabelas ASCII) para transformar em inteiro
+            return false;
+        }
+
+        // Segundo digito verificador
+        // Soma com pesos
+        for (int i = 1, j = 10; i < cpf.length() - 1; i++, j--) {
+            num = (int)(cpf.charAt(i) - 48); // Subtraio 48 ('0' na tabelas ASCII) para transformar em inteiro
+            sum2 += num * j;
+        }
+
+        // Cálculo do digito verificador
+        r2 = sum2 % 11;
+        if (r2 == 0 || r2 == 1) {
+            d2 = 0;
+        } else {
+            d2 = 11 - r2;
+        }
+
+        // Comparacao do digito calculado com o digito passado
+        if (d2 != (int)(cpf.charAt(10) - 48)) { // Subtraio 48 ('0' na tabelas ASCII) para transformar em inteiro
+            return false;
+        }
+
+        return true;
+    }
+
+    // Verificar digitos verificadores do CNPJ
+    private static boolean digitosVerificadoresCNPJ(String cnpj){
+        int num, r1, r2, d1, d2;
+        int sum1 = 0, sum2 = 0;
+
+        // Primeiro digito verificador
+        // Soma com pesos
+        for (int i = 0, j = 5; i < cnpj.length() - 2; i++, j--) {
+            num = (int)(cnpj.charAt(i) - 48);
+            sum1 += num * j;
+
+            if (j == 2) {
+                j = 10;
+            }
+        }
+
+        // Cálculo do digito verificador
+        r1 = sum1 % 11;
+        if (r1 == 0 || r1 == 1) {
+            d1 = 0;
+        } else {
+            d1 = 11 - r1;
+        }
+
+        // Comparacao do digito calculado com o digito passado
+        if (d1 != (int)(cnpj.charAt(12) - 48)) { // Subtraio 48 ('0' na tabelas ASCII) para transformar em inteiro
+            return false;
+        }
+
+        // Segundo digito verificador
+        // Soma com pesos
+        for (int i = 0, j = 6; i < cnpj.length() - 1; i++, j--) {
+            num = (int)(cnpj.charAt(i) - 48); // Subtraio 48 ('0' na tabelas ASCII) para transformar em inteiro
+            sum2 += num * j;
+
+            if (j == 2) {
+                j = 10;
+            }
+        }
+
+        // Cálculo do digito verificador
+        r2 = sum2 % 11;
+        if (r2 == 0 || r2 == 1) {
+            d2 = 0;
+        } else {
+            d2 = 11 - r2;
+        }
+
+        // Comparacao do digito calculado com o digito passado
+        if (d2 != (int)(cnpj.charAt(13) - 48)) { // Subtraio 48 ('0' na tabelas ASCII) para transformar em inteiro
+            return false;
+        }
+
+        return true;
+    }
 }
