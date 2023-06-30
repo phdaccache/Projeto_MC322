@@ -283,7 +283,7 @@ public class PanelCadastrarBiblioteca extends JPanel {
 			}
 		});
 		pnlCadastroBtn.setBackground(MyColors.PRIMARY);
-		pnlCadastroBtn.setBounds(48, 290, 250, 40);
+		pnlCadastroBtn.setBounds(53, 290, 240, 40);
 		add(pnlCadastroBtn);
 		pnlCadastroBtn.setLayout(null);
 		
