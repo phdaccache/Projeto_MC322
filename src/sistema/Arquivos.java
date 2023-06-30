@@ -1,4 +1,4 @@
-package pacote;
+package sistema;
 
 import java.io.File;
 import java.io.FileWriter;

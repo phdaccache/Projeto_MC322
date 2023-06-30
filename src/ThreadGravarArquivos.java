@@ -1,4 +1,4 @@
-import pacote.Admin;
+import sistema.Admin;
 
 public class ThreadGravarArquivos extends Thread {
     public void run() {

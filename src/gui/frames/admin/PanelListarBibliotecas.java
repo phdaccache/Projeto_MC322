@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
-import pacote.Admin;
+import sistema.Admin;
 
 public class PanelListarBibliotecas extends JPanel {
 	private static final long serialVersionUID = 1L;

@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
-import pacote.Biblioteca;
+import sistema.Biblioteca;
 
 public class PanelListarApostilas extends JPanel {
 	private static final long serialVersionUID = 1L;
