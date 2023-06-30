@@ -143,7 +143,7 @@ public class PanelAvancarTempo extends JPanel {
 			}
 		});
 		pnlAvancarBtn.setBackground(MyColors.PRIMARY);
-		pnlAvancarBtn.setBounds(48, 290, 250, 40);
+		pnlAvancarBtn.setBounds(53, 290, 240, 40);
 		add(pnlAvancarBtn);
 		pnlAvancarBtn.setLayout(null);
 		

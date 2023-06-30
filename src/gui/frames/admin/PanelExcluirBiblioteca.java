@@ -139,7 +139,7 @@ public class PanelExcluirBiblioteca extends JPanel {
 			}
 		});
 		pnlExcluirBtn.setBackground(MyColors.PRIMARY);
-		pnlExcluirBtn.setBounds(48, 290, 250, 40);
+		pnlExcluirBtn.setBounds(53, 290, 240, 40);
 		add(pnlExcluirBtn);
 		pnlExcluirBtn.setLayout(null);
 		
