@@ -13,7 +13,7 @@ public class PanelEditarDados extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelEditarDados(Biblioteca biblioteca) {
+	public PanelEditarDados(Biblioteca biblioteca, JFrame frameMinhaConta) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -99,9 +99,6 @@ public class PanelEditarDados extends JPanel {
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String nome = txtInput1.getText();
-
 		///////////////////////// Input 2 /////////////////////////
 
 		JPanel pnlInput2 = new JPanel();
@@ -116,14 +113,14 @@ public class PanelEditarDados extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Email")) {
+				if (txtInput2.getText().equals("CNPJ")) {
 					txtInput2.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Email");
+					txtInput2.setText("CNPJ");
 					txtInput2.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -132,14 +129,11 @@ public class PanelEditarDados extends JPanel {
 		txtInput2.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput2.setSelectionColor(MyColors.ACCENT);
 		txtInput2.setForeground(MyColors.PLACEHOLDER);
-		txtInput2.setText("Email");
+		txtInput2.setText("CNPJ");
 		txtInput2.setBackground(MyColors.BACKGROUND);
 		txtInput2.setBounds(10, 5, 100, 15);
 		pnlInput2.add(txtInput2);
 		txtInput2.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		//String email = txtInput2.getText();
 
 		///////////////////////// Input 3 /////////////////////////
 
@@ -155,14 +149,14 @@ public class PanelEditarDados extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput3.setForeground(MyColors.TEXT);
-				if (txtInput3.getText().equals("Telefone")) {
+				if (txtInput3.getText().equals("Endereço")) {
 					txtInput3.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput3.getText().equals("")) {
-					txtInput3.setText("Telefone");
+					txtInput3.setText("Endereço");
 					txtInput3.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -171,14 +165,11 @@ public class PanelEditarDados extends JPanel {
 		txtInput3.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput3.setSelectionColor(MyColors.ACCENT);
 		txtInput3.setForeground(MyColors.PLACEHOLDER);
-		txtInput3.setText("Telefone");
+		txtInput3.setText("Endereço");
 		txtInput3.setBackground(MyColors.BACKGROUND);
 		txtInput3.setBounds(10, 5, 100, 15);
 		pnlInput3.add(txtInput3);
 		txtInput3.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		//String telefone = txtInput3.getText();
 
 		///////////////////////// Input 4 /////////////////////////
 
@@ -194,14 +185,14 @@ public class PanelEditarDados extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput4.setForeground(MyColors.TEXT);
-				if (txtInput4.getText().equals("Nascimento")) {
+				if (txtInput4.getText().equals("Telefone")) {
 					txtInput4.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput4.getText().equals("")) {
-					txtInput4.setText("Nascimento");
+					txtInput4.setText("Telefone");
 					txtInput4.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -210,15 +201,11 @@ public class PanelEditarDados extends JPanel {
 		txtInput4.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput4.setSelectionColor(MyColors.ACCENT);
 		txtInput4.setForeground(MyColors.PLACEHOLDER);
-		txtInput4.setText("Nascimento");
+		txtInput4.setText("Telefone");
 		txtInput4.setBackground(MyColors.BACKGROUND);
 		txtInput4.setBounds(10, 5, 100, 15);
 		pnlInput4.add(txtInput4);
 		txtInput4.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		//String nascimento = txtInput4.getText();
-		//int value = Integer.parseInt(nascimento);
 
 		///////////////////////// Input 5 /////////////////////////
 
@@ -256,7 +243,71 @@ public class PanelEditarDados extends JPanel {
 		pnlInput5.add(txtInput5);
 		txtInput5.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String senha = txtInput5.getText();
+		JPanel pnlEditarBtn = new JPanel();
+		pnlEditarBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String nome = txtInput1.getText();
+					String cnpj = txtInput2.getText();
+					String endereco = txtInput3.getText();
+					String telefone = txtInput4.getText();
+					String senha = txtInput5.getText();
+					if (nome.equals("Nome")) {
+						nome = biblioteca.getNome();
+					}
+					if (cnpj.equals("CNPJ")) {
+						cnpj = biblioteca.getCNPJ();
+					}
+					if (endereco.equals("Endereço")) {
+						endereco = biblioteca.getEndereco();
+					}
+					if (telefone.equals("Telefone")) {
+						telefone = biblioteca.getTelefone();
+					}
+					if (senha.equals("Senha")) {
+						senha = biblioteca.getSenha();
+					}
+					String message = biblioteca.editarDados(nome, cnpj, endereco, telefone, senha);
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameMinhaConta.dispose();
+						JFrame frame = new FrameMinhaConta(biblioteca);
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlEditarBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlEditarBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlEditarBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlEditarBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+		pnlEditarBtn.setBackground(MyColors.PRIMARY);
+		pnlEditarBtn.setBounds(53, 290, 240, 40);
+		add(pnlEditarBtn);
+		pnlEditarBtn.setLayout(null);
+		
+		JLabel lblEditar = new JLabel("EDITAR");
+		lblEditar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEditar.setForeground(MyColors.BACKGROUND);
+		lblEditar.setFont(new Font("Arial", Font.BOLD, 14));
+		lblEditar.setBounds(0, 5, 250, 30);
+		pnlEditarBtn.add(lblEditar);
 	}
 }

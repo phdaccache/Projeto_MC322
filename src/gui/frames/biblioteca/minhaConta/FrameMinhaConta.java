@@ -44,8 +44,8 @@ public class FrameMinhaConta extends JFrame {
 		});
 		
 		panelVisualizarDados = new PanelVisualizarDados(biblioteca);
-		panelEditarDados = new PanelEditarDados(biblioteca);
-		panelExcluirConta = new PanelExcluirConta(biblioteca);
+		panelEditarDados = new PanelEditarDados(biblioteca, this);
+		panelExcluirConta = new PanelExcluirConta(biblioteca, this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);

@@ -30,6 +30,56 @@ public class Biblioteca {
         this.reservas = new ArrayList<Reserva>();
     }
 
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner("\n");
+        joiner.add("Nome: " + getNome());
+        joiner.add("CNPJ: " + getCNPJ());
+        joiner.add("Endereço: " + getEndereco());
+        joiner.add("Telefone: " + getTelefone());
+        joiner.add("Quantidade de Itens: " + getItens().size());
+        joiner.add("Quantidade de Clientes: " + getClientes().size());
+        joiner.add("Quantidade de Empréstimos: " + getEmprestimos().size());
+        joiner.add("Quantidade de Reservas: " + getReservas().size());
+
+        return joiner.toString();
+    }
+
+    public String visualizarDados() {
+        return toString();
+    }
+
+    public String editarDados(String nome, String cnpj, String endereco, String telefone, String senha) {
+        // Caso em que o CNPJ e invalido
+        if (!Validacao.validarDocumento(cnpj, "CNPJ")) {
+            throw new IllegalArgumentException("CNPJ invalido");
+        }
+
+        // Caso em que o CNPJ ja existe
+        for (Biblioteca biblioteca : Admin.listaBibliotecas) {
+            if (biblioteca.getCNPJ().equals(cnpj) && !biblioteca.getCNPJ().equals(getCNPJ())) {
+                throw new IllegalArgumentException("Ja existe a biblioteca de CNPJ " + cnpj);
+            }
+        }
+
+        // Edicao dos dados
+        setNome(nome);
+        setCNPJ(cnpj);
+        setEndereco(endereco);
+        setTelefone(telefone);
+        setSenha(senha);
+        return "Dados atualizados!\n";
+    }
+
+    public String excluirConta() {
+        try {
+            Admin.excluirBiblioteca(getCNPJ());
+            return "Conta excluída!\n";
+        } catch (IllegalArgumentException erro) {
+            throw erro;
+        }
+    }
+
     public String cadastrarEstudante(String CPF, String nome, String telefone, String email, LocalDate dataNasc, String senha, String assinatura, String matricula, String curso, int ano_grad) {
         Estudante estudante = new Estudante(this, CPF, nome, telefone, email, dataNasc, senha, assinatura, matricula, curso, ano_grad);
         try {
@@ -643,26 +693,7 @@ public class Biblioteca {
         }
         return "Cliente não encontrado!";
     }
-    //Metodos para atualizar emprestimos e reservas depois de um certo tempo.
-
-
-    //toString
-    @Override
-    public String toString() {
-        StringJoiner joiner = new StringJoiner("\n");
-        joiner.add("Nome: " + this.nome);
-        joiner.add("CNPJ: " + this.CNPJ);
-        joiner.add("Endereço: " + this.endereco);
-        joiner.add("Telefone: " + this.telefone);
-        joiner.add("Lista de itens: " + this.itens);
-        joiner.add("Lista de clientes: " + this.clientes);
-        joiner.add("Lista de emprestimos: " + this.emprestimos);
-        joiner.add("Lista de reservar: " + this.reservas);
-
-        return joiner.toString();
-    }
-
-
+  
     // Getters e Setters
     public String getNome() {
         return this.nome;
