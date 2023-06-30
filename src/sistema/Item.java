@@ -11,7 +11,7 @@ public class Item {
 	private String status;
 	private String titulo;
 	private String autor;
-	private int ano;
+	private int ano; // ano de publicacao
 	private ArrayList<Reserva> listaReservas;
 	
 	//Construtor
