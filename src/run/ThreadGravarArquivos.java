@@ -1,3 +1,4 @@
+package run;
 import sistema.Admin;
 
 public class ThreadGravarArquivos extends Thread {
