@@ -1,0 +1,4 @@
+NOME,CNPJ,ENDERECO,TELEFONE,itens.txt,clientes.txt,emprestimos.txt,reservas.txt,SENHA
+
+Biblioteca,81277798000115,Rua 11,(00) 00000-0000,itens0.txt,clientes0.txt,emprestimos0.txt,reservas0.txt,123
+Biblioteca,81277798000115,Rua 11,(00) 00000-0000,itens1.txt,clientes1.txt,emprestimos1.txt,reservas1.txt,123
