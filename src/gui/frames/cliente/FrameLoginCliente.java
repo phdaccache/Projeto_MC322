@@ -8,6 +8,9 @@ import javax.swing.border.*;
 
 import gui.frames.*;
 import gui.frames.style.*;
+import sistema.Admin;
+import sistema.Biblioteca;
+import sistema.Cliente;
 
 public class FrameLoginCliente extends JFrame {
 	private Image img_user = new ImageIcon(FrameLoginCliente.class.getResource("../../res/user.png")).getImage().getScaledInstance(70, 85, Image.SCALE_SMOOTH);
@@ -253,24 +256,33 @@ public class FrameLoginCliente extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			if (txtUsername.getText().equals("cliente") && txtPassword.getText().equals("123")) {
-				lblLoginMessage.setText("");
-				FrameLoginCliente.this.dispose();
-				
-				FrameCliente cliente = new FrameCliente();
-				cliente.setVisible(true);
-				cliente.toFront();
-				cliente.requestFocus();
+				if (Admin.listaBibliotecas == null || Admin.listaBibliotecas.isEmpty()) {
+					lblLoginMessage.setText("Não há bibliotecas cadastradas.");
+					return;
 				}
-			else if (txtUsername.getText().equals("") || txtUsername.getText().equals("CPF do Cliente") || 
-					 txtPassword.getText().equals("") || txtPassword.getText().equals("Senha")) {
-					
-				lblLoginMessage.setText("Preencha todos os campos.");
+
+				for (Biblioteca biblioteca : Admin.listaBibliotecas) {
+					for (Cliente cliente : biblioteca.getClientes()) {
+						if (txtUsername.getText().equals(cliente.getCPF()) && txtPassword.getText().equals(cliente.getSenha())) {
+							lblLoginMessage.setText("");
+							FrameLoginCliente.this.dispose();
+							
+							FrameCliente clienteFrame = new FrameCliente(cliente);
+							clienteFrame.setVisible(true);
+							clienteFrame.toFront();
+							clienteFrame.requestFocus();
+							}
+					}
 				}
-			else {
-				lblLoginMessage.setText("Usuário e/ou senha inválidos.");	
+				if (txtUsername.getText().equals("") || txtUsername.getText().equals("CPF do Cliente") || 
+					txtPassword.getText().equals("") || txtPassword.getText().equals("Senha")) {
+						
+					lblLoginMessage.setText("Preencha todos os campos.");
 				}
-			}
+				else {
+					lblLoginMessage.setText("Usuário e/ou senha inválidos.");	
+				}
+				}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pnlLoginBtn.setBackground(MyColors.ACCENT);

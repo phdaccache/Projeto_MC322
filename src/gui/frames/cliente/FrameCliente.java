@@ -11,6 +11,7 @@ import gui.frames.cliente.itens.FrameItens;
 import gui.frames.cliente.minhaConta.FrameMinhaConta;
 import gui.frames.cliente.reservas.FrameReservas;
 import gui.frames.style.*;
+import sistema.Cliente;
 
 public class FrameCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +33,7 @@ public class FrameCliente extends JFrame {
 	private int mouseX;
 	private int mouseY;
 
-	public FrameCliente() {
+	public FrameCliente(Cliente cliente) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -84,10 +85,10 @@ public class FrameCliente extends JFrame {
 				if(confirmation == 0) {
 					FrameCliente.this.dispose();
 					
-					JFrame frameLoginBiblioteca = new FrameLoginCliente();
-					frameLoginBiblioteca.setVisible(true);
-					frameLoginBiblioteca.toFront();
-					frameLoginBiblioteca.requestFocus();
+					JFrame frameLoginCliente = new FrameLoginCliente();
+					frameLoginCliente.setVisible(true);
+					frameLoginCliente.toFront();
+					frameLoginCliente.requestFocus();
 				}
 			}
 			@Override
@@ -179,7 +180,7 @@ public class FrameCliente extends JFrame {
 		pnlMinhaConta.addMouseListener(new PanelButtonMouseAdapter(pnlMinhaConta) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameMinhaConta = new FrameMinhaConta();
+				JFrame frameMinhaConta = new FrameMinhaConta(cliente);
 				menuClicked(frameMinhaConta);
 			}
 		});
@@ -200,7 +201,7 @@ public class FrameCliente extends JFrame {
 		pnlItens.addMouseListener(new PanelButtonMouseAdapter(pnlItens) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameItens = new FrameItens();
+				JFrame frameItens = new FrameItens(cliente);
 				menuClicked(frameItens);
 			}
 		});
@@ -221,7 +222,7 @@ public class FrameCliente extends JFrame {
 		pnlEmprestimos.addMouseListener(new PanelButtonMouseAdapter(pnlEmprestimos) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameEmprestimos = new FrameEmprestimos();
+				JFrame frameEmprestimos = new FrameEmprestimos(cliente);
 				menuClicked(frameEmprestimos);
 			}
 		});
@@ -242,7 +243,7 @@ public class FrameCliente extends JFrame {
 		pnlReservas.addMouseListener(new PanelButtonMouseAdapter(pnlReservas) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame frameReservas = new FrameReservas();
+				JFrame frameReservas = new FrameReservas(cliente);
 				menuClicked(frameReservas);
 			}
 		});
@@ -257,13 +258,6 @@ public class FrameCliente extends JFrame {
 		lblReservas.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblReservas.setBounds(30, 10, 150, 20);
 		pnlReservas.add(lblReservas);
-		
-		//JScrollPane scrollPane = new JScrollPane();
-		//scrollPane.setBounds(150, 81, 300, 253);
-		//contentPane.add(scrollPane);
-		
-		//JTextArea textArea = new JTextArea();
-		//scrollPane.setViewportView(textArea);
 	}
 	
 	public void menuClicked(JFrame frame) {

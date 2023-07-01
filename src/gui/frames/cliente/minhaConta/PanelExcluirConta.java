@@ -6,12 +6,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
+import sistema.Cliente;
 
 public class PanelExcluirConta extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelExcluirConta() {
+	public PanelExcluirConta(Cliente cliente, JFrame frameMinhaConta) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -60,5 +61,59 @@ public class PanelExcluirConta extends JPanel {
 			}
 		});
 		add(iconX);
+
+		JLabel lblConfirmacao = new JLabel("Deseja realmente excluir sua conta?");
+		lblConfirmacao.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblConfirmacao.setForeground(Color.red);
+		lblConfirmacao.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConfirmacao.setBounds(10, 150, 326, 60);
+		add(lblConfirmacao);
+
+		JPanel pnlExcluirBtn = new JPanel();
+		pnlExcluirBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					// String message = cliente.excluirConta();
+					// int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					// if(confirmation == 0) {
+					// 	frameMinhaConta.dispose();
+					// 	JFrame frame = new FrameLoginBiblioteca();
+					// 	frame.setVisible(true);
+					// 	frame.toFront();
+					// 	frame.requestFocus();
+					// }
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlExcluirBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+		pnlExcluirBtn.setBackground(MyColors.PRIMARY);
+		pnlExcluirBtn.setBounds(53, 290, 240, 40);
+		add(pnlExcluirBtn);
+		pnlExcluirBtn.setLayout(null);
+		
+		JLabel lblExcluir = new JLabel("EXCLUIR");
+		lblExcluir.setHorizontalAlignment(SwingConstants.CENTER);
+		lblExcluir.setForeground(MyColors.BACKGROUND);
+		lblExcluir.setFont(new Font("Arial", Font.BOLD, 14));
+		lblExcluir.setBounds(0, 5, 250, 30);
+		pnlExcluirBtn.add(lblExcluir);
 	}
 }

@@ -275,10 +275,10 @@ public class FrameLoginBiblioteca extends JFrame {
 						txtPassword.getText().equals("") || txtPassword.getText().equals("Senha")) {
 						
 					lblLoginMessage.setText("Preencha todos os campos.");
-					}
+				}
 				else {
 					lblLoginMessage.setText("Usuário e/ou senha inválidos.");	
-					}
+				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

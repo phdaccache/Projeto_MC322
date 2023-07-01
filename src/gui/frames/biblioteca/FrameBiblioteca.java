@@ -282,13 +282,6 @@ public class FrameBiblioteca extends JFrame {
 		lblReservas.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblReservas.setBounds(30, 10, 150, 20);
 		pnlReservas.add(lblReservas);
-		
-		//JScrollPane scrollPane = new JScrollPane();
-		//scrollPane.setBounds(150, 81, 300, 253);
-		//contentPane.add(scrollPane);
-		
-		//JTextArea textArea = new JTextArea();
-		//scrollPane.setViewportView(textArea);
 	}
 	
 	public void menuClicked(JFrame frame) {

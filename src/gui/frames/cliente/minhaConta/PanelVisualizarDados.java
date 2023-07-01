@@ -6,12 +6,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
+import sistema.Cliente;
 
 public class PanelVisualizarDados extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelVisualizarDados() {
+	public PanelVisualizarDados(Cliente cliente) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -60,5 +61,20 @@ public class PanelVisualizarDados extends JPanel {
 			}
 		});
 		add(iconX);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 125, 326, 230);
+		add(scrollPane);
+
+		JTextArea textArea = new JTextArea();
+		textArea.setSelectionColor(MyColors.ACCENT);
+		textArea.setEditable(false);
+		textArea.setMargin(new Insets(10, 10, 10, 10));
+		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		scrollPane.setViewportView(textArea);
+
+		// String recebida do backend
+		//String string = cliente.visualizarDados();
+		//textArea.setText(string);
 	}
 }

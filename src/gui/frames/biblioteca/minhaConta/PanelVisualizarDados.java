@@ -61,6 +61,7 @@ public class PanelVisualizarDados extends JPanel {
 			}
 		});
 		add(iconX);
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 125, 326, 230);
 		add(scrollPane);

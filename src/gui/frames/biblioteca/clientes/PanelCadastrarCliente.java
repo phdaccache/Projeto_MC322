@@ -305,32 +305,9 @@ public class PanelCadastrarCliente extends JPanel {
 		add(pnlInput8);
 		pnlInput8.setLayout(null);
 		
-		JTextField txtInput8 = new JTextField();
-		txtInput8.addFocusListener(new FocusAdapter() {
-		@Override
-		public void focusGained(FocusEvent e) {
-		txtInput8.setForeground(MyColors.TEXT);
-		if (txtInput8.getText().equals("Assinatura")) {
-			txtInput8.setText("");
-		}
-		}
-		@Override
-		public void focusLost(FocusEvent e) {
-		if (txtInput8.getText().equals("")) {
-			txtInput8.setText("Assinatura");
-			txtInput8.setForeground(MyColors.PLACEHOLDER);
-		}
-		}
-		});
-		txtInput8.setBorder(null);
-		txtInput8.setFont(new Font("Arial", Font.PLAIN, 13));
-		txtInput8.setSelectionColor(MyColors.ACCENT);
-		txtInput8.setForeground(MyColors.PLACEHOLDER);
-		txtInput8.setText("Assinatura");
-		txtInput8.setBackground(MyColors.BACKGROUND);
-		txtInput8.setBounds(10, 5, 100, 15);
-		pnlInput8.add(txtInput8);
-		txtInput8.setColumns(10);
+		JComboBox<String> comboBox2 = new JComboBox<String>(new String[] {"Básico", "Prata", "Dourado"});
+		comboBox2.setBounds(0, 0, 115, 25);
+		pnlInput8.add(comboBox2);
 
 		///////////////////////// Input 9 /////////////////////////
 		
@@ -688,7 +665,7 @@ public class PanelCadastrarCliente extends JPanel {
 					String email = txtInput5.getText();
 					String nascimentoString = txtInput6.getText();
 					String senha = txtInput7.getText();
-					String assinatura = txtInput8.getText();
+					String assinatura = (String)comboBox2.getSelectedItem();
 					LocalDate nascimento = LocalDate.parse(nascimentoString, dtf);
 
 					if (opcao.equals("Estudante")) {
