@@ -45,11 +45,11 @@ public class FrameEmprestimos extends JFrame {
 			}
 		});
 		
-		panelMeusEmprestimos = new PanelMeusEmprestimos();
-		panelEmprestimosAtrasados = new PanelEmprestimosAtrasados();
-		panelGerarEmprestimo = new PanelGerarEmprestimo();
-		panelDevolverEmprestimo = new PanelDevolverEmprestimo();
-		panelRenovarEmprestimo = new PanelRenovarEmprestimo();
+		panelMeusEmprestimos = new PanelMeusEmprestimos(cliente);
+		panelEmprestimosAtrasados = new PanelEmprestimosAtrasados(cliente);
+		panelGerarEmprestimo = new PanelGerarEmprestimo(cliente, this);
+		panelDevolverEmprestimo = new PanelDevolverEmprestimo(cliente, this);
+		panelRenovarEmprestimo = new PanelRenovarEmprestimo(cliente, this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);

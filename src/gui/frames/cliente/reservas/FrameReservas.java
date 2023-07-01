@@ -43,9 +43,9 @@ public class FrameReservas extends JFrame {
 			}
 		});
 		
-		panelMinhasReservas = new PanelMinhasReservas();
-		panelReservarItem = new PanelReservarItem();
-		panelCancelarReserva = new PanelCancelarReserva();
+		panelMinhasReservas = new PanelMinhasReservas(cliente);
+		panelReservarItem = new PanelReservarItem(cliente, this);
+		panelCancelarReserva = new PanelCancelarReserva(cliente, this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);

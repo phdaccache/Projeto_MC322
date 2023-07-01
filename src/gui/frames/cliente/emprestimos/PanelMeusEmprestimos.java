@@ -6,12 +6,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gui.frames.style.MyColors;
+import sistema.Cliente;
 
 public class PanelMeusEmprestimos extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelMeusEmprestimos() {
+	public PanelMeusEmprestimos(Cliente cliente) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -72,7 +73,7 @@ public class PanelMeusEmprestimos extends JPanel {
 		scrollPane.setViewportView(textArea);
 
 		// String recebida do backend
-		String string = "teste\nteste";
+		String string = cliente.listarEmprestimos();
 		textArea.setText(string);
 	}
 }
