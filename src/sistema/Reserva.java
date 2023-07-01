@@ -1,6 +1,7 @@
 package sistema;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.StringJoiner;
 
@@ -35,8 +36,10 @@ public class Reserva {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
-		joiner.add("Item: %s (Code: %s)" + getItem().getTitulo() + getItem().getCode());
-		joiner.add("Data de reserva:" + getData());
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataReservaString = getData().format(dtf);
+		joiner.add(String.format("Item: %s (Code: %d)", getItem().getTitulo(), getItem().getCode()));
+		joiner.add("Data de reserva:" + dataReservaString);
 		joiner.add("Codigo da reserva: " + getCode());
 		joiner.add("Cliente: %s (CPF: %s)" + getCliente().getNome() + getCliente().getCPF());
 		joiner.add("Posicao na fila de espera: " + getPosicao());

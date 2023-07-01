@@ -197,14 +197,14 @@ public class Biblioteca {
         }
 
         // Caso em que o cliente possui emprestimos pendentes
-        // if (cliente.getEmprestimosPendentes().size() > 0) {
-        //     throw new IllegalArgumentException("O cliente possui empréstimos pendentes");
-        // }
+        if (cliente.getListaEmprestimos().size() > 0) {
+            throw new IllegalArgumentException("O cliente possui empréstimos pendentes");
+        }
 
         // Caso em que o cliente possui reservas pendentes
-        // if (cliente.getReservasPendentes().size() > 0) {
-        //     throw new IllegalArgumentException("O cliente possui reservas pendentes");
-        // }
+        if (cliente.getListaReservasItens().size() > 0) {
+            throw new IllegalArgumentException("O cliente possui reservas pendentes");
+        }
 
         // Exclusao do cliente
         clientes.remove(cliente);

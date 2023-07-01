@@ -4,14 +4,16 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
+import sistema.Cliente;
 
 public class PanelPesquisarItem extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelPesquisarItem() {
+	public PanelPesquisarItem(Cliente cliente) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -60,8 +62,45 @@ public class PanelPesquisarItem extends JPanel {
 			}
 		});
 		add(iconX);
+		
+		///////////////////////// Input 1 /////////////////////////
+
+		JPanel pnlInput1 = new JPanel();
+		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
+		pnlInput1.setBackground(MyColors.BACKGROUND);
+		pnlInput1.setBounds(115, 125, 115, 25);
+		add(pnlInput1);
+		pnlInput1.setLayout(null);
+
+		JTextField txtInput1 = new JTextField();
+		txtInput1.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtInput1.setForeground(MyColors.TEXT);
+				if (txtInput1.getText().equals("Titulo")) {
+					txtInput1.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtInput1.getText().equals("")) {
+					txtInput1.setText("Titulo");
+					txtInput1.setForeground(MyColors.PLACEHOLDER);
+				}
+			}
+		});
+		txtInput1.setBorder(null);
+		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput1.setSelectionColor(MyColors.ACCENT);
+		txtInput1.setForeground(MyColors.PLACEHOLDER);
+		txtInput1.setText("Titulo");
+		txtInput1.setBackground(MyColors.BACKGROUND);
+		txtInput1.setBounds(10, 5, 100, 15);
+		pnlInput1.add(txtInput1);
+		txtInput1.setColumns(10);
+
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 125, 326, 230);
+		scrollPane.setBounds(33, 160, 280, 163);
 		add(scrollPane);
 
 		JTextArea textArea = new JTextArea();
@@ -71,8 +110,49 @@ public class PanelPesquisarItem extends JPanel {
 		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
 		scrollPane.setViewportView(textArea);
 
-		// String recebida do backend
-		String string = "teste\nteste";
-		textArea.setText(string);
+		JPanel lblPesquisarBtn = new JPanel();
+		lblPesquisarBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String titulo = txtInput1.getText();
+					String resultado = cliente.pesquisarItem(titulo);
+
+					// String recebida do backend
+					textArea.setText(resultado);
+
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+
+		lblPesquisarBtn.setBackground(MyColors.PRIMARY);
+		lblPesquisarBtn.setBounds(53, 334, 240, 40);
+		add(lblPesquisarBtn);
+		lblPesquisarBtn.setLayout(null);
+		
+		JLabel lblPesquisar = new JLabel("PESQUISAR");
+		lblPesquisar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPesquisar.setForeground(MyColors.BACKGROUND);
+		lblPesquisar.setFont(new Font("Arial", Font.BOLD, 14));
+		lblPesquisar.setBounds(0, 5, 250, 30);
+		lblPesquisarBtn.add(lblPesquisar);
 	}
 }

@@ -1,6 +1,7 @@
 package sistema;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.StringJoiner;
 
@@ -42,11 +43,14 @@ public class Emprestimo {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
-		joiner.add("Item: %s (Code: %s)" + getItem().getTitulo() + getItem().getCode());
-		joiner.add("Data de inicio de emprestimo:" + getData_ini());
-		joiner.add("Data limite de devolucao:" + getData_fim());
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataIniString = getData_ini().format(dtf);
+		String dataFimString = getData_fim().format(dtf);
+		joiner.add(String.format("Item: %s (Code: %d)", getItem().getTitulo(), getItem().getCode()));
+		joiner.add("Data de inicio de emprestimo:" + dataIniString);
+		joiner.add("Data limite de devolucao:" + dataFimString);
 		joiner.add("Cliente: %s (CPF: %s)" + getCliente().getNome() + getCliente().getCPF());
-		joiner.add("Code: %s" + getCode());
+		joiner.add("Code: %d" + getCode());
 		return joiner.toString();
 	}
 

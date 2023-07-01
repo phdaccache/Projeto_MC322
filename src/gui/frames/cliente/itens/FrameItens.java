@@ -42,8 +42,8 @@ public class FrameItens extends JFrame {
 			}
 		});
 		
-		panelPesquisarItem = new PanelPesquisarItem();
-		panelUltimasAquisicoes = new PanelUltimasAquisicoes();
+		panelPesquisarItem = new PanelPesquisarItem(cliente);
+		panelUltimasAquisicoes = new PanelUltimasAquisicoes(cliente);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);

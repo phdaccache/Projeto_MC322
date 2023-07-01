@@ -68,8 +68,8 @@ public class Cliente {
 
 	/////////////////////////////////// ITENS ///////////////////////////////////
 
-	public void pesquisarItem(String titulo) throws IllegalArgumentException {
-		getBiblioteca().pesquisarItem(titulo);
+	public String pesquisarItem(String titulo) throws IllegalArgumentException {
+		return getBiblioteca().pesquisarItem(titulo);
 	}
 
 	public String ultimasAquisicoes() {
@@ -97,6 +97,44 @@ public class Cliente {
 
 	/////////////////////////////////// EMPRESTIMOS ///////////////////////////////////
 
+	public String listarEmprestimos(){
+        String string = "";
+        ArrayList<Emprestimo> emprestimos = getListaEmprestimos();
+
+        if(emprestimos == null || emprestimos.isEmpty()){
+            string += "Não há empréstimos cadastrados.\n";
+        }
+
+        else {
+            for(Emprestimo emprestimo : emprestimos){
+                string += "---------------------------------------------\n";
+                string += (emprestimo + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
+    }
+
+	public String listarEmprestimosAtrasados() {
+		String string = "";
+		ArrayList<Emprestimo> emprestimos = getEmprestimosAtrasados();
+
+		if(emprestimos == null || emprestimos.isEmpty()){
+            string += "Não há empréstimos atrasados.\n";
+        }
+
+        else {
+            for(Emprestimo emprestimo : emprestimos){
+                string += "---------------------------------------------\n";
+                string += (emprestimo + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
+	}
+
 	//Metodo para verificar se o cliente esta apto a fazer emprestimos
 	public boolean aptoEmprestimo() {
 		if (status.equals("ativo")) {
@@ -121,7 +159,7 @@ public class Cliente {
 		}
 	}
 
-	//Metodo para achar emprestimo na lista de emprestimos da biblioteca
+	// Metodo para achar emprestimo na lista de emprestimos da biblioteca
 	public Emprestimo achaEmprestimo(String titulo, ArrayList<Emprestimo> listaEmprestimos) {
 		try {
 	        if (listaEmprestimos == null) {
@@ -191,22 +229,10 @@ public class Cliente {
 			return "Cliente nao apto a fazer emprestimos";
 		}
 	}
+
 	public void fazerEmprestimo(String titulo){
 		//biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
 		biblioteca.getItem(titulo).setStatus("emprestado");
-	}
-	public String listarEmprestimos(){
-		String retorno;
-		if(listaEmprestimos.isEmpty() || listaEmprestimos == null){
-			return "Nao ha emprestimos";
-		}
-		else{
-			retorno = "****** Emprestimos ******\n";
-			for(Emprestimo emprestimo : listaEmprestimos){
-				retorno += emprestimo.toString();
-			}
-		}
-		return retorno;
 	}
 
 	public String DevolverEmprestimo(String Titulo){
@@ -251,22 +277,25 @@ public class Cliente {
 		return "Emprestimo nao encontrado";
 	}
 
-	//public void listarEmprestimosAtrasados(){}
-
 	/////////////////////////////////// RESERVAS ///////////////////////////////////
 
 	public String listarReservas(){
-		String retorno = "";
-		if(listaReservasItens.isEmpty() || listaReservasItens == null){
-			return "Nao ha reservas";
-		}
-		else{
-			retorno = "****** Reservas ******\n";
-			for(Reserva reserva : listaReservasItens){
-				retorno += reserva.toString();
-			}
-		}
-		return retorno;
+		String string = "";
+        ArrayList<Reserva> reservas = getListaReservasItens();
+
+        if(reservas == null || reservas.isEmpty()){
+            string += "Não há reservas cadastradas.\n";
+        }
+
+        else {
+            for(Reserva reserva : reservas){
+                string += "---------------------------------------------\n";
+                string += (reserva + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
 	}
 
 	public Boolean TentaReservar(String titulo) {
@@ -323,6 +352,21 @@ public class Cliente {
             return null;
     	}
 	}
+
+	public ArrayList<Emprestimo> getEmprestimosAtrasados() {
+		ArrayList<Emprestimo> emprestimosAtrasados = new ArrayList<Emprestimo>();
+		ArrayList<Emprestimo> emprestimos = getListaEmprestimos();
+
+		for(Emprestimo emprestimo : emprestimos){
+			if(emprestimo.isAtrasado()){
+				emprestimosAtrasados.add(emprestimo);
+			}
+		}
+
+		return emprestimosAtrasados;
+	}
+
+	/////////////////////////////////// METODOS AUXILIARES ///////////////////////////////////
 
 	// Metodo para verificar a quantidade de dias que um cliente pode ficar.
 	public int verificaQtdDeDias(Cliente cliente){
