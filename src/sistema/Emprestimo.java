@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 public class Emprestimo {
 	// Atributos
 	private String[] possiveisStatus;
+	private Biblioteca biblioteca;
 	private Item item;
 	private String status;
 	private LocalDate data_ini; // data do emprestimo
@@ -15,8 +16,9 @@ public class Emprestimo {
 	private final int code; // aleatorio
 	
 	//Construtor
-	public Emprestimo(Item item, LocalDate data_ini, LocalDate data_fim, Cliente cliente) {
+	public Emprestimo(Biblioteca biblioteca, Item item, LocalDate data_ini, LocalDate data_fim, Cliente cliente) {
 		this.possiveisStatus = new String[] {"Em dia", "Atrasado"};
+		this.biblioteca = biblioteca;
 		this.item = item;
 		this.data_ini = data_ini;
 		this.data_fim = data_fim;
@@ -24,6 +26,17 @@ public class Emprestimo {
 		this.status = "Em dia";
 		Random random = new Random();
 		this.code = random.nextInt();
+	}
+
+	public Emprestimo(Biblioteca biblioteca, Item item, LocalDate data_ini, LocalDate data_fim, Cliente cliente, int code) {
+		this.possiveisStatus = new String[] {"Em dia", "Atrasado"};
+		this.biblioteca = biblioteca;
+		this.item = item;
+		this.data_ini = data_ini;
+		this.data_fim = data_fim;
+		this.cliente = cliente;
+		this.status = "Em dia";
+		this.code = code;
 	}
 
 	@Override
@@ -49,6 +62,14 @@ public class Emprestimo {
 
 	public void setPossiveisStatus(String[] possiveisStatus) {
 		this.possiveisStatus = possiveisStatus;
+	}
+
+	public Biblioteca getBiblioteca() {
+		return this.biblioteca;
+	}
+
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
 	}
 
 	public Item getItem() {

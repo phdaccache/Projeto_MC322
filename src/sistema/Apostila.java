@@ -14,6 +14,12 @@ public class Apostila extends Item {
 		this.instituicao = instituicao;
 	}
 
+	public Apostila(int quantidade, String titulo, String autor, int ano, String disciplina, String instituicao, String status) {
+		super(quantidade, titulo, autor, ano, status);
+		this.disciplina = disciplina;
+		this.instituicao = instituicao;
+	}
+
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");

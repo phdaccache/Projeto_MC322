@@ -16,6 +16,13 @@ public class Artigo extends Item {
 		this.keywords = keywords;
 	}
 
+	public Artigo(int quantidade, String titulo, String autor, int ano, int DOI, String abstractArtigo, String keywords, String status) {
+		super(quantidade, titulo, autor, ano, DOI, status);
+		this.DOI = DOI;
+		this.abstractArtigo = abstractArtigo;
+		this.keywords = keywords;
+	}
+
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");

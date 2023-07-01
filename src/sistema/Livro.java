@@ -18,6 +18,14 @@ public class Livro extends Item {
 		this.tema = tema;
 	}
 
+	public Livro(int quantidade, String titulo, String autor, int ano, String editora, int ISBN, String edicao, String tema, String status) {
+		super(quantidade, titulo, autor, ano, ISBN, status);
+		this.editora = editora;
+		this.ISBN = ISBN;
+		this.edicao = edicao;
+		this.tema = tema;
+	}
+
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");

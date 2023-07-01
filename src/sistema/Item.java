@@ -36,6 +36,29 @@ public class Item {
 		this.listaReservas = new ArrayList<Reserva>();
 	}
 
+	public Item(int quantidade, String titulo, String autor, int ano, String status) {
+		this.possiveisStatus = new String[]{"Disponível", "Emprestado", "Reservado"};
+		Random random = new Random();
+		this.code = random.nextInt();
+		this.quantidade = quantidade;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.ano = ano;
+		this.status = status;
+		this.listaReservas = new ArrayList<Reserva>();
+	}
+
+	public Item(int quantidade, String titulo, String autor, int ano, int code, String status) {
+		this.possiveisStatus = new String[]{"Disponível", "Emprestado", "Reservado"};
+		this.code = code;
+		this.quantidade = quantidade;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.ano = ano;
+		this.status = status;
+		this.listaReservas = new ArrayList<Reserva>();
+	}
+
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");

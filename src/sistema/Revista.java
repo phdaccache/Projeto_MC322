@@ -18,6 +18,14 @@ public class Revista extends Item {
 		this.ISSN = ISSN;
 	}
 
+	public Revista(int quantidade, String titulo, String autor, int ano, String edicao, String instituicao, String assuntos, int ISSN, String status) {
+		super(quantidade, titulo, autor, ano, ISSN, status);
+		this.edicao = edicao;
+		this.instituicao = instituicao;
+		this.assuntos = assuntos;
+		this.ISSN = ISSN;
+	}
+
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");

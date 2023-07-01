@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.StringJoiner;
 
 public class Reserva {
+	private Biblioteca biblioteca;
 	private Item item;
 	private LocalDate data; // Data em que o cliente vai poder tirar o item
 	private Cliente cliente;
@@ -12,12 +13,22 @@ public class Reserva {
 	private int posicao;
 	
 	//Construtor
-	public Reserva(Item item, LocalDate data, Cliente cliente, int posicao) {
+	public Reserva(Biblioteca biblioteca, Item item, LocalDate data, Cliente cliente, int posicao) {
+		this.biblioteca = biblioteca;
 		this.item = item;
 		this.data = data;
 		this.cliente = cliente;
 		Random random = new Random();
 		this.code = random.nextInt();
+		this.posicao = posicao;
+	}
+
+	public Reserva(Biblioteca biblioteca, Item item, LocalDate data, Cliente cliente, int code, int posicao) {
+		this.biblioteca = biblioteca;
+		this.item = item;
+		this.data = data;
+		this.cliente = cliente;
+		this.code = code;
 		this.posicao = posicao;
 	}
 
@@ -34,6 +45,14 @@ public class Reserva {
 
 
 	// Getters e Setters
+	public Biblioteca getBiblioteca() {
+		return this.biblioteca;
+	}
+
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
+	}
+
 	public Item getItem() {
 		return this.item;
 	}

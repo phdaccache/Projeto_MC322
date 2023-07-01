@@ -26,7 +26,7 @@ public class ArquivoRevista implements Arquivo<Revista>{
             String linha = br.readLine();
 
             while (linha != null) {
-                if (linha.equals("CODE,QTD_DE_PAGINAS,STATUS,TITULO,AUTOR,ANO,CLASSE")) {
+                if (linha.equals("CODE,QUANTIDADE,STATUS,TITULO,AUTOR,ANO,CLASSE")) {
                     linha = br.readLine();
                     continue;
                 }
@@ -48,7 +48,7 @@ public class ArquivoRevista implements Arquivo<Revista>{
                         linhas.add(campos1);
 
                         if (campos[0].equals(campos1[0])) {
-                            lista.add(new Revista(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], campos1[2], campos1[3], Integer.parseInt(campos1[4])));
+                            lista.add(new Revista(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], campos1[2], campos1[3], Integer.parseInt(campos1[4]), campos[2]));
                         }
 
                         linha1 = br1.readLine();
