@@ -4,14 +4,14 @@ import java.util.StringJoiner;
 
 public class Revista extends Item {
 	// Atributos
-	private int edicao;
+	private String edicao;
 	private String instituicao;
 	private String assuntos;
 	private final int ISSN;
 	
 	//Construtor
-	public Revista(int code, int qtdDePaginas, String titulo, String autor, int ano, int edicao, String instituicao, String assuntos, int ISSN) {
-		super(code, qtdDePaginas, titulo, autor, ano);
+	public Revista(int qtdDePaginas, String titulo, String autor, int ano, String edicao, String instituicao, String assuntos, int ISSN) {
+		super(qtdDePaginas, titulo, autor, ano, ISSN);
 		this.edicao = edicao;
 		this.instituicao = instituicao;
 		this.assuntos = assuntos;
@@ -22,7 +22,7 @@ public class Revista extends Item {
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
 		joiner.add(super.toString());
-		if (edicao != -1) {
+		if (edicao != null) {
 		    joiner.add("Edição: " + this.edicao);
 		} else {
 			joiner.add("Edição: Não especificada");
@@ -46,11 +46,11 @@ public class Revista extends Item {
 	}
 
 	// Getters e Setters
-	public int getEdicao() {
+	public String getEdicao() {
 		return this.edicao;
 	}
 
-	public void setEdicao(int edicao) {
+	public void setEdicao(String edicao) {
 		this.edicao = edicao;
 	}
 

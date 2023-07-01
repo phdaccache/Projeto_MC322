@@ -99,7 +99,60 @@ public class PanelPesquisarItem extends JPanel {
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String titulo = txtInput1.getText();
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(33, 160, 280, 163);
+		add(scrollPane);
+
+		JTextArea textArea = new JTextArea();
+		textArea.setSelectionColor(MyColors.ACCENT);
+		textArea.setEditable(false);
+		textArea.setMargin(new Insets(10, 10, 10, 10));
+		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		scrollPane.setViewportView(textArea);
+
+		JPanel lblPesquisarBtn = new JPanel();
+		lblPesquisarBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String titulo = txtInput1.getText();
+					String resultado = biblioteca.pesquisarItem(titulo);
+
+					// String recebida do backend
+					textArea.setText(resultado);
+
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lblPesquisarBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+
+		lblPesquisarBtn.setBackground(MyColors.PRIMARY);
+		lblPesquisarBtn.setBounds(53, 334, 240, 40);
+		add(lblPesquisarBtn);
+		lblPesquisarBtn.setLayout(null);
+		
+		JLabel lblPesquisar = new JLabel("PESQUISAR");
+		lblPesquisar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPesquisar.setForeground(MyColors.BACKGROUND);
+		lblPesquisar.setFont(new Font("Arial", Font.BOLD, 14));
+		lblPesquisar.setBounds(0, 5, 250, 30);
+		lblPesquisarBtn.add(lblPesquisar);
 	}
 }

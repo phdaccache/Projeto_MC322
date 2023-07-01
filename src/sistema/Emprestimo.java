@@ -37,6 +37,10 @@ public class Emprestimo {
 		return joiner.toString();
 	}
 
+	public boolean isAtrasado() {
+		return this.status.equals("Atrasado");
+	}
+
 
 	// Getters e Setters
 	public String[] getPossiveisStatus() {

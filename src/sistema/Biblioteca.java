@@ -198,7 +198,7 @@ public class Biblioteca {
 
         // Caso em que o cliente possui emprestimos pendentes
         // if (cliente.getEmprestimosPendentes().size() > 0) {
-        //     throw new IllegalArgumentException("O cliente possui emprestimos pendentes");
+        //     throw new IllegalArgumentException("O cliente possui empréstimos pendentes");
         // }
 
         // Caso em que o cliente possui reservas pendentes
@@ -211,284 +211,333 @@ public class Biblioteca {
         return "Cliente excluído!\n";
     }
 
+    public String listarAssinaturas() {
+        String string = "";
+        boolean temAssinatura = false;
+
+        for(Cliente cliente: clientes){
+            if (!cliente.getAssinatura().equals("Básico")) {
+                temAssinatura = true;
+                string += "---------------------------------------------\n";
+                string += String.format("Cliente: %s\n", cliente.getNome());
+                string += String.format("CPF: %s\n", cliente.getCPF());
+                string += String.format("Assinatura: %s\n", cliente.getAssinatura());
+            }
+        }
+        if (!temAssinatura) {
+            string += "Não há assinaturas ativas.\n";
+        } else {
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
+    }
+
+    public String gerarAssinatura(String CPF, String assinatura) {
+        for(Cliente cliente : clientes){
+            if(cliente.getCPF().equals(CPF)){
+                cliente.setAssinatura(assinatura);
+                return "Assinatura atualizada!";
+            }
+        }
+        throw new IllegalArgumentException("Cliente não encontrado");
+    }
+
+    public String excluirAssinatura(String CPF) {
+        for(Cliente cliente : clientes){
+            if(cliente.getCPF().equals(CPF)){
+                cliente.setAssinatura("Básico");
+                return "Assinatura excluída!";
+            }
+        }
+        throw new IllegalArgumentException("Cliente não encontrado");
+    }
+
     /////////////////////////////////// ITENS ///////////////////////////////////
 
-    public String cadastrarLivro(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, String editora, int ISBN, String edicao, String tema){
-        Livro livro = new Livro(code, qtdDePaginas, titulo, autores, ano, editora, ISBN, edicao, tema);
-        try {
-	        if (this.itens == null) {
-	            throw new IllegalArgumentException();
-	        }
-	    this.itens.add(livro);
-	    return "Livro cadastrado com sucesso.";
-    	} catch (IllegalArgumentException e) {
-        	this.itens = new ArrayList<>();
- 	        this.itens.add(livro);
-            return "Livro cadastrado com sucesso.";
- 	    }
-    }
-    public String cadastrarArtigo(int code, int qtdDePaginas, String status, String titulo, String autores, ArrayList<Reserva> listaReservas, int ano, int DOI, String abstractArtigo, String keywords){
-        Artigo artigo = new Artigo(code, qtdDePaginas, titulo, autores, ano, DOI, abstractArtigo, keywords);
-        try {
-	        if (this.itens == null) {
-	            throw new IllegalArgumentException();
-	        }
-	    this.itens.add(artigo);
-	    return "Artigo cadastrado com sucesso";
-    	} catch (IllegalArgumentException e) {
-        	this.itens = new ArrayList<>();
- 	        this.itens.add(artigo);
-            return "Artigo cadastrado com sucesso";
- 	    }
-    }
-    public String cadastrarRevista(int code, int qtdDePaginas, String status, String titulo, String autor, int ano, int edicao, String instituicao, String assuntos, int ISSN) {
-        Revista revista = new Revista(code, qtdDePaginas, titulo, autor, ano, edicao, instituicao, assuntos, ISSN);
-        try {
-	        if (this.itens == null) {
-	            throw new IllegalArgumentException();
-	        }
-	    this.itens.add(revista);
-	    return "Revista cadastrado com sucesso";
-    	} catch (IllegalArgumentException e) {
-        	this.itens = new ArrayList<>();
- 	        this.itens.add(revista);
-            return "Revista cadastrado com sucesso";
- 	    }
-    }
-    public String cadastrarEmprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente) {
-        Emprestimo emprestimo = new Emprestimo(item, data_ini, data_lim, cliente);
-        try {
-            if (this.emprestimos == null) {
-                throw new IllegalArgumentException();
-            }
-            this.emprestimos.add(emprestimo);
-            return "Emprestimo cadastrado com sucesso";
+    public String pesquisarItem(String titulo) {
+        String string = "";
 
-        } catch (IllegalArgumentException e) {
-            this.emprestimos = new ArrayList<>();
-            this.emprestimos.add(emprestimo);
-            return "Emprestimo cadastrado com sucesso";
-        }
-    }
-    public String cadastrarReserva(Item item, LocalDate data, Cliente cliente, int posicao) {
-        Reserva reserva = new Reserva(item, data, cliente, posicao);
-        try {
-            if (this.reservas == null) {
-                throw new IllegalArgumentException();
+        for(Item item: itens){
+            if (item.getTitulo().equals(titulo)) {
+                string += (item + "\n");
+                return string;
             }
-            this.reservas.add(reserva);
-            return "Reserva cadastrado com sucesso";
-        } catch (IllegalArgumentException e) {
-            this.reservas = new ArrayList<>();
-            this.reservas.add(reserva);
-            return "Reserva cadastrado com sucesso";
         }
-    }
-
-    public String removerItem(String Titulo) {
-        System.out.println("***** Removendo item *****");
-        try {
-            if (this.itens == null) {
-                throw new IllegalArgumentException("Lista vazia!");
-            }
-            for (Item item : this.itens) {
-                if (item.getTitulo().equals(Titulo)) {
-                    this.itens.remove(item);
-                    //removerEmprestimoPorItem(Titulo);
-                    //removerReservasPorItem(Titulo);
-                    return "Item removido com sucesso!";
-                }
-            }
-            return "Item não encontrado!";
-        } catch (IllegalArgumentException e) {
-            return "Erro: " + e.getMessage();
-        }
+        
+        throw new IllegalArgumentException("Item não encontrado");
     }
 
     public String listarItens(){
-        String retorno = "";
+        String string = "";
         if(itens == null || itens.isEmpty()){
-            return "Não há itens cadastrados!";
+            string += "Não há itens cadastrados.\n";
+        } 
+        
+        else {
+            string += "Livros:\n";
+            string += listarLivros();
+            string += "\n";
+            string += "Apostilas:\n";
+            string += listarApostilas();
+            string += "\n";
+            string += "Artigos:\n";
+            string += listarArtigos();
+            string += "\n";
+            string += "Revistas:\n";
+            string += listarRevistas();
         }
-        if (getlivros() != null) {
-            retorno = "***** Livros *****";
-            for(Livro livro : getlivros()){
-                retorno = retorno + livro.toString();
-            }
-        }
-        if (getArtigos() != null) {
-            retorno = retorno + "***** Artigos *****";
-            for(Artigo artigo : getArtigos()){
-                retorno = retorno + artigo.toString();
-            }
-        }
-        if (getRevistas() != null) {
-            retorno = retorno + "***** Revistas *****";
-            for(Revista revista : getRevistas()){
-                retorno = retorno + revista.toString();
-            }
-        }
-        return retorno;
+        return string;
     }
+
     public String listarLivros(){
-        if(getlivros() == null){
-            return "Não há livros cadastrados!";
+        String string = "";
+        ArrayList<Livro> livros = getLivros();
+
+        if(livros == null || livros.isEmpty()){
+            string += "Não há livros cadastrados.\n";
         }
-        String retorno = "***** Livros *****\n";
-        for(Livro livro : getlivros()){
-            retorno = retorno + livro.toString();
+
+        else {
+            for(Livro livro : getLivros()){
+                string += "---------------------------------------------\n";
+                string += (livro + "\n");
+            }
+            string += "---------------------------------------------\n";
         }
-        return retorno;
+
+
+        return string;
     }
-    public String listarRevistas(){
-        String retorno = "";
-        if(getRevistas() == null){
-            return "Não há revistas cadastradas!";
+
+    public String listarApostilas() {
+        String string = "";
+        ArrayList<Apostila> apostilas = getApostilas();
+
+        if(apostilas == null || apostilas.isEmpty()){
+            string += "Não há apostilas cadastradas.\n";
         }
-        retorno = "***** Revistas *****\n";
-        for(Revista revista : getRevistas()){
-           retorno = retorno + revista.toString();
+
+        else {
+            for(Apostila apostila : getApostilas()){
+                string += "---------------------------------------------\n";
+                string += (apostila + "\n");
+            }
+            string += "---------------------------------------------\n";
         }
-        return retorno;
+
+
+        return string;
     }
+
     public String listarArtigos(){
-        String retorno = "";
-        if(getArtigos() == null){
-            return "Não há artigos cadastrados!";
+        String string = "";
+        ArrayList<Artigo> artigos = getArtigos();
+
+        if(artigos == null || artigos.isEmpty()){
+            string += "Não há artigos cadastrados.\n";
         }
-        retorno = "***** Artigos *****\n";
-        for(Artigo artigo : getArtigos()){
-            retorno = retorno + artigo.toString();
+
+        else {
+            for(Artigo artigo : getArtigos()){
+                string += "---------------------------------------------\n";
+                string += (artigo + "\n");
+            }
+            string += "---------------------------------------------\n";
         }
-        return retorno;
+
+
+        return string;
+    }
+
+    public String listarRevistas(){
+        String string = "";
+        ArrayList<Revista> revistas = getRevistas();
+
+        if(revistas == null || revistas.isEmpty()){
+            string += "Não há revistas cadastradas.\n";
+        }
+
+        else {
+            for(Revista revista : getRevistas()){
+                string += "---------------------------------------------\n";
+                string += (revista + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+
+        return string;
+    }
+
+    public String cadastrarLivro(int qtdDePaginas, String titulo, String autor, int ano, String editora, int ISBN, String edicao, String tema){
+        // Caso em que o ISBN ja existe
+        for (Item item : itens) {
+            if (item.getCode() == ISBN) {
+                throw new IllegalArgumentException("Ja existe o item de ISBN " + ISBN);
+            }
+        }
+
+        // Cadastro do item
+        Item item = new Livro(qtdDePaginas, titulo, autor, ano, editora, ISBN, edicao, tema);
+        itens.add(item);
+        return "Livro cadastrado!\n";
+    }
+
+    public String cadastrarApostila(int qtdDePaginas, String titulo, String autor, int ano, String disciplina, String instituicao) {
+        Apostila apostila = new Apostila(qtdDePaginas, titulo, autor, ano, disciplina, instituicao);
+        itens.add(apostila);
+        return "Apostila cadastrada!\n";
+    }
+
+    public String cadastrarArtigo(int qtdDePaginas, String titulo, String autor, int ano, int DOI, String abstractArtigo, String keywords){
+        // Caso em que o DOI ja existe
+        for (Item item : itens) {
+            if (item.getCode() == DOI) {
+                throw new IllegalArgumentException("Ja existe o item de DOI " + DOI);
+            }
+        }
+
+        // Cadastro do item
+        Item item = new Artigo(qtdDePaginas, titulo, autor, ano, DOI, abstractArtigo, keywords);
+        itens.add(item);
+        return "Artigo cadastrado!\n";
+    }
+
+    public String cadastrarRevista(int qtdDePaginas, String titulo, String autor, int ano, String edicao, String instituicao, String assuntos, int ISSN) {
+        // Caso em que o ISSN ja existe
+        for (Item item : itens) {
+            if (item.getCode() == ISSN) {
+                throw new IllegalArgumentException("Ja existe o item de ISSN " + ISSN);
+            }
+        }
+
+        // Cadastro do item
+        Item item = new Revista(qtdDePaginas, titulo, autor, ano, edicao, instituicao, assuntos, ISSN);
+        itens.add(item);
+        return "Revista cadastrada!\n";
+    }
+
+    public String excluirItem(int code) {
+        return "";
+    }
+
+    /////////////////////////////////// EMPRESTIMOS ///////////////////////////////////
+
+    public String listarEmprestimos(){
+        String string = "";
+        ArrayList<Emprestimo> emprestimos = getEmprestimos();
+
+        if(emprestimos == null || emprestimos.isEmpty()){
+            string += "Não há empréstimos cadastrados.\n";
+        }
+
+        else {
+            for(Emprestimo emprestimo : emprestimos){
+                string += "---------------------------------------------\n";
+                string += (emprestimo + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
+    }
+
+    public String listarEmprestimosAtrasados() {
+        String string = "";
+        ArrayList<Emprestimo> emprestimos = getEmprestimosAtrasados();
+
+        if(emprestimos == null || emprestimos.isEmpty()){
+            string += "Não há empréstimos atrasados.\n";
+        }
+
+        else {
+            for(Emprestimo emprestimo : emprestimos){
+                string += "---------------------------------------------\n";
+                string += (emprestimo + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
+    }
+
+    public String listarEmprestimosPorCliente(String CPF){
+        Cliente cliente = getCliente(CPF);
+        String string = "";
+
+        // Caso em que o cliente nao existe
+        if(cliente == null){
+            throw new IllegalArgumentException("Cliente nao existe");
+        }
+
+        ArrayList<Emprestimo> emprestimos = getEmprestimosPorCliente(CPF);
+
+        if(emprestimos == null || emprestimos.isEmpty()){
+            string += "Não há empréstimos cadastrados para esse cliente.\n";
+        }
+
+        else {
+            for(Emprestimo emprestimo : emprestimos){
+                string += "---------------------------------------------\n";
+                string += (emprestimo + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
     }
     
+    /////////////////////////////////// RESERVAS ///////////////////////////////////
+    
     public String listarReservas(){
-        String retorno = "";
-        if(reservas.isEmpty()){
-            return "Não há reservas cadastradas!";
+        String string = "";
+        ArrayList<Reserva> reservas = getReservas();
+
+        if(reservas == null || reservas.isEmpty()){
+            string += "Não há reservas cadastradas.\n";
         }
-        retorno = "***** Reservas *****\n";
-        for(Reserva reserva : reservas){
-            retorno = retorno + reserva.toString();
+
+        else {
+            for(Reserva reserva : reservas){
+                string += "---------------------------------------------\n";
+                string += (reserva + "\n");
+            }
+            string += "---------------------------------------------\n";
         }
-        return retorno;
+
+        return string;
     }
 
     public String listarReservasPorCliente(String CPF){
-        String retorno = "";
-        try {
-            if (this.clientes == null) {
-                throw new IllegalArgumentException("Lista vazia!");
-            }
-            retorno = "***** Reservas *****\n";
-            for(Cliente cliente : clientes){
-                if(cliente.getCPF().equals(CPF)){
-                    for(Reserva reserva : reservas){
-                        if(reserva.getCliente().getCPF().equals(CPF)){
-                            retorno = retorno + reserva.toString();
-                        }
-                    }
-                }
-            }
-            return retorno;
-        } catch (IllegalArgumentException e) {
-            return "Erro: " + e.getMessage();
-        }
-    }
-    public String listarEmprestimosPorCliente(String CPF){
-        String retorno = "";
-        try {
-            if (this.clientes == null) {
-                throw new IllegalArgumentException("Lista vazia!");
-            }
-            retorno = "***** Emprestimos *****\n";
-            for(Cliente cliente : clientes){
-                if(cliente.getCPF().equals(CPF)){
-                    for(Emprestimo emprestimo : emprestimos){
-                        if(emprestimo.getCliente().getCPF().equals(CPF)){
-                            retorno = retorno + emprestimo.toString();
-                        }
-                    }
-                }
-            }
-            return retorno;
-        } catch (IllegalArgumentException e) {
-            return "Erro: " + e.getMessage();
-        }
-    }
-    //public void listarEmprestimosAtrasados(){}
-    public String listarEmprestimos(){
-        String retorno = "";
-        try {
-            if (this.emprestimos == null) {
-                throw new IllegalArgumentException("Lista vazia!");
-            }
-            if(emprestimos.isEmpty()){
-                return "Não há emprestimos cadastrados!";
-            }
-            retorno = "***** Emprestimos *****";
-            for(Emprestimo emprestimo : emprestimos){
-                retorno = retorno + emprestimo.toString();
-            }
-            return retorno;
-        } catch (IllegalArgumentException e) {
-            return "Erro: " + e.getMessage();
-        }
-    }
-    public String pesquisarItem(String titulo){ //QUESTÃO DO RETURN
-        try {
-            if (this.itens == null) {
-                throw new IllegalArgumentException("Lista vazia!");
-            }
-            for(Item item : itens){
-                if(item.getTitulo().equals(titulo)){
-                    return "Item encontrado!" + item.toString();
-                }
-            }
-            return "Item não encontrado!";
-        } catch (IllegalArgumentException e) {
-            return "Erro: " + e.getMessage();
-        }
-    }
+        Cliente cliente = getCliente(CPF);
+        String string = "";
 
-    public String excluirAssinatura(String CPF){
-        for(Cliente cliente : clientes){
-            if(cliente.getCPF().equals(CPF)){
-                if(cliente instanceof Estudante){
-                    Estudante estudante = (Estudante) cliente;
-                    estudante.setAssinatura("Básico");
-                    return "Assinatura excluida com sucesso!";
-                }
-                if(cliente instanceof Professor){
-                    Professor professor = (Professor) cliente;
-                    professor.setAssinatura("Básico");
-                    return "Assinatura excluida com sucesso!";
-                }
-            }
+        // Caso em que o cliente nao existe
+        if(cliente == null){
+            throw new IllegalArgumentException("Cliente nao existe");
         }
-        return "Cliente não encontrado!";
-    }
-    public String gerarAssinatura(String CPF, String assinatura){
-        for(Cliente cliente : clientes){
-            if(cliente.getCPF().equals(CPF)){
-                if(cliente instanceof Estudante){
-                    Estudante estudante = (Estudante) cliente;
-                    estudante.setAssinatura(assinatura);
-                    return "Assinatura gerada com sucesso!";
-                }
-                if(cliente instanceof Professor){
-                    Professor professor = (Professor) cliente;
-                    professor.setAssinatura(assinatura);
-                    return "Assinatura gerada com sucesso!";
-                }
-            }
+
+        ArrayList<Reserva> reservas = getReservasPorCliente(CPF);
+
+        if(reservas == null || reservas.isEmpty()){
+            string += "Não há reservas cadastradas para esse cliente.\n";
         }
-        return "Cliente não encontrado!";
+
+        else {
+            for(Reserva reserva : reservas){
+                string += "---------------------------------------------\n";
+                string += (reserva + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
     }
 
 
-    // Getters para as listas
+    /////////////////////////////////// GETTERS PARA OBJETOS ///////////////////////////////////
+
     public ArrayList<Estudante> getEstudantes(){
         ArrayList<Estudante> estudantes = new ArrayList<>();
         for (Cliente cliente : clientes) {
@@ -536,70 +585,74 @@ public class Biblioteca {
         }
     }
 
-    public ArrayList<Livro> getlivros(){
-        try {
-            if (this.itens == null) {
-                throw new IllegalArgumentException("Lista vazia!");
+    public ArrayList<Livro> getLivros(){
+        ArrayList<Livro> livros = new ArrayList<>();
+        for (Item item : itens) {
+            if (item instanceof Livro) {
+                livros.add((Livro)item);
             }
-            ArrayList<Livro> livros = new ArrayList<>();
-            for(Item item : itens){
-                if(item instanceof Livro){
-                    livros.add((Livro) item);
-                }
-            }
-            if(livros.isEmpty()){
-                System.out.println("Não há livros cadastrados!");
-                return null;
-            }
-            return livros;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-            return null;
         }
+        return livros;
+    }
+
+    public ArrayList<Apostila> getApostilas() {
+        ArrayList<Apostila> apostilas = new ArrayList<>();
+        for (Item item : itens) {
+            if (item instanceof Apostila) {
+                apostilas.add((Apostila)item);
+            }
+        }
+        return apostilas;
     }
 
     public ArrayList<Artigo> getArtigos(){
-        try {
-            if (this.itens == null) {
-                throw new IllegalArgumentException("Lista vazia!");
+        ArrayList<Artigo> artigos = new ArrayList<>();
+        for (Item item : itens) {
+            if (item instanceof Artigo) {
+                artigos.add((Artigo)item);
             }
-            ArrayList<Artigo> artigos = new ArrayList<>();
-            for(Item item : itens){
-                if(item instanceof Artigo){
-                    artigos.add((Artigo) item);
-                }
-            }
-            if (artigos.isEmpty()){
-                System.out.println("Não há artigos cadastrados!");
-                return null;
-            }
-            return artigos;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-            return null;
         }
+        return artigos;
     }
 
     public ArrayList<Revista> getRevistas(){
-        try {
-            if (this.itens == null) {
-                throw new IllegalArgumentException("Lista vazia!");
+        ArrayList<Revista> revistas = new ArrayList<>();
+        for (Item item : itens) {
+            if (item instanceof Revista) {
+                revistas.add((Revista)item);
             }
-            ArrayList<Revista> revistas = new ArrayList<>();
-            for(Item item : itens){
-                if(item instanceof Revista){
-                    revistas.add((Revista) item);
-                }
-            }
-            if (revistas.isEmpty()){
-                System.out.println("Não há revistas cadastradas!");
-                return null;
-            }
-            return revistas;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
-            return null;
         }
+        return revistas;
+    }
+
+    public ArrayList<Emprestimo> getEmprestimosAtrasados() {
+        ArrayList<Emprestimo> emprestimosAtrasados = new ArrayList<>();
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.isAtrasado()) {
+                emprestimosAtrasados.add(emprestimo);
+            }
+        }
+        return emprestimosAtrasados;
+    }
+
+    public ArrayList<Emprestimo> getEmprestimosPorCliente(String CPF) {
+        ArrayList<Emprestimo> emprestimosPorCliente = new ArrayList<>();
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.getCliente().getCPF().equals(CPF)) {
+                emprestimosPorCliente.add(emprestimo);
+            }
+        }
+        return emprestimosPorCliente;
+    }
+
+    public ArrayList<Reserva> getReservasPorCliente(String CPF) {
+        ArrayList<Reserva> reservasPorCliente = new ArrayList<>();
+        for (Reserva reserva : reservas) {
+            if (reserva.getCliente().getCPF().equals(CPF)) {
+                reservasPorCliente.add(reserva);
+            }
+        }
+        return reservasPorCliente;
     }
   
     // Getters e Setters

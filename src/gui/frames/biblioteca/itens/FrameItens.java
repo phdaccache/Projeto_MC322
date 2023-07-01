@@ -54,8 +54,8 @@ public class FrameItens extends JFrame {
 		panelListarApostilas = new PanelListarApostilas(biblioteca);
 		panelListarArtigos = new PanelListarArtigos(biblioteca);
 		panelListarRevistas = new PanelListarRevistas(biblioteca);
-		panelCadastrarItem = new PanelCadastrarItem(biblioteca);
-		panelExcluirItem = new PanelExcluirItem(biblioteca);
+		panelCadastrarItem = new PanelCadastrarItem(biblioteca, this);
+		panelExcluirItem = new PanelExcluirItem(biblioteca, this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);

@@ -73,7 +73,7 @@ public class PanelListarApostilas extends JPanel {
 		scrollPane.setViewportView(textArea);
 
 		// String recebida do backend
-		String string = "teste\nteste";
+		String string = biblioteca.listarApostilas();
 		textArea.setText(string);
 	}
 }
