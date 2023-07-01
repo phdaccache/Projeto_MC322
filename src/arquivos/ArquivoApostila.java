@@ -1,7 +1,6 @@
 package arquivos;
 
 import sistema.Apostila;
-import sistema.Artigo;
 
 import java.io.BufferedReader;
 import java.io.File;
