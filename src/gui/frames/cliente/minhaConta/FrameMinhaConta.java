@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.cliente.FrameCliente;
 import gui.frames.style.*;
+import sistema.Cliente;
 
 public class FrameMinhaConta extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +25,7 @@ public class FrameMinhaConta extends JFrame {
 	private int mouseX;
 	private int mouseY;
 	
-	public FrameMinhaConta() {
+	public FrameMinhaConta(Cliente cliente) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -42,9 +43,9 @@ public class FrameMinhaConta extends JFrame {
 			}
 		});
 		
-		panelVisualizarDados = new PanelVisualizarDados();
-		panelEditarDados = new PanelEditarDados();
-		panelExcluirConta = new PanelExcluirConta();
+		panelVisualizarDados = new PanelVisualizarDados(cliente);
+		panelEditarDados = new PanelEditarDados(cliente, this);
+		panelExcluirConta = new PanelExcluirConta(cliente, this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);
@@ -78,7 +79,7 @@ public class FrameMinhaConta extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				FrameMinhaConta.this.dispose();
 				
-				JFrame frameCliente = new FrameCliente();
+				JFrame frameCliente = new FrameCliente(cliente);
 				frameCliente.setVisible(true);
 				frameCliente.toFront();
 				frameCliente.requestFocus();
