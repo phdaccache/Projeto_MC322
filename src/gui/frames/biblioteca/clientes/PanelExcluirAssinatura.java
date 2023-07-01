@@ -13,7 +13,7 @@ public class PanelExcluirAssinatura extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelExcluirAssinatura(Biblioteca biblioteca) {
+	public PanelExcluirAssinatura(Biblioteca biblioteca, JFrame frameClientes) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);

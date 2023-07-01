@@ -1,8 +1,8 @@
 package sistema;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.StringJoiner;
 
 public class Cliente {
@@ -38,8 +38,8 @@ public class Cliente {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //Formato da data (dia/mes/ano
-		String dataNascimento = formato.format(getDataNasc());
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataNascimento = getDataNasc().format(dtf);
 		joiner.add("CPF: " + CPF);
 		joiner.add("Nome: " + nome);
 		joiner.add("Email: " + email);
@@ -195,9 +195,6 @@ public class Cliente {
 	public void pesquisarItem(String titulo){
 		getBiblioteca().pesquisarItem(titulo);
 	}
-	public void UltimasAquisicoes(){
-		getBiblioteca().UltimasAquisicoes();
-	}
 
 	public String DevolverEmprestimo(String Titulo){
 		try {
@@ -207,7 +204,7 @@ public class Cliente {
         for(Emprestimo emprestimo : listaEmprestimos){
 			if(emprestimo.getItem().getTitulo().equals(Titulo)){
 				listaEmprestimos.remove(emprestimo);
-				biblioteca.removerEmprestimo(Titulo);
+				//biblioteca.removerEmprestimo(Titulo);
 				return "Emprestimo removido com sucesso";
 			}
 		}
@@ -289,7 +286,7 @@ public class Cliente {
 			if(reserva.getItem().getTitulo().equals(titulo)){
 				listaReservasItens.remove(reserva);
 				getItem(titulo).removeReserva(reserva);
-				biblioteca.removerReserva(titulo);
+				//biblioteca.removerReserva(titulo);
 			}
 		}
 	}
