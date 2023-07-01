@@ -11,7 +11,11 @@ import java.util.ArrayList;
 
 public class ArquivoReserva implements Arquivo<Reserva>{
     @Override
-    public String GravarDados(ArrayList<Reserva> lista) {
+    public String GravarDados(ArrayList<Reserva> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Reservas1.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("CNPJ_BIBLIOTECA,TITULO_ITEM,DATA,CODE_CLIENTE,CODE,POSICAO");
         return null;
     }
 
