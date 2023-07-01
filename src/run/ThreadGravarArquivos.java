@@ -1,8 +1,5 @@
 package run;
-import arquivos.ArquivoBiblioteca;
-import arquivos.ArquivoEmprestimo;
-import arquivos.ArquivoEstudante;
-import arquivos.ArquivoLivro;
+import arquivos.*;
 import sistema.*;
 
 import java.io.IOException;
@@ -12,6 +9,10 @@ import java.util.ArrayList;
 public class ThreadGravarArquivos extends Thread {
 
     public void run() {
-
+        try {
+            Gravar.gravarDados();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

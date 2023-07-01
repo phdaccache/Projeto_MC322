@@ -1,17 +1,23 @@
 package arquivos;
 
 import sistema.Artigo;
+import sistema.Revista;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ArquivoArtigo implements Arquivo<Artigo>{
     @Override
-    public String GravarDados(ArrayList<Artigo> lista) {
-        return null;
+    public String GravarDados(ArrayList<Artigo> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Revistas.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("CODE_ITEM,DOI,ABSTRACT,KEYWORDS");
+        for (Artigo artigo : lista) {
+            pw.println(artigo.getCode() + "," + artigo.getDOI() + "," + artigo.getAbstractArtigo() + "," + artigo.getKeywords());
+        }
+        fileWriter.close();
+        return "Artigos salvos com sucesso!";
     }
 
     @Override

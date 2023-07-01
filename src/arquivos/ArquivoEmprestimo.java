@@ -3,19 +3,25 @@ package arquivos;
 import sistema.Admin;
 import sistema.Emprestimo;
 import sistema.Estudante;
+import sistema.Reserva;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ArquivoEmprestimo implements Arquivo<Emprestimo>{
     @Override
-    public String GravarDados(ArrayList<Emprestimo> lista) {
-        return null;
+    public String GravarDados(ArrayList<Emprestimo> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Emprestimos.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("CNPJ_BIBLIOTECA,TITULO_ITEM,STATUS,DATA_INI,DATA_FIM,CPF_CLIENTE,CODE_EMPRESTIMO");
+        for (Emprestimo emprestimo : lista) {
+            pw.println(emprestimo.getBiblioteca().getCNPJ() + "," + emprestimo.getItem().getTitulo() + "," + emprestimo.getStatus() + "," + emprestimo.getData_ini() + "," + emprestimo.getData_fim() + "," + emprestimo.getCliente().getCPF() + "," + emprestimo.getCode());
+        }
+        fileWriter.close();
+        return "Emprestimos salvos com sucesso!";
     }
 
     @Override
