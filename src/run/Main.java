@@ -1,6 +1,7 @@
 package run;
 import javax.swing.*;
 
+import arquivos.Carregar;
 import gui.frames.*;
 
 public class Main {
@@ -9,6 +10,9 @@ public class Main {
 		// Duplicando a escala da tela
 		System.setProperty("sun.java2d.uiScale", "2");
 
+		// Carregando dados dos arquivos csv
+		Carregar.carregarDados();
+
 		// Rodando o programa
 		Main window = new Main();
 		window.FrameMain.setVisible(true);
@@ -16,15 +20,15 @@ public class Main {
 		window.FrameMain.requestFocus();
 
 		// Rodando uma segunda thread para gravar os dados apos a execucao do programa
-		// ThreadGravarArquivos thread = new ThreadGravarArquivos();
-		// Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-		// 	thread.start();
-		// 	try {
-		// 		thread.join();
-		// 	} catch (InterruptedException e) {
-		// 		e.printStackTrace();
-		// 	}
-		// }));
+		ThreadGravarArquivos thread = new ThreadGravarArquivos();
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			thread.start();
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}));
 	}
     
     public Main() {

@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import gui.frames.cliente.FrameCliente;
 import gui.frames.style.*;
+import sistema.Cliente;
 
 public class FrameItens extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +24,7 @@ public class FrameItens extends JFrame {
 	private int mouseX;
 	private int mouseY;
 	
-	public FrameItens() {
+	public FrameItens(Cliente cliente) {
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -76,7 +77,7 @@ public class FrameItens extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				FrameItens.this.dispose();
 				
-				JFrame frameCliente = new FrameCliente();
+				JFrame frameCliente = new FrameCliente(cliente);
 				frameCliente.setVisible(true);
 				frameCliente.toFront();
 				frameCliente.requestFocus();

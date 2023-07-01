@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ArquivoReserva implements Arquivo<Reserva>{
@@ -25,6 +26,7 @@ public class ArquivoReserva implements Arquivo<Reserva>{
         if (file.exists()) {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String linha = br.readLine();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             while (linha != null) {
                 if (linha.equals("CNPJ_BIBLIOTECA,CODE_ITEM,DATA,CODE_CLIENTE,CODE,POSICAO")) {
@@ -34,7 +36,7 @@ public class ArquivoReserva implements Arquivo<Reserva>{
 
                 String[] campos = linha.split(demilitador);
                 linhas.add(campos);
-                lista.add(new Reserva(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[2]), Admin.getBiblioteca(campos[0]).getCliente(campos[5]), Integer.parseInt(campos[6]), Integer.parseInt(campos[7])));
+                lista.add(new Reserva(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[2], dtf), Admin.getBiblioteca(campos[0]).getCliente(campos[5]), Integer.parseInt(campos[6]), Integer.parseInt(campos[7])));
                 linha = br.readLine();
         }
             br.close();

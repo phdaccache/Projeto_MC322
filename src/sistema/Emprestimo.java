@@ -28,14 +28,14 @@ public class Emprestimo {
 		this.code = random.nextInt();
 	}
 
-	public Emprestimo(Biblioteca biblioteca, Item item, LocalDate data_ini, LocalDate data_fim, Cliente cliente, int code) {
+	public Emprestimo(Biblioteca biblioteca, Item item, LocalDate data_ini, LocalDate data_fim, Cliente cliente, String status, int code) {
 		this.possiveisStatus = new String[] {"Em dia", "Atrasado"};
 		this.biblioteca = biblioteca;
 		this.item = item;
 		this.data_ini = data_ini;
 		this.data_fim = data_fim;
 		this.cliente = cliente;
-		this.status = "Em dia";
+		this.status = status;
 		this.code = code;
 	}
 

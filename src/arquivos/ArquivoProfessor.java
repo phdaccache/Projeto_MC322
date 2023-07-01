@@ -5,6 +5,7 @@ import sistema.Professor;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ArquivoProfessor implements Arquivo<Professor>{
@@ -35,6 +36,7 @@ public class ArquivoProfessor implements Arquivo<Professor>{
                 if (campos[10].equals("Professor")) {
                     BufferedReader br1 = new BufferedReader(new FileReader(file1));
                     String linha1 = br1.readLine();
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                     while (linha1 != null) {
                         if (linha1.equals("CPF_CLIENTE,INSTITUICAO,EDUCACAO,AREA,AULAS,ANO_ING")) {
@@ -46,7 +48,7 @@ public class ArquivoProfessor implements Arquivo<Professor>{
                         linhas.add(campos1);
 
                         if (campos[1].equals(campos1[0])) {
-                            lista.add(new Professor(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6]), campos[7], campos[8], campos1[1], campos1[2], campos1[3], campos1[4], Integer.parseInt(campos1[5])));
+                            lista.add(new Professor(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6], dtf), campos[7], campos[8], campos1[1], campos1[2], campos1[3], campos1[4], Integer.parseInt(campos1[5])));
                         }
 
                         linha1 = br1.readLine();

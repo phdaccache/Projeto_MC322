@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ArquivoEstudante implements Arquivo<Estudante>{
@@ -40,6 +41,7 @@ public class ArquivoEstudante implements Arquivo<Estudante>{
                 if (campos[10].equals("Estudante")) {
                     BufferedReader br1 = new BufferedReader(new FileReader(file1));
                     String linha1 = br1.readLine();
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                     while (linha1 != null) {
                         if (linha1.equals("CPF_CLIENTE,MATRICULA,CURSO,ANO_GRAD")) {
@@ -51,7 +53,7 @@ public class ArquivoEstudante implements Arquivo<Estudante>{
                         linhas.add(campos1);
 
                         if (campos[1].equals(campos1[0])) {
-                            lista.add(new Estudante(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6]), campos[7], campos[8], campos1[1], campos1[2], Integer.parseInt(campos1[3])));
+                            lista.add(new Estudante(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6], dtf), campos[7], campos[8], campos1[1], campos1[2], Integer.parseInt(campos1[3])));
                         }
 
                         linha1 = br1.readLine();
