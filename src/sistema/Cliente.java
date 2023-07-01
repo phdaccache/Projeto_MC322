@@ -1,8 +1,8 @@
 package sistema;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.StringJoiner;
 
 public class Cliente {
@@ -38,8 +38,8 @@ public class Cliente {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner("\n");
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); //Formato da data (dia/mes/ano
-		String dataNascimento = formato.format(getDataNasc());
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String dataNascimento = getDataNasc().format(dtf);
 		joiner.add("CPF: " + CPF);
 		joiner.add("Nome: " + nome);
 		joiner.add("Email: " + email);
@@ -163,7 +163,7 @@ public class Cliente {
 		}
 	}
 	public void fazerEmprestimo(String titulo){
-		biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
+		//biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
 		biblioteca.getItem(titulo).setStatus("emprestado");
 	}
 	public String listarEmprestimos(){
@@ -195,9 +195,6 @@ public class Cliente {
 	public void pesquisarItem(String titulo){
 		getBiblioteca().pesquisarItem(titulo);
 	}
-	public void UltimasAquisicoes(){
-		getBiblioteca().UltimasAquisicoes();
-	}
 
 	public String DevolverEmprestimo(String Titulo){
 		try {
@@ -207,7 +204,7 @@ public class Cliente {
         for(Emprestimo emprestimo : listaEmprestimos){
 			if(emprestimo.getItem().getTitulo().equals(Titulo)){
 				listaEmprestimos.remove(emprestimo);
-				biblioteca.removerEmprestimo(Titulo);
+				//biblioteca.removerEmprestimo(Titulo);
 				return "Emprestimo removido com sucesso";
 			}
 		}
@@ -281,7 +278,7 @@ public class Cliente {
 		return data;
 	}
 	public void Reservar(String titulo){
-		biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
+		//biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
 		biblioteca.getItem(titulo).setStatus("reservado");
 	}
 	public void RemoverReserva(String titulo){
@@ -289,7 +286,7 @@ public class Cliente {
 			if(reserva.getItem().getTitulo().equals(titulo)){
 				listaReservasItens.remove(reserva);
 				getItem(titulo).removeReserva(reserva);
-				biblioteca.removerReserva(titulo);
+				//biblioteca.removerReserva(titulo);
 			}
 		}
 	}

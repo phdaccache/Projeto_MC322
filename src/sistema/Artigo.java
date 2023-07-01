@@ -9,8 +9,8 @@ public class Artigo extends Item {
 	private String keywords; // Palavras-chave do artigo;
 	
 	// Construtor
-	public Artigo(int code, int qtdDePaginas, String titulo, String autor, int ano, int DOI, String abstractArtigo, String keywords) {
-		super(code, qtdDePaginas, titulo, autor, ano);
+	public Artigo(int qtdDePaginas, String titulo, String autor, int ano, int DOI, String abstractArtigo, String keywords) {
+		super(qtdDePaginas, titulo, autor, ano, DOI);
 		this.DOI = DOI;
 		this.abstractArtigo = abstractArtigo;
 		this.keywords = keywords;

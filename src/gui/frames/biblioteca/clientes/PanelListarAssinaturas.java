@@ -73,7 +73,7 @@ public class PanelListarAssinaturas extends JPanel {
 		scrollPane.setViewportView(textArea);
 
 		// String recebida do backend
-		String string = "teste\nteste";
+		String string = biblioteca.listarAssinaturas();
 		textArea.setText(string);
 	}
 }

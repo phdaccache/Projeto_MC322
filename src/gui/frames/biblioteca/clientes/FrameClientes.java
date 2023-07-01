@@ -62,11 +62,11 @@ public class FrameClientes extends JFrame {
 		panelListarTodosOsClientes = new PanelListarTodosOsClientes(biblioteca);
 		panelListarEstudantes = new PanelListarEstudantes(biblioteca);
 		panelListarProfessores = new PanelListarProfessores(biblioteca);
-		panelCadastrarCliente = new PanelCadastrarCliente(biblioteca);
-		panelExcluirCliente = new PanelExcluirCliente(biblioteca);
+		panelCadastrarCliente = new PanelCadastrarCliente(biblioteca, this);
+		panelExcluirCliente = new PanelExcluirCliente(biblioteca, this);
 		panelListarAssinaturas = new PanelListarAssinaturas(biblioteca);
-		panelGerarAssinatura = new PanelGerarAssinatura(biblioteca);
-		panelExcluirAssinatura = new PanelExcluirAssinatura(biblioteca);
+		panelGerarAssinatura = new PanelGerarAssinatura(biblioteca, this);
+		panelExcluirAssinatura = new PanelExcluirAssinatura(biblioteca, this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);

@@ -15,11 +15,20 @@ public class Item {
 	private ArrayList<Reserva> listaReservas;
 	
 	//Construtor
-
-	public Item(int code, int qtdDePaginas, String titulo, String autor, int ano) {
+	public Item(int qtdDePaginas, String titulo, String autor, int ano) {
 		this.possiveisStatus = new String[]{"Disponível", "Emprestado", "Reservado"};
 		Random random = new Random();
 		this.code = random.nextInt();
+		this.qtdPaginas = qtdDePaginas;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.ano = ano;
+		this.listaReservas = new ArrayList<Reserva>();
+	}
+
+	public Item(int qtdDePaginas, String titulo, String autor, int ano, int code) {
+		this.possiveisStatus = new String[]{"Disponível", "Emprestado", "Reservado"};
+		this.code = code;
 		this.qtdPaginas = qtdDePaginas;
 		this.titulo = titulo;
 		this.autor = autor;

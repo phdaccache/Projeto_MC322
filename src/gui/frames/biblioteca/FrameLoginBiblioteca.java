@@ -260,8 +260,6 @@ public class FrameLoginBiblioteca extends JFrame {
 					return;
 				}
 				for (Biblioteca biblioteca : Admin.listaBibliotecas) {
-					System.out.println(biblioteca.getCNPJ());
-					System.out.println(biblioteca.getSenha());
 					if (txtUsername.getText().equals(biblioteca.getCNPJ()) && txtPassword.getText().equals(biblioteca.getSenha())) {
 						lblLoginMessage.setText("");
 						FrameLoginBiblioteca.this.dispose();

@@ -8,8 +8,8 @@ public class Apostila extends Item {
 	private String instituicao;
 	
 	//Construtor
-	public Apostila(int code, int qtdDePaginas, String titulo, String autor, int ano, String disciplina, String instituicao) {
-		super(code, qtdDePaginas, titulo, autor, ano);
+	public Apostila(int qtdDePaginas, String titulo, String autor, int ano, String disciplina, String instituicao) {
+		super(qtdDePaginas, titulo, autor, ano);
 		this.disciplina = disciplina;
 		this.instituicao = instituicao;
 	}

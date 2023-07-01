@@ -13,7 +13,7 @@ public class PanelGerarAssinatura extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelGerarAssinatura(Biblioteca biblioteca) {
+	public PanelGerarAssinatura(Biblioteca biblioteca, JFrame frameClientes) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -99,9 +99,6 @@ public class PanelGerarAssinatura extends JPanel {
 		pnlInput1.add(txtInput1);
 		txtInput1.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String cpf = txtInput1.getText();
-
 		///////////////////////// Input 2 /////////////////////////
 
 		JPanel pnlInput2 = new JPanel();
@@ -111,34 +108,57 @@ public class PanelGerarAssinatura extends JPanel {
 		add(pnlInput2);
 		pnlInput2.setLayout(null);
 
-		JTextField txtInput2 = new JTextField();
-		txtInput2.addFocusListener(new FocusAdapter() {
+		JComboBox<String> comboBox = new JComboBox<String>(new String[] {"Básico", "Prata", "Dourado"});
+		comboBox.setBounds(0, 0, 115, 25);
+		pnlInput2.add(comboBox);
+
+		JPanel pnlGerarBtn = new JPanel();
+		pnlGerarBtn.addMouseListener(new MouseAdapter() {
 			@Override
-			public void focusGained(FocusEvent e) {
-				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Assinatura")) {
-					txtInput2.setText("");
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String cpf = txtInput1.getText();
+					String assinatura = (String)comboBox.getSelectedItem();
+					String message = biblioteca.gerarAssinatura(cpf, assinatura);
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameClientes.dispose();
+						JFrame frame = new FrameClientes(biblioteca);
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Assinatura");
-					txtInput2.setForeground(MyColors.PLACEHOLDER);
-				}
+			public void mouseEntered(MouseEvent e) {
+				pnlGerarBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlGerarBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlGerarBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlGerarBtn.setBackground(MyColors.ACCENT);
 			}
 		});
-		txtInput2.setBorder(null);
-		txtInput2.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtInput2.setSelectionColor(MyColors.ACCENT);
-		txtInput2.setForeground(MyColors.PLACEHOLDER);
-		txtInput2.setText("Assinatura");
-		txtInput2.setBackground(MyColors.BACKGROUND);
-		txtInput2.setBounds(10, 5, 100, 15);
-		pnlInput2.add(txtInput2);
-		txtInput2.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		//String assinatura = txtInput2.getText();
+		pnlGerarBtn.setBackground(MyColors.PRIMARY);
+		pnlGerarBtn.setBounds(53, 290, 240, 40);
+		add(pnlGerarBtn);
+		pnlGerarBtn.setLayout(null);
+		
+		JLabel lblGerar = new JLabel("GERAR");
+		lblGerar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGerar.setForeground(MyColors.BACKGROUND);
+		lblGerar.setFont(new Font("Arial", Font.BOLD, 14));
+		lblGerar.setBounds(0, 5, 250, 30);
+		pnlGerarBtn.add(lblGerar);
 	}
 }

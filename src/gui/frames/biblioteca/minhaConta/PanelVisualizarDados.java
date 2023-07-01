@@ -73,7 +73,7 @@ public class PanelVisualizarDados extends JPanel {
 		scrollPane.setViewportView(textArea);
 
 		// String recebida do backend
-		String string = biblioteca.toString();
+		String string = biblioteca.visualizarDados();
 		textArea.setText(string);
 	}
 

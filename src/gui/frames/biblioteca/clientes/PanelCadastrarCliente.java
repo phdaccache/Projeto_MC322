@@ -2,6 +2,9 @@ package gui.frames.biblioteca.clientes;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import javax.swing.*;
 
@@ -14,7 +17,7 @@ public class PanelCadastrarCliente extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel iconX;
 	
-	public PanelCadastrarCliente(Biblioteca biblioteca) {
+	public PanelCadastrarCliente(Biblioteca biblioteca, JFrame frameClientes) {
 		setBounds(0, 0, 346, 396);
 		setLayout(null);
 		setVisible(true);
@@ -63,52 +66,26 @@ public class PanelCadastrarCliente extends JPanel {
 			}
 		});
 		add(iconX);
-		
+
 		///////////////////////// Input 1 /////////////////////////
-		
+
 		JPanel pnlInput1 = new JPanel();
 		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput1.setBackground(MyColors.BACKGROUND);
-		pnlInput1.setBounds(53, 125, 115, 25);
+		pnlInput1.setBounds(115, 100, 115, 25);
 		add(pnlInput1);
 		pnlInput1.setLayout(null);
-		
-		JTextField txtInput1 = new JTextField();
-		txtInput1.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Tipo de Cliente")) {
-					txtInput1.setText("");
-				}
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Tipo de Cliente");
-					txtInput1.setForeground(MyColors.PLACEHOLDER);
-				}
-			}
-		});
-		txtInput1.setBorder(null);
-		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtInput1.setSelectionColor(MyColors.ACCENT);
-		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("Tipo de Cliente");
-		txtInput1.setBackground(MyColors.BACKGROUND);
-		txtInput1.setBounds(10, 5, 100, 15);
-		pnlInput1.add(txtInput1);
-		txtInput1.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String tipo = txtInput1.getText();
+
+		JComboBox<String> comboBox = new JComboBox<String>(new String[] {"Estudante", "Professor"});
+		comboBox.setBounds(0, 0, 115, 25);
+		pnlInput1.add(comboBox);
 		
 		///////////////////////// Input 2 /////////////////////////
 		
 		JPanel pnlInput2 = new JPanel();
 		pnlInput2.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput2.setBackground(MyColors.BACKGROUND);
-		pnlInput2.setBounds(178, 125, 115, 25);
+		pnlInput2.setBounds(53, 135, 115, 25);
 		add(pnlInput2);
 		pnlInput2.setLayout(null);
 		
@@ -138,16 +115,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput2.setBounds(10, 5, 100, 15);
 		pnlInput2.add(txtInput2);
 		txtInput2.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String cpf = txtInput2.getText();
 
 		///////////////////////// Input 3 /////////////////////////
 		
 		JPanel pnlInput3 = new JPanel();
 		pnlInput3.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput3.setBackground(MyColors.BACKGROUND);
-		pnlInput3.setBounds(53, 160, 115, 25);
+		pnlInput3.setBounds(178, 135, 115, 25);
 		add(pnlInput3);
 		pnlInput3.setLayout(null);
 		
@@ -177,16 +151,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput3.setBounds(10, 5, 100, 15);
 		pnlInput3.add(txtInput3);
 		txtInput3.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String nome = txtInput3.getText();
 
 		///////////////////////// Input 4 /////////////////////////
 		
 		JPanel pnlInput4 = new JPanel();
 		pnlInput4.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput4.setBackground(MyColors.BACKGROUND);
-		pnlInput4.setBounds(178, 160, 115, 25);
+		pnlInput4.setBounds(53, 170, 115, 25);
 		add(pnlInput4);
 		pnlInput4.setLayout(null);
 		
@@ -216,16 +187,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput4.setBounds(10, 5, 100, 15);
 		pnlInput4.add(txtInput4);
 		txtInput4.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String telefone = txtInput4.getText();
 
 		///////////////////////// Input 5 /////////////////////////
 		
 		JPanel pnlInput5 = new JPanel();
 		pnlInput5.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput5.setBackground(MyColors.BACKGROUND);
-		pnlInput5.setBounds(53, 195, 115, 25);
+		pnlInput5.setBounds(178, 170, 115, 25);
 		add(pnlInput5);
 		pnlInput5.setLayout(null);
 		
@@ -255,16 +223,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput5.setBounds(10, 5, 100, 15);
 		pnlInput5.add(txtInput5);
 		txtInput5.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String email = txtInput5.getText();
 
 		///////////////////////// Input 6 /////////////////////////
 		
 		JPanel pnlInput6 = new JPanel();
 		pnlInput6.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput6.setBackground(MyColors.BACKGROUND);
-		pnlInput6.setBounds(178, 195, 115, 25);
+		pnlInput6.setBounds(53, 205, 115, 25);
 		add(pnlInput6);
 		pnlInput6.setLayout(null);
 		
@@ -294,16 +259,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput6.setBounds(10, 5, 100, 15);
 		pnlInput6.add(txtInput6);
 		txtInput6.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String nascimento = txtInput6.getText();
 
 		///////////////////////// Input 7 /////////////////////////
 		
 		JPanel pnlInput7 = new JPanel();
 		pnlInput7.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput7.setBackground(MyColors.BACKGROUND);
-		pnlInput7.setBounds(53, 230, 115, 25);
+		pnlInput7.setBounds(178, 205, 115, 25);
 		add(pnlInput7);
 		pnlInput7.setLayout(null);
 		
@@ -333,16 +295,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput7.setBounds(10, 5, 100, 15);
 		pnlInput7.add(txtInput7);
 		txtInput7.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String senha = txtInput7.getText();
 
 		///////////////////////// Input 8 /////////////////////////
 		
 		JPanel pnlInput8 = new JPanel();
 		pnlInput8.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput8.setBackground(MyColors.BACKGROUND);
-		pnlInput8.setBounds(178, 230, 115, 25);
+		pnlInput8.setBounds(53, 240, 115, 25);
 		add(pnlInput8);
 		pnlInput8.setLayout(null);
 		
@@ -372,16 +331,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput8.setBounds(10, 5, 100, 15);
 		pnlInput8.add(txtInput8);
 		txtInput8.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String assinatura = txtInput8.getText();
 
 		///////////////////////// Input 9 /////////////////////////
 		
 		JPanel pnlInput9 = new JPanel();
 		pnlInput9.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput9.setBackground(MyColors.BACKGROUND);
-		pnlInput9.setBounds(53, 265, 115, 25);
+		pnlInput9.setBounds(178, 240, 115, 25);
 		add(pnlInput9);
 		pnlInput9.setLayout(null);
 		
@@ -411,16 +367,13 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput9.setBounds(10, 5, 100, 15);
 		pnlInput9.add(txtInput9);
 		txtInput9.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String matricula = txtInput9.getText();
 
 		///////////////////////// Input 10 /////////////////////////
 
 		JPanel pnlInput10 = new JPanel();
 		pnlInput10.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput10.setBackground(MyColors.BACKGROUND);
-		pnlInput10.setBounds(178, 265, 115, 25);
+		pnlInput10.setBounds(53, 275, 115, 25);
 		add(pnlInput10);
 		pnlInput10.setLayout(null);
 
@@ -451,15 +404,12 @@ public class PanelCadastrarCliente extends JPanel {
 		pnlInput10.add(txtInput10);
 		txtInput10.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String curso = txtInput10.getText();
-
 		///////////////////////// Input 11 /////////////////////////
 
 		JPanel pnlInput11 = new JPanel();
 		pnlInput11.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput11.setBackground(MyColors.BACKGROUND);
-		pnlInput11.setBounds(53, 300, 115, 25);
+		pnlInput11.setBounds(178, 275, 115, 25);
 		add(pnlInput11);
 		pnlInput11.setLayout(null);
 
@@ -490,17 +440,15 @@ public class PanelCadastrarCliente extends JPanel {
 		pnlInput11.add(txtInput11);
 		txtInput11.setColumns(10);
 
-		// Pegar a informação de dentro do input:
-		//String ano_grad = txtInput11.getText();
-
 		///////////////////////// Input 12 /////////////////////////
 
 		JPanel pnlInput12 = new JPanel();
 		pnlInput12.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput12.setBackground(MyColors.BACKGROUND);
-		pnlInput12.setBounds(178, 300, 115, 25);
+		pnlInput12.setBounds(178, 240, 115, 25);
 		add(pnlInput12);
 		pnlInput12.setLayout(null);
+		pnlInput12.setVisible(false);
 
 		JTextField txtInput12 = new JTextField();
 		txtInput12.addFocusListener(new FocusAdapter() {
@@ -528,18 +476,17 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput12.setBounds(10, 5, 100, 15);
 		pnlInput12.add(txtInput12);
 		txtInput12.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		//String instituicao = txtInput12.getText();
+		txtInput12.setVisible(false);
 
 		///////////////////////// Input 13 /////////////////////////
 
 		JPanel pnlInput13 = new JPanel();
 		pnlInput13.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput13.setBackground(MyColors.BACKGROUND);
-		pnlInput13.setBounds(53, 335, 115, 25);
+		pnlInput13.setBounds(53, 275, 115, 25);
 		add(pnlInput13);
 		pnlInput13.setLayout(null);
+		pnlInput13.setVisible(false);
 
 		JTextField txtInput13 = new JTextField();
 		txtInput13.addFocusListener(new FocusAdapter() {
@@ -567,18 +514,17 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput13.setBounds(10, 5, 100, 15);
 		pnlInput13.add(txtInput13);
 		txtInput13.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		//String educacao = txtInput13.getText();
+		txtInput13.setVisible(false);
 
 		///////////////////////// Input 14 /////////////////////////
 
 		JPanel pnlInput14 = new JPanel();
 		pnlInput14.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput14.setBackground(MyColors.BACKGROUND);
-		pnlInput14.setBounds(178, 335, 115, 25);
+		pnlInput14.setBounds(178, 275, 115, 25);
 		add(pnlInput14);
 		pnlInput14.setLayout(null);
+		pnlInput14.setVisible(false);
 
 		JTextField txtInput14 = new JTextField();
 		txtInput14.addFocusListener(new FocusAdapter() {
@@ -606,18 +552,17 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput14.setBounds(10, 5, 100, 15);
 		pnlInput14.add(txtInput14);
 		txtInput14.setColumns(10);
-
-		// Pegar a informação de dentro do input:
-		//String area = txtInput14.getText();
+		txtInput14.setVisible(false);
 
 		///////////////////////// Input 15 /////////////////////////
 		
 		JPanel pnlInput15 = new JPanel();
 		pnlInput15.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput15.setBackground(MyColors.BACKGROUND);
-		pnlInput15.setBounds(53, 370, 115, 25);
+		pnlInput15.setBounds(53, 310, 115, 25);
 		add(pnlInput15);
 		pnlInput15.setLayout(null);
+		pnlInput15.setVisible(false);
 		
 		JTextField txtInput15 = new JTextField();
 		txtInput15.addFocusListener(new FocusAdapter() {
@@ -645,18 +590,17 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput15.setBounds(10, 5, 100, 15);
 		pnlInput15.add(txtInput15);
 		txtInput15.setColumns(10);
-		
-		// Pegar a informação de dentro do input:
-		//String aulas = txtInput15.getText();
+		txtInput15.setVisible(false);
 
 		///////////////////////// Input 16 /////////////////////////
 		
 		JPanel pnlInput16 = new JPanel();
 		pnlInput16.setBorder(new LineBorder(MyColors.TEXT));
 		pnlInput16.setBackground(MyColors.BACKGROUND);
-		pnlInput16.setBounds(178, 370, 115, 25);
+		pnlInput16.setBounds(178, 310, 115, 25);
 		add(pnlInput16);
 		pnlInput16.setLayout(null);
+		pnlInput16.setVisible(false);
 		
 		JTextField txtInput16 = new JTextField();
 		txtInput16.addFocusListener(new FocusAdapter() {
@@ -684,8 +628,131 @@ public class PanelCadastrarCliente extends JPanel {
 		txtInput16.setBounds(10, 5, 100, 15);
 		pnlInput16.add(txtInput16);
 		txtInput16.setColumns(10);
+		txtInput16.setVisible(false);
+
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+        		String opcao = (String)comboBox.getSelectedItem();
+				if (opcao.equals("Estudante")) {
+					pnlInput9.setVisible(true);
+					pnlInput10.setVisible(true);
+					pnlInput11.setVisible(true);
+					txtInput9.setVisible(true);
+					txtInput10.setVisible(true);
+					txtInput11.setVisible(true);
+
+					pnlInput12.setVisible(false);
+					pnlInput13.setVisible(false);
+					pnlInput14.setVisible(false);
+					pnlInput15.setVisible(false);
+					pnlInput16.setVisible(false);
+					txtInput12.setVisible(false);
+					txtInput13.setVisible(false);
+					txtInput14.setVisible(false);
+					txtInput15.setVisible(false);
+					txtInput16.setVisible(false);
+				} else if (opcao.equals("Professor")) {
+					pnlInput9.setVisible(false);
+					pnlInput10.setVisible(false);
+					pnlInput11.setVisible(false);
+					txtInput9.setVisible(false);
+					txtInput10.setVisible(false);
+					txtInput11.setVisible(false);
+
+					pnlInput12.setVisible(true);
+					pnlInput13.setVisible(true);
+					pnlInput14.setVisible(true);
+					pnlInput15.setVisible(true);
+					pnlInput16.setVisible(true);
+					txtInput12.setVisible(true);
+					txtInput13.setVisible(true);
+					txtInput14.setVisible(true);
+					txtInput15.setVisible(true);
+					txtInput16.setVisible(true);
+				}
+			}
+		});
+
+		JPanel pnlCadastroBtn = new JPanel();
+		pnlCadastroBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String opcao = (String)comboBox.getSelectedItem();
+				try {
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					String message = "";
+
+					String cpf = txtInput2.getText();
+					String nome = txtInput3.getText();
+					String telefone = txtInput4.getText();
+					String email = txtInput5.getText();
+					String nascimentoString = txtInput6.getText();
+					String senha = txtInput7.getText();
+					String assinatura = txtInput8.getText();
+					LocalDate nascimento = LocalDate.parse(nascimentoString, dtf);
+
+					if (opcao.equals("Estudante")) {
+						String matricula = txtInput9.getText();
+						String curso = txtInput10.getText();
+						int ano_grad = Integer.parseInt(txtInput11.getText());
+
+						message = biblioteca.cadastrarEstudante(cpf, nome, telefone, email, nascimento, senha, assinatura, matricula, curso, ano_grad);
+					} else if (opcao.equals("Professor")) {
+						String instituicao = txtInput12.getText();
+						String educacao = txtInput13.getText();
+						String area = txtInput14.getText();
+						String aulas = txtInput15.getText();
+						int ano_ing = Integer.parseInt(txtInput16.getText());
+
+						message = biblioteca.cadastrarProfessor(cpf, nome, telefone, email, nascimento, senha, assinatura, instituicao, educacao, area, aulas, ano_ing);
+					}
+					
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameClientes.dispose();
+						JFrame frame = new FrameClientes(biblioteca);
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (NumberFormatException error) {
+					String message = "Os campos 'Ano Graduação' e 'Ano Ingresso'\ndevem ser preenchidos apenas com números.";
+					JOptionPane.showMessageDialog(null, message, "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (DateTimeParseException error) {
+					String message = "Data tem que estar no formato 'dd/mm/aaaa'.";
+					JOptionPane.showMessageDialog(null, message, "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlCadastroBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+
+		pnlCadastroBtn.setBackground(MyColors.PRIMARY);
+		pnlCadastroBtn.setBounds(53, 345, 240, 40);
+		add(pnlCadastroBtn);
+		pnlCadastroBtn.setLayout(null);
 		
-		// Pegar a informação de dentro do input:
-		//String ano_ing = txtInput16.getText();
+		JLabel lblCadastrar = new JLabel("CADASTRAR");
+		lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastrar.setForeground(MyColors.BACKGROUND);
+		lblCadastrar.setFont(new Font("Arial", Font.BOLD, 14));
+		lblCadastrar.setBounds(0, 5, 240, 30);
+		pnlCadastroBtn.add(lblCadastrar);
 	}
 }

@@ -73,7 +73,7 @@ public class PanelListarEmprestimosAtrasados extends JPanel {
 		scrollPane.setViewportView(textArea);
 
 		// String recebida do backend
-		String string = "teste\nteste";
+		String string = biblioteca.listarEmprestimosAtrasados();
 		textArea.setText(string);
 	}
 }
