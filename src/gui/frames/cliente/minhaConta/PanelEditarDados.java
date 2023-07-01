@@ -636,6 +636,8 @@ public class PanelEditarDados extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					LocalDate nascimento;
+					int ano_grad;
 					String message = "";
 
 					String cpf = txtInput1.getText();
@@ -657,27 +659,58 @@ public class PanelEditarDados extends JPanel {
 						email = cliente.getEmail();
 					}
 					if (nascimentoString.equals("Nascimento")) {
-						LocalDate nascimento = cliente.getDataNasc();
+						nascimento = cliente.getDataNasc();
+					} else {
+						nascimento = LocalDate.parse(nascimentoString, dtf);
 					}
 					if (senha.equals("Senha")) {
 						senha = cliente.getSenha();
 					}
-					LocalDate nascimento = LocalDate.parse(nascimentoString, dtf);
 					
 					if (tipo.equals("Estudante")) {
 						String matricula = txtInput7.getText();
 						String curso = txtInput8.getText();
-						int ano_grad = Integer.parseInt(txtInput9.getText());
+						String ano_gradString = txtInput9.getText();
+						if (matricula.equals("Matrícula")) {
+							matricula = ((Estudante) cliente).getMatricula();
+						}
+						if (curso.equals("Curso")) {
+							curso = ((Estudante) cliente).getCurso();
+						}
+						if (ano_gradString.equals("Ano Graduação")) {
+							ano_grad = ((Estudante) cliente).getAno_grad();
+						} else {
+							ano_grad = Integer.parseInt(txtInput9.getText());
+						}
 
-						//message = cliente.editarDadosEstudante(cpf, nome, telefone, email, nascimento, senha, matricula, curso, ano_grad);
+
+						message = ((Estudante)cliente).editarDados(cpf, nome, telefone, email, nascimento, senha, matricula, curso, ano_grad);
 					} else if (tipo.equals("Professor")) {
+						int ano_ing;
 						String instituicao = txtInput10.getText();
 						String educacao = txtInput11.getText();
 						String area = txtInput12.getText();
 						String aulas = txtInput13.getText();
-						int ano_ing = Integer.parseInt(txtInput13.getText());
+						String ano_ingString = txtInput13.getText();
+						if (instituicao.equals("Instituição")) {
+							instituicao = ((Professor) cliente).getInstituicao();
+						}
+						if (educacao.equals("Educação")) {
+							educacao = ((Professor) cliente).getEducacao();
+						}
+						if (area.equals("Área Atuação")) {
+							area = ((Professor) cliente).getArea();
+						}
+						if (aulas.equals("Aulas")) {
+							aulas = ((Professor) cliente).getAulas();
+						}
+						if (ano_ingString.equals("Ano Ingresso")) {
+							ano_ing = ((Professor) cliente).getAno_ing();
+						} else {
+							ano_ing = Integer.parseInt(txtInput13.getText());
+						}
 
-						//message = cliente.editarDadosProfessor(cpf, nome, telefone, email, nascimento, senha, instituicao, educacao, area, aulas, ano_ing);
+						message = ((Professor)cliente).editarDados(cpf, nome, telefone, email, nascimento, senha, instituicao, educacao, area, aulas, ano_ing);
 					}
 
 					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);

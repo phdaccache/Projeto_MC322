@@ -53,6 +53,40 @@ public class Professor extends Cliente {
 		return joiner.toString();
 	}
 
+	public String editarDados(String cpf, String nome, String telefone, String email, LocalDate dataNasc, String senha, String instituicao, String educacao, String area, String aulas, int ano_ing) {
+		// Caso em que o CPF e invalido
+        if (!Validacao.validarDocumento(cpf, "CPF")) {
+            throw new IllegalArgumentException("CPF inválido");
+        }
+
+        // Caso em que o CPF ja existe
+        for (Cliente cliente : getBiblioteca().getClientes()) {
+            if (cliente.getCPF().equals(cpf)) {
+                throw new IllegalArgumentException("Já existe o cliente de CPF " + cpf);
+            }
+        }
+
+        // Caso em que o nome e invalido
+        if (!Validacao.validarNome(nome)) {
+            throw new IllegalArgumentException("Nome inválido");
+        }
+
+        // Edicao dos dados
+		setCPF(cpf);
+		setNome(nome);
+		setTelefone(telefone);
+		setEmail(email);
+		setDataNasc(dataNasc);
+		setSenha(senha);
+		setInstituicao(instituicao);
+		setEducacao(educacao);
+		setArea(area);
+		setAulas(aulas);
+		setAno_ing(ano_ing);
+        
+        return "Dados atualizados!\n";
+	}
+
 
 	// Getters e Setters
 	public String getInstituicao() {

@@ -51,22 +51,51 @@ public class Cliente {
 		return joiner.toString();
 	}
 
-	public Item getItem(String Titulo){
-		try {
-	        if (this.biblioteca == null) {
-	            throw new IllegalArgumentException("Lista vazia!");
-	        }
-        for(Item item : biblioteca.getItens()) {
-			if(item.getTitulo().equals(Titulo)) {
-				return item;
-			}
-		}
-		return null;
-    	} catch (IllegalArgumentException e) {
-	        System.out.println("Erro: " + e.getMessage());
-            return null;
-    	}
+	/////////////////////////////////// MINHA CONTA ///////////////////////////////////
+
+	public String visualizarDados(){
+		return toString();
 	}
+
+	public String excluirConta() {
+        try {
+            getBiblioteca().excluirCliente(getCPF());
+            return "Conta excluída!\n";
+        } catch (IllegalArgumentException erro) {
+            throw erro;
+        }
+    }
+
+	/////////////////////////////////// ITENS ///////////////////////////////////
+
+	public void pesquisarItem(String titulo) throws IllegalArgumentException {
+		getBiblioteca().pesquisarItem(titulo);
+	}
+
+	public String ultimasAquisicoes() {
+		String string = "";
+        ArrayList<Item> itens = getItens();
+
+        if(itens == null || itens.isEmpty()){
+            string += "Não há itens cadastrados.\n";
+        }
+
+        else {
+            for(int i = itens.size() - 1; i >= 0; i--){
+				// garantir que so vai pegar os ultimos 5 itens
+				if (i < itens.size() - 5) {
+					break;
+				}
+                string += "---------------------------------------------\n";
+                string += (itens.get(i) + "\n");
+            }
+            string += "---------------------------------------------\n";
+        }
+
+        return string;
+	}
+
+	/////////////////////////////////// EMPRESTIMOS ///////////////////////////////////
 
 	//Metodo para verificar se o cliente esta apto a fazer emprestimos
 	public boolean aptoEmprestimo() {
@@ -179,22 +208,6 @@ public class Cliente {
 		}
 		return retorno;
 	}
-	public String listarReservas(){
-		String retorno = "";
-		if(listaReservasItens.isEmpty() || listaReservasItens == null){
-			return "Nao ha reservas";
-		}
-		else{
-			retorno = "****** Reservas ******\n";
-			for(Reserva reserva : listaReservasItens){
-				retorno += reserva.toString();
-			}
-		}
-		return retorno;
-	}
-	public void pesquisarItem(String titulo){
-		getBiblioteca().pesquisarItem(titulo);
-	}
 
 	public String DevolverEmprestimo(String Titulo){
 		try {
@@ -240,6 +253,22 @@ public class Cliente {
 
 	//public void listarEmprestimosAtrasados(){}
 
+	/////////////////////////////////// RESERVAS ///////////////////////////////////
+
+	public String listarReservas(){
+		String retorno = "";
+		if(listaReservasItens.isEmpty() || listaReservasItens == null){
+			return "Nao ha reservas";
+		}
+		else{
+			retorno = "****** Reservas ******\n";
+			for(Reserva reserva : listaReservasItens){
+				retorno += reserva.toString();
+			}
+		}
+		return retorno;
+	}
+
 	public Boolean TentaReservar(String titulo) {
 		try {
 	        if (listaEmprestimos == null) {
@@ -256,6 +285,45 @@ public class Cliente {
             return false;
     	}
 	}
+
+	public void Reservar(String titulo){
+		//biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
+		biblioteca.getItem(titulo).setStatus("reservado");
+	}
+	
+	public void RemoverReserva(String titulo){
+		for(Reserva reserva : listaReservasItens){
+			if(reserva.getItem().getTitulo().equals(titulo)){
+				listaReservasItens.remove(reserva);
+				getItem(titulo).removeReserva(reserva);
+				//biblioteca.removerReserva(titulo);
+			}
+		}
+	}
+
+	/////////////////////////////////// GETTERS PARA OBJETOS ///////////////////////////////////
+
+	public ArrayList<Item> getItens() {
+		return getBiblioteca().getItens();
+	}
+
+	public Item getItem(String Titulo){
+		try {
+	        if (this.biblioteca == null) {
+	            throw new IllegalArgumentException("Lista vazia!");
+	        }
+        for(Item item : biblioteca.getItens()) {
+			if(item.getTitulo().equals(Titulo)) {
+				return item;
+			}
+		}
+		return null;
+    	} catch (IllegalArgumentException e) {
+	        System.out.println("Erro: " + e.getMessage());
+            return null;
+    	}
+	}
+
 	// Metodo para verificar a quantidade de dias que um cliente pode ficar.
 	public int verificaQtdDeDias(Cliente cliente){
 		if(cliente.getAssinatura().equals("Básico")){
@@ -272,49 +340,13 @@ public class Cliente {
 			return 0;
 		}
 	}
+
 	//Método para calcular a data esperada para o item estar disponivel.
 	public LocalDate CalculaData(String titulo){
 		LocalDate data = getItem(titulo).getListaReservas().get(0).getData().plusDays(verificaQtdDeDias(this));
 		return data;
 	}
-	public void Reservar(String titulo){
-		//biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
-		biblioteca.getItem(titulo).setStatus("reservado");
-	}
-	public void RemoverReserva(String titulo){
-		for(Reserva reserva : listaReservasItens){
-			if(reserva.getItem().getTitulo().equals(titulo)){
-				listaReservasItens.remove(reserva);
-				getItem(titulo).removeReserva(reserva);
-				//biblioteca.removerReserva(titulo);
-			}
-		}
-	}
 
-	//Metodo que deixa em aberto que pode mudar todos os dados, se recebe uma string vazia, não muda o dado.
-	public String EditarDados(String nome, String email, String telefone, LocalDate dataNasc, String senha){
-		if(nome != ""){
-			setNome(nome);
-		}
-		if(email != ""){
-			setEmail(email);
-		}
-		if(telefone != ""){
-			setTelefone(telefone);
-		}
-		if(dataNasc != null){
-			setDataNasc(dataNasc);
-		}
-		if(senha != ""){
-			setSenha(senha);
-		}
-		return "Dados alterados com sucesso";
-	}
-	public String VisualizarDados(){
-		return toString();
-	}
-
-	//Fazer metodo para atualizar a situação
 
 	// Getters e Setters
 	public String[] getPossiveisAssinaturas() {

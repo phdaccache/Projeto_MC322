@@ -109,7 +109,7 @@ public class Biblioteca {
         }
 
         else {
-            for(Estudante estudante : getEstudantes()){
+            for(Estudante estudante : estudantes){
                 string += "---------------------------------------------\n";
                 string += (estudante + "\n");
             }
@@ -129,7 +129,7 @@ public class Biblioteca {
         }
 
         else {
-            for(Professor professor : getProfessores()){
+            for(Professor professor : professores){
                 string += "---------------------------------------------\n";
                 string += (professor + "\n");
             }
