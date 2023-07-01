@@ -1,17 +1,23 @@
 package arquivos;
 
 import sistema.Apostila;
+import sistema.Artigo;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ArquivoApostila implements Arquivo<Apostila>{
     @Override
-    public String GravarDados(ArrayList<Apostila> lista) {
-
+    public String GravarDados(ArrayList<Apostila> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Revistas.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("CODE_ITEM,DISCIPLINA,INSTITUICAO");
+        for (Apostila apostila : lista) {
+            pw.println(apostila.getCode() + "," + apostila.getDisciplina() + "," + apostila.getInstituicao());
+        }
+        fileWriter.close();
+        return "Apostilas salvas com sucesso!";
     }
 
     @Override

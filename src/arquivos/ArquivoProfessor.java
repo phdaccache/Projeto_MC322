@@ -1,6 +1,7 @@
 package arquivos;
 
 import sistema.Admin;
+import sistema.Livro;
 import sistema.Professor;
 
 import java.io.*;
@@ -10,8 +11,16 @@ import java.util.ArrayList;
 
 public class ArquivoProfessor implements Arquivo<Professor>{
     @Override
-    public String GravarDados(ArrayList<Professor> lista) {
-        return null;
+    public String GravarDados(ArrayList<Professor> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Livros.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("CPF_CLIENTE,INSTITUICAO,EDUCACAO,AREA,AULAS,ANO_ING");
+        for (Professor professor : lista) {
+            pw.println(professor.getCPF() + "," + professor.getInstituicao() + "," + professor.getEducacao() + "," + professor.getArea() + "," + professor.getAulas() + "," + professor.getAno_ing());
+        }
+        fileWriter.close();
+        return "Professores salvos com sucesso!";
     }
 
     @Override

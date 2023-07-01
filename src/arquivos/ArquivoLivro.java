@@ -1,5 +1,6 @@
 package arquivos;
 
+import sistema.Emprestimo;
 import sistema.Livro;
 
 import java.io.*;
@@ -7,9 +8,16 @@ import java.util.ArrayList;
 
 public class ArquivoLivro implements Arquivo<Livro>{
     @Override
-    public String GravarDados(ArrayList<Livro> lista) {
-        File file = new File("src/arquivos/ArquivosCSV/Itens1.csv");
-        return null;
+    public String GravarDados(ArrayList<Livro> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Livros.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("CODE_ITEM,EDITORA,EDICAO,TEMA");
+        for (Livro livro : lista) {
+            pw.println(livro.getCode() + "," + livro.getEditora() + "," + livro.getEdicao() + "," + livro.getTema());
+        }
+        fileWriter.close();
+        return "Livros salvos com sucesso";
     }
 
     @Override

@@ -1,11 +1,9 @@
 package arquivos;
 import sistema.Admin;
+import sistema.Biblioteca;
 import sistema.Estudante;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,8 +12,16 @@ import java.util.ArrayList;
 public class ArquivoEstudante implements Arquivo<Estudante>{
 
     @Override
-    public String GravarDados(ArrayList<Estudante> lista) {
-        return null;
+    public String GravarDados(ArrayList<Estudante> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Revistas.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("CPF_CLIENTE,MATRICULA,CURSO,ANO_GRAD");
+        for (Estudante estudante : lista) {
+            pw.println(estudante.getCPF() + "," + estudante.getMatricula() + "," + estudante.getCurso() + "," + estudante.getAno_grad());
+        }
+        fileWriter.close();
+        return "Estudantes salvos com sucesso!";
     }
 
     @Override

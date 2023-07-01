@@ -8,8 +8,16 @@ import java.util.ArrayList;
 public class ArquivoBiblioteca implements Arquivo<Biblioteca> {
 
     @Override
-    public String GravarDados(ArrayList<Biblioteca> lista) {
-        return null;
+    public String GravarDados(ArrayList<Biblioteca> lista) throws IOException {
+        File file = new File("src/arquivos/ArquivosCSV/Revistas.csv");
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fileWriter);
+        pw.println("NOME,CNPJ,ENDERECO,TELEFONE,SENHA\n");
+        for (Biblioteca biblioteca : lista) {
+            pw.println(biblioteca.getNome() + "," + biblioteca.getCNPJ() + "," + biblioteca.getEndereco() + "," + biblioteca.getTelefone() + "," + biblioteca.getSenha());
+        }
+        fileWriter.close();
+        return "Bibliotecas salvas com sucesso!";
     }
 
     @Override
