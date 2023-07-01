@@ -19,7 +19,7 @@ public class ArquivoEmprestimo implements Arquivo<Emprestimo>{
     @Override
     public String LerDados(ArrayList<Emprestimo> lista) throws IOException {
 
-        File file = new File("src/arquivos/Bibliotecas_arquivos/Emprestimos.csv"); //Mudar para ser acessada por qualquer usuário
+        File file = new File("src/arquivos/ArquivosCSV/Emprestimos.csv"); //Mudar para ser acessada por qualquer usuário
 
         String demilitador = ",";
         ArrayList<String[]> linhas = new ArrayList<>();

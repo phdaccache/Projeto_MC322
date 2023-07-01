@@ -17,8 +17,8 @@ public class ArquivoRevista implements Arquivo<Revista>{
     @Override
     public String LerDados(ArrayList<Revista> lista) throws IOException {
 
-        File file = new File("src/arquivos/Bibliotecas_arquivos/Itens.csv");
-        File file1 = new File("src/arquivos/Bibliotecas_arquivos/Revistas.csv");
+        File file = new File("src/arquivos/ArquivosCSV/Itens.csv");
+        File file1 = new File("src/arquivos/ArquivosCSV/Revistas.csv");
         String demilitador = ",";
         ArrayList<String[]> linhas = new ArrayList<>();
         if (file.exists()) {

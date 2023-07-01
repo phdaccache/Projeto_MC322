@@ -19,7 +19,7 @@ public class ArquivoAdmin implements Arquivo<Admin>{
     @Override
     public String LerDados(ArrayList<Admin> lista) throws IOException {
         try {
-            File file = new File("src/arquivos/Bibliotecas_arquivos/Admin.csv"); //Mudar para ser acessada por qualquer usuário
+            File file = new File("src/arquivos/ArquivosCSV/Admin.csv"); //Mudar para ser acessada por qualquer usuário
             String demilitador = ",";
             ArrayList<String[]> linhas = new ArrayList<>();
 

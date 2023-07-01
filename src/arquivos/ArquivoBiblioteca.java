@@ -15,7 +15,7 @@ public class ArquivoBiblioteca implements Arquivo<Biblioteca> {
     @Override
     public String LerDados(ArrayList<Biblioteca> lista) throws IOException {
         try {
-            File file = new File("src/arquivos/Bibliotecas_arquivos/Bibliotecas.csv"); //Mudar para ser acessada por qualquer usuário
+            File file = new File("src/arquivos/ArquivosCSV/Bibliotecas.csv"); //Mudar para ser acessada por qualquer usuário
             String demilitador = ",";
             ArrayList<String[]> linhas = new ArrayList<>();
 

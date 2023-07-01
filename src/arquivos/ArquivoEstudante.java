@@ -20,8 +20,8 @@ public class ArquivoEstudante implements Arquivo<Estudante>{
     @Override
     public String LerDados(ArrayList<Estudante> lista) throws IOException, ParseException {
 
-        File file = new File("src/arquivos/Bibliotecas_arquivos/Clientes.csv"); //Mudar para ser acessada por qualquer usuário
-        File file1 = new File("src/arquivos/Bibliotecas_arquivos/Estudantes.csv"); //Mudar para ser acessada por qualquer usuário
+        File file = new File("src/arquivos/ArquivosCSV/Clientes.csv"); //Mudar para ser acessada por qualquer usuário
+        File file1 = new File("src/arquivos/ArquivosCSV/Estudantes.csv"); //Mudar para ser acessada por qualquer usuário
         String demilitador = ",";
         ArrayList<String[]> linhas = new ArrayList<>();
         if (file.exists()) {
