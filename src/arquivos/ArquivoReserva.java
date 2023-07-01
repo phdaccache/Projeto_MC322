@@ -1,12 +1,10 @@
 package arquivos;
 
 import sistema.Admin;
+import sistema.Emprestimo;
 import sistema.Reserva;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -29,19 +27,19 @@ public class ArquivoReserva implements Arquivo<Reserva>{
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             while (linha != null) {
-                if (linha.equals("CNPJ_BIBLIOTECA,CODE_ITEM,DATA,CODE_CLIENTE,CODE,POSICAO")) {
+                if (linha.equals("CNPJ_BIBLIOTECA,TITULO_ITEM,DATA,CODE_CLIENTE,CODE,POSICAO")) {
                     linha = br.readLine();
                     continue;
                 }
-
                 String[] campos = linha.split(demilitador);
                 linhas.add(campos);
-                lista.add(new Reserva(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[2], dtf), Admin.getBiblioteca(campos[0]).getCliente(campos[5]), Integer.parseInt(campos[6]), Integer.parseInt(campos[7])));
+                lista.add(new Reserva(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[2], dtf), Admin.getBiblioteca(campos[0]).getCliente(campos[4]), Integer.parseInt(campos[5])));
                 linha = br.readLine();
-        }
+            }
             br.close();
             return "Reservas carregadas com sucesso!";
         }
         return "Arquivo não encontrado!";
     }
 }
+

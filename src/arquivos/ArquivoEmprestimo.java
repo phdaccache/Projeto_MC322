@@ -2,6 +2,7 @@ package arquivos;
 
 import sistema.Admin;
 import sistema.Emprestimo;
+import sistema.Estudante;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,7 +31,7 @@ public class ArquivoEmprestimo implements Arquivo<Emprestimo>{
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             while (linha != null) {
-                if (linha.equals("CNPJ_BIBLIOTECA,CODE_ITEM,STATUS,DATA_INI,DATA_FIM,CPF_CLIENTE,CODE_EMPRESTIMO")) {
+                if (linha.equals("CNPJ_BIBLIOTECA,TITULO_ITEM,STATUS,DATA_INI,DATA_FIM,CPF_CLIENTE,CODE_EMPRESTIMO")) {
                     linha = br.readLine();
                     continue;
                 }
@@ -39,7 +40,7 @@ public class ArquivoEmprestimo implements Arquivo<Emprestimo>{
                 linhas.add(campos);
                 lista.add(new Emprestimo(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[3], dtf), LocalDate.parse(campos[4], dtf), Admin.getBiblioteca(campos[0]).getCliente(campos[5]), campos[2], Integer.parseInt(campos[6])));
                 linha = br.readLine();
-        }
+            }
             br.close();
             return "Emprestimos carregados com sucesso!";
         }

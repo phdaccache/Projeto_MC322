@@ -36,7 +36,7 @@ public class ArquivoLivro implements Arquivo<Livro>{
                     String linha1 = br1.readLine();
 
                     while (linha1 != null) {
-                        if (linha1.equals("CODE_ITEM,EDITORA,ISBN,EDICAO,TEMA")) {
+                        if (linha1.equals("CODE_ITEM,EDITORA,EDICAO,TEMA")) {
                             linha1 = br1.readLine();
                             continue;
                         }
@@ -45,7 +45,7 @@ public class ArquivoLivro implements Arquivo<Livro>{
                         linhas.add(campos1);
 
                         if (campos[0].equals(campos1[0])) {
-                            lista.add(new Livro(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], Integer.parseInt(campos1[2]), campos1[3], campos1[4], campos[2]));
+                            lista.add(new Livro(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], Integer.parseInt(campos1[0]), campos1[2], campos1[3], campos[2]));
                         }
 
                         linha1 = br1.readLine();
@@ -58,7 +58,7 @@ public class ArquivoLivro implements Arquivo<Livro>{
             }
 
             br.close();
-            return "Alunos carregados com sucesso!";
+            return "Livros carregados com sucesso!";
         }
         return "Arquivo não encontrado!";
     }
