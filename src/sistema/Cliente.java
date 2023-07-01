@@ -357,6 +357,10 @@ public class Cliente {
 		ArrayList<Emprestimo> emprestimosAtrasados = new ArrayList<Emprestimo>();
 		ArrayList<Emprestimo> emprestimos = getListaEmprestimos();
 
+		if (emprestimos == null || emprestimos.isEmpty()) {
+			return emprestimosAtrasados;
+		}
+
 		for(Emprestimo emprestimo : emprestimos){
 			if(emprestimo.isAtrasado()){
 				emprestimosAtrasados.add(emprestimo);
