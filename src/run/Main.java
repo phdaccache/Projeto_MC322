@@ -16,15 +16,15 @@ public class Main {
 		window.FrameMain.requestFocus();
 
 		// Rodando uma segunda thread para gravar os dados apos a execucao do programa
-		ThreadGravarArquivos thread = new ThreadGravarArquivos();
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			thread.start();
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}));
+		// ThreadGravarArquivos thread = new ThreadGravarArquivos();
+		// Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+		// 	thread.start();
+		// 	try {
+		// 		thread.join();
+		// 	} catch (InterruptedException e) {
+		// 		e.printStackTrace();
+		// 	}
+		// }));
 	}
     
     public Main() {

@@ -10,8 +10,8 @@ public class Revista extends Item {
 	private final int ISSN;
 	
 	//Construtor
-	public Revista(int qtdDePaginas, String titulo, String autor, int ano, String edicao, String instituicao, String assuntos, int ISSN) {
-		super(qtdDePaginas, titulo, autor, ano, ISSN);
+	public Revista(int quantidade, String titulo, String autor, int ano, String edicao, String instituicao, String assuntos, int ISSN) {
+		super(quantidade, titulo, autor, ano, ISSN);
 		this.edicao = edicao;
 		this.instituicao = instituicao;
 		this.assuntos = assuntos;

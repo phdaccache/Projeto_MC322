@@ -24,8 +24,7 @@ public class FrameClientes extends JFrame {
 	private JPanel panelCadastrarCliente;
 	private JPanel panelExcluirCliente;
 	private JPanel panelListarAssinaturas;
-	private JPanel panelGerarAssinatura;
-	private JPanel panelExcluirAssinatura;
+	private JPanel panelAtualizarAssinatura;
 	private JPanel pnlCadastrarCliente;
 	
 	private JLabel lblCadastrarCliente;
@@ -33,10 +32,8 @@ public class FrameClientes extends JFrame {
 	private JLabel lblExcluirCliente;
 	private JPanel pnlListarAssinaturas;
 	private JLabel lblListarAssinaturas;
-	private JPanel pnlGerarAssinatura;
-	private JLabel lblGerarAssinatura;
-	private JPanel pnlExcluirAssinatura;
-	private JLabel lblExcluirAssinatura;
+	private JPanel pnlAtualizarAssinatura;
+	private JLabel lblAtualizarAssinatura;
 	
 	private int mouseX;
 	private int mouseY;
@@ -65,8 +62,7 @@ public class FrameClientes extends JFrame {
 		panelCadastrarCliente = new PanelCadastrarCliente(biblioteca, this);
 		panelExcluirCliente = new PanelExcluirCliente(biblioteca, this);
 		panelListarAssinaturas = new PanelListarAssinaturas(biblioteca);
-		panelGerarAssinatura = new PanelGerarAssinatura(biblioteca, this);
-		panelExcluirAssinatura = new PanelExcluirAssinatura(biblioteca, this);
+		panelAtualizarAssinatura = new PanelAtualizarAssinatura(biblioteca, this);
 		
 		JPanel dragPanel = new JPanel();
 		dragPanel.setOpaque(false);
@@ -314,48 +310,27 @@ public class FrameClientes extends JFrame {
 		lblListarAssinaturas.setBounds(0, 6, 210, 20);
 		pnlListarAssinaturas.add(lblListarAssinaturas);
 		
-		pnlGerarAssinatura = new JPanel();
-		pnlGerarAssinatura.addMouseListener(new PanelButtonMouseAdapter(pnlGerarAssinatura) {
+		pnlAtualizarAssinatura = new JPanel();
+		pnlAtualizarAssinatura.addMouseListener(new PanelButtonMouseAdapter(pnlAtualizarAssinatura) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				menuClicked(panelGerarAssinatura);
+				menuClicked(panelAtualizarAssinatura);
 			}
 		});
-		pnlGerarAssinatura.setLayout(null);
-		pnlGerarAssinatura.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
-		pnlGerarAssinatura.setBackground(new Color(121, 98, 68));
-		pnlGerarAssinatura.setBounds(20, 317, 210, 32);
-		pnlMenu.add(pnlGerarAssinatura);
+		pnlAtualizarAssinatura.setLayout(null);
+		pnlAtualizarAssinatura.setBorder(new MatteBorder(0, 0, 1, 0, (Color) MyColors.TEXT));
+		pnlAtualizarAssinatura.setBackground(new Color(121, 98, 68));
+		pnlAtualizarAssinatura.setBounds(20, 317, 210, 32);
+		pnlMenu.add(pnlAtualizarAssinatura);
 		
-		lblGerarAssinatura = new JLabel("GERAR ASSINATURA");
-		lblGerarAssinatura.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblGerarAssinatura.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGerarAssinatura.setForeground(new Color(250, 249, 251));
-		lblGerarAssinatura.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblGerarAssinatura.setAlignmentX(0.5f);
-		lblGerarAssinatura.setBounds(0, 6, 210, 20);
-		pnlGerarAssinatura.add(lblGerarAssinatura);
-		
-		pnlExcluirAssinatura = new JPanel();
-		pnlExcluirAssinatura.addMouseListener(new PanelButtonMouseAdapter(pnlExcluirAssinatura) {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				menuClicked(panelExcluirAssinatura);
-			}
-		});
-		pnlExcluirAssinatura.setLayout(null);
-		pnlExcluirAssinatura.setBackground(new Color(121, 98, 68));
-		pnlExcluirAssinatura.setBounds(20, 349, 210, 32);
-		pnlMenu.add(pnlExcluirAssinatura);
-		
-		lblExcluirAssinatura = new JLabel("EXCLUIR ASSINATURA");
-		lblExcluirAssinatura.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblExcluirAssinatura.setHorizontalAlignment(SwingConstants.CENTER);
-		lblExcluirAssinatura.setForeground(new Color(250, 249, 251));
-		lblExcluirAssinatura.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblExcluirAssinatura.setAlignmentX(0.5f);
-		lblExcluirAssinatura.setBounds(0, 6, 210, 20);
-		pnlExcluirAssinatura.add(lblExcluirAssinatura);
+		lblAtualizarAssinatura = new JLabel("ATUALIZAR ASSINATURA");
+		lblAtualizarAssinatura.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblAtualizarAssinatura.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAtualizarAssinatura.setForeground(new Color(250, 249, 251));
+		lblAtualizarAssinatura.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblAtualizarAssinatura.setAlignmentX(0.5f);
+		lblAtualizarAssinatura.setBounds(0, 6, 210, 20);
+		pnlAtualizarAssinatura.add(lblAtualizarAssinatura);
 		
 		JPanel pnlMainContent = new JPanel();
 		pnlMainContent.setBounds(252, 2, 346, 396);
@@ -368,8 +343,7 @@ public class FrameClientes extends JFrame {
 		pnlMainContent.add(panelCadastrarCliente);
 		pnlMainContent.add(panelExcluirCliente);
 		pnlMainContent.add(panelListarAssinaturas);
-		pnlMainContent.add(panelGerarAssinatura);
-		pnlMainContent.add(panelExcluirAssinatura);
+		pnlMainContent.add(panelAtualizarAssinatura);
 		
 		menuClicked(null);
 	}
@@ -381,8 +355,8 @@ public class FrameClientes extends JFrame {
 		panelCadastrarCliente.setVisible(false);
 		panelExcluirCliente.setVisible(false);
 		panelListarAssinaturas.setVisible(false);
-		panelGerarAssinatura.setVisible(false);
-		panelExcluirAssinatura.setVisible(false);
+		panelAtualizarAssinatura.setVisible(false);
+
 		
 		if (selectedPanel != null) {
 			selectedPanel.setVisible(true);

@@ -7,7 +7,7 @@ public class Item {
 	// Atributos
 	private final String[] possiveisStatus;
 	private final int code;
-	private final int qtdPaginas;
+	private int quantidade;
 	private String status;
 	private String titulo;
 	private String autor;
@@ -15,21 +15,21 @@ public class Item {
 	private ArrayList<Reserva> listaReservas;
 	
 	//Construtor
-	public Item(int qtdDePaginas, String titulo, String autor, int ano) {
+	public Item(int quantidade, String titulo, String autor, int ano) {
 		this.possiveisStatus = new String[]{"Disponível", "Emprestado", "Reservado"};
 		Random random = new Random();
 		this.code = random.nextInt();
-		this.qtdPaginas = qtdDePaginas;
+		this.quantidade = quantidade;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.ano = ano;
 		this.listaReservas = new ArrayList<Reserva>();
 	}
 
-	public Item(int qtdDePaginas, String titulo, String autor, int ano, int code) {
+	public Item(int quantidade, String titulo, String autor, int ano, int code) {
 		this.possiveisStatus = new String[]{"Disponível", "Emprestado", "Reservado"};
 		this.code = code;
-		this.qtdPaginas = qtdDePaginas;
+		this.quantidade = quantidade;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.ano = ano;
@@ -44,10 +44,10 @@ public class Item {
 		} else {
 			joiner.add("Título: Não especificado");
 		}
-		if (qtdPaginas != -1) {
-		    joiner.add("Quantidade de Páginas: " + this.qtdPaginas);
+		if (quantidade != -1) {
+		    joiner.add("Quantidade: " + this.quantidade);
 		} else {
-			joiner.add("Quantidade de Páginas: Não especificado");
+			joiner.add("Quantidade: Não especificado");
 		}
 		if (status != null) {
 		    joiner.add("Status: " + this.status);
@@ -87,10 +87,13 @@ public class Item {
 	}
 
 
-	public int getQtdPaginas() {
-		return this.qtdPaginas;
+	public int getQuantidade() {
+		return this.quantidade;
 	}
 
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
 
 	public String getStatus() {
 		return this.status;

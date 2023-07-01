@@ -116,6 +116,9 @@ public class PanelListarReservasPorCliente extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					String cpf = txtInput1.getText();
+					if(cpf.equals("CPF")) {
+						throw new IllegalArgumentException("Preencha todos os campos");
+					}
 					String resultado = biblioteca.listarReservasPorCliente(cpf);
 
 					// String recebida do backend

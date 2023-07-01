@@ -90,14 +90,14 @@ public class PanelCadastrarItem extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				txtInput2.setForeground(MyColors.TEXT);
-				if (txtInput2.getText().equals("Páginas")) {
+				if (txtInput2.getText().equals("Quantidade")) {
 					txtInput2.setText("");
 				}
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtInput2.getText().equals("")) {
-					txtInput2.setText("Páginas");
+					txtInput2.setText("Quantidade");
 					txtInput2.setForeground(MyColors.PLACEHOLDER);
 				}
 			}
@@ -106,7 +106,7 @@ public class PanelCadastrarItem extends JPanel {
 		txtInput2.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtInput2.setSelectionColor(MyColors.ACCENT);
 		txtInput2.setForeground(MyColors.PLACEHOLDER);
-		txtInput2.setText("Páginas");
+		txtInput2.setText("Quantidade");
 		txtInput2.setBackground(MyColors.BACKGROUND);
 		txtInput2.setBounds(10, 5, 100, 15);
 		pnlInput2.add(txtInput2);
@@ -840,7 +840,7 @@ public class PanelCadastrarItem extends JPanel {
 				String opcao = (String)comboBox.getSelectedItem();
 				try {
 					String message = "";
-					int qtdDePaginas = Integer.parseInt(txtInput2.getText());
+					int quantidade = Integer.parseInt(txtInput2.getText());
 					String titulo = txtInput3.getText();
 					String autores = txtInput4.getText();
 					int ano = Integer.parseInt(txtInput5.getText());
@@ -851,25 +851,25 @@ public class PanelCadastrarItem extends JPanel {
 						String edicao = txtInput8.getText();
 						String tema = txtInput9.getText();
 
-						message = biblioteca.cadastrarLivro(qtdDePaginas, titulo, autores, ano, editora, isbn, edicao, tema);
+						message = biblioteca.cadastrarLivro(quantidade, titulo, autores, ano, editora, isbn, edicao, tema);
 					} else if (opcao.equals("Apostila")) {
 						String disciplina = txtInput10.getText();
 						String instituicao = txtInput11.getText();
 
-						message = biblioteca.cadastrarApostila(qtdDePaginas, titulo, autores, ano, disciplina, instituicao);
+						message = biblioteca.cadastrarApostila(quantidade, titulo, autores, ano, disciplina, instituicao);
 					} else if (opcao.equals("Artigo")) {
 						int doi = Integer.parseInt(txtInput12.getText());
 						String resumo = txtInput13.getText();
 						String keyWords = txtInput14.getText();
 
-						message = biblioteca.cadastrarArtigo(qtdDePaginas, titulo, autores, ano, doi, resumo, keyWords);
+						message = biblioteca.cadastrarArtigo(quantidade, titulo, autores, ano, doi, resumo, keyWords);
 					} else if (opcao.equals("Revista")) {
 						String edicao = txtInput15.getText();
 						String instituicao = txtInput16.getText();
 						String assuntos = txtInput17.getText();
 						int issn = Integer.parseInt(txtInput18.getText());
 
-						message = biblioteca.cadastrarRevista(qtdDePaginas, titulo, autores, ano, edicao, instituicao, assuntos, issn);
+						message = biblioteca.cadastrarRevista(quantidade, titulo, autores, ano, edicao, instituicao, assuntos, issn);
 					}
 					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
 					if(confirmation == 0) {
@@ -880,7 +880,7 @@ public class PanelCadastrarItem extends JPanel {
 						frame.requestFocus();
 					}
 				} catch (NumberFormatException error) {
-					String message = "Os campos 'Páginas', 'Ano', 'ISBN', 'DOI' e 'ISSN'\ndevem ser preenchidos apenas com números.";
+					String message = "Os campos 'Quantidade', 'Ano', 'ISBN', 'DOI' e 'ISSN'\ndevem ser preenchidos apenas com números.";
 					JOptionPane.showMessageDialog(null, message, "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (IllegalArgumentException error) {
 					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

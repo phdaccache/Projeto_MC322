@@ -233,21 +233,11 @@ public class Biblioteca {
         return string;
     }
 
-    public String gerarAssinatura(String CPF, String assinatura) {
+    public String atualizarAssinatura(String CPF, String assinatura) {
         for(Cliente cliente : clientes){
             if(cliente.getCPF().equals(CPF)){
                 cliente.setAssinatura(assinatura);
                 return "Assinatura atualizada!";
-            }
-        }
-        throw new IllegalArgumentException("Cliente não encontrado");
-    }
-
-    public String excluirAssinatura(String CPF) {
-        for(Cliente cliente : clientes){
-            if(cliente.getCPF().equals(CPF)){
-                cliente.setAssinatura("Básico");
-                return "Assinatura excluída!";
             }
         }
         throw new IllegalArgumentException("Cliente não encontrado");

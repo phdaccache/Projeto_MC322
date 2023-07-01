@@ -10,8 +10,8 @@ public class Livro extends Item {
 	private String tema; // Educação, suspense, romance, etc
 	
 	//Construtor
-	public Livro(int qtdDePaginas, String titulo, String autor, int ano, String editora, int ISBN, String edicao, String tema) {
-		super(qtdDePaginas, titulo, autor, ano, ISBN);
+	public Livro(int quantidade, String titulo, String autor, int ano, String editora, int ISBN, String edicao, String tema) {
+		super(quantidade, titulo, autor, ano, ISBN);
 		this.editora = editora;
 		this.ISBN = ISBN;
 		this.edicao = edicao;
