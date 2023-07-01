@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import gui.frames.cliente.FrameLoginCliente;
 import gui.frames.style.MyColors;
 import sistema.Cliente;
 
@@ -74,15 +75,15 @@ public class PanelExcluirConta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					// String message = cliente.excluirConta();
-					// int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
-					// if(confirmation == 0) {
-					// 	frameMinhaConta.dispose();
-					// 	JFrame frame = new FrameLoginBiblioteca();
-					// 	frame.setVisible(true);
-					// 	frame.toFront();
-					// 	frame.requestFocus();
-					// }
+					String message = cliente.excluirConta();
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameMinhaConta.dispose();
+						JFrame frame = new FrameLoginCliente();
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
 				} catch (IllegalArgumentException error) {
 					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
