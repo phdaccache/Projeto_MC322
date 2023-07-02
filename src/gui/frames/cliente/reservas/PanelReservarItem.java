@@ -2,11 +2,14 @@ package gui.frames.cliente.reservas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
 import sistema.Cliente;
+import sistema.Item;
 
 public class PanelReservarItem extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -62,19 +65,70 @@ public class PanelReservarItem extends JPanel {
 		});
 		add(iconX);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 125, 326, 230);
-		add(scrollPane);
+		///////////////////////// Input 1 /////////////////////////
 
-		JTextArea textArea = new JTextArea();
-		textArea.setSelectionColor(MyColors.ACCENT);
-		textArea.setEditable(false);
-		textArea.setMargin(new Insets(10, 10, 10, 10));
-		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
-		scrollPane.setViewportView(textArea);
+		JPanel pnlInput1 = new JPanel();
+		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
+		pnlInput1.setBackground(MyColors.BACKGROUND);
+		pnlInput1.setBounds(115, 125, 115, 25);
+		add(pnlInput1);
+		pnlInput1.setLayout(null);
 
-		// String recebida do backend
-		String string = "Reservar";
-		textArea.setText(string);
+		ArrayList<Item> itens = cliente.getBiblioteca().getItens();
+		String[] titulos = new String[itens.size()];
+		for (int i = 0; i < itens.size(); i++) {
+			titulos[i] = itens.get(i).getTitulo();
+		}
+		JComboBox<String> comboBox = new JComboBox<String>(titulos);
+		comboBox.setBounds(0, 0, 115, 25);
+		pnlInput1.add(comboBox);
+
+		JPanel pnlReservarBtn = new JPanel();
+		pnlReservarBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String titulo = (String)comboBox.getSelectedItem();
+					String message = cliente.Reservar(titulo);
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameReservas.dispose();
+						JFrame frame = new FrameReservas(cliente);
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlReservarBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlReservarBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlReservarBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlReservarBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+		pnlReservarBtn.setBackground(MyColors.PRIMARY);
+		pnlReservarBtn.setBounds(53, 290, 240, 40);
+		add(pnlReservarBtn);
+		pnlReservarBtn.setLayout(null);
+		
+		JLabel lblReservas = new JLabel("Reservar");
+		lblReservas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReservas.setForeground(MyColors.BACKGROUND);
+		lblReservas.setFont(new Font("Arial", Font.BOLD, 14));
+		lblReservas.setBounds(0, 5, 250, 30);
+		pnlReservarBtn.add(lblReservas);
 	}
 }

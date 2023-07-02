@@ -1,7 +1,6 @@
 package arquivos;
 
 import sistema.Artigo;
-import sistema.Revista;
 
 import java.io.*;
 import java.util.ArrayList;

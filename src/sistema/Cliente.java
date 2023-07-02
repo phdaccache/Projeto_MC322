@@ -33,6 +33,8 @@ public class Cliente {
 		this.dataNasc = dataNasc;
 		this.senha = senha;
 		this.assinatura = assinatura;
+		this.listaEmprestimos = new ArrayList<Emprestimo>();
+		this.listaReservasItens = new ArrayList<Reserva>();
 	}
 
 	@Override
@@ -313,19 +315,24 @@ public class Cliente {
     	}
 	}
 
-	public void Reservar(String titulo){
-		biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
+	public String Reservar(String titulo){
+		String message = biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
 		biblioteca.getItem(titulo).setStatus("reservado");
+		return message;
 	}
 	
-	public void RemoverReserva(String titulo){
+	public String RemoverReserva(String titulo){
 		for(Reserva reserva : listaReservasItens){
 			if(reserva.getItem().getTitulo().equals(titulo)){
 				listaReservasItens.remove(reserva);
 				getItem(titulo).removeReserva(reserva);
 				biblioteca.removerReserva(titulo);
+
+				return "Reserva Cancelada!";
 			}
 		}
+
+		return "Não foi possível cancelar a reserva!";
 	}
 
 	/////////////////////////////////// GETTERS PARA OBJETOS ///////////////////////////////////
