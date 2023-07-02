@@ -47,7 +47,7 @@ public class Estudante extends Cliente {
 
         // Caso em que o CPF ja existe
         for (Cliente cliente : getBiblioteca().getClientes()) {
-            if (cliente.getCPF().equals(cpf)) {
+            if (cliente.getCPF().equals(cpf) && !cliente.getCPF().equals(getCPF())) {
                 throw new IllegalArgumentException("Já existe o cliente de CPF " + cpf);
             }
         }
