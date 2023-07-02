@@ -232,6 +232,8 @@ public class Cliente {
 
 	public String fazerEmprestimo(String titulo) throws IllegalArgumentException {
 		String message = biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
+		Emprestimo emprestimo = new Emprestimo(biblioteca, getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
+		getListaEmprestimos().add(emprestimo);
 		biblioteca.getItem(titulo).setStatus("emprestado");
 		return message;
 	}
