@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ArquivoApostila implements Arquivo<Apostila>{
     @Override
     public String GravarDados(ArrayList<Apostila> lista) throws IOException {
-        File file = new File("src/arquivos/ArquivosCSV/Apostila.csv");
+        File file = new File("src/arquivos/ArquivosCSV/Apostilas.csv");
         FileWriter fileWriter = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fileWriter);
         pw.println("CODE_ITEM,DISCIPLINA,INSTITUICAO");

@@ -12,7 +12,7 @@ public class ArquivoBiblioteca implements Arquivo<Biblioteca> {
         File file = new File("src/arquivos/ArquivosCSV/Bibliotecas.csv");
         FileWriter fileWriter = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fileWriter);
-        pw.println("NOME,CNPJ,ENDERECO,TELEFONE,SENHA\n");
+        pw.println("NOME,CNPJ,ENDERECO,TELEFONE,SENHA");
         for (Biblioteca biblioteca : lista) {
             pw.println(biblioteca.getNome() + "," + biblioteca.getCNPJ() + "," + biblioteca.getEndereco() + "," + biblioteca.getTelefone() + "," + biblioteca.getSenha());
         }
