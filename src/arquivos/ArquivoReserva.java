@@ -42,7 +42,9 @@ public class ArquivoReserva implements Arquivo<Reserva>{
                 String[] campos = linha.split(demilitador);
                 linhas.add(campos);
                 Reserva reserva = new Reserva(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[2], dtf), Admin.getBiblioteca(campos[0]).getCliente(campos[3]), Integer.parseInt(campos[5]));
-                Admin.getBiblioteca(campos[0]).getCliente(campos[3]).Reservar(campos[1]);
+                ArrayList listaReserva = new ArrayList<>();
+               // Admin.getBiblioteca(campos[0]).getCliente(campos[3]).setListaReservasItens(listaReserva);
+               // Admin.getBiblioteca(campos[0]).getCliente(campos[3]).getListaReservasItens().add(reserva);
                 lista.add(reserva);
                 linha = br.readLine();
             }
