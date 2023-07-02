@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
 import sistema.Cliente;
@@ -61,19 +62,89 @@ public class PanelDevolverEmprestimo extends JPanel {
 			}
 		});
 		add(iconX);
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 125, 326, 230);
-		add(scrollPane);
+		
+		///////////////////////// Input 1 /////////////////////////
 
-		JTextArea textArea = new JTextArea();
-		textArea.setSelectionColor(MyColors.ACCENT);
-		textArea.setEditable(false);
-		textArea.setMargin(new Insets(10, 10, 10, 10));
-		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
-		scrollPane.setViewportView(textArea);
+		JPanel pnlInput1 = new JPanel();
+		pnlInput1.setBorder(new LineBorder(MyColors.TEXT));
+		pnlInput1.setBackground(MyColors.BACKGROUND);
+		pnlInput1.setBounds(115, 125, 115, 25);
+		add(pnlInput1);
+		pnlInput1.setLayout(null);
 
-		// String recebida do backend
-		String string = "Devover";
-		textArea.setText(string);
+		JTextField txtInput1 = new JTextField();
+		txtInput1.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtInput1.setForeground(MyColors.TEXT);
+				if (txtInput1.getText().equals("Título")) {
+					txtInput1.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtInput1.getText().equals("")) {
+					txtInput1.setText("Título");
+					txtInput1.setForeground(MyColors.PLACEHOLDER);
+				}
+			}
+		});
+		txtInput1.setBorder(null);
+		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtInput1.setSelectionColor(MyColors.ACCENT);
+		txtInput1.setForeground(MyColors.PLACEHOLDER);
+		txtInput1.setText("Título");
+		txtInput1.setBackground(MyColors.BACKGROUND);
+		txtInput1.setBounds(10, 5, 100, 15);
+		pnlInput1.add(txtInput1);
+		txtInput1.setColumns(10);
+
+		JPanel pnlDevolverBtn = new JPanel();
+		pnlDevolverBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					String titulo = txtInput1.getText();
+					String message = cliente.DevolverEmprestimo(titulo);
+					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
+					if(confirmation == 0) {
+						frameEmprestimos.dispose();
+						JFrame frame = new FrameEmprestimos(cliente);
+						frame.setVisible(true);
+						frame.toFront();
+						frame.requestFocus();
+					}
+				} catch (IllegalArgumentException error) {
+					JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pnlDevolverBtn.setBackground(MyColors.ACCENT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pnlDevolverBtn.setBackground(MyColors.PRIMARY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				pnlDevolverBtn.setBackground(MyColors.SECONDARY_ACCENT);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pnlDevolverBtn.setBackground(MyColors.ACCENT);
+			}
+		});
+		pnlDevolverBtn.setBackground(MyColors.PRIMARY);
+		pnlDevolverBtn.setBounds(53, 290, 240, 40);
+		add(pnlDevolverBtn);
+		pnlDevolverBtn.setLayout(null);
+		
+		JLabel lblDevolver = new JLabel("DEVOLVER");
+		lblDevolver.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDevolver.setForeground(MyColors.BACKGROUND);
+		lblDevolver.setFont(new Font("Arial", Font.BOLD, 14));
+		lblDevolver.setBounds(0, 5, 250, 30);
+		pnlDevolverBtn.add(lblDevolver);
 	}
 }

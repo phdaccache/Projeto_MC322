@@ -230,28 +230,24 @@ public class Cliente {
 		}
 	}
 
-	public void fazerEmprestimo(String titulo){
-		//biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
+	public String fazerEmprestimo(String titulo) throws IllegalArgumentException {
+		String message = biblioteca.cadastrarEmprestimo(getItem(titulo), Admin.data, Admin.data.plusDays(verificaQtdDeDias(this)), this);
 		biblioteca.getItem(titulo).setStatus("emprestado");
+		return message;
 	}
 
 	public String DevolverEmprestimo(String Titulo){
-		try {
-	        if (listaEmprestimos == null) {
-	            throw new IllegalArgumentException("Lista vazia!");
-	        }
+		if (listaEmprestimos == null) {
+			throw new IllegalArgumentException("Lista vazia!");
+		}
         for(Emprestimo emprestimo : listaEmprestimos){
 			if(emprestimo.getItem().getTitulo().equals(Titulo)){
 				listaEmprestimos.remove(emprestimo);
-				//biblioteca.removerEmprestimo(Titulo);
+				biblioteca.removerEmprestimo(Titulo);
 				return "Emprestimo removido com sucesso";
 			}
 		}
-		return "Emprestimo nao encontrado";
-    	} catch (IllegalArgumentException e) {
-	        System.out.println("Erro: " + e.getMessage());
-            return null;
-    	}
+		throw new IllegalArgumentException("Empréstimo não encontrado!");
 	}
 
 	//Permite fazer uma renovação apenas quando não há reservas para o item.
@@ -316,7 +312,7 @@ public class Cliente {
 	}
 
 	public void Reservar(String titulo){
-		//biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
+		biblioteca.cadastrarReserva(getItem(titulo), CalculaData(titulo), this, 0);
 		biblioteca.getItem(titulo).setStatus("reservado");
 	}
 	
@@ -325,7 +321,7 @@ public class Cliente {
 			if(reserva.getItem().getTitulo().equals(titulo)){
 				listaReservasItens.remove(reserva);
 				getItem(titulo).removeReserva(reserva);
-				//biblioteca.removerReserva(titulo);
+				biblioteca.removerReserva(titulo);
 			}
 		}
 	}

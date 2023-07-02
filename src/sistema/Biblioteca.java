@@ -477,6 +477,32 @@ public class Biblioteca {
 
         return string;
     }
+
+    public String cadastrarEmprestimo(Item item, LocalDate data_ini, LocalDate data_lim, Cliente cliente) {
+        Emprestimo emprestimo = new Emprestimo(this, item, data_ini, data_lim, cliente);
+        if (this.emprestimos == null) {
+            throw new IllegalArgumentException();
+        }
+        this.emprestimos.add(emprestimo);
+        return "Emprestimo cadastrado com sucesso";
+    }
+
+    public void removerEmprestimo(String titulo){
+        try {
+            if (this.emprestimos == null) {
+                throw new IllegalArgumentException("Lista vazia!");
+            }
+            for(Emprestimo emprestimo : emprestimos){
+                if(emprestimo.getItem().getTitulo().equals(titulo)){
+                    this.emprestimos.remove(emprestimo);
+                    return;
+                }
+            }
+            return;
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+    }
     
     /////////////////////////////////// RESERVAS ///////////////////////////////////
     
@@ -523,6 +549,38 @@ public class Biblioteca {
         }
 
         return string;
+    }
+
+    public String cadastrarReserva(Item item, LocalDate data, Cliente cliente, int posicao) {
+        Reserva reserva = new Reserva(this, item, data, cliente, posicao);
+        try {
+            if (this.reservas == null) {
+                throw new IllegalArgumentException();
+            }
+            this.reservas.add(reserva);
+            return "Reserva cadastrado com sucesso";
+        } catch (IllegalArgumentException e) {
+            this.reservas = new ArrayList<>();
+            this.reservas.add(reserva);
+            return "Reserva cadastrado com sucesso";
+        }
+    }
+
+    public void removerReserva(String titulo){
+        try {
+            if (this.reservas == null) {
+                throw new IllegalArgumentException("Lista vazia!");
+            }
+            for(Reserva reserva : reservas){
+                if(reserva.getItem().getTitulo().equals(titulo)){
+                    this.reservas.remove(reserva);
+                    return;
+                }
+            }
+            return;
+        } catch (IllegalArgumentException e) {
+            return;
+        }
     }
 
 

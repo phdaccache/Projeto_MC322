@@ -143,7 +143,7 @@ public class PanelExcluirCliente extends JPanel {
 		add(pnlExcluirBtn);
 		pnlExcluirBtn.setLayout(null);
 		
-		JLabel lblExcluir = new JLabel("Excluir");
+		JLabel lblExcluir = new JLabel("EXCLUIR");
 		lblExcluir.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExcluir.setForeground(MyColors.BACKGROUND);
 		lblExcluir.setFont(new Font("Arial", Font.BOLD, 14));
