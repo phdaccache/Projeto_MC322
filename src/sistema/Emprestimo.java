@@ -49,8 +49,8 @@ public class Emprestimo {
 		joiner.add(String.format("Item: %s (Code: %d)", getItem().getTitulo(), getItem().getCode()));
 		joiner.add("Data de inicio de emprestimo:" + dataIniString);
 		joiner.add("Data limite de devolucao:" + dataFimString);
-		joiner.add("Cliente: %s (CPF: %s)" + getCliente().getNome() + getCliente().getCPF());
-		joiner.add("Code: %d" + getCode());
+		joiner.add(String.format("Cliente: %s (CPF: %s)", getCliente().getNome(), getCliente().getCPF()));
+		joiner.add("Code: " + getCode());
 		return joiner.toString();
 	}
 
