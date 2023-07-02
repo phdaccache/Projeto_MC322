@@ -44,7 +44,9 @@ public class ArquivoEmprestimo implements Arquivo<Emprestimo>{
 
                 String[] campos = linha.split(demilitador);
                 linhas.add(campos);
-                lista.add(new Emprestimo(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[3], dtf), LocalDate.parse(campos[4], dtf), Admin.getBiblioteca(campos[0]).getCliente(campos[5]), campos[2], Integer.parseInt(campos[6])));
+                Emprestimo emprestimo = new Emprestimo(Admin.getBiblioteca(campos[0]), Admin.getBiblioteca(campos[0]).getItem(campos[1]), LocalDate.parse(campos[3], dtf), LocalDate.parse(campos[4], dtf), Admin.getBiblioteca(campos[0]).getCliente(campos[5]), campos[2], Integer.parseInt(campos[6]));
+                Admin.getBiblioteca(campos[0]).getCliente(campos[5]).fazerEmprestimo(campos[1]);
+                lista.add(emprestimo);
                 linha = br.readLine();
             }
             br.close();
