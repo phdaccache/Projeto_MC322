@@ -2,12 +2,15 @@ package gui.frames.cliente.emprestimos;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import gui.frames.style.MyColors;
 import sistema.Cliente;
+import sistema.Emprestimo;
+import sistema.Item;
 
 public class PanelDevolverEmprestimo extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -72,39 +75,25 @@ public class PanelDevolverEmprestimo extends JPanel {
 		add(pnlInput1);
 		pnlInput1.setLayout(null);
 
-		JTextField txtInput1 = new JTextField();
-		txtInput1.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				txtInput1.setForeground(MyColors.TEXT);
-				if (txtInput1.getText().equals("Título")) {
-					txtInput1.setText("");
+		ArrayList<Item> itens = cliente.getBiblioteca().getItens();
+		String[] titulos = new String[itens.size()];
+		for (int i = 0; i < itens.size(); i++) {
+			for (Emprestimo emprestimo : cliente.getListaEmprestimos()) {
+				if (emprestimo.getItem().getTitulo().equals(itens.get(i).getTitulo())) {
+					titulos[i] = itens.get(i).getTitulo();
 				}
 			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtInput1.getText().equals("")) {
-					txtInput1.setText("Título");
-					txtInput1.setForeground(MyColors.PLACEHOLDER);
-				}
-			}
-		});
-		txtInput1.setBorder(null);
-		txtInput1.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtInput1.setSelectionColor(MyColors.ACCENT);
-		txtInput1.setForeground(MyColors.PLACEHOLDER);
-		txtInput1.setText("Título");
-		txtInput1.setBackground(MyColors.BACKGROUND);
-		txtInput1.setBounds(10, 5, 100, 15);
-		pnlInput1.add(txtInput1);
-		txtInput1.setColumns(10);
+		}
+		JComboBox<String> comboBox = new JComboBox<String>(titulos);
+		comboBox.setBounds(0, 0, 115, 25);
+		pnlInput1.add(comboBox);
 
 		JPanel pnlDevolverBtn = new JPanel();
 		pnlDevolverBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					String titulo = txtInput1.getText();
+					String titulo = (String)comboBox.getSelectedItem();
 					String message = cliente.DevolverEmprestimo(titulo);
 					int confirmation = JOptionPane.showConfirmDialog(null, message, "Confirmação", JOptionPane.DEFAULT_OPTION);
 					if(confirmation == 0) {

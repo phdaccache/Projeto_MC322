@@ -2,7 +2,6 @@ package arquivos;
 
 import sistema.Cliente;
 import sistema.Estudante;
-import sistema.Livro;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,6 +1,5 @@
 package arquivos;
 
-import sistema.Livro;
 import sistema.Revista;
 
 import java.io.*;

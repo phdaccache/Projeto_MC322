@@ -1,7 +1,6 @@
 package arquivos;
 
 import sistema.Admin;
-import sistema.Livro;
 import sistema.Professor;
 
 import java.io.*;

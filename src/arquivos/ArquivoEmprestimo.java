@@ -2,8 +2,6 @@ package arquivos;
 
 import sistema.Admin;
 import sistema.Emprestimo;
-import sistema.Estudante;
-import sistema.Reserva;
 
 import java.io.*;
 import java.time.LocalDate;

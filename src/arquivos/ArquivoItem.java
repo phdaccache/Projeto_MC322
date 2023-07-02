@@ -1,6 +1,5 @@
 package arquivos;
 
-import sistema.Cliente;
 import sistema.Item;
 import sistema.Livro;
 

@@ -1,6 +1,5 @@
 package arquivos;
 
-import sistema.Emprestimo;
 import sistema.Livro;
 
 import java.io.*;
