@@ -9,3 +9,7 @@ A ideia do trabalho foi de fazer um sistema de bibliotecas, ou seja, um programa
 ## Diagrama de Classes UML
 
 ![](https://github.com/phdaccache/Projeto_MC322/blob/main/images/Diagrama_UML.png)
+
+## Vídeo de Demonstração da Interface Gráfica
+
+https://drive.google.com/file/d/1BvIdsbh_RM2o1bhSaLNMqBLOj8onNb6n/view?usp=drive_link
