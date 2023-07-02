@@ -9,7 +9,7 @@ public class ArquivoBiblioteca implements Arquivo<Biblioteca> {
 
     @Override
     public String GravarDados(ArrayList<Biblioteca> lista) throws IOException {
-        File file = new File("src/arquivos/ArquivosCSV/Revistas.csv");
+        File file = new File("src/arquivos/ArquivosCSV/Bibliotecas.csv");
         FileWriter fileWriter = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fileWriter);
         pw.println("NOME,CNPJ,ENDERECO,TELEFONE,SENHA\n");

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ArquivoProfessor implements Arquivo<Professor>{
     @Override
     public String GravarDados(ArrayList<Professor> lista) throws IOException {
-        File file = new File("src/arquivos/ArquivosCSV/Livros.csv");
+        File file = new File("src/arquivos/ArquivosCSV/Professor.csv");
         FileWriter fileWriter = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fileWriter);
         pw.println("CPF_CLIENTE,INSTITUICAO,EDUCACAO,AREA,AULAS,ANO_ING");

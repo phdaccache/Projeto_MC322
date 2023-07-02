@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ArquivoItem {
     public String GravarDados(ArrayList<Item> lista) throws IOException {
-        File file = new File("src/arquivos/ArquivosCSV/Clientes.csv");
+        File file = new File("src/arquivos/ArquivosCSV/Itens.csv");
         FileWriter fileWriter = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fileWriter);
         pw.println("CODE,QUANTIDADE,STATUS,TITULO,AUTOR,ANO,CLASSE");
