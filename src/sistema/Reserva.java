@@ -41,7 +41,7 @@ public class Reserva {
 		joiner.add(String.format("Item: %s (Code: %d)", getItem().getTitulo(), getItem().getCode()));
 		joiner.add("Data de reserva:" + dataReservaString);
 		joiner.add("Codigo da reserva: " + getCode());
-		joiner.add(String.format("Cliente: %s (CPF: %s)" + getCliente().getNome() + getCliente().getCPF()));
+		joiner.add(String.format("Cliente: %s (CPF: %s)", getCliente().getNome(), getCliente().getCPF()));
 		joiner.add("Posicao na fila de espera: " + getPosicao());
 		return joiner.toString();
 	}
