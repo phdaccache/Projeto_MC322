@@ -53,7 +53,9 @@ public class ArquivoApostila implements Arquivo<Apostila>{
                         linhas.add(campos1);
 
                         if (campos[0].equals(campos1[0])) {
-                            lista.add(new Apostila(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], campos1[2], campos[2]));
+                            Apostila apostila = new Apostila(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], campos1[2], campos[2]);
+                            apostila.setStatus(campos[2]);
+                            lista.add(apostila);
                         }
 
                         linha1 = br1.readLine();

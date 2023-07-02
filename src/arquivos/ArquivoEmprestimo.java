@@ -16,9 +16,11 @@ public class ArquivoEmprestimo implements Arquivo<Emprestimo>{
         File file = new File("src/arquivos/ArquivosCSV/Emprestimos.csv");
         FileWriter fileWriter = new FileWriter(file);
         PrintWriter pw = new PrintWriter(fileWriter);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         pw.println("CNPJ_BIBLIOTECA,TITULO_ITEM,STATUS,DATA_INI,DATA_FIM,CPF_CLIENTE,CODE_EMPRESTIMO");
         for (Emprestimo emprestimo : lista) {
-            pw.println(emprestimo.getBiblioteca().getCNPJ() + "," + emprestimo.getItem().getTitulo() + "," + emprestimo.getStatus() + "," + emprestimo.getData_ini() + "," + emprestimo.getData_fim() + "," + emprestimo.getCliente().getCPF() + "," + emprestimo.getCode());
+            pw.println(emprestimo.getBiblioteca().getCNPJ() + "," + emprestimo.getItem().getTitulo() + "," + emprestimo.getStatus() + "," + dtf.parse(emprestimo.getData_ini()) + "," + emprestimo.getData_fim() + "," + emprestimo.getCliente().getCPF() + "," + emprestimo.getCode());
         }
         fileWriter.close();
         return "Emprestimos salvos com sucesso!";

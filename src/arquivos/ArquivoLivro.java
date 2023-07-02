@@ -54,7 +54,9 @@ public class ArquivoLivro implements Arquivo<Livro>{
                         linhas.add(campos1);
 
                         if (campos[0].equals(campos1[0])) {
-                            lista.add(new Livro(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], Integer.parseInt(campos1[0]), campos1[2], campos1[3], campos[2]));
+                            Livro livro = new Livro(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], Integer.parseInt(campos1[0]), campos1[2], campos1[3], campos[2]);
+                            livro.setStatus(campos[2]);
+                            lista.add(livro);
                         }
 
                         linha1 = br1.readLine();

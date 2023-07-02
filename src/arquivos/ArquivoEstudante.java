@@ -59,7 +59,10 @@ public class ArquivoEstudante implements Arquivo<Estudante>{
                         linhas.add(campos1);
 
                         if (campos[1].equals(campos1[0])) {
-                            lista.add(new Estudante(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6], dtf), campos[7], campos[8], campos1[1], campos1[2], Integer.parseInt(campos1[3])));
+                            Estudante estudante = new Estudante(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6], dtf), campos[7], campos[8], campos1[1], campos1[2], Integer.parseInt(campos1[3]));
+                            estudante.setMulta(Integer.parseInt(campos[2]));
+                            estudante.setStatus(campos[9]);
+                            lista.add(estudante);
                         }
 
                         linha1 = br1.readLine();

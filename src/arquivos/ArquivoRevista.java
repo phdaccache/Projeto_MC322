@@ -54,12 +54,13 @@ public class ArquivoRevista implements Arquivo<Revista>{
                         linhas.add(campos1);
 
                         if (campos[0].equals(campos1[0])) {
-                            lista.add(new Revista(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], campos1[2], campos1[3], Integer.parseInt(campos1[4]), campos[2]));
+                            Revista revista = new Revista(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), campos1[1], campos1[2], campos1[3], Integer.parseInt(campos1[4]), campos[2]);
+                            revista.setStatus(campos[2]);
+                            lista.add(revista);
                         }
 
                         linha1 = br1.readLine();
                     }
-
                     br1.close();
                 }
 

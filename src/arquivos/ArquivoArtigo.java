@@ -54,7 +54,9 @@ public class ArquivoArtigo implements Arquivo<Artigo>{
                         linhas.add(campos1);
 
                         if (campos[0].equals(campos1[0])) {
-                            lista.add(new Artigo(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), Integer.parseInt(campos1[1]), campos1[2], campos1[3], campos[2]));
+                            Artigo artigo = new Artigo(Integer.parseInt(campos[1]), campos[3], campos[4], Integer.parseInt(campos[5]), Integer.parseInt(campos1[1]), campos1[2], campos1[3], campos[2]);
+                            artigo.setStatus(campos[2]);
+                            lista.add(artigo);
                         }
 
                         linha1 = br1.readLine();

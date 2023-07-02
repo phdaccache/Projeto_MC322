@@ -57,9 +57,10 @@ public class ArquivoProfessor implements Arquivo<Professor>{
                         linhas.add(campos1);
 
                         if (campos[1].equals(campos1[0])) {
-                            lista.add(new Professor(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6], dtf), campos[7], campos[8], campos1[1], campos1[2], campos1[3], campos1[4], Integer.parseInt(campos1[5])));
+                            Professor professor = new Professor(Admin.getBiblioteca(campos[0]), campos[1], campos[3], campos[4], campos[5], LocalDate.parse(campos[6], dtf), campos[7], campos[8], campos1[1], campos1[2], campos1[3], campos1[4], Integer.parseInt(campos1[5]));
+                            professor.setMulta(Integer.parseInt(campos[2]));
+                            professor.setStatus(campos[9]);
                         }
-
                         linha1 = br1.readLine();
                     }
 
